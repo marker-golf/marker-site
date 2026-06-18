@@ -1,0 +1,156 @@
+---
+layout: layouts/base.njk
+title: All Golf. No Math.
+description: Marker tracks scores live, manages your side games, and settles the tab instantly. Available on iPhone, iPad, Android, and Web.
+---
+
+{% from "components/badges.njk" import AppStoreBadge, PlayStoreBadge %}
+{% from "components/platform-bar.njk" import PlatformSupportBar %}
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__content">
+    <h1>All Golf.<br>No Math.</h1>
+    <p class="hero__sub">Live scoring, side games, and instant settlement for your whole group.</p>
+    <div class="hero__actions">
+      <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
+    </div>
+    <div class="hero__badge-row">
+      {{ AppStoreBadge() }}
+      <span class="hero__badge-divider">or</span>
+      {{ PlayStoreBadge() }}
+    </div>
+    <div class="hero__screenshot">
+      <img src="/images/screen-home.png" alt="Marker scorecard on iPhone" width="320" height="690" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- Platform bar -->
+{{ PlatformSupportBar() }}
+
+<!-- How it works -->
+<section class="section section--white how-it-works">
+  <div class="container">
+    <div class="section-header" style="text-align:center; margin-bottom:48px;">
+      <h2>Set up in under a minute.</h2>
+      <p style="max-width:420px; margin-inline:auto; margin-top:12px;">No spreadsheets. No mental math. Just tap and play.</p>
+    </div>
+    <div class="how-it-works__grid">
+      <div class="how-card">
+        <div class="how-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Invite your group</h3>
+        <p>Share a link and your playing partners join instantly — no accounts required.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+        </div>
+        <h3>Enter scores live</h3>
+        <p>Everyone scores on their own device. The leaderboard updates in real time, hole by hole.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h3>Settle up instantly</h3>
+        <p>Skins, Nassau, Nines — Marker calculates exactly who owes who. No arguments, no guesswork.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature: Live leaderboard -->
+<section class="section feature-showcase">
+  <div class="container">
+    <div class="feature-row">
+      <div class="feature-row__text">
+        <h2>A live leaderboard everyone can see.</h2>
+        <p>Every player's phone shows the same real-time standings. No more waiting until the 19th hole to find out who's winning.</p>
+        <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Try it free</a>
+      </div>
+      <div class="feature-row__media">
+        <img src="/images/screen-leaderboard.png" alt="Live leaderboard on Marker" width="280" height="560" loading="lazy">
+      </div>
+    </div>
+
+    <div class="feature-row feature-row--flip">
+      <div class="feature-row__text">
+        <h2>Every side game, already built in.</h2>
+        <p>Skins, Nassau, Matchplay, Nines, Stableford — pick your games before teeing off and Marker tracks every dollar automatically.</p>
+        <a href="/games/" class="btn btn-primary btn-sm">See all games</a>
+      </div>
+      <div class="feature-row__media">
+        <img src="/images/screen-games.png" alt="Side games on Marker" width="280" height="560" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Commissioner callout -->
+<section class="section commissioner-callout">
+  <div class="container">
+    <div class="commissioner-callout__inner">
+      <div>
+        <h2>Running a league or event?</h2>
+        <p>Marker gives commissioners full control: manage multiple flights, configure handicap rules, and publish results for everyone. Golf groups of all sizes run on Marker.</p>
+      </div>
+      <div>
+        <a href="https://app.marker.golf" class="btn btn-ghost">Get started free</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <div class="testimonials__header">
+      <h2>Golfers love it.</h2>
+    </div>
+    <div class="testimonials__grid">
+      <div class="testimonial">
+        <p class="testimonial__quote">Our Saturday group used to spend 20 minutes after the round figuring out who won what. Now it's done by the time we hit the parking lot.</p>
+        <p class="testimonial__author">Mike T.</p>
+        <p class="testimonial__role">Saturday morning group, Chicago</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial__quote">I run a 24-man league and Marker cut my admin time in half. Handicaps, flights, side games — it handles everything.</p>
+        <p class="testimonial__author">Dave R.</p>
+        <p class="testimonial__role">League commissioner, Arizona</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial__quote">Finally an app that actually understands how golfers play — not just stroke play. The Nassau and Skins tracking alone is worth it.</p>
+        <p class="testimonial__author">Carlos M.</p>
+        <p class="testimonial__role">Golfer, Florida</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Available anywhere you play.</h2>
+    <p>iPhone, iPad, Android, Web — Marker is on every device in your group.</p>
+    <div class="cta-band__actions">
+      <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
+      <div class="cta-band__badges">
+        {{ AppStoreBadge() }}
+        {{ PlayStoreBadge() }}
+      </div>
+    </div>
+  </div>
+</section>

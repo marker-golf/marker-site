@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="container">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" class="nav__wordmark">Marker</a>
+      <ul class="nav__links" role="list">
+        <li>
+          <a href="/games/"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a>
+        </li>
+      </ul>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+  <div class="nav__mobile" id="mobile-nav" hidden>
+    <ul role="list">
+      <li><a href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+      <li><a href="/games/"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a></li>
+      <li><a href="/about/"{% if '/about' in page.url %} aria-current="page"{% endif %}>About</a></li>
+    </ul>
+    <a href="https://app.marker.golf" class="btn btn-primary nav__mobile-cta">Try Marker Free</a>
+  </div>
+</header>

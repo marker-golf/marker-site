@@ -1,0 +1,82 @@
+---
+layout: layouts/base.njk
+title: Games
+description: Marker supports nine of the most popular golf side games. Set them up before you tee off and Marker handles all the math.
+---
+
+{% from "components/badges.njk" import AppStoreBadge, PlayStoreBadge %}
+
+<section class="page-hero">
+  <div class="container">
+    <h1>Nine games. Zero math.</h1>
+    <p>Choose your games before you tee off and Marker tracks every bet, point, and payout automatically.</p>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="game-grid">
+
+      <div class="game-card" id="high-low">
+        <h3>High-Low</h3>
+        <p>Each hole, compare the best and worst scores across two teams. Win the "high" ball, win the "low" ball, or sweep both. Marker calculates team totals and net results hole by hole.</p>
+      </div>
+
+      <div class="game-card" id="matchplay">
+        <h3>Matchplay</h3>
+        <p>Hole-by-hole head-to-head competition. Win the hole, halve it, or lose it. Marker tracks the standing (e.g. 2UP, 3DOWN) and closes the match automatically when it's won.</p>
+      </div>
+
+      <div class="game-card" id="nassau">
+        <h3>Nassau</h3>
+        <p>Three bets in one — front 9, back 9, and overall 18. The classic money game with optional presses. Marker runs all three simultaneously and handles automatic or manual press rules.</p>
+      </div>
+
+      <div class="game-card" id="nines">
+        <h3>Nines</h3>
+        <p>Three players share 9 points per hole based on finish order. Best score takes 5, second takes 3, third takes 1. Ties split the points. Marker totals each player's running score instantly.</p>
+      </div>
+
+      <div class="game-card" id="scotch">
+        <h3>Scotch (Foursomes)</h3>
+        <p>Partners alternate hitting the same ball. Marker keeps track of who's hitting next, combines team scores, and shows net results against handicap.</p>
+      </div>
+
+      <div class="game-card" id="skins">
+        <h3>Skins</h3>
+        <p>Win the hole outright to claim the skin. Ties carry the pot over to the next hole. Marker shows the current skin value and reveals winners the moment the hole is cleared.</p>
+      </div>
+
+      <div class="game-card" id="stableford">
+        <h3>Stableford</h3>
+        <p>Points for every hole based on score vs. par. Birdie scores big, bogey still earns. Marker handles the Modified Stableford point table and net handicap adjustments automatically.</p>
+      </div>
+
+      <div class="game-card" id="stroke-play">
+        <h3>Stroke Play</h3>
+        <p>Total strokes wins. Simple, official, and the format used in most tournaments. Marker tracks gross and net scores, computes handicap differentials, and exports clean scorecards.</p>
+      </div>
+
+      <div class="game-card" id="team-stroke-play">
+        <h3>Team Stroke Play</h3>
+        <p>Combine individual stroke-play scores into team totals. Best-ball or aggregate — Marker handles both. Perfect for corporate outings, charity events, and league team competitions.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA band -->
+<section class="cta-band">
+  <div class="container">
+    <h2>Ready to play?</h2>
+    <p>Start a round in under a minute. Available on iPhone, iPad, Android, and Web.</p>
+    <div class="cta-band__actions">
+      <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
+      <div class="cta-band__badges">
+        {{ AppStoreBadge() }}
+        {{ PlayStoreBadge() }}
+      </div>
+    </div>
+  </div>
+</section>
