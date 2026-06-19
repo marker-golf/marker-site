@@ -565,3 +565,89 @@ p { color: var(--ink-muted); line-height: 1.75; }
   .platform-bar { gap: 20px; }
   .platform-bar__divider { display: none; }
 }
+
+/* ---- 19. Legal pages ---- */
+.legal {
+  max-width: 720px;
+  margin-inline: auto;
+}
+.legal__toc {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 56px;
+}
+.legal__toc-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 14px;
+}
+.legal__toc ol {
+  list-style: decimal;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.legal__toc li { color: var(--ink); }
+.legal__toc a {
+  font-size: 0.9rem;
+  color: var(--green-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.18s, color 0.18s;
+}
+.legal__toc a:hover {
+  color: var(--green-800);
+  text-decoration-color: currentColor;
+}
+.legal__prose h2 {
+  font-size: 1.25rem;
+  color: var(--ink);
+  margin-top: 48px;
+  margin-bottom: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.legal__prose h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.legal__prose h3 {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+.legal__prose p {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.legal__prose ul,
+.legal__prose ol {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.legal__prose ul { list-style: disc; }
+.legal__prose ol { list-style: decimal; }
+.legal__prose li {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  line-height: 1.75;
+}
+.legal__prose li strong { color: var(--ink); }
+.legal__prose a {
+  color: var(--green-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal__prose a:hover { color: var(--green-800); }
