@@ -1,10 +1,10 @@
 <header class="site-header">
   <div class="container">
     <nav class="nav" aria-label="Main navigation">
-      <a href="/" class="nav__wordmark">Marker</a>
+      <a href="{{ '/' | url }}" class="nav__wordmark">Marker</a>
       <ul class="nav__links" role="list">
         <li>
-          <a href="/games/"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a>
+          <a href="{{ '/games/' | url }}"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a>
         </li>
       </ul>
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -14,9 +14,9 @@
   </div>
   <div class="nav__mobile" id="mobile-nav" hidden>
     <ul role="list">
-      <li><a href="/"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
-      <li><a href="/games/"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a></li>
-      <li><a href="/about/"{% if '/about' in page.url %} aria-current="page"{% endif %}>About</a></li>
+      <li><a href="{{ '/' | url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+      <li><a href="{{ '/games/' | url }}"{% if '/games' in page.url %} aria-current="page"{% endif %}>Games</a></li>
+      <li><a href="{{ '/about/' | url }}"{% if '/about' in page.url %} aria-current="page"{% endif %}>About</a></li>
     </ul>
     <a href="https://app.marker.golf" class="btn btn-primary nav__mobile-cta">Try Marker Free</a>
   </div>

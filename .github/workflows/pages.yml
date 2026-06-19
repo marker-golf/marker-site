@@ -36,6 +36,8 @@ jobs:
 
       - name: Build Eleventy site
         run: npm run build
+        env:
+          PATHPREFIX: /marker-site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4

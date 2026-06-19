@@ -329,7 +329,7 @@ p { color: var(--ink-muted); line-height: 1.75; }
   background-color: var(--green-800);
   background-image:
     linear-gradient(to bottom, rgba(15, 36, 25, 0.88) 0%, rgba(26, 61, 46, 0.72) 100%),
-    url('/images/hero-bg.jpg');
+    url('../images/hero-bg.jpg');
   background-size: cover;
   background-position: center 35%;
   color: var(--white);
