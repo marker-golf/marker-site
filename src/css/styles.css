@@ -4,17 +4,20 @@
 
 /* ---- 1. Tokens ---- */
 :root {
+  /* Greens — aligned to Expo MARKER_GREEN (#4a7c59) and marker-dark (#314e36) */
   --green-900: #0f2419;
   --green-800: #1a3d2e;
-  --green-600: #2d6a4f;
-  --green-400: #52a882;
+  --green-700: #314e36;
+  --green-600: #4a7c59;
 
   --cream:     #f5f2eb;
   --white:     #ffffff;
-  --ink:       #181c17;
-  --ink-muted: #5a6358;
-  --ink-light: #8b9489;
-  --border:    #e0ddd5;
+  /* Text — aligned to Expo SCRIM_BLACK and Tailwind gray scale */
+  --ink:       #1b1c1b;
+  --ink-muted: #6b7280;
+  --ink-light: #9ca3af;
+  /* Borders — aligned to Expo gray-200 */
+  --border:    #e5e7eb;
 
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body:    'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -23,10 +26,12 @@
   --max-w:      1100px;
   --pad-x:      clamp(20px, 5vw, 48px);
   --section-v:  clamp(64px, 8vw, 96px);
-  --radius:     10px;
-  --radius-lg:  16px;
-  --shadow:     0 2px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg:  0 12px 48px rgba(0, 0, 0, 0.2);
+  /* Radii — aligned to Expo: 8px elements, 12px cards, 32px pill CTAs */
+  --radius:     8px;
+  --radius-lg:  12px;
+  /* Shadows — softened to match Expo's border-first depth approach */
+  --shadow:     0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* ---- 2. Reset ---- */
@@ -104,7 +109,8 @@ p { color: var(--ink-muted); line-height: 1.75; }
 .btn-primary {
   background: var(--green-600);
   color: var(--white);
-  border-color: var(--green-600);
+  border-color: var(--green-700);
+  border-radius: 32px;
 }
 .btn-primary:hover {
   background: var(--green-800);
@@ -115,6 +121,7 @@ p { color: var(--ink-muted); line-height: 1.75; }
   background: transparent;
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.38);
+  border-radius: 32px;
 }
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.1);
