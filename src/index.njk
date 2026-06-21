@@ -15,11 +15,7 @@ description: Marker tracks scores live, manages your side games, and settles the
     <div class="hero__actions">
       <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
     </div>
-    <div class="hero__badge-row">
-      {{ AppStoreBadge() }}
-      <span class="hero__badge-divider">or</span>
-      {{ PlayStoreBadge() }}
-    </div>
+    <p class="hero__pricing-note">Free for players and commissioners. No credit card required.</p>
     <div class="hero__screenshot">
       <img src="{{ '/images/screen-home.png' | url }}" alt="Marker scorecard on iPhone" width="320" height="690" loading="eager">
     </div>
@@ -102,43 +98,73 @@ description: Marker tracks scores live, manages your side games, and settles the
 <!-- Commissioner callout -->
 <section class="section commissioner-callout">
   <div class="container">
-    <div class="commissioner-callout__inner">
-      <div>
-        <h2>Running a league or event?</h2>
-        <p>Marker gives commissioners full control: manage multiple flights, configure handicap rules, and publish results for everyone. Golf groups of all sizes run on Marker.</p>
+    <div class="commissioner-callout__header">
+      <h2>Running a league or event?</h2>
+      <p>Marker gives commissioners complete control — from flights and pairings to automatic settlements. One commissioner brings their entire group.</p>
+    </div>
+    <div class="commissioner-features">
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        <h4>Flights &amp; Pairings</h4>
+        <p>Organize players into flights, build pairings, and manage the field before you reach the first tee.</p>
       </div>
-      <div>
-        <a href="https://app.marker.golf" class="btn btn-ghost">Get started free</a>
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+          </svg>
+        </div>
+        <h4>Handicap Settings</h4>
+        <p>Configure handicap rules per event. USGA-compliant calculations are built in automatically.</p>
       </div>
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+        </div>
+        <h4>Live Leaderboards</h4>
+        <p>Every player sees real-time standings on their own device throughout the entire round.</p>
+      </div>
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h4>Team Competitions</h4>
+        <p>Ryder Cup, Scotch, Team Stroke Play — full team format support for any size event.</p>
+      </div>
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <h4>Side Games for All</h4>
+        <p>Nassau, Skins, Matchplay — run multiple games simultaneously across the entire field.</p>
+      </div>
+      <div class="commissioner-feature">
+        <div class="commissioner-feature__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <h4>Automatic Settlements</h4>
+        <p>When the round ends, Marker calculates exactly who owes who. No disputes, no mental math.</p>
+      </div>
+    </div>
+    <div class="commissioner-callout__actions">
+      <a href="{{ '/commissioners/' | url }}" class="btn btn-ghost">See commissioner tools</a>
+      <a href="https://app.marker.golf" class="btn btn-primary">Set Up Your League</a>
     </div>
   </div>
 </section>
 
-<!-- Testimonials -->
-<section class="section testimonials">
-  <div class="container">
-    <div class="testimonials__header">
-      <h2>Golfers love it.</h2>
-    </div>
-    <div class="testimonials__grid">
-      <div class="testimonial">
-        <p class="testimonial__quote">Our Saturday group used to spend 20 minutes after the round figuring out who won what. Now it's done by the time we hit the parking lot.</p>
-        <p class="testimonial__author">Mike T.</p>
-        <p class="testimonial__role">Saturday morning group, Chicago</p>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial__quote">I run a 24-man league and Marker cut my admin time in half. Handicaps, flights, side games — it handles everything.</p>
-        <p class="testimonial__author">Dave R.</p>
-        <p class="testimonial__role">League commissioner, Arizona</p>
-      </div>
-      <div class="testimonial">
-        <p class="testimonial__quote">Finally an app that actually understands how golfers play — not just stroke play. The Nassau and Skins tracking alone is worth it.</p>
-        <p class="testimonial__author">Carlos M.</p>
-        <p class="testimonial__role">Golfer, Florida</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CTA band -->
 <section class="cta-band">
