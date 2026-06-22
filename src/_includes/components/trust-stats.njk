@@ -1,0 +1,25 @@
+{% macro TrustStats() %}
+{#
+  Trust stats — static placeholders.
+  Values will eventually be sourced from admin.marker.golf.
+  Update all four entries here when refreshing metrics.
+#}
+<div class="trust-stats" aria-label="Marker usage statistics">
+  <div class="trust-stats__item">
+    <span class="trust-stats__number">11,000+</span>
+    <span class="trust-stats__label">Scorecards Created</span>
+  </div>
+  <div class="trust-stats__item">
+    <span class="trust-stats__number">642,000+</span>
+    <span class="trust-stats__label">Scores Recorded</span>
+  </div>
+  <div class="trust-stats__item">
+    <span class="trust-stats__number">2,600+</span>
+    <span class="trust-stats__label">Registered Golfers</span>
+  </div>
+  <div class="trust-stats__item">
+    <span class="trust-stats__number">Hundreds</span>
+    <span class="trust-stats__label">of Events Managed</span>
+  </div>
+</div>
+{% endmacro %}
