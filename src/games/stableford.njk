@@ -1,0 +1,103 @@
+---
+layout: layouts/base.njk
+title: Stableford — Marker Golf Games
+description: Stableford golf scoring — earn points on every hole based on your score vs. par. Marker handles the Modified Stableford table, quota system, and handicap adjustments automatically.
+---
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="tutorial-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/games/' | url }}">Games</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Stableford</span>
+    </nav>
+    <div class="game-detail-meta">
+      <div class="game-meta-tag"><strong>Players</strong>2 or more</div>
+      <div class="game-meta-tag"><strong>Type</strong>Points-based</div>
+      <div class="game-meta-tag"><strong>Handicap</strong>Supported</div>
+      <div class="game-meta-tag"><strong>Status</strong>Available in Marker</div>
+    </div>
+    <h1>Stableford</h1>
+    <p>Earn points on every hole based on your score vs. par. Big birdies score big; a blowup hole barely costs you. The format that keeps everyone in the game.</p>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+
+    <nav class="game-subnav" aria-label="Games navigation">
+      <a href="{{ '/games/' | url }}">All Games</a>
+      <a href="{{ '/games/stableford/' | url }}" aria-current="page">Stableford</a>
+      <a href="{{ '/games/nines/' | url }}">Nines</a>
+      <a href="{{ '/games/skins/' | url }}">Skins</a>
+      <a href="{{ '/games/nassau/' | url }}">Nassau</a>
+      <a href="{{ '/games/match-play/' | url }}">Match Play</a>
+    </nav>
+
+    <div class="game-section">
+      <h3>How Stableford works</h3>
+      <p>Instead of counting total strokes, Stableford awards points on each hole based on your score relative to par. High scores barely hurt; birdies and eagles win the round. The player with the most points wins.</p>
+      <p>Marker uses the Modified Stableford point table, which rewards aggressive play and penalizes blow-up holes:</p>
+
+      <table class="scoring-table">
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>vs. Par</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Double Eagle (Albatross)</td><td>−3</td><td>8</td></tr>
+          <tr><td>Eagle</td><td>−2</td><td>5</td></tr>
+          <tr><td>Birdie</td><td>−1</td><td>2</td></tr>
+          <tr><td>Par</td><td>E</td><td>0</td></tr>
+          <tr><td>Bogey</td><td>+1</td><td>−1</td></tr>
+          <tr><td>Double Bogey or worse</td><td>+2 or more</td><td>−3</td></tr>
+        </tbody>
+      </table>
+
+      <p>Marker automatically applies handicap strokes before calculating points — so the points on your scorecard already reflect your net score vs. par.</p>
+    </div>
+
+    <div class="game-section">
+      <h3>The Quota System</h3>
+      <p>The quota system adds a target to beat. Each player's quota is calculated as <strong>36 minus their course handicap</strong>. A 10-handicapper has a quota of 26 points. Beating your quota means you played better than expected; falling short means the course got you.</p>
+      <ul>
+        <li>Quota keeps all handicap levels competitive in the same round</li>
+        <li>It's easy to explain: "beat your number to win"</li>
+        <li>Marker displays your running total vs. your quota as you play</li>
+        <li>Final result is shown as points over or under quota (e.g. +4 quota)</li>
+      </ul>
+      <p>You can run Stableford with or without the quota system — Marker supports both. Without quota, the player with the highest raw point total wins.</p>
+    </div>
+
+    <div class="game-section">
+      <h3>How Marker runs Stableford</h3>
+      <ul>
+        <li>Select Stableford when setting up games for your event</li>
+        <li>Marker calculates each player's course handicap from their handicap index and tee selection</li>
+        <li>Handicap strokes are distributed across holes per USGA allocation</li>
+        <li>Points are calculated automatically as scores are entered — no manual lookup required</li>
+        <li>The leaderboard shows running point totals and quota status for every player</li>
+        <li>Settlement is automatic: highest points (or biggest quota beater) wins</li>
+      </ul>
+    </div>
+
+    <div class="game-footer-nav">
+      <a href="{{ '/games/' | url }}" class="btn btn-ghost btn-sm">← All Games</a>
+      <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Play Stableford in Marker</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Let Marker keep score.</h2>
+    <p>Set up Stableford before you tee off and Marker handles every point automatically.</p>
+    <div class="cta-band__actions">
+      <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
+    </div>
+  </div>
+</section>

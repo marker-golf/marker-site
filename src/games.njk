@@ -1,6 +1,6 @@
 ---
 layout: layouts/base.njk
-title: Games
+title: Golf Games
 description: Marker supports nine of the most popular golf side games. Set them up before you tee off and Marker handles all the math.
 ---
 
@@ -15,63 +15,120 @@ description: Marker supports nine of the most popular golf side games. Set them 
 
 <section class="section section--white">
   <div class="container">
-    <div class="game-grid">
 
-      <div class="game-card" id="high-low">
-        <h3>High-Low</h3>
-        <p>Each hole, compare the best and worst scores across two teams. Win the "high" ball, win the "low" ball, or sweep both. Marker calculates team totals and net results hole by hole.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track High-Low on Marker →</a>
+    <!-- ── Featured Games ─────────────────────────────────── -->
+    <div class="games-section">
+      <div class="games-section-header">
+        <h2>Featured Games</h2>
+        <p>Marker's signature formats — more strategy, more drama, more fun.</p>
       </div>
+      <div class="game-grid">
 
-      <div class="game-card" id="matchplay">
-        <h3>Matchplay</h3>
-        <p>Hole-by-hole head-to-head competition. Win the hole, halve it, or lose it. Marker tracks the standing (e.g. 2UP, 3DOWN) and closes the match automatically when it's won.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Matchplay on Marker →</a>
+        <a href="{{ '/games/wolf/' | url }}" class="game-card game-card--featured game-card--link">
+          <span class="game-badge game-badge--soon">Coming Soon</span>
+          <h3>Wolf</h3>
+          <p>One player per hole is the "Wolf" — pick a partner after each tee shot or go it alone for double points. Marker tracks team selection and point totals automatically.</p>
+          <span class="game-card__cta">Learn about Wolf →</span>
+        </a>
+
+        <a href="{{ '/games/hammer/' | url }}" class="game-card game-card--featured game-card--link">
+          <span class="game-badge game-badge--soon">Coming Soon</span>
+          <h3>Hammer</h3>
+          <p>Double the bet on any hole by dropping a Hammer. The other side can accept or double back. Marker tracks all active multipliers and calculates the final payout.</p>
+          <span class="game-card__cta">Learn about Hammer →</span>
+        </a>
+
+        <a href="{{ '/games/ryder-cup/' | url }}" class="game-card game-card--featured game-card--link">
+          <span class="game-badge game-badge--soon">Coming Soon</span>
+          <h3>Ryder Cup</h3>
+          <p>Multi-session team match play — Foursomes, Four-Ball, and Singles — with a live points table and cumulative standings. Perfect for golf trips and club events.</p>
+          <span class="game-card__cta">Learn about Ryder Cup →</span>
+        </a>
+
+        <a href="{{ '/games/team-count-x/' | url }}" class="game-card game-card--featured game-card--link">
+          <span class="game-badge game-badge--soon">Coming Soon</span>
+          <h3>TeamCountX</h3>
+          <p>Each team counts their best X scores on each hole. Mix the count by hole type or by nine. Endlessly flexible team scoring for any group size.</p>
+          <span class="game-card__cta">Learn about TeamCountX →</span>
+        </a>
+
       </div>
-
-      <div class="game-card" id="nassau">
-        <h3>Nassau</h3>
-        <p>Three bets in one — front 9, back 9, and overall 18. The classic money game with optional presses. Marker runs all three simultaneously and handles automatic or manual press rules.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Nassau on Marker →</a>
-      </div>
-
-      <div class="game-card" id="nines">
-        <h3>Nines</h3>
-        <p>Three players share 9 points per hole based on finish order. Best score takes 5, second takes 3, third takes 1. Ties split the points. Marker totals each player's running score instantly.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Nines on Marker →</a>
-      </div>
-
-      <div class="game-card" id="scotch">
-        <h3>Scotch (Foursomes)</h3>
-        <p>Partners alternate hitting the same ball. Marker keeps track of who's hitting next, combines team scores, and shows net results against handicap.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Scotch on Marker →</a>
-      </div>
-
-      <div class="game-card" id="skins">
-        <h3>Skins</h3>
-        <p>Win the hole outright to claim the skin. Ties carry the pot over to the next hole. Marker shows the current skin value and reveals winners the moment the hole is cleared.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Skins on Marker →</a>
-      </div>
-
-      <div class="game-card" id="stableford">
-        <h3>Stableford</h3>
-        <p>Points for every hole based on score vs. par. Birdie scores big, bogey still earns. Marker handles the Modified Stableford point table and net handicap adjustments automatically.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Stableford on Marker →</a>
-      </div>
-
-      <div class="game-card" id="stroke-play">
-        <h3>Stroke Play</h3>
-        <p>Total strokes wins. Simple, official, and the format used in most tournaments. Marker tracks gross and net scores, computes handicap differentials, and exports clean scorecards.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Stroke Play on Marker →</a>
-      </div>
-
-      <div class="game-card" id="team-stroke-play">
-        <h3>Team Stroke Play</h3>
-        <p>Combine individual stroke-play scores into team totals. Best-ball or aggregate — Marker handles both. Perfect for corporate outings, charity events, and league team competitions.</p>
-        <a href="https://app.marker.golf" class="game-card__cta">Track Team Stroke Play on Marker →</a>
-      </div>
-
     </div>
+
+    <!-- ── Classic Formats ────────────────────────────────── -->
+    <div class="games-section">
+      <div class="games-section-header">
+        <h2>Classic Formats</h2>
+        <p>The games every golfer knows — now with automatic scoring, live leaderboards, and instant settlement.</p>
+      </div>
+      <div class="game-grid">
+
+        <a href="{{ '/games/high-low/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>High-Low</h3>
+          <p>Each hole, compare the best and worst scores across two teams. Win the "high" ball, win the "low" ball, or sweep both. Marker calculates team totals and net results hole by hole.</p>
+          <span class="game-card__cta">Learn about High-Low →</span>
+        </a>
+
+        <a href="{{ '/games/match-play/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Match Play</h3>
+          <p>Hole-by-hole head-to-head competition. Win the hole, halve it, or lose it. Marker tracks the standing (e.g. 2UP, 3DOWN) and closes the match automatically when it's won.</p>
+          <span class="game-card__cta">Learn about Match Play →</span>
+        </a>
+
+        <a href="{{ '/games/nassau/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Nassau</h3>
+          <p>Three bets in one — front 9, back 9, and overall 18. The classic money game with optional presses. Marker runs all three simultaneously and handles automatic or manual press rules.</p>
+          <span class="game-card__cta">Learn about Nassau →</span>
+        </a>
+
+        <a href="{{ '/games/nines/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Nines</h3>
+          <p>Three players share 9 points per hole based on finish order. Best score takes 5, second takes 3, third takes 1. Ties split the points. Marker totals each player's running score instantly.</p>
+          <span class="game-card__cta">Learn about Nines →</span>
+        </a>
+
+        <a href="{{ '/games/scotch/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Scotch (Foursomes)</h3>
+          <p>Partners alternate hitting the same ball. Marker keeps track of who's hitting next, combines team scores, and shows net results against handicap.</p>
+          <span class="game-card__cta">Learn about Scotch →</span>
+        </a>
+
+        <a href="{{ '/games/skins/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Skins</h3>
+          <p>Win the hole outright to claim the skin. Ties carry the pot over to the next hole. Marker shows the current skin value and reveals winners the moment the hole is cleared.</p>
+          <span class="game-card__cta">Learn about Skins →</span>
+        </a>
+
+        <a href="{{ '/games/stableford/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Stableford</h3>
+          <p>Points for every hole based on score vs. par. Birdie scores big, bogey costs you. Marker handles the Modified Stableford point table and net handicap adjustments automatically.</p>
+          <span class="game-card__cta">Learn about Stableford →</span>
+        </a>
+
+        <a href="{{ '/games/stroke-play/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Stroke Play</h3>
+          <p>Total strokes wins. Simple, official, and the format used in most tournaments. Marker tracks gross and net scores, computes handicap differentials, and exports clean scorecards.</p>
+          <span class="game-card__cta">Learn about Stroke Play →</span>
+        </a>
+
+        <a href="{{ '/games/team-stroke-play/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Team Stroke Play</h3>
+          <p>Combine individual stroke-play scores into team totals. Best-ball or aggregate — Marker handles both. Perfect for corporate outings, charity events, and league team competitions.</p>
+          <span class="game-card__cta">Learn about Team Stroke Play →</span>
+        </a>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
