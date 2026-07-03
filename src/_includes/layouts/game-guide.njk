@@ -1,0 +1,63 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="page-hero">
+  <div class="container">
+
+    <nav class="tutorial-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/games/' | url }}">Games</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ game.name }}</span>
+    </nav>
+
+    <span class="gg-difficulty gg-difficulty--{{ game.difficulty }}">
+      <span class="gg-difficulty__dot"></span>
+      {{ game.difficultyLabel }}
+    </span>
+
+    <h1>{{ game.name }}</h1>
+
+    <p style="max-width:{{ game.heroSubtitleWidth | default('520px') }}; margin-inline:auto; color:rgba(255,255,255,0.72); font-size:1.1rem; line-height:1.65; margin-bottom:0;">{{ game.subtitle }}</p>
+
+    <div class="gg-hero-stats">
+      {% for stat in game.heroStats %}
+      <div class="gg-hero-stat">
+        <span class="gg-hero-stat__label">{{ stat.label }}</span>
+        <span class="gg-hero-stat__value">{{ stat.value }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="gg-hero-ctas">
+      <a href="{{ game.heroCta.primary.href }}" class="btn btn-primary">{{ game.heroCta.primary.text }}</a>
+      {% if game.heroCta.secondary %}
+      <a href="{{ game.heroCta.secondary.href | url }}" class="btn btn-outline-light btn-sm">{{ game.heroCta.secondary.text }}</a>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<nav class="gg-page-nav" aria-label="Page sections">
+  <div class="gg-page-nav__inner">
+    {% for sec in sections %}
+    <a href="#{{ sec.id }}">{{ sec.label }}</a>
+    {% endfor %}
+  </div>
+</nav>
+
+{{ content | safe }}
+
+<section class="gg-final-cta">
+  <div class="container">
+    <h2>{{ game.finalCta.heading }}</h2>
+    <p>{{ game.finalCta.body }}</p>
+    <div class="gg-final-cta__actions">
+      <a href="{{ game.finalCta.primary.href }}" class="btn btn-primary" style="font-size:1rem; padding:16px 36px;">{{ game.finalCta.primary.text }}</a>
+      {% if game.finalCta.secondary %}
+      <a href="{{ game.finalCta.secondary.href | url }}" class="btn btn-outline-light btn-sm">{{ game.finalCta.secondary.text }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
