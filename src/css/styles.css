@@ -2126,6 +2126,45 @@ details.gg-faq-item[open] summary {
   flex-wrap: wrap;
 }
 
+/* ── Quick Rules summary box ──────────────────────────────── */
+.gg-quick-rules {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green-600);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin: 28px 0;
+  max-width: 640px;
+}
+.gg-quick-rules__title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--green-700);
+  margin-bottom: 12px;
+}
+.gg-quick-rules ol {
+  list-style: decimal;
+  padding-left: 18px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.gg-quick-rules ol li {
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.55;
+}
+.gg-quick-rules ol li strong { color: var(--ink); }
+
+/* ── Scrollable wrapper for wide tables on mobile ─────────── */
+.scoring-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ── Responsive ───────────────────────────────────────────── */
 @media (max-width: 960px) {
   .gg-related-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2148,6 +2187,8 @@ details.gg-faq-item[open] summary {
 @media (max-width: 540px) {
   .gg-hero-stat { min-width: 130px; }
   .gg-quick-stats { grid-template-columns: 1fr; max-width: 260px; }
-  .gg-related-grid { grid-template-columns: repeat(2, 1fr); }
   .gg-hero-ctas { flex-direction: column; align-items: center; }
+}
+@media (max-width: 480px) {
+  .gg-related-grid { grid-template-columns: 1fr; }
 }

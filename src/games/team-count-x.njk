@@ -58,7 +58,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
     <h1>TeamCountX</h1>
 
     <p style="max-width:560px; margin-inline:auto; color:rgba(255,255,255,0.72); font-size:1.1rem; line-height:1.65; margin-bottom:0;">
-      Each team collects every player's score on every hole — then selects exactly X of them to count. Choose wisely. Discard the rest. Lowest total wins.
+      Each team collects all of its players' scores on every hole — then selects exactly X of them to count toward the team total. Choose wisely. Discard the rest. Lowest total wins.
     </p>
 
     <div class="gg-hero-stats">
@@ -121,17 +121,17 @@ description: "TeamCountX explained: team stroke play where each team selects X s
   <div class="container">
 
     {{ SectionHeader("Overview", "What Is TeamCountX?",
-      "Team stroke play where each team picks exactly X scores from all player-hole combinations — and the rest are discarded.") }}
+      "Select exactly X of your team's Y possible scores as the round progresses — one locked decision per hole.") }}
 
     <div class="gg-prose">
-      <p>TeamCountX starts with a simple idea: instead of every score counting, each team gets to choose which ones do. Over an 18-hole round, two players on a team generate 36 individual scores — one per player per hole. The commissioner sets a count target, X, before the round begins. Each team must select exactly X of their 36 scores to include in their total. The other scores are discarded.</p>
+      <p>TeamCountX is strategic team stroke play built around a single constraint: each team must choose exactly X scores from Y total possible to form its final team total. Every player scores every hole individually, generating one score per player per hole — a 2-player team accumulates 36 scores over 18 holes; a 3-player team accumulates 54. The commissioner sets X before the round begins. Each team selects exactly X of their scores to count toward their total. The rest are discarded.</p>
 
-      <p>The result is a format that rewards consistent teams — because bad holes can be left out — but not reckless ones, because you can only discard so many scores before the quota forces your hand. A team that plays it safe and counts early will finish, but a team that strategically holds off counting their weakest holes may find that great late-round scores erase the deficit entirely.</p>
+      <p>The critical rule is <em>when</em> those decisions happen. Teams choose hole by hole, right after scores are entered — not at the end of the round. Once a hole is saved in Marker, that hole's selections are locked. There is no going back to change an earlier hole after seeing what happens on a later one.</p>
 
-      <p>TeamCountX scales to any group size. Two players per team, three, four — even uneven groups with a blind draw. The X count adjusts for team size, and Marker handles all the arithmetic.</p>
+      <p>This creates a sustained strategic tension across all 18 holes. Count too many scores early and you may be forced to include poor scores later when Forced Count kicks in. Save too many selections and you leave good scores behind as the round ends. Every hole is a live decision: count this score now, or preserve the remaining quota for a better score later.</p>
 
       <div class="gg-callout">
-        <p><strong>Why golfers love it:</strong> Most formats punish every bad hole. TeamCountX gives every player a safety net — but not an infinite one. The result is a format that feels fair even when someone has an off day, while still demanding consistency and smart in-round decision-making.</p>
+        <p><strong>Marker handles the math:</strong> Marker tracks each team's remaining selections throughout the round, displays the live Selected&thinsp;/&thinsp;X count on the leaderboard, and automatically enforces Forced Count when a team no longer has enough remaining opportunities to discard.</p>
       </div>
     </div>
 
@@ -152,6 +152,17 @@ description: "TeamCountX explained: team stroke play where each team selects X s
 
     {{ MarkerImplNote("TeamCountX is fully supported in Marker. The commissioner sets the count target and teams before the round. During play, each team uses the in-app selection modal to choose which scores to count. Marker tracks the running total, enforces the quota, and updates the leaderboard automatically.") }}
 
+    <div class="gg-quick-rules">
+      <div class="gg-quick-rules__title">Quick Rules</div>
+      <ol>
+        <li><strong>Set up teams</strong> before the round — 2 to 5 players per team. Every player scores every hole individually.</li>
+        <li><strong>Set Count X</strong> — the total number of individual scores each team must select across the full 18 holes. (A 2-player team: 36 possible, count 24 is common.)</li>
+        <li><strong>After each hole</strong>, each team decides which of its players' scores to count. Choices lock when the hole is saved — no changing them after later holes are played.</li>
+        <li><strong>Quota</strong>: once a team has selected X scores total, counting is complete. Forced Count activates if remaining opportunities equal remaining quota.</li>
+        <li><strong>After 18 holes</strong>, the team with the lowest cumulative net-to-par from their selected scores wins.</li>
+      </ol>
+    </div>
+
   </div>
 </section>
 
@@ -171,7 +182,8 @@ description: "TeamCountX explained: team stroke play where each team selects X s
         <div class="gg-step__body">
           <h3>Commissioner sets the count target and teams</h3>
           <p>Before the round, the commissioner opens Marker, selects TeamCountX, divides players into teams, and enters <strong>Count X</strong> — the number of individual scores each team must select across the entire 18 holes. The count target is calculated relative to the total possible:</p>
-          <table class="scoring-table" style="max-width:480px; margin-top:14px;">
+          <div class="scoring-table-wrap" style="max-width:480px; margin-top:14px;">
+          <table class="scoring-table" style="margin:0;">
             <thead><tr><th>Team size</th><th>Total possible (18 holes)</th><th>Example X</th><th>Scores discarded</th></tr></thead>
             <tbody>
               <tr><td>2 players</td><td>36</td><td>24</td><td>12</td></tr>
@@ -180,6 +192,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
               <tr><td>5 players</td><td>90</td><td>60</td><td>30</td></tr>
             </tbody>
           </table>
+          </div>
           <p style="margin-top:10px;">X can be any value from 1 to the total possible. The examples above discard one-third of scores — a common starting point. Groups can adjust X freely to make the format more or less selective.</p>
         </div>
       </div>
@@ -198,7 +211,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
           <h3>Teams select which scores to count, hole by hole</h3>
           <p>After scores are posted for a hole, each team taps their hole cell in Marker to open the <strong>selection modal</strong>. They see all their players' scores for that hole and choose which ones to include in their running total. Any combination is valid — count both, count one, count neither — as long as the team stays within their overall quota.</p>
           <div class="gg-callout gg-callout--info">
-            <p><strong>Cross-hole flexibility:</strong> There is no rule about how many scores to count on any given hole. Teams decide when and where to use their selections across the full 18 holes, making this a round-long strategic exercise rather than a hole-by-hole forced choice.</p>
+            <p><strong>Selections lock when a hole is saved.</strong> Teams can adjust checkboxes freely before tapping Save — but once the hole is saved, those choices are permanent. There is no rule about how many scores to count on any given hole, but the decision for each hole must be made before moving on. The strategic question is always present-tense: count this score now, or skip it and preserve quota for a better score on a future hole?</p>
           </div>
         </div>
       </div>
@@ -239,7 +252,8 @@ description: "TeamCountX explained: team stroke play where each team selects X s
       <p>A practical rule of thumb: count <strong>two-thirds of possible scores</strong>. For a 2-player team over 18 holes (36 possible), count 24. For a 3-player team (54 possible), count 36. This lets each team discard roughly one in three scores — enough to rescue a bad hole, not enough to rescue a bad round.</p>
     </div>
 
-    <table class="scoring-table" style="max-width:640px; margin-top:8px; margin-bottom:28px;">
+    <div class="scoring-table-wrap" style="max-width:640px; margin-top:8px; margin-bottom:28px;">
+    <table class="scoring-table" style="margin:0;">
       <thead>
         <tr>
           <th>If you want…</th>
@@ -270,6 +284,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
         </tr>
       </tbody>
     </table>
+    </div>
 
     <div class="gg-callout">
       <p><strong>First-time groups:</strong> Start with ⅔ of your total possible. You can always adjust X for the next round once the group has a feel for how quota pressure plays out over 18 holes.</p>
@@ -302,7 +317,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
       <ul>
         <li><strong>How good is this score?</strong> A score at or under net par is almost always worth counting. A bogey or worse is a candidate to skip — unless quota pressure forces it.</li>
         <li><strong>How many selections remain?</strong> If you have 10 selections left but 12 holes remaining with 2 players each (24 opportunities), you can still afford to skip a few. If you have 3 selections left and 6 opportunities remaining, you have to be more selective about what you pass on.</li>
-        <li><strong>How is your opponent tracking?</strong> A team that's well ahead on to-par might play it conservative and count safe scores. A trailing team may hold off counting mediocre holes hoping for a late birdie run.</li>
+        <li><strong>How is your opponent tracking?</strong> A team that's well ahead might play it conservative and bank safe scores. A trailing team may skip a mediocre hole and hope for a late birdie run — but once a hole is saved, that skip is final. The comeback has to come from future holes, not from revisiting earlier ones.</li>
       </ul>
     </div>
 
@@ -390,7 +405,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
 
     <div class="gg-prose" style="margin-top:28px;">
       <h3 style="font-size:1.05rem; color:var(--ink); margin-bottom:12px;">Settlement</h3>
-      <p>If a dollar amount is configured, TeamCountX uses a <strong>pool model</strong>: each player pays a fixed buy-in, all amounts go into a pot, and the pot is distributed to teams by place. By default, the winning team takes the entire pool. The commissioner can configure split payouts (e.g., 60/40) by entering amounts for each place. Payout is split equally among non-blind members of the winning team.</p>
+      <p>If a dollar amount is configured, TeamCountX uses a <strong>pool model</strong>: each player pays a fixed buy-in, all amounts go into a pot, and the pot is distributed to teams by place. By default, the winning team takes the entire pool. For multi-team events the commissioner can configure a dollar amount for each finishing position (e.g., $100 for first, $50 for second). Payout is split equally among non-blind members of each winning team.</p>
     </div>
 
   </div>
@@ -461,7 +476,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
         [
           { label: "No amount — track scores only", rec: false },
           { label: "Fixed buy-in, winner takes all", rec: true },
-          { label: "Fixed buy-in, split (e.g. 60/40)", rec: false }
+          { label: "Fixed buy-in, split prizes by finishing position", rec: false }
         ],
         ""
       ) }}
@@ -856,16 +871,6 @@ description: "TeamCountX explained: team stroke play where each team selects X s
         </div>
       </div>
 
-      <div class="gg-variation">
-        <div class="gg-variation__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <div class="gg-variation__body">
-          <h4>Sealed Selections</h4>
-          <p>Selections are locked immediately after each hole — no revisiting previous hole choices. Some groups prefer this to eliminate hindsight strategy adjustments and keep the game moving. This is a gentleman's rule, not a Marker setting.</p>
-        </div>
-      </div>
-
     </div>
 
   </div>
@@ -966,7 +971,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
       <details class="gg-faq-item">
         <summary>Can a team skip counting a score on a hole entirely?</summary>
         <div class="gg-faq-body">
-          <p>Yes — a team can choose to count zero player scores on any given hole. Neither player's result for that hole needs to be included in the team total. However, every score that isn't counted reduces the team's discard budget. Skip too many holes and you'll hit Forced Count before the round ends, requiring all remaining scores to be counted.</p>
+          <p>Yes — a team can choose to count zero player scores on any given hole. Neither player's result for that hole is included in the team total. That decision is made and locked when the hole is saved — you cannot go back and count a skipped hole after later holes have been played. Every skipped hole reduces the team's discard budget; skip too aggressively and you'll hit Forced Count before the round ends.</p>
         </div>
       </details>
 
@@ -1015,7 +1020,7 @@ description: "TeamCountX explained: team stroke play where each team selects X s
       <details class="gg-faq-item">
         <summary>How is the winner paid out?</summary>
         <div class="gg-faq-body">
-          <p>TeamCountX uses a pool model. Each player pays a buy-in before the round; all buy-ins are pooled. The winning team receives the full pot by default (winner-take-all). For multi-team events, the commissioner can configure split payouts — e.g., 60% to first, 40% to second. Payout is divided equally among non-blind members of each winning team. Marker calculates and displays each player's share automatically.</p>
+          <p>TeamCountX uses a pool model. Each player pays a buy-in before the round; all buy-ins are pooled. The winning team receives the full pot by default (winner-take-all). For multi-team events, the commissioner can configure a payout amount for each finishing position — e.g., $100 to first, $50 to second. Payout is divided equally among non-blind members of each placing team. Marker calculates and displays each player's share.</p>
         </div>
       </details>
 
