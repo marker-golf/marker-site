@@ -53,13 +53,8 @@
   {% if desc %}<p>{{ desc }}</p>{% endif %}
   {% if options.length %}
   <div class="gg-config-options">
-    {% for opt in options %}
-    <div class="gg-config-option{% if opt.rec %} gg-config-option--rec{% endif %}">
-      <span class="gg-config-option__dot"></span>
-      {{ opt.label }}
-    </div>
-    {% endfor %}
-  </div>
+{% for opt in options %}<div class="gg-config-option{% if opt.rec %} gg-config-option--rec{% endif %}"><span class="gg-config-option__dot"></span>{{ opt.label }}</div>
+{% endfor %}  </div>
   {% endif %}
 </div>
 {% endmacro %}
