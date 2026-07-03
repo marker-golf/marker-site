@@ -1392,3 +1392,762 @@ p { color: var(--ink-muted); line-height: 1.75; }
   .game-detail-meta { gap: 8px; }
   .game-meta-tag { padding: 4px 10px; }
 }
+
+/* =============================================================
+   29. Game Guide Template  (.gg-*)
+   Canonical reusable system for all Marker game guide pages.
+   Used first in: High-Low. Reuse for Wolf, Nassau, Skins, etc.
+   ============================================================= */
+
+/* ── Difficulty badge ─────────────────────────────────────── */
+.gg-difficulty {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 32px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.gg-difficulty--beginner {
+  background: rgba(74, 124, 89, 0.22);
+  color: #5fa670;
+  border: 1px solid rgba(74, 124, 89, 0.4);
+}
+.gg-difficulty--intermediate {
+  background: rgba(180, 130, 20, 0.18);
+  color: #c49a1a;
+  border: 1px solid rgba(180, 130, 20, 0.38);
+}
+.gg-difficulty--advanced {
+  background: rgba(185, 55, 55, 0.14);
+  color: #c45050;
+  border: 1px solid rgba(185, 55, 55, 0.3);
+}
+.gg-difficulty__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ── Hero stats row ───────────────────────────────────────── */
+.gg-hero-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 22px 0 32px;
+}
+.gg-hero-stat {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  min-width: 108px;
+  text-align: left;
+}
+.gg-hero-stat__label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  display: block;
+  margin-bottom: 3px;
+}
+.gg-hero-stat__value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.3;
+}
+
+/* ── Hero CTAs ────────────────────────────────────────────── */
+.gg-hero-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-outline-light {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 32px;
+}
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: var(--white);
+}
+
+/* ── In-page anchor navigation ────────────────────────────── */
+.gg-page-nav {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 50;
+}
+.gg-page-nav__inner {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-inline: var(--pad-x);
+}
+.gg-page-nav__inner::-webkit-scrollbar { display: none; }
+.gg-page-nav a {
+  padding: 14px 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.18s, border-color 0.18s;
+  flex-shrink: 0;
+}
+.gg-page-nav a:hover {
+  color: var(--green-800);
+  border-bottom-color: var(--green-600);
+}
+
+/* ── Section label ────────────────────────────────────────── */
+.gg-label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin-bottom: 10px;
+}
+
+/* ── Section header ───────────────────────────────────────── */
+.gg-section-header {
+  margin-bottom: 40px;
+}
+.gg-section-header h2 { color: var(--ink); }
+.gg-section-header p {
+  margin-top: 10px;
+  max-width: 600px;
+  font-size: 1.02rem;
+}
+
+/* Dark section overrides */
+.section--dark .gg-section-header h2 { color: var(--white); }
+.section--dark .gg-section-header p { color: rgba(255, 255, 255, 0.65); }
+.section--dark .gg-label { color: var(--green-600); }
+
+/* ── Prose content ────────────────────────────────────────── */
+.gg-prose { max-width: 720px; }
+.gg-prose p { line-height: 1.8; margin-bottom: 16px; font-size: 0.975rem; }
+.gg-prose p:last-child { margin-bottom: 0; }
+.gg-prose strong { color: var(--ink); }
+.gg-prose a { color: var(--green-600); text-decoration: underline; text-underline-offset: 2px; }
+.gg-prose a:hover { color: var(--green-800); }
+
+/* ── Callout boxes ────────────────────────────────────────── */
+.gg-callout {
+  background: rgba(74, 124, 89, 0.06);
+  border-left: 3px solid var(--green-600);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 24px 0;
+  max-width: 720px;
+}
+.gg-callout--info {
+  background: rgba(59, 130, 246, 0.05);
+  border-left-color: #3b82f6;
+}
+.gg-callout--warn {
+  background: rgba(180, 130, 20, 0.07);
+  border-left-color: #b47800;
+}
+.gg-callout--marker {
+  background: var(--gray-50);
+  border-left-color: var(--ink-light);
+}
+.gg-callout p { font-size: 0.9rem; color: var(--ink-muted); margin: 0; line-height: 1.7; }
+.gg-callout p + p { margin-top: 8px; }
+.gg-callout strong { color: var(--ink); }
+
+/* ── Quick stats grid (below "What is" text) ──────────────── */
+.gg-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 560px;
+  margin-top: 32px;
+}
+.gg-quick-stat {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  text-align: center;
+}
+.gg-quick-stat__val {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--green-800);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.gg-quick-stat__lbl {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+/* ── Numbered steps ───────────────────────────────────────── */
+.gg-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 720px;
+  position: relative;
+}
+.gg-steps::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 44px;
+  bottom: 44px;
+  width: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.gg-step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 22px;
+  padding-bottom: 36px;
+  position: relative;
+}
+.gg-step:last-child { padding-bottom: 0; }
+.gg-step__num {
+  width: 40px;
+  height: 40px;
+  background: var(--green-800);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.gg-step__body { padding-top: 8px; }
+.gg-step__body h3 {
+  font-size: 1.05rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+.gg-step__body p { font-size: 0.95rem; line-height: 1.75; margin-bottom: 10px; }
+.gg-step__body p:last-child { margin-bottom: 0; }
+.gg-step__body strong { color: var(--ink); }
+.gg-step__body .scoring-table { margin-top: 16px; }
+
+/* ── Configuration cards ──────────────────────────────────── */
+.gg-config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+.gg-config-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+.gg-config-card__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 5px;
+}
+.gg-config-card__title {
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.gg-config-card p { font-size: 0.875rem; line-height: 1.65; margin: 0 0 10px; }
+.gg-config-card p:last-child { margin: 0; }
+.gg-config-options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+}
+.gg-config-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.845rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+.gg-config-option__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.gg-config-option--rec {
+  color: var(--ink);
+  font-weight: 500;
+}
+.gg-config-option--rec .gg-config-option__dot {
+  background: var(--green-600);
+}
+.gg-config-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(74, 124, 89, 0.12);
+  color: var(--green-700);
+  border: 1px solid rgba(74, 124, 89, 0.25);
+  margin-left: 4px;
+}
+
+/* ── Expo screenshot placeholder ──────────────────────────── */
+.gg-screenshot-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 760px;
+  margin-top: 36px;
+}
+.gg-screenshot-placeholder {
+  background: var(--gray-50);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.gg-screenshot-placeholder__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--cream);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-light);
+}
+.gg-screenshot-placeholder__icon svg { width: 20px; height: 20px; }
+.gg-screenshot-placeholder__caption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-light);
+  line-height: 1.4;
+  margin: 0;
+}
+.gg-screenshot-placeholder__sub {
+  font-size: 0.7rem;
+  color: var(--ink-light);
+  opacity: 0.65;
+  margin: 0;
+}
+
+/* ── Example round table ──────────────────────────────────── */
+.gg-example-wrap {
+  max-width: 820px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+.gg-example-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 560px;
+}
+.gg-example-table th {
+  background: var(--green-800);
+  color: var(--white);
+  padding: 10px 14px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.gg-example-table th.col-left,
+.gg-example-table td.col-left { text-align: left; }
+.gg-example-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-muted);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.gg-example-table tr:last-child td { border-bottom: none; }
+.gg-example-table thead th { border-right: none; }
+.gg-example-table .gg-sub-header th {
+  background: rgba(245, 242, 235, 1);
+  color: var(--ink-light);
+  font-size: 0.6rem;
+  padding-block: 5px;
+  border-bottom: 1px solid var(--border);
+}
+.gg-example-table .gg-totals-row td {
+  background: var(--green-800);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 600;
+  border-bottom: none;
+}
+.gg-example-table .gg-totals-row td.col-left { color: var(--white); }
+
+/* Cell states */
+.gg-win  { background: rgba(74, 124, 89, 0.10) !important; color: var(--green-700) !important; font-weight: 700 !important; }
+.gg-sweep { background: rgba(74, 124, 89, 0.18) !important; color: var(--green-800) !important; font-weight: 700 !important; }
+.gg-tie  { color: var(--ink-light) !important; font-style: italic; }
+.gg-high { font-weight: 600; color: var(--ink) !important; }
+
+/* ── Strategy tips grid ───────────────────────────────────── */
+.gg-tips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 760px;
+}
+.gg-tip {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  border-top: 3px solid var(--green-600);
+}
+.gg-tip__cat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin-bottom: 7px;
+}
+.gg-tip h4 { color: var(--ink); margin-bottom: 9px; font-size: 0.95rem; }
+.gg-tip p  { font-size: 0.875rem; line-height: 1.65; margin: 0; }
+
+/* ── Handicap options ─────────────────────────────────────── */
+.gg-hdcp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 720px;
+  margin-bottom: 28px;
+}
+.gg-hdcp-option {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 16px;
+}
+.gg-hdcp-option--rec {
+  border-color: rgba(74, 124, 89, 0.45);
+  background: rgba(74, 124, 89, 0.03);
+}
+.gg-hdcp-option__name {
+  font-weight: 700;
+  font-size: 0.925rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gg-hdcp-rec-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: rgba(74, 124, 89, 0.12);
+  color: var(--green-700);
+  border: 1px solid rgba(74, 124, 89, 0.25);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+.gg-hdcp-option__desc {
+  font-size: 0.825rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+/* ── Variations ───────────────────────────────────────────── */
+.gg-variations {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 760px;
+}
+.gg-variation {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+}
+.gg-variation__icon {
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+.gg-variation__icon svg { width: 16px; height: 16px; }
+.gg-variation__body h4 { color: var(--ink); font-size: 0.9rem; margin-bottom: 5px; }
+.gg-variation__body p { font-size: 0.845rem; line-height: 1.6; margin: 0; }
+
+/* ── Why Marker benefits ──────────────────────────────────── */
+.gg-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 760px;
+}
+.gg-benefit {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px;
+}
+.gg-benefit__icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 14px;
+}
+.gg-benefit__icon svg { width: 20px; height: 20px; }
+.gg-benefit h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 7px; }
+.gg-benefit p { font-size: 0.845rem; color: rgba(255, 255, 255, 0.55); line-height: 1.65; margin: 0; }
+
+/* ── FAQ accordion ────────────────────────────────────────── */
+.gg-faq {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+}
+details.gg-faq-item {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--white);
+  border-bottom: none;
+}
+details.gg-faq-item:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+details.gg-faq-item:last-child { border-radius: 0 0 var(--radius) var(--radius); border-bottom: 1px solid var(--border); }
+details.gg-faq-item summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  gap: 14px;
+  transition: background 0.15s;
+  user-select: none;
+}
+details.gg-faq-item summary::-webkit-details-marker { display: none; }
+details.gg-faq-item summary::after {
+  content: '+';
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: var(--ink-light);
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+details.gg-faq-item[open] summary::after { content: '−'; }
+details.gg-faq-item summary:hover { background: var(--cream); }
+details.gg-faq-item[open] summary {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+.gg-faq-body {
+  padding: 16px 20px;
+}
+.gg-faq-body p {
+  font-size: 0.92rem;
+  line-height: 1.78;
+  color: var(--ink-muted);
+  margin: 0;
+}
+.gg-faq-body p + p { margin-top: 10px; }
+.gg-faq-body strong { color: var(--ink); }
+.gg-faq-body a { color: var(--green-600); text-decoration: underline; text-underline-offset: 2px; }
+.gg-faq-body a:hover { color: var(--green-800); }
+
+/* ── Three-match structure (Nassau-style games) ───────────── */
+.gg-match-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 560px;
+  margin: 24px 0 28px;
+}
+.gg-match-card {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  border-top: 3px solid var(--green-600);
+}
+.gg-match-card__label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin-bottom: 5px;
+}
+.gg-match-card__name {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.gg-match-card__holes {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* ── Prose list support ────────────────────────────────────── */
+.gg-prose ul {
+  list-style: disc;
+  padding-left: 22px;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gg-prose ul li {
+  font-size: 0.975rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+}
+.gg-prose ul li strong { color: var(--ink); }
+
+/* ── Related games ────────────────────────────────────────── */
+.gg-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  max-width: 760px;
+}
+.gg-related-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+}
+.gg-related-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--green-600);
+  box-shadow: var(--shadow);
+}
+.gg-related-card h4 { color: var(--ink); font-size: 0.9rem; margin-bottom: 6px; }
+.gg-related-card p { font-size: 0.8rem; color: var(--ink-muted); line-height: 1.5; margin: 0; flex: 1; }
+.gg-related-card__arrow {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green-600);
+}
+
+/* ── Final CTA (game guide variant) ──────────────────────── */
+.gg-final-cta {
+  background: var(--green-900);
+  padding-block: clamp(80px, 10vw, 120px);
+  text-align: center;
+}
+.gg-final-cta h2 { color: var(--white); margin-bottom: 14px; }
+.gg-final-cta p { color: rgba(255, 255, 255, 0.62); margin-bottom: 40px; font-size: 1.05rem; max-width: 480px; margin-inline: auto; }
+.gg-final-cta p:last-of-type { margin-bottom: 40px; }
+.gg-final-cta__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .gg-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .gg-screenshot-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .gg-hero-stats { justify-content: flex-start; }
+  .gg-config-grid { grid-template-columns: 1fr; }
+  .gg-tips-grid { grid-template-columns: 1fr; }
+  .gg-benefit-grid { grid-template-columns: 1fr; }
+  .gg-hdcp-grid { grid-template-columns: 1fr; }
+  .gg-variations { grid-template-columns: 1fr; }
+  .gg-quick-stats { grid-template-columns: repeat(3, 1fr); }
+  .gg-screenshot-row { grid-template-columns: 1fr; }
+  .gg-steps::before { left: 17px; }
+  .gg-step { grid-template-columns: 36px 1fr; gap: 16px; }
+  .gg-step__num { width: 36px; height: 36px; font-size: 0.9rem; }
+  .gg-page-nav { position: static; }
+}
+@media (max-width: 540px) {
+  .gg-hero-stat { min-width: 130px; }
+  .gg-quick-stats { grid-template-columns: 1fr; max-width: 260px; }
+  .gg-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .gg-hero-ctas { flex-direction: column; align-items: center; }
+}
