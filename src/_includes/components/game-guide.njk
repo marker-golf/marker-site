@@ -1,0 +1,144 @@
+{#
+  game-guide.njk — Reusable Nunjucks macros for Marker game guide pages.
+
+  TEMPLATE SECTIONS (use in this order):
+    1.  page-hero  + gg-hero-stats + gg-hero-ctas   → Hero
+    2.  gg-page-nav                                  → In-page anchor nav
+    3.  #overview  section--white                    → What is <Game>?
+    4.  #how-it-works section                        → How It Works (steps)
+    5.  #configuration section--white                → Marker Configuration
+    6.  #example section                             → Example Round
+    7.  #strategy section--white                     → Strategy Tips
+    8.  #handicaps section                           → Handicap Considerations
+    9.  #variations section--white                   → Variations
+   10.  #why-marker section--dark                    → Why Use Marker?
+   11.  #faq section--white                          → FAQ
+   12.  #related section                             → Related Games
+   13.  gg-final-cta                                 → Final CTA
+
+  DATA EACH GAME NEEDS (document at top of your page file):
+    name, subtitle, difficulty, players, teamFormat, bestFor, roundLength,
+    appStoreUrl (default: https://app.marker.golf)
+#}
+
+{# ── Section label (small-caps green tag) ─────────────────── #}
+{% macro Label(text) %}
+<span class="gg-label">{{ text }}</span>
+{% endmacro %}
+
+{# ── Section header: label + h2 + optional subtitle ──────── #}
+{% macro SectionHeader(label, heading, subtitle='') %}
+<div class="gg-section-header">
+  <span class="gg-label">{{ label }}</span>
+  <h2>{{ heading }}</h2>
+  {% if subtitle %}<p>{{ subtitle }}</p>{% endif %}
+</div>
+{% endmacro %}
+
+{# ── Config card ────────────────────────────────────────────
+   Params:
+     label   – e.g. "Scoring Mode"
+     title   – e.g. "Gross vs Net"
+     desc    – short description string
+     options – array of {label, rec} objects
+     badge   – optional badge text (e.g. "Recommended")
+#}
+{% macro ConfigCard(label, title, desc, options=[], badge='') %}
+<div class="gg-config-card">
+  <div class="gg-config-card__label">{{ label }}</div>
+  <div class="gg-config-card__title">
+    {{ title }}
+    {% if badge %}<span class="gg-config-badge">{{ badge }}</span>{% endif %}
+  </div>
+  {% if desc %}<p>{{ desc }}</p>{% endif %}
+  {% if options.length %}
+  <div class="gg-config-options">
+    {% for opt in options %}
+    <div class="gg-config-option{% if opt.rec %} gg-config-option--rec{% endif %}">
+      <span class="gg-config-option__dot"></span>
+      {{ opt.label }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{# ── Expo screenshot placeholder ────────────────────────────
+   caption – screen name, e.g. "Game Setup Screen"
+   sub     – optional sub-label, e.g. "iOS / Android"
+#}
+{% macro ScreenshotPlaceholder(caption, sub='iOS · Android') %}
+<div class="gg-screenshot-placeholder">
+  <div class="gg-screenshot-placeholder__icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12.01" y2="18"/>
+    </svg>
+  </div>
+  <p class="gg-screenshot-placeholder__caption">{{ caption }}</p>
+  {% if sub %}<p class="gg-screenshot-placeholder__sub">{{ sub }}</p>{% endif %}
+</div>
+{% endmacro %}
+
+{# ── Strategy tip card ──────────────────────────────────────
+   category – e.g. "Offense"
+   heading  – short tip title
+   body     – tip text (safe to include HTML)
+#}
+{% macro TipCard(category, heading, body) %}
+<div class="gg-tip">
+  <div class="gg-tip__cat">{{ category }}</div>
+  <h4>{{ heading }}</h4>
+  <p>{{ body }}</p>
+</div>
+{% endmacro %}
+
+{# ── FAQ item (native <details> accordion) ──────────────────
+   question – the Q string
+   answer   – HTML string for the answer body
+#}
+{% macro FaqItem(question, answer) %}
+<details class="gg-faq-item">
+  <summary>{{ question }}</summary>
+  <div class="gg-faq-body">
+    <p>{{ answer | safe }}</p>
+  </div>
+</details>
+{% endmacro %}
+
+{# ── TODO: Verify Marker Implementation callout ─────────────
+   Use for any implementation detail that requires confirmation
+   from the development team before publishing. Renders in amber
+   to be clearly visible during content review.
+   question – the specific thing to confirm (plain text)
+#}
+{% macro TodoNote(question) %}
+<div class="gg-callout gg-callout--warn" style="margin-top:20px; margin-bottom:20px;">
+  <p><strong>TODO — Verify Marker Implementation:</strong> {{ question }}</p>
+</div>
+{% endmacro %}
+
+{# ── Marker implementation note ─────────────────────────────
+   Subtle callout clarifying that scoring examples reflect Marker's
+   implementation. Reuse at the bottom of the Overview section on
+   every game guide. body is the explanatory sentence or two.
+#}
+{% macro MarkerImplNote(body) %}
+<div class="gg-callout gg-callout--marker" style="margin-top:28px;">
+  <p><strong>Marker Implementation</strong> — {{ body }}</p>
+</div>
+{% endmacro %}
+
+{# ── Related game card ──────────────────────────────────────
+   name – game name
+   desc – one-line description
+   href – URL
+#}
+{% macro RelatedCard(name, desc, href) %}
+<a href="{{ href }}" class="gg-related-card">
+  <h4>{{ name }}</h4>
+  <p>{{ desc }}</p>
+  <span class="gg-related-card__arrow">Learn more →</span>
+</a>
+{% endmacro %}
