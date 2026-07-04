@@ -510,7 +510,7 @@ Each player receives one handicap stroke on holes where their course handicap is
 **Mixed gross/net ball allocation.** The settings form allows counting 1 gross ball and 1 net ball per hole from the same team — selecting one player based on best gross performance and another based on best net performance. This is unusual but supported. Both selected players' Stableford points (gross and net respectively) contribute to the team total for that hole.
 
 <div class="gg-callout gg-callout--info">
-<p>For the full explanation of Marker's handicap settings — percentage modes, stroke allocation, half-strokes — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For the full explanation of Marker's handicap settings — percentage modes, stroke allocation, half-strokes — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

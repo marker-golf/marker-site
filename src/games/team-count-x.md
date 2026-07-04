@@ -821,7 +821,7 @@ A high-handicapper who receives a stroke on a par 4 (SI 5, for example) and make
 Marker applies advanced handicap options for groups that need more control: stroke off low ball (differential allocation), per-player overrides, max strokes cap, half strokes, and suppression of strokes on par 3s.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of how Marker allocates handicap strokes, see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of how Marker allocates handicap strokes, see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

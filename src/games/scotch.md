@@ -580,7 +580,7 @@ Net Scotch is the standard form: each player's Course Handicap is applied by Str
 </div>
 
 <div class="gg-callout gg-callout--info" style="margin-top:24px;">
-<p>For the full explanation of handicap settings in Marker — stroke allocation by Stroke Index, percentage modes, and per-player overrides — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For the full explanation of handicap settings in Marker — stroke allocation by Stroke Index, percentage modes, and per-player overrides — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

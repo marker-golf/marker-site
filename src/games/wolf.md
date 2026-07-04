@@ -830,7 +830,7 @@ Conversely, on a Lone Wolf attempt, the Wolf's own strokes matter. If the Wolf i
 Marker offers advanced options including stroke off low ball (differential-based allocation), per-player handicap overrides, max strokes, half strokes, and suppression of strokes on par 3s. These are available in the Handicap Settings panel when creating the event.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of how Marker allocates handicap strokes, see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of how Marker allocates handicap strokes, see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

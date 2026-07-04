@@ -587,7 +587,7 @@ $20 total pot (4 × $5). Five skins distributed. Winners divide the pot by skin 
 **Half-stroke option.** Marker also supports a half-strokes handicap mode, which divides each player's handicap allocation by two. This is less common but occasionally used when groups feel full handicap gives too large an advantage on specific holes.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of all handicap settings in Marker — including stroke allocation, percentage modes, and per-player overrides — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of all handicap settings in Marker — including stroke allocation, percentage modes, and per-player overrides — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

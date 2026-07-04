@@ -636,7 +636,7 @@ Same gross score, 1-point difference, because one hole allocates a stroke and th
 **Partial handicap (85%).** Marker also supports fractional handicap modes. At 85%, each player's Course Handicap is multiplied by 0.85 before stroke allocation. This reduces the edge for high handicappers while still applying some adjustment. Some groups use this when they feel full handicap gives too large an advantage on specific holes.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of all handicap settings in Marker — including percentage modes, half-strokes, and per-player overrides — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of all handicap settings in Marker — including percentage modes, half-strokes, and per-player overrides — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>
@@ -973,7 +973,7 @@ Same gross score, 1-point difference, because one hole allocates a stroke and th
 {{ RelatedCard(
   "Handicap Settings",
   "Full explanation of how Marker applies handicap strokes, percentage modes, and per-player configurations across all games.",
-  '/games/handicap-settings/' | url
+  '/tutorials/handicap-settings/' | url
 ) }}
 
 </div>

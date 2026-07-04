@@ -597,7 +597,7 @@ This means a high-handicapper can win the low-score position on a hole where the
 
 **Handicap percentage** scales how many strokes are applied. At 100% (the default), a player's full course handicap is used. At 80%, the effective handicap is reduced by 20%. This is common in money games to partially offset the advantage of high handicappers.
 
-For full details on stroke allocation by stroke index, see the [Handicap Settings guide](/games/handicap-settings/).
+For full details on stroke allocation by stroke index, see the [Handicap Settings guide](/tutorials/handicap-settings/).
 
 </div>
 
@@ -856,7 +856,7 @@ For full details on stroke allocation by stroke index, see the [Handicap Setting
 {{ RelatedCard(
   "Handicap Settings",
   "How Marker allocates handicap strokes across holes by stroke index, with percentage and override options.",
-  "/games/handicap-settings/"
+  "/tutorials/handicap-settings/"
 ) }}
 
 </div>

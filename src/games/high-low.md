@@ -573,7 +573,7 @@ In High-Low (net), strokes are typically allocated using the **Match Play method
 Marker uses the USGA Stroke Index allocation by default. Strokes are distributed one per hole, starting with the hardest holes (SI 1, 2, 3…) until each player's stroke allocation is used up.
 
 <div class="gg-callout gg-callout--info">
-<p>For a detailed explanation of all handicap modes in Marker — including how to set stroke allowances and choose between individual vs. match play allocation — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a detailed explanation of all handicap modes in Marker — including how to set stroke allowances and choose between individual vs. match play allocation — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 <h3 style="font-size:1.05rem; color:var(--ink); margin-bottom:14px; margin-top:32px;">Why Net High-Low Is More Competitive</h3>
@@ -751,7 +751,7 @@ In gross High-Low, the team with the two best players will almost always win. Ne
 <details class="gg-faq-item">
         <summary>Can High-Low be played with handicaps?</summary>
 <div class="gg-faq-body">
-          <p>Yes — net High-Low is actually the most common version among mixed-ability groups. Marker supports full handicap (100%), partial (85%), and gross play. You choose the mode when setting up the event. See the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a> for more detail.</p>
+          <p>Yes — net High-Low is actually the most common version among mixed-ability groups. Marker supports full handicap (100%), partial (85%), and gross play. You choose the mode when setting up the event. See the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a> for more detail.</p>
 </div>
 </details>
 

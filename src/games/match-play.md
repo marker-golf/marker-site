@@ -579,7 +579,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 **Why match play handicap isn't just total stroke adjustment.** In stroke play, you compare final totals and subtract handicaps at the end — the stroke distribution across holes doesn't matter. In match play, it matters a great deal which specific holes you receive strokes on. Getting a stroke on SI 1 (the hardest hole) means you're most likely to use it and convert a potential loss into a win. Getting strokes on easier holes is less impactful. This is why Stroke Index allocation is central to fair net match play.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of all handicap settings in Marker — including how to override individual player handicaps, set stroke allowances, and choose between percentage modes — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of all handicap settings in Marker — including how to override individual player handicaps, set stroke allowances, and choose between percentage modes — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>
@@ -780,7 +780,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 <details class="gg-faq-item">
 <summary>Can match play use handicaps?</summary>
 <div class="gg-faq-body">
-<p>Yes. Net match play is the standard for recreational and most competitive rounds. Marker applies handicap strokes using Stroke Index — strokes are distributed to the hardest holes first. Each player's individual handicap is used to compute their net score per hole, and those net scores are compared to determine the hole winner. See the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a> for all configuration options.</p>
+<p>Yes. Net match play is the standard for recreational and most competitive rounds. Marker applies handicap strokes using Stroke Index — strokes are distributed to the hardest holes first. Each player's individual handicap is used to compute their net score per hole, and those net scores are compared to determine the hole winner. See the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a> for all configuration options.</p>
 </div>
 </details>
 
@@ -863,7 +863,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 {{ RelatedCard(
   "Handicap Settings",
   "Full reference for all handicap modes in Marker — percentage, stroke allocation, and overrides.",
-  '/games/handicap-settings/' | url
+  '/tutorials/handicap-settings/' | url
 ) }}
 
 </div>

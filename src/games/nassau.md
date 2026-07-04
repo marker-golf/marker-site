@@ -487,7 +487,7 @@ Both teams have two players. On each hole, Marker takes the best net score from 
 **1v1 handicap.** In a head-to-head Nassau, the player with the lower Course Handicap plays at full gross and the higher-handicapper receives the difference. If A plays to a 6 and B plays to a 14, B receives 8 strokes on the 8 hardest holes. No manual calculation needed — Marker handles it.
 
 <div class="gg-callout gg-callout--info">
-<p>For a full explanation of handicap modes and stroke allocation in Marker — including how to set stroke allowances — see the <a href="{{ '/games/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
+<p>For a full explanation of handicap modes and stroke allocation in Marker — including how to set stroke allowances — see the <a href="{{ '/tutorials/handicap-settings/' | url }}">Handicap Settings guide</a>.</p>
 </div>
 
 </div>

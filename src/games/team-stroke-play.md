@@ -531,7 +531,7 @@ Each hole, Marker selects the player with the lowest net score from each team. T
 
 **Handicap percentage.** The percentage setting (default 100%) scales handicaps before application. Setting it to 80% reduces each player's effective strokes by 20%, which is common in competitive formats to prevent heavy handicappers from dominating.
 
-For more on how Marker handles handicap allocation, see the [Handicap Settings guide](/games/handicap-settings/).
+For more on how Marker handles handicap allocation, see the [Handicap Settings guide](/tutorials/handicap-settings/).
 
 </div>
 
@@ -895,7 +895,7 @@ Choose Team Stroke Play when your group prefers traditional stroke scoring and w
 {{ RelatedCard(
   "Handicap Settings",
   "How Marker allocates handicap strokes across 18 holes, percentage settings, and override options.",
-  "/games/handicap-settings/"
+  "/tutorials/handicap-settings/"
 ) }}
 
 </div>
