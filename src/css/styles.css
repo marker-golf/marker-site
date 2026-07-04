@@ -475,7 +475,7 @@ p { color: var(--ink-muted); line-height: 1.75; }
   background-color: var(--green-800);
   background-image:
     linear-gradient(to bottom, rgba(15, 36, 25, 0.88) 0%, rgba(26, 61, 46, 0.72) 100%),
-    url('../images/hero-bg.jpg');
+    url('../images/brand/hero-bg.jpg');
   background-size: cover;
   background-position: center 35%;
   color: var(--white);
@@ -910,7 +910,70 @@ p { color: var(--ink-muted); line-height: 1.75; }
 .comm-games__all a { color: var(--green-600); font-weight: 600; }
 .comm-games__all a:hover { color: var(--green-800); }
 
-/* ---- 24. Responsive ---- */
+/* ---- 24. Product screenshot component ---- */
+.product-screenshot {
+  margin: 0;
+  display: block;
+}
+.product-screenshot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+.product-screenshot figcaption {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+.product-screenshot--placeholder img {
+  opacity: 0.8;
+}
+.product-screenshot--phone {
+  position: relative;
+}
+.product-screenshot__phone-frame {
+  background: var(--ink);
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+}
+.product-screenshot__phone-screen {
+  border-radius: 30px;
+  overflow: hidden;
+  display: block;
+}
+.product-screenshot__phone-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+.product-screenshot--tutorial {
+  position: relative;
+}
+.product-screenshot__step-badge {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 32px;
+  height: 32px;
+  background: var(--green-800);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- 26. Responsive ---- */
 @media (max-width: 960px) {
   .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .game-grid { grid-template-columns: repeat(2, 1fr); }

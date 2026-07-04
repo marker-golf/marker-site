@@ -7,6 +7,7 @@ description: Marker tracks scores live, manages your side games, and settles the
 {% from "components/badges.njk" import AppStoreBadge, PlayStoreBadge %}
 {% from "components/platform-bar.njk" import PlatformSupportBar %}
 {% from "components/trust-stats.njk" import TrustStats %}
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
 
 <!-- Hero -->
 <section class="hero">
@@ -18,7 +19,7 @@ description: Marker tracks scores live, manages your side games, and settles the
     </div>
     <p class="hero__pricing-note">{{ pricing.heroNote }}</p>
     <div class="hero__screenshot">
-      <img src="{{ '/images/screen-home.png' | url }}" alt="Marker scorecard on iPhone" width="320" height="690" loading="eager">
+      {{ ProductScreenshot("homepageHero", screenshots) }}
     </div>
   </div>
 </section>
@@ -115,7 +116,7 @@ description: Marker tracks scores live, manages your side games, and settles the
         <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Try it free</a>
       </div>
       <div class="feature-row__media">
-        <img src="{{ '/images/screen-leaderboard.png' | url }}" alt="Live leaderboard on Marker" width="280" height="560" loading="lazy">
+        {{ ProductScreenshot("homepageLeaderboard", screenshots) }}
       </div>
     </div>
 
@@ -126,7 +127,7 @@ description: Marker tracks scores live, manages your side games, and settles the
         <a href="{{ '/games/' | url }}" class="btn btn-primary btn-sm">See all games</a>
       </div>
       <div class="feature-row__media">
-        <img src="{{ '/images/screen-games.png' | url }}" alt="Side games on Marker" width="280" height="560" loading="lazy">
+        {{ ProductScreenshot("homepageGames", screenshots) }}
       </div>
     </div>
   </div>

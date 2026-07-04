@@ -1,0 +1,190 @@
+{
+  "_comment": "Screenshot manifest. Status: placeholder | draft | stale | approved. See docs/screenshot-automation.md.",
+
+  "homepageHero": {
+    "src": "/images/screenshots/web/homepage-hero-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-hero-mobile-demo.png",
+    "alt": "Marker scorecard on iPhone showing a live golf round",
+    "caption": null,
+    "usage": ["index"],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Replace after hero flow is finalized in Expo app."
+  },
+
+  "homepageLeaderboard": {
+    "src": "/images/screenshots/web/homepage-leaderboard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-leaderboard-mobile-demo.png",
+    "alt": "Live leaderboard on Marker showing player standings during a round",
+    "caption": null,
+    "usage": ["index"],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Replace after leaderboard screen is finalized."
+  },
+
+  "homepageGames": {
+    "src": "/images/screenshots/web/homepage-games-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-games-mobile-demo.png",
+    "alt": "Side games list on Marker showing Skins, Nassau, and Wolf",
+    "caption": null,
+    "usage": ["index"],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Replace after games list screen is finalized."
+  },
+
+  "homepageEndRound": {
+    "src": "/images/screenshots/web/homepage-end-round-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-end-round-mobile-demo.png",
+    "alt": "End-of-round settlement screen showing who owes who",
+    "caption": null,
+    "usage": [],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Not currently placed on any page. Good candidate for homepage settlement feature row."
+  },
+
+  "homepageEventList": {
+    "src": "/images/screenshots/web/homepage-event-list-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-event-list-mobile-demo.png",
+    "alt": "Marker event list showing upcoming and past golf events",
+    "caption": null,
+    "usage": [],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for Create an Event tutorial."
+  },
+
+  "homepageScorecard": {
+    "src": "/images/screenshots/web/homepage-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-scorecard-mobile-demo.png",
+    "alt": "Scorecard view in Marker showing hole-by-hole scores",
+    "caption": null,
+    "usage": [],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for event-scoring tutorial."
+  },
+
+  "homepageScoring": {
+    "src": "/images/screenshots/web/homepage-scoring-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-scoring-mobile-demo.png",
+    "alt": "Score entry screen in Marker for entering hole scores",
+    "caption": null,
+    "usage": [],
+    "viewport": "mobile",
+    "status": "stale",
+    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for event-scoring tutorial."
+  },
+
+  "tutorialCreateEventStep1": {
+    "src": "/images/screenshots/web/tutorial-create-event-01-event-list-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Marker event list with the button to create a new golf event",
+    "caption": "Tap the + button on the Events tab to start a new event.",
+    "usage": ["tutorials/create-an-event"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after create-event flow is stable in Expo app. Capture from Events tab with the + CTA visible."
+  },
+
+  "tutorialCreateEventStep2": {
+    "src": "/images/screenshots/web/tutorial-create-event-02-event-form-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "New event form in Marker showing course search, event name, and date fields",
+    "caption": "Search for your course, name the event, and set the date.",
+    "usage": ["tutorials/create-an-event"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after event form is stable. Show course search field with a result selected."
+  },
+
+  "tutorialAddGamesStep1": {
+    "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Marker game picker showing all available game formats",
+    "caption": "Tap + in the Games section to open the game picker.",
+    "usage": ["tutorials/add-and-configure-games"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after GamePicker screen is stable. Show full list of formats including Premium pills."
+  },
+
+  "tutorialAddGamesStep2": {
+    "src": "/images/screenshots/web/tutorial-add-games-02-game-form-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Game configuration form in Marker showing handicap and player settings",
+    "caption": "Configure handicap, select players, and set any game-specific options.",
+    "usage": ["tutorials/add-and-configure-games"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after GameForm screen is stable. Show Skins or Nassau configuration as example."
+  },
+
+  "tutorialEventScoringStep1": {
+    "src": "/images/screenshots/web/tutorial-event-scoring-01-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Scorecard view in Marker during an active golf round",
+    "caption": "The scorecard updates as each player enters their score.",
+    "usage": ["tutorials/event-scoring"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after scoring screen is stable. Show an active round with a few holes entered."
+  },
+
+  "tutorialHandicapSettings": {
+    "src": "/images/screenshots/web/tutorial-handicap-01-settings-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Handicap settings panel in Marker showing Net/Gross toggle and allowance options",
+    "caption": "Configure handicap allowance, stroke limits, and half-stroke rules per game.",
+    "usage": ["tutorials/handicap-settings"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after handicap settings panel is stable. Show expanded advanced settings."
+  },
+
+  "gameWolfSetup": {
+    "src": "/images/screenshots/web/game-wolf-setup-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Wolf game setup screen in Marker showing the lone wolf assignment for a hole",
+    "caption": "The wolf chooses their partner (or goes alone) before anyone else tees off.",
+    "usage": ["games/wolf"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after Wolf game screen is stable. Show hole view with wolf selection prompt."
+  },
+
+  "gameNassauSetup": {
+    "src": "/images/screenshots/web/game-nassau-setup-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Nassau game configuration in Marker showing match amounts for front, back, and full 18",
+    "caption": "Set separate match amounts for front 9, back 9, and the full 18.",
+    "usage": ["games/nassau"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after Nassau configuration is stable. Show the three-bet setup form."
+  },
+
+  "gameSkinsPayout": {
+    "src": "/images/screenshots/web/game-skins-payout-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Skins payout screen in Marker showing hole-by-hole skin winners and carry amounts",
+    "caption": "Skins accumulate when a hole is halved — Marker tracks every carry automatically.",
+    "usage": ["games/skins"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after Skins results screen is stable. Show a game with several carries."
+  },
+
+  "commissionersHero": {
+    "src": "/images/screenshots/web/commissioners-event-overview-mobile-demo.webp",
+    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
+    "alt": "Marker event overview screen showing groups, games, and live scoring status",
+    "caption": null,
+    "usage": ["commissioners"],
+    "viewport": "mobile",
+    "status": "placeholder",
+    "notes": "Replace after event overview screen is stable. Show a multi-group event with games configured."
+  }
+}

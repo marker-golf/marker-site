@@ -1,0 +1,109 @@
+{#
+  ProductScreenshot(key, data, opts)
+  ——————————————————————————————————
+  Renders a product screenshot from the manifest, falling back to a placeholder
+  when the real asset is not yet available.
+
+  key      — string, key in screenshots.json
+  data     — pass `screenshots` (the global data variable)
+  frame    — "phone" renders inside a phone outline; "none" (default) renders bare
+  caption  — true (default) shows the caption from the manifest; false suppresses it
+  class    — extra CSS class string applied to the <figure>
+
+  Usage:
+    {% from "components/product-screenshot.njk" import ProductScreenshot %}
+    {{ ProductScreenshot("homepageHero", screenshots) }}
+    {{ ProductScreenshot("tutorialCreateEventStep1", screenshots, frame="phone") }}
+    {{ ProductScreenshot("gameSkinsPayout", screenshots, caption=false) }}
+#}
+
+{% macro ProductScreenshot(key, data, frame="none", caption=true, class="") %}
+  {%- set shot = data[key] -%}
+  {%- if shot -%}
+    {%- set isPlaceholder = shot.status == "placeholder" -%}
+    {%- set imgSrc = shot.fallback if (isPlaceholder or shot.status == "stale") else shot.src -%}
+    <figure class="product-screenshot{% if frame == 'phone' %} product-screenshot--phone{% endif %}{% if isPlaceholder %} product-screenshot--placeholder{% endif %}{% if class %} {{ class }}{% endif %}">
+      {%- if frame == "phone" %}
+      <div class="product-screenshot__phone-frame" aria-hidden="true">
+        <div class="product-screenshot__phone-screen">
+          <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
+        </div>
+      </div>
+      {%- else %}
+      <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
+      {%- endif %}
+      {%- if caption and shot.caption %}
+      <figcaption>{{ shot.caption }}</figcaption>
+      {%- endif %}
+    </figure>
+  {%- endif %}
+{% endmacro %}
+
+
+{#
+  TutorialStepScreenshot(key, data, stepNum, opts)
+  ————————————————————————————————————————————————
+  Like ProductScreenshot but renders with a phone frame and a step number badge.
+  Intended for use in tutorial step illustrations.
+
+  key     — string, key in screenshots.json
+  data    — pass `screenshots`
+  stepNum — optional step number shown as a badge (omit to suppress)
+  caption — true (default) shows caption
+  class   — extra CSS class
+
+  Usage:
+    {% from "components/product-screenshot.njk" import TutorialStepScreenshot %}
+    {{ TutorialStepScreenshot("tutorialCreateEventStep1", screenshots, 1) }}
+#}
+
+{% macro TutorialStepScreenshot(key, data, stepNum="", caption=true, class="") %}
+  {%- set shot = data[key] -%}
+  {%- if shot -%}
+    {%- set isPlaceholder = shot.status == "placeholder" -%}
+    {%- set imgSrc = shot.fallback if (isPlaceholder or shot.status == "stale") else shot.src -%}
+    <figure class="product-screenshot product-screenshot--tutorial product-screenshot--phone{% if isPlaceholder %} product-screenshot--placeholder{% endif %}{% if class %} {{ class }}{% endif %}">
+      {%- if stepNum %}
+      <div class="product-screenshot__step-badge" aria-hidden="true">{{ stepNum }}</div>
+      {%- endif %}
+      <div class="product-screenshot__phone-frame" aria-hidden="true">
+        <div class="product-screenshot__phone-screen">
+          <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
+        </div>
+      </div>
+      {%- if caption and shot.caption %}
+      <figcaption>{{ shot.caption }}</figcaption>
+      {%- endif %}
+    </figure>
+  {%- endif %}
+{% endmacro %}
+
+
+{#
+  GameGuideScreenshot(key, data, opts)
+  ————————————————————————————————————
+  Like ProductScreenshot with phone frame. Used in game guide pages for
+  context screenshots alongside rules/setup explanations.
+
+  Usage:
+    {% from "components/product-screenshot.njk" import GameGuideScreenshot %}
+    {{ GameGuideScreenshot("gameWolfSetup", screenshots) }}
+#}
+
+{% macro GameGuideScreenshot(key, data, caption=true, class="") %}
+  {%- set shot = data[key] -%}
+  {%- if shot -%}
+    {%- set isPlaceholder = shot.status == "placeholder" -%}
+    {%- set imgSrc = shot.fallback if (isPlaceholder or shot.status == "stale") else shot.src -%}
+    <figure class="product-screenshot product-screenshot--game product-screenshot--phone{% if isPlaceholder %} product-screenshot--placeholder{% endif %}{% if class %} {{ class }}{% endif %}">
+      <div class="product-screenshot__phone-frame" aria-hidden="true">
+        <div class="product-screenshot__phone-screen">
+          <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
+        </div>
+      </div>
+      {%- if caption and shot.caption %}
+      <figcaption>{{ shot.caption }}</figcaption>
+      {%- endif %}
+    </figure>
+  {%- endif %}
+{% endmacro %}
