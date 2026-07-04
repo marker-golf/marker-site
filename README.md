@@ -230,7 +230,7 @@ src/images/
         └── placeholder-mobile.svg      # Fallback shown for unshot slots
 ```
 
-`web/` is currently empty — all screenshot slots are either `stale` (pre-Expo PNGs served from `source/`) or `placeholder` (SVG fallback). WebP files go in `web/` after optimization; the manifest entry determines which file is rendered.
+`web/` holds optimized WebP files ready to serve. WebP files land here after optimization; the manifest `status` determines whether `src` (the WebP) or `fallback` (source PNG or placeholder SVG) is rendered for each entry.
 
 ### The core principle: filename vs. manifest key
 
@@ -298,9 +298,11 @@ placeholder → draft → approved → stale
 | Status | Meaning |
 |---|---|
 | `placeholder` | Not yet captured — site renders the SVG fallback |
-| `draft` | Screenshot added but not yet reviewed |
-| `approved` | Current, reviewed, and ready for production |
+| `draft` | Screenshot exists and is under review — **not safe to commit or deploy until approved** |
+| `approved` | Passed visual, accuracy, and privacy review — ready for production |
 | `stale` | Exists but shows outdated UI — renders from `fallback` until replaced |
+
+`draft` is a workflow state, not a deployment or privacy clearance. A draft screenshot may contain personal or sensitive data from the capture session and must pass privacy review before it can be promoted to `approved` or committed to the repository.
 
 Mark screenshots `stale` explicitly rather than leaving obsolete product UI silently on the site.
 
@@ -332,36 +334,80 @@ The `screenshots` variable is globally available from `src/_data/screenshots.jso
 
 Do not hardcode `src/images/screenshots/` paths in templates. The component resolves the correct path from the manifest and handles fallback automatically.
 
-### Adding a screenshot
+### Tested manual screenshot workflow
 
-1. Capture from the approved demo environment with deterministic demo data.
+This workflow was validated replacing the `homepageHero` screenshot with an Expo capture.
+
+1. Capture a screenshot of the Expo app as PNG.
 2. Save the original PNG to `src/images/screenshots/source/` using the naming convention.
-3. Optimize to WebP and save to `src/images/screenshots/web/`.
-4. Add an entry to `src/_data/screenshots.json` — choose a stable semantic key, set `status: "draft"`.
-5. Run `npm run build`, verify locally, then promote to `"approved"`.
+3. Convert to WebP using Sharp (already a project devDependency):
 
-### Replacing a screenshot
+   ```bash
+   node -e "require('sharp')('src/images/screenshots/source/<filename>.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/<filename>.webp')"
+   ```
 
-1. Add the new PNG to `source/` and optimize to `web/`.
-2. Update the existing `screenshots.json` entry — update `src`, set `status: "draft"`. **Keep the same manifest key** unless the screenshot's semantic purpose has changed.
-3. Review locally, promote to `"approved"`.
-4. Do not edit page templates unless the screenshot placement itself is changing.
+4. Update the manifest entry in `src/_data/screenshots.json`:
+   - For a **new** screenshot: add an entry with a stable semantic key.
+   - For a **replacement**: keep the existing key, update `src` and `fallback` paths.
+   - Set `status: "draft"`.
+
+5. Run `npm run build` — verify no broken paths.
+6. Run `npm run start` and review the screenshot in context at the relevant page.
+7. Complete the privacy review checklist (see below) — **a screenshot must pass privacy review before it can be committed**.
+8. Run `git status` — confirm the manifest change and the approved asset file are staged together, and no draft or personal-data screenshots are staged.
+9. Promote `status` to `"approved"` only after all reviews pass.
+10. Commit the manifest and the approved WebP together in the same commit.
+
+**Example — `homepageHero`:**
+
+| | |
+|---|---|
+| Manifest key | `homepageHero` (stable — survives future filename changes) |
+| Source PNG | `src/images/screenshots/source/homepage-hero-mobile-expo-demo.png` |
+| Optimized WebP | `src/images/screenshots/web/homepage-hero-mobile-expo-demo.webp` |
+
+The key `homepageHero` stays constant even if the underlying filename changes in a future UI refresh — only the manifest `src` and `fallback` values update.
+
+### Privacy review checklist
+
+Before promoting a screenshot from `draft` to `approved`, verify the image contains **none** of the following:
+
+- [ ] Real names
+- [ ] GHIN numbers or other handicap identifiers
+- [ ] Phone numbers
+- [ ] Email addresses
+- [ ] Profile photos of real people
+- [ ] Real customer or player information
+- [ ] Private event or club names
+- [ ] Personal financial or payment information
+- [ ] Precise location data
+- [ ] Any other personally identifying or sensitive data
+
+**Screenshots containing personal or sensitive information must not be committed to this repository or deployed to production.**
+
+Capture screenshots using only:
+- Dedicated demo accounts with fictional identities
+- Seeded events with fictional player names and synthetic scoring data
+- Non-sensitive course and event information
+- No real GHIN identifiers
 
 ### Screenshot automation (planned)
 
-Playwright-based automated capture is designed but not yet implemented. The capture flow, viewport standards, demo data requirements, optimization pipeline, and stale-screenshot verification script are documented in [`docs/screenshot-automation.md`](docs/screenshot-automation.md).
+Playwright-based automated capture is designed but not yet implemented. Sharp is already installed as a project devDependency and will be used for the PNG→WebP optimization step. The full automation design — capture flow, Playwright script structure, viewport standards, demo data requirements, and stale-screenshot verification — is documented in [`docs/screenshot-automation.md`](docs/screenshot-automation.md).
 
-**Currently implemented:** folder structure, naming convention, manifest, reusable template components, SVG placeholder fallback.  
-**Planned:** Playwright capture, WebP optimization pipeline, stale screenshot detection.
+**Currently implemented:** folder structure, naming convention, manifest, reusable template components, SVG placeholder fallback, Sharp for WebP conversion.  
+**Planned:** Playwright capture, automated optimization pipeline, stale screenshot detection.
 
 ### Image rules
 
 - Never hardcode screenshot paths in templates — use manifest keys.
 - A screenshot filename describes what was captured; the manifest key describes how the site uses it.
 - Keep original captures in `source/`. Serve optimized WebP from `web/`.
+- `draft` is not a deployment approval — screenshots must pass privacy review before being committed or promoted to `approved`.
+- Use only demo accounts with fictional identities. Never use real customer, player, or personal data in screenshots.
 - Use consistent viewports: mobile 390×844, tablet 768×1024, desktop 1440×900.
-- Use realistic but non-sensitive demo data. Never use real customer data in screenshots.
 - Mark outdated screenshots `stale` — don't leave obsolete product UI on the site silently.
+- Commit the manifest and asset files together — never let a manifest entry point to a local-only file.
 - Run `npm run build` before committing any image change.
 
 ---

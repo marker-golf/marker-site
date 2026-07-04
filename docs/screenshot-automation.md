@@ -24,7 +24,6 @@ src/images/
       ... (see screenshots.json for full list)
 
     web/                        Optimized WebP files for production — generated from source/
-      (empty until first optimization run)
 
     placeholders/               SVG fallback images shown while real screenshots are pending
       placeholder-mobile.svg    Generic mobile-viewport placeholder
@@ -86,9 +85,11 @@ Every screenshot slot — both real images and placeholders — has an entry in 
 | Status        | Meaning |
 |---------------|---------|
 | `placeholder` | No real screenshot yet — renders the SVG placeholder |
-| `draft`       | Screenshot captured but not yet reviewed |
+| `draft`       | Screenshot captured but under review — **not safe to commit or deploy until approved** |
 | `stale`       | Screenshot exists but app UI has changed and it needs recapture |
-| `approved`    | Screenshot reviewed and approved for production |
+| `approved`    | Passed visual, accuracy, and privacy review — ready for production |
+
+`draft` is a workflow state, not a deployment or privacy clearance. A draft screenshot may contain personal or sensitive data captured during a manual session and must not be committed until it passes privacy review.
 
 The component renders the fallback (placeholder or source PNG) for `placeholder` and `stale` statuses. It renders the WebP `src` only for `draft` and `approved`.
 
@@ -157,30 +158,34 @@ All current screenshot slots are `viewport: "mobile"`. Desktop/tablet slots can 
 
 Before running automated screenshot capture, the following must be true:
 
-### 1. Demo user account
+### 1. Demo user account (required)
 
 A dedicated demo user must exist with:
-- Established USGA handicap index (set to 14.0 for a mid-handicap look)
-- No real personal data
+- **Fictional identity only** — no real name, no real GHIN identifier
+- A synthetic handicap index set programmatically (e.g., 14.0 for a mid-handicap look)
+- No real email addresses or phone numbers visible in any screenshot
 - Credentials stored in `.env.screenshot` (never committed)
 
-### 2. Demo event with deterministic data
+If the app displays a GHIN-linked handicap, the demo account must use a test/synthetic GHIN that does not correspond to a real golfer. Capturing a real user's GHIN and committing it to this repository is not acceptable.
+
+### 2. Demo event with deterministic data (required)
 
 A seeded event must exist with:
-- Course: a real USGA course (e.g., a well-known public course with readable hole names)
-- 4 players with recognizable first names (e.g., Todd, Mike, Sara, Chris)
-- Scores entered for all 18 holes (par-realistic, not perfect)
-- At least one game running: Skins with a carry on hole 7; Nassau with press on back 9
-- Wolf game running if capturing Wolf screens
+- Course: a real USGA course with readable hole names (non-sensitive)
+- 4 players with clearly fictional names (e.g., Alex Demo, Sam Test, Jordan Play, Riley Golf)
+- Scores entered for all 18 holes — par-realistic, not perfect
+- At least one game configured: Skins with a carry on hole 7; Nassau with press on back 9
+- Wolf game configured if capturing Wolf screens
 
-This data must be stable and not change between capture runs. A seed script or Expo dev fixture should create or reset it.
+This data must be stable and reproducible between capture runs. A seed script or Expo dev fixture must create or reset it before each capture session.
 
 ### 3. App in a predictable state
 
 - No loading spinners during capture — wait for network idle
 - No onboarding modals, tooltips, or "rate us" prompts
 - Font rendering stable (system fonts, not web fonts, to avoid FOUT)
-- Dark mode OFF (site screenshots are light-mode)
+- Dark mode OFF (screenshots are light-mode)
+- No real user data visible anywhere in the capture viewport
 
 ---
 
@@ -255,7 +260,25 @@ Add to `package.json`:
 
 ## Optimization flow (PNG → WebP)
 
-After capture, optimize each PNG to WebP before committing to `web/`:
+Sharp is already installed as a project devDependency (`"sharp": "^0.35.3"` in `package.json`). No additional installation is required.
+
+### Manual conversion (tested)
+
+Convert a single PNG to WebP at the command line:
+
+```bash
+node -e "require('sharp')('src/images/screenshots/source/<filename>.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/<filename>.webp')"
+```
+
+This command was tested successfully for the `homepageHero` replacement:
+
+```bash
+node -e "require('sharp')('src/images/screenshots/source/homepage-hero-mobile-expo-demo.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/homepage-hero-mobile-expo-demo.webp')"
+```
+
+### Batch conversion script (future)
+
+When automated capture is implemented, a batch optimization script will process all new PNGs:
 
 ```js
 // scripts/optimize-screenshots.js (future)
@@ -277,10 +300,10 @@ for (const file of files) {
 }
 ```
 
-Install dependency: `npm install --save-dev sharp`
-
 Target quality: `85` (good balance of size and fidelity for mobile screenshots).  
 Typical result: 350 KB PNG → 40–80 KB WebP.
+
+> **Note:** macOS `sips` does not support WebP output. Use Sharp only.
 
 ---
 
@@ -290,9 +313,82 @@ After new screenshots are captured and optimized:
 
 1. Set `status` from `"placeholder"` → `"draft"` in `screenshots.json`
 2. Verify the `src` (WebP) path matches the actual file in `screenshots/web/`
-3. Review the image in context by running `npm run build` and opening the page locally
-4. Promote `"draft"` → `"approved"` after visual review
-5. Set `"approved"` → `"stale"` when the app UI changes and the screenshot needs recapture
+3. Run `npm run build` — verify no broken paths
+4. Run `npm run start` — review the image in context at the relevant page
+5. Complete the Screenshot Approval Gate (see below) before promoting
+6. Promote `"draft"` → `"approved"` only after all reviews pass
+7. Set `"approved"` → `"stale"` when the app UI changes and the screenshot needs recapture
+
+---
+
+## Screenshot Approval Gate
+
+A screenshot may move from `draft` to `approved` only after all of the following are true:
+
+- [ ] The UI shown is current — the app has not changed since capture
+- [ ] The screenshot accurately represents the described feature or workflow step
+- [ ] **No personal, customer, or sensitive data is visible** (see privacy checklist below)
+- [ ] Alt text in `screenshots.json` accurately describes the image
+- [ ] Caption (if used) is accurate and concise
+- [ ] The page placement has been reviewed at desktop and mobile widths
+- [ ] The manifest `src` path resolves to the correct file in `screenshots/web/`
+- [ ] The source PNG and optimized WebP are both correctly named per convention
+- [ ] The WebP is optimized (not a renamed PNG)
+- [ ] The manifest change and the approved asset file are ready to commit together
+
+### Privacy checklist
+
+Before approving a screenshot, verify it contains **none** of the following:
+
+- [ ] Real names
+- [ ] GHIN numbers or other handicap identifiers linked to real golfers
+- [ ] Phone numbers
+- [ ] Email addresses
+- [ ] Profile photos of real people
+- [ ] Real customer or player information
+- [ ] Private event or club names
+- [ ] Personal financial or payment information
+- [ ] Precise location data
+- [ ] Any other personally identifying or sensitive data
+
+**Screenshots containing personal or sensitive information must not be committed to this repository or deployed to production.** Use only dedicated demo accounts, fictional player names, and synthetic scoring data.
+
+---
+
+## Pre-Commit Screenshot Checklist
+
+Run these checks before committing any screenshot-related change:
+
+```bash
+# 1. Verify the build passes cleanly
+npm run build
+
+# 2. Check which files are staged
+git status
+
+# 3. List all non-approved screenshot slots
+node -e "
+const s = JSON.parse(require('fs').readFileSync('src/_data/screenshots.json', 'utf8'));
+Object.entries(s)
+  .filter(([k,v]) => !k.startsWith('_') && v.status !== 'approved')
+  .forEach(([k,v]) => console.log(v.status.padEnd(12), k));
+"
+```
+
+Verify:
+
+- [ ] No draft screenshots are staged that have not passed privacy review
+- [ ] No personal or sensitive data is present in any staged image file
+- [ ] Every `src` path in changed manifest entries resolves to an actual file in `screenshots/web/`
+- [ ] Every `fallback` path in changed entries resolves to an actual file in `source/` or `placeholders/`
+- [ ] Manifest changes and their referenced asset files are staged **together** in the same commit
+- [ ] No manifest entry points to a local-only file that is intentionally excluded from Git
+- [ ] Stale screenshots are clearly marked `stale` — not silently presenting outdated UI
+- [ ] Approved screenshots are not accidentally pointing to placeholder fallbacks
+
+### Commit discipline
+
+If `screenshots.json` points to a new screenshot file, that file must be included in the same commit. Never commit a manifest change that references a local-only draft image that is intentionally withheld from the repository — this creates broken image references in production.
 
 ---
 
