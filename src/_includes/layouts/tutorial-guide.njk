@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="tutorial-hero">
+  <div class="container">
+    <nav class="tutorial-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ '/tutorials/' | url }}">Tutorials</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ title }}</span>
+    </nav>
+    <h1>{{ title }}</h1>
+    <p>{{ subtitle }}</p>
+    <nav class="tutorial-subnav" aria-label="Tutorial navigation">
+      <a href="{{ '/tutorials/getting-started/' | url }}"{% if page.url == '/tutorials/getting-started/' %} aria-current="page"{% endif %}>Getting Started</a>
+      <a href="{{ '/tutorials/create-an-event/' | url }}"{% if page.url == '/tutorials/create-an-event/' %} aria-current="page"{% endif %}>Create an Event</a>
+      <a href="{{ '/tutorials/add-players/' | url }}"{% if page.url == '/tutorials/add-players/' %} aria-current="page"{% endif %}>Add Players</a>
+      <a href="{{ '/tutorials/create-scorecards/' | url }}"{% if page.url == '/tutorials/create-scorecards/' %} aria-current="page"{% endif %}>Create Scorecards</a>
+      <a href="{{ '/tutorials/event-scoring/' | url }}"{% if page.url == '/tutorials/event-scoring/' %} aria-current="page"{% endif %}>Event Scoring</a>
+      <a href="{{ '/tutorials/side-games/' | url }}"{% if page.url == '/tutorials/side-games/' %} aria-current="page"{% endif %}>Side Games</a>
+    </nav>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+
+    {{ content | safe }}
+
+    {% if relatedTutorials and relatedTutorials.length %}
+    <div class="tutorial-footer-nav">
+      <span class="tutorial-footer-nav__label">{{ nextLabel | default("Up next") }}</span>
+      <a href="{{ relatedTutorials[0].url | url }}" class="btn btn-primary btn-sm">{{ relatedTutorials[0].title }}</a>
+      <a href="{{ '/tutorials/' | url }}" class="btn btn-ghost btn-sm">All Tutorials</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>{{ cta.heading }}</h2>
+    <p>{{ cta.body }}</p>
+    <div class="cta-band__actions">
+      <a href="https://app.marker.golf" class="btn btn-primary">Open Marker</a>
+    </div>
+  </div>
+</section>
