@@ -1,0 +1,30 @@
+---
+layout: layouts/base.njk
+---
+<section class="page-hero">
+  <div class="container">
+    <h1>{{ heroHeading }}</h1>
+    <p>{{ heroSubtitle }}</p>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="legal">
+
+      <nav class="legal__toc" aria-label="Table of contents">
+        <p class="legal__toc-heading">Contents</p>
+        <ol>
+          {% for item in toc %}
+          <li><a href="#{{ item.anchor }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ol>
+      </nav>
+
+      <div class="legal__prose">
+        {{ content | safe }}
+      </div>
+
+    </div>
+  </div>
+</section>
