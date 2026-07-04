@@ -14,6 +14,9 @@
         <li>
           <a href="{{ '/commissioners/' | url }}"{% if '/commissioners' in page.url %} aria-current="page"{% endif %}>For Leagues</a>
         </li>
+        <li>
+          <a href="{{ '/about/' | url }}"{% if '/about' in page.url %} aria-current="page"{% endif %}>About</a>
+        </li>
       </ul>
       <img src="{{ '/images/usga-badge.png' | url }}" alt="USGA Handicap Data Affiliate" class="nav__usga-badge">
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
