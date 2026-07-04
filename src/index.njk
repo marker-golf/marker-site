@@ -19,7 +19,7 @@ description: Marker tracks scores live, manages your side games, and settles the
     </div>
     <p class="hero__pricing-note">{{ pricing.heroNote }}</p>
     <div class="hero__screenshot">
-      {{ ProductScreenshot("homepageHero", screenshots) }}
+      {{ ProductScreenshot("homepageHero", screenshots, frame="phone") }}
     </div>
   </div>
 </section>
@@ -116,7 +116,7 @@ description: Marker tracks scores live, manages your side games, and settles the
         <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Try it free</a>
       </div>
       <div class="feature-row__media">
-        {{ ProductScreenshot("homepageLeaderboard", screenshots) }}
+        {{ ProductScreenshot("homepageLeaderboard", screenshots, frame="phone") }}
       </div>
     </div>
 
@@ -127,7 +127,7 @@ description: Marker tracks scores live, manages your side games, and settles the
         <a href="{{ '/games/' | url }}" class="btn btn-primary btn-sm">See all games</a>
       </div>
       <div class="feature-row__media">
-        {{ ProductScreenshot("homepageGames", screenshots) }}
+        {{ ProductScreenshot("homepageGames", screenshots, frame="phone") }}
       </div>
     </div>
   </div>

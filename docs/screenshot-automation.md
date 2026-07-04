@@ -29,9 +29,11 @@ src/images/
       placeholder-mobile.svg    Generic mobile-viewport placeholder
 ```
 
-**`source/`** — commit raw PNGs here after capture.  
-**`web/`** — generated from `source/`; commit WebP after optimization.  
+**`source/`** — commit raw PNGs here after capture. **Do not bake device frames into image files.**  
+**`web/`** — generated from `source/`; commit WebP after optimization. Also frameless.  
 **`placeholders/`** — commit SVGs; these are permanent fallbacks.
+
+The website applies CSS device frames at render time via the `ProductScreenshot`, `TutorialStepScreenshot`, and `GameGuideScreenshot` components. Screenshots in `source/` and `web/` should always be clean, unframed captures of the app UI.
 
 ---
 
@@ -92,6 +94,30 @@ Every screenshot slot — both real images and placeholders — has an entry in 
 `draft` is a workflow state, not a deployment or privacy clearance. A draft screenshot may contain personal or sensitive data captured during a manual session and must not be committed until it passes privacy review.
 
 The component renders the fallback (placeholder or source PNG) for `placeholder` and `stale` statuses. It renders the WebP `src` only for `draft` and `approved`.
+
+---
+
+## Device framing
+
+Screenshots are presented inside CSS phone frames on the site. The frames are applied by the template components — **not** baked into the image files.
+
+```
+Raw capture (PNG/WebP)     →    Template component    →    Rendered output
+  unframed app UI                frame="phone"              framed on page
+```
+
+This separation means:
+- Screenshots can be recaptured without worrying about consistent frame rendering
+- The same raw screenshot can be presented framed or unframed depending on context
+- Frame design can be updated via CSS without recapturing any screenshots
+
+When capturing screenshots, always capture **only the app UI** at the exact viewport size — no simulator chrome, no OS menubar, no desktop background. The component adds the device frame.
+
+Recommended Playwright capture approach:
+```js
+await page.setViewportSize({ width: 390, height: 844 }); // mobile
+await page.screenshot({ path: '...', fullPage: false, clip: { x: 0, y: 0, width: 390, height: 844 } });
+```
 
 ---
 

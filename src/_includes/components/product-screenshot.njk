@@ -24,10 +24,12 @@
     {%- set imgSrc = shot.fallback if (isPlaceholder or shot.status == "stale") else shot.src -%}
     <figure class="product-screenshot{% if frame == 'phone' %} product-screenshot--phone{% endif %}{% if isPlaceholder %} product-screenshot--placeholder{% endif %}{% if class %} {{ class }}{% endif %}">
       {%- if frame == "phone" %}
-      <div class="product-screenshot__phone-frame" aria-hidden="true">
+      <div class="product-screenshot__phone-frame">
+        <div class="product-screenshot__phone-island" aria-hidden="true"></div>
         <div class="product-screenshot__phone-screen">
           <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
         </div>
+        <div class="product-screenshot__phone-bar" aria-hidden="true"></div>
       </div>
       {%- else %}
       <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
@@ -66,10 +68,12 @@
       {%- if stepNum %}
       <div class="product-screenshot__step-badge" aria-hidden="true">{{ stepNum }}</div>
       {%- endif %}
-      <div class="product-screenshot__phone-frame" aria-hidden="true">
+      <div class="product-screenshot__phone-frame">
+        <div class="product-screenshot__phone-island" aria-hidden="true"></div>
         <div class="product-screenshot__phone-screen">
           <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
         </div>
+        <div class="product-screenshot__phone-bar" aria-hidden="true"></div>
       </div>
       {%- if caption and shot.caption %}
       <figcaption>{{ shot.caption }}</figcaption>
@@ -96,10 +100,12 @@
     {%- set isPlaceholder = shot.status == "placeholder" -%}
     {%- set imgSrc = shot.fallback if (isPlaceholder or shot.status == "stale") else shot.src -%}
     <figure class="product-screenshot product-screenshot--game product-screenshot--phone{% if isPlaceholder %} product-screenshot--placeholder{% endif %}{% if class %} {{ class }}{% endif %}">
-      <div class="product-screenshot__phone-frame" aria-hidden="true">
+      <div class="product-screenshot__phone-frame">
+        <div class="product-screenshot__phone-island" aria-hidden="true"></div>
         <div class="product-screenshot__phone-screen">
           <img src="{{ imgSrc | url }}" alt="{{ shot.alt }}" loading="lazy" decoding="async">
         </div>
+        <div class="product-screenshot__phone-bar" aria-hidden="true"></div>
       </div>
       {%- if caption and shot.caption %}
       <figcaption>{{ shot.caption }}</figcaption>
