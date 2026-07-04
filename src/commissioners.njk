@@ -1,16 +1,127 @@
 ---
 layout: layouts/base.njk
-title: Commissioner Tools — Run Your Golf League on Marker
-description: Marker gives golf league commissioners complete control — flights, pairings, handicaps, team competitions, live leaderboards, and automatic settlements. Free for your whole group.
+title: Marker for Commissioners — Run Any Golf Event Without the Spreadsheet
+description: Marker gives golf commissioners everything to run the game — create events, invite players, build groups, add games, track live scores, and settle results automatically. First 3 events free.
 ---
 
-<!-- Page hero -->
+{% from "components/trust-stats.njk" import TrustStats %}
+
+<!-- Hero -->
 <section class="page-hero">
   <div class="container">
     <p class="page-hero__label">For Commissioners</p>
-    <h1>Run your entire golf league<br>from a single scorecard.</h1>
-    <p>Flights, handicaps, team competitions, live leaderboards, and instant settlements — Marker handles the administration so you can focus on the game.</p>
-    <a href="https://app.marker.golf" class="btn btn-primary">Set Up Your League</a>
+    <h1>Run the whole golf game<br>without the spreadsheet.</h1>
+    <p>Create the event, invite your group, build groups, add games, and settle results — Marker handles the administration so you can focus on the game.</p>
+    <a href="https://app.marker.golf" class="btn btn-primary">Start Your First Event</a>
+    <p class="comm-hero__note">Your first 3 events are free. No credit card required.</p>
+  </div>
+</section>
+
+<!-- Who it's for -->
+<section class="section section--white">
+  <div class="container">
+    <div class="section-header" style="text-align:center; margin-bottom:40px;">
+      <h2>Built for whoever runs the game.</h2>
+      <p style="max-width:480px; margin-inline:auto; margin-top:12px;">Whether you're organizing a Saturday group or a season-long league — if you set it up, Marker is for you.</p>
+    </div>
+    <div class="comm-use-cases__grid">
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        Weekly Golf Groups
+      </div>
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        Golf Trips
+      </div>
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Leagues &amp; Series
+      </div>
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>
+        </svg>
+        Member-Guest Events
+      </div>
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Ryder Cup Weekends
+      </div>
+
+      <div class="comm-use-case">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>
+        </svg>
+        Club Tournaments
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section comm-how">
+  <div class="container">
+    <div class="section-header" style="text-align:center; margin-bottom:48px;">
+      <h2>From first tee to final settlement.</h2>
+      <p style="max-width:440px; margin-inline:auto; margin-top:12px;">Five steps. The whole round.</p>
+    </div>
+    <div class="comm-how__steps">
+
+      <div class="comm-step">
+        <div class="comm-step__num" aria-hidden="true">1</div>
+        <div class="comm-step__content">
+          <h3>Create an event</h3>
+          <p>Search for the course from Marker's USGA course database, name the event, and set the date. Optionally attach it to a season series to track cumulative standings over multiple rounds.</p>
+        </div>
+      </div>
+
+      <div class="comm-step">
+        <div class="comm-step__num" aria-hidden="true">2</div>
+        <div class="comm-step__content">
+          <h3>Add players</h3>
+          <p>Share a link and your group joins from any device — iPhone, Android, or web browser. No app download or account required for players to participate.</p>
+        </div>
+      </div>
+
+      <div class="comm-step">
+        <div class="comm-step__num" aria-hidden="true">3</div>
+        <div class="comm-step__content">
+          <h3>Build groups</h3>
+          <p>Create a scorecard for each cart group, assign players, and set tees. Multiple groups play simultaneously — everyone shares the same live leaderboard across the whole field.</p>
+        </div>
+      </div>
+
+      <div class="comm-step">
+        <div class="comm-step__num" aria-hidden="true">4</div>
+        <div class="comm-step__content">
+          <h3>Add games</h3>
+          <p>Choose from 11 built-in formats — Skins, Nassau, Wolf, Stableford, and more. Configure handicap, select which players are in, and set stakes. Marker handles all the math from there.</p>
+        </div>
+      </div>
+
+      <div class="comm-step">
+        <div class="comm-step__num" aria-hidden="true">5</div>
+        <div class="comm-step__content">
+          <h3>Score live and settle</h3>
+          <p>Every player enters scores on their own device. The leaderboard updates hole by hole. Lock the event when the round ends and Marker shows exactly who owes who — across every game, in one screen.</p>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -18,19 +129,19 @@ description: Marker gives golf league commissioners complete control — flights
 <section class="section section--white">
   <div class="container">
     <div class="section-header" style="text-align:center; margin-bottom:48px;">
-      <h2>Everything you need to run a golf event.</h2>
-      <p style="max-width:480px; margin-inline:auto; margin-top:12px;">From a casual Saturday round to a 64-player tournament, Marker scales with your event.</p>
+      <h2>Everything you need to run the event.</h2>
+      <p style="max-width:500px; margin-inline:auto; margin-top:12px;">Built for the commissioner who wants full control without the administrative overhead.</p>
     </div>
     <div class="comm-features-grid">
 
       <div class="comm-feature-card">
         <div class="comm-feature-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
           </svg>
         </div>
-        <h3>Flights &amp; Pairings</h3>
-        <p>Organize players into flights, build pairings, and manage the field before you reach the first tee. Works for 4-player groups up to full tournament fields.</p>
+        <h3>Live Leaderboard for the Field</h3>
+        <p>Every player's phone shows real-time standings across all groups as scores come in hole by hole. No waiting for carts to return — everyone knows where they stand.</p>
       </div>
 
       <div class="comm-feature-card">
@@ -39,28 +150,8 @@ description: Marker gives golf league commissioners complete control — flights
             <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
           </svg>
         </div>
-        <h3>Handicap Management</h3>
-        <p>Set handicap rules per event. Marker is an Official USGA Handicap Data Affiliate — calculations follow World Handicap System rules automatically.</p>
-      </div>
-
-      <div class="comm-feature-card">
-        <div class="comm-feature-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-          </svg>
-        </div>
-        <h3>Live Leaderboards</h3>
-        <p>Every player sees real-time standings on their own device as scores come in hole by hole. No more waiting until the 19th hole to find out who's winning.</p>
-      </div>
-
-      <div class="comm-feature-card">
-        <div class="comm-feature-card__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <h3>Team Competitions</h3>
-        <p>Ryder Cup, Scotch, Team Stroke Play, High-Low — full team format support for any size event, with automatic team score tracking throughout the round.</p>
+        <h3>USGA Handicap Management</h3>
+        <p>Marker is an Official USGA Handicap Data Affiliate. Course handicaps calculate from current indexes automatically. Allowances, stroke overrides, and World Handicap System rules are all built in.</p>
       </div>
 
       <div class="comm-feature-card">
@@ -69,8 +160,18 @@ description: Marker gives golf league commissioners complete control — flights
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>
         </div>
-        <h3>Side Games for the Field</h3>
-        <p>Nassau, Skins, Matchplay, Nines, Stableford — configure multiple games simultaneously across the entire field. Every player's results calculate automatically.</p>
+        <h3>Multiple Games, One Event</h3>
+        <p>Add Skins, Nassau, and Wolf to the same event. Each game tracks independently — different players, different stakes, different formats — and settles separately when the round ends.</p>
+      </div>
+
+      <div class="comm-feature-card">
+        <div class="comm-feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <h3>Season Series</h3>
+        <p>Group your events into a series and track cumulative standings across the whole season. Results from each event roll up automatically. Series management is a commissioner feature.</p>
       </div>
 
       <div class="comm-feature-card">
@@ -79,33 +180,102 @@ description: Marker gives golf league commissioners complete control — flights
             <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
           </svg>
         </div>
-        <h3>Automatic Settlements</h3>
-        <p>When the round ends, Marker calculates exactly who owes who across every game running. No disputes, no spreadsheets, no 19th hole math.</p>
+        <h3>Automatic Settlement</h3>
+        <p>Lock the event when the round ends and Marker calculates exactly who owes who across every game. No mental math, no disputes, no waiting until someone gets home to run the numbers.</p>
+      </div>
+
+      <div class="comm-feature-card">
+        <div class="comm-feature-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72z"/><path d="m14 7 3 3"/>
+          </svg>
+        </div>
+        <h3>AI Game Generation</h3>
+        <p>Describe a custom format in plain English and Marker generates the scoring rules. Review before activating. Useful for group-specific house formats that don't fit a standard built-in game.</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- Why commissioners choose Marker -->
-<section class="section comm-why">
+<!-- Games commissioners run -->
+<section class="section comm-games">
   <div class="container">
-    <div class="comm-why__header">
-      <h2>Why commissioners choose Marker.</h2>
+    <div class="comm-games__header">
+      <h2>Formats your group already plays.</h2>
+      <p>Every game is built in — no configuration required to add it. Pick the format, set stakes, and play.</p>
     </div>
-    <div class="comm-why__grid">
-      <div class="comm-why__item">
-        <h4>One link to invite everyone.</h4>
-        <p>Share a single link and your players join from any device. No app download required for your group to participate.</p>
+    <div class="comm-games__grid">
+
+      <a href="{{ '/games/wolf/' | url }}" class="comm-game-card">
+        <h3>Wolf</h3>
+        <p>Rotating lone wolf. Every hole, the wolf picks their team — or goes it alone for double stakes. Premium.</p>
+      </a>
+
+      <a href="{{ '/games/nassau/' | url }}" class="comm-game-card">
+        <h3>Nassau</h3>
+        <p>Three separate bets: front 9, back 9, and full 18. Optional press rules built in.</p>
+      </a>
+
+      <a href="{{ '/games/skins/' | url }}" class="comm-game-card">
+        <h3>Skins</h3>
+        <p>Win the hole outright or the pot carries. Marker tracks every skin and shows the live payout.</p>
+      </a>
+
+      <a href="{{ '/games/match-play/' | url }}" class="comm-game-card">
+        <h3>Match Play</h3>
+        <p>Head-to-head, hole by hole. Marker tracks standing (2UP, 3DOWN) and closes the match automatically.</p>
+      </a>
+
+      <a href="{{ '/games/stableford/' | url }}" class="comm-game-card">
+        <h3>Stableford</h3>
+        <p>Points relative to par. Works well for mixed-handicap groups where scoring gaps are wide.</p>
+      </a>
+
+      <a href="{{ '/games/team-count-x/' | url }}" class="comm-game-card">
+        <h3>TeamCountX</h3>
+        <p>Team stroke play where each team selects X scores per hole. Scales to any team size. Premium.</p>
+      </a>
+
+    </div>
+    <p class="comm-games__all"><a href="{{ '/games/' | url }}">Browse all 11 game formats →</a></p>
+  </div>
+</section>
+
+<!-- Trust stats -->
+<section class="section section--white">
+  <div class="container">
+    {{ TrustStats() }}
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div class="pricing__header">
+      <h2>Start free. Upgrade when you need more.</h2>
+      <p>Your first 3 events are included — no credit card, no time limit. Premium unlocks Wolf, TeamCountX, and season series.</p>
+    </div>
+    <div class="pricing__grid">
+      {% for plan in pricing.plans %}
+      <div class="pricing-card pricing-card--{{ plan.id }}">
+        <p class="pricing-card__plan">{{ plan.name }}</p>
+        <div class="pricing-card__price">
+          <span class="pricing-card__amount">{{ plan.amount }}</span>
+          {% if plan.period %}<span class="pricing-card__period">{{ plan.period }}</span>{% endif %}
+        </div>
+        <p class="pricing-card__alt">{{ plan.altText }}</p>
+        <div class="pricing-card__divider" aria-hidden="true"></div>
+        <ul class="pricing-card__features">
+          {% for feature in plan.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+        {% if plan.cta %}
+        <a href="{{ plan.cta.href }}" class="btn btn-ghost">{{ plan.cta.text }}</a>
+        {% endif %}
       </div>
-      <div class="comm-why__item">
-        <h4>Free for your whole group.</h4>
-        <p>Marker is free for players and commissioners. No per-player fees, no subscriptions, no credit card required.</p>
-      </div>
-      <div class="comm-why__item">
-        <h4>Works on any device.</h4>
-        <p>iPhone, Android, iPad, or web browser — every player in your group is covered regardless of what they carry.</p>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -113,10 +283,10 @@ description: Marker gives golf league commissioners complete control — flights
 <!-- CTA band -->
 <section class="cta-band">
   <div class="container">
-    <h2>Set up your league in under a minute.</h2>
+    <h2>Start your first event in under a minute.</h2>
     <p>No spreadsheets. No group texts. No arguments at the 19th hole.</p>
     <div class="cta-band__actions">
-      <a href="https://app.marker.golf" class="btn btn-primary">Set Up Your League</a>
+      <a href="https://app.marker.golf" class="btn btn-primary">Start Your First Event</a>
     </div>
   </div>
 </section>
