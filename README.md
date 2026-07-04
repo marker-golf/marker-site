@@ -68,7 +68,8 @@ No frameworks, no bundlers, no build-time dependencies beyond Eleventy.
 marker-site/
 ├── src/
 │   ├── _data/
-│   │   └── pricing.json          # Pricing plans rendered in index.njk
+│   │   ├── pricing.json          # Pricing plans rendered in index.njk
+│   │   └── screenshots.json      # Screenshot manifest (see Images and Screenshots)
 │   ├── _includes/
 │   │   ├── layouts/
 │   │   │   ├── base.njk          # HTML shell: meta, fonts, header, footer
@@ -80,14 +81,15 @@ marker-site/
 │   │   │   ├── badges.njk        # AppStoreBadge, PlayStoreBadge macros
 │   │   │   ├── game-guide.njk    # Game guide section/step macros
 │   │   │   ├── platform-bar.njk  # PlatformSupportBar macro
+│   │   │   ├── product-screenshot.njk # ProductScreenshot, TutorialStepScreenshot, GameGuideScreenshot
 │   │   │   └── trust-stats.njk   # TrustStats macro
 │   │   ├── header.njk            # Sticky nav with mobile panel
-│   │   └── footer.njk            # 4-column footer
+│   │   └── footer.njk            # 5-column footer
 │   ├── css/
 │   │   └── styles.css            # All styles: tokens, layout, components
 │   ├── js/
 │   │   └── main.js               # Mobile nav toggle
-│   ├── images/                   # See Images section below
+│   ├── images/                   # See Images and Screenshots section below
 │   ├── games/
 │   │   ├── GAME-GUIDE-AUTHORING.md  # Author reference (excluded from build)
 │   │   ├── handicap-settings.njk    # Handicap reference page
@@ -110,8 +112,11 @@ marker-site/
 │   │   ├── create-an-event.md
 │   │   ├── add-players.md
 │   │   ├── create-scorecards.md
+│   │   ├── add-and-configure-games.md
 │   │   ├── event-scoring.md
-│   │   └── side-games.md
+│   │   ├── handicap-settings.md
+│   │   ├── side-games.md
+│   │   └── ai-game-generation.md
 │   ├── index.njk                 # Homepage
 │   ├── games.njk                 # Games landing page
 │   ├── tutorials.njk             # Tutorials landing page
@@ -120,6 +125,8 @@ marker-site/
 │   ├── privacy.md                # Privacy policy
 │   ├── terms.md                  # Terms & Conditions
 │   └── _redirects                # URL redirect rules (copied to _site/)
+├── docs/
+│   └── screenshot-automation.md  # Playwright automation design (see Images and Screenshots)
 ├── _site/                        # Generated output (gitignored)
 ├── eleventy.config.js
 ├── package.json
@@ -202,25 +209,160 @@ Pricing values are stored in `src/_data/pricing.json` and automatically availabl
 
 ---
 
-## Images
+## Images and Screenshots
 
-All images live in `src/images/` and are copied verbatim to `_site/images/` at build time.
+All images live under `src/images/` and are copied verbatim to `_site/images/` at build time. Use the `url` filter on every reference: `{{ '/images/MarkerLogo.svg' | url }}`.
 
-| File | Usage |
+### Directory layout
+
+```
+src/images/
+├── MarkerLogo.svg                      # Brand wordmark — used in header and footer
+├── usga-badge.png                      # USGA Handicap Affiliate badge
+├── brand/
+│   ├── hero-bg.jpg                     # Hero section background (CSS only)
+│   ├── sketch-bg.jpg                   # (unused) alternate background texture
+│   └── sketch-bg-2.jpg                 # (unused) alternate background texture
+└── screenshots/
+    ├── source/                         # Original PNG captures — commit after capture
+    ├── web/                            # Optimized WebP files — served by the site
+    └── placeholders/
+        └── placeholder-mobile.svg      # Fallback shown for unshot slots
+```
+
+`web/` is currently empty — all screenshot slots are either `stale` (pre-Expo PNGs served from `source/`) or `placeholder` (SVG fallback). WebP files go in `web/` after optimization; the manifest entry determines which file is rendered.
+
+### The core principle: filename vs. manifest key
+
+A screenshot **filename** describes what was captured. A **manifest key** describes how the site uses it.
+
+```
+Filename:   game-wolf-scorecard-mobile-active.webp
+Key:        wolfLiveScorecard
+```
+
+This separation means a screenshot can be replaced — or renamed — without touching any page template. Templates reference the stable key; the manifest entry points to whichever file currently fills that slot.
+
+### Naming convention
+
+```
+<context>-<screen>-<viewport>-<state>.<ext>
+```
+
+| Segment | Examples |
 |---|---|
-| `MarkerLogo.svg` | Header and footer wordmark |
-| `usga-badge.png` | USGA Handicap Affiliate badge |
-| `hero-bg.jpg` | Homepage hero background |
-| `sketch-bg.jpg`, `sketch-bg-2.jpg` | Section backgrounds |
-| `screen-home.png` | Homepage hero screenshot |
-| `screen-leaderboard.png` | Leaderboard feature row |
-| `screen-games.png` | Games feature row |
-| `screen-scorecard.png` | Scorecard screenshot |
-| `screen-scoring.png` | Scoring screenshot |
-| `screen-event.png` | Event screenshot |
-| `screen-end-round.png` | End-of-round screenshot |
+| `context` | `homepage`, `tutorial-create-event`, `game-wolf`, `commissioners` |
+| `screen` | `hero`, `event-list`, `game-picker`, `leaderboard`, `settlement` |
+| `viewport` | `mobile`, `tablet`, `desktop` |
+| `state` | `demo`, `empty`, `active`, `results`, `setup` |
+| `ext` | `.png` in `source/`, `.webp` in `web/` |
 
-Reference images in templates with the `url` filter: `{{ '/images/screen-home.png' | url }}`.
+Use lowercase kebab-case. For multi-step tutorial captures, prefix with a two-digit sequence number:
+
+```
+tutorial-create-event-01-event-list-mobile-demo.png
+tutorial-create-event-02-event-form-mobile-demo.png
+```
+
+Name files after **what is captured**, not where the image appears on the site:
+
+```
+# Good — describes the UI state shown
+game-wolf-scorecard-mobile-active.webp
+
+# Avoid — describes page placement
+wolf-guide-second-image.webp
+```
+
+### Screenshot manifest (`src/_data/screenshots.json`)
+
+Every screenshot slot — real or placeholder — has a named entry in `src/_data/screenshots.json`. This is the source of truth for what screenshots exist, what they show, and where they are used.
+
+| Field | Description |
+|---|---|
+| `src` | WebP path in `screenshots/web/` — served when `status` is `draft` or `approved` |
+| `fallback` | PNG in `source/` or placeholder SVG — rendered when `src` is not yet ready |
+| `alt` | Alt text for accessibility |
+| `caption` | Optional caption rendered below the image (`null` to suppress) |
+| `usage` | Informational list of pages that reference this screenshot |
+| `viewport` | `mobile`, `tablet`, or `desktop` |
+| `status` | `placeholder` / `draft` / `approved` / `stale` — see lifecycle below |
+| `notes` | Capture instructions for whoever takes the screenshot |
+
+### Status lifecycle
+
+```
+placeholder → draft → approved → stale
+```
+
+| Status | Meaning |
+|---|---|
+| `placeholder` | Not yet captured — site renders the SVG fallback |
+| `draft` | Screenshot added but not yet reviewed |
+| `approved` | Current, reviewed, and ready for production |
+| `stale` | Exists but shows outdated UI — renders from `fallback` until replaced |
+
+Mark screenshots `stale` explicitly rather than leaving obsolete product UI silently on the site.
+
+### Using screenshots in templates
+
+Import the macros at the top of any `.njk` or `.md` file:
+
+```njk
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+{% from "components/product-screenshot.njk" import TutorialStepScreenshot %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
+```
+
+The `screenshots` variable is globally available from `src/_data/screenshots.json`.
+
+```njk
+{# Bare image #}
+{{ ProductScreenshot("homepageHero", screenshots) }}
+
+{# With phone frame #}
+{{ ProductScreenshot("tutorialCreateEventStep1", screenshots, frame="phone") }}
+
+{# Tutorial step with numbered badge #}
+{{ TutorialStepScreenshot("tutorialCreateEventStep1", screenshots, 1) }}
+
+{# Game guide screenshot #}
+{{ GameGuideScreenshot("gameWolfSetup", screenshots) }}
+```
+
+Do not hardcode `src/images/screenshots/` paths in templates. The component resolves the correct path from the manifest and handles fallback automatically.
+
+### Adding a screenshot
+
+1. Capture from the approved demo environment with deterministic demo data.
+2. Save the original PNG to `src/images/screenshots/source/` using the naming convention.
+3. Optimize to WebP and save to `src/images/screenshots/web/`.
+4. Add an entry to `src/_data/screenshots.json` — choose a stable semantic key, set `status: "draft"`.
+5. Run `npm run build`, verify locally, then promote to `"approved"`.
+
+### Replacing a screenshot
+
+1. Add the new PNG to `source/` and optimize to `web/`.
+2. Update the existing `screenshots.json` entry — update `src`, set `status: "draft"`. **Keep the same manifest key** unless the screenshot's semantic purpose has changed.
+3. Review locally, promote to `"approved"`.
+4. Do not edit page templates unless the screenshot placement itself is changing.
+
+### Screenshot automation (planned)
+
+Playwright-based automated capture is designed but not yet implemented. The capture flow, viewport standards, demo data requirements, optimization pipeline, and stale-screenshot verification script are documented in [`docs/screenshot-automation.md`](docs/screenshot-automation.md).
+
+**Currently implemented:** folder structure, naming convention, manifest, reusable template components, SVG placeholder fallback.  
+**Planned:** Playwright capture, WebP optimization pipeline, stale screenshot detection.
+
+### Image rules
+
+- Never hardcode screenshot paths in templates — use manifest keys.
+- A screenshot filename describes what was captured; the manifest key describes how the site uses it.
+- Keep original captures in `source/`. Serve optimized WebP from `web/`.
+- Use consistent viewports: mobile 390×844, tablet 768×1024, desktop 1440×900.
+- Use realistic but non-sensitive demo data. Never use real customer data in screenshots.
+- Mark outdated screenshots `stale` — don't leave obsolete product UI on the site silently.
+- Run `npm run build` before committing any image change.
 
 ---
 
@@ -266,9 +408,9 @@ Edit `src/_data/pricing.json`. Changes propagate to the homepage hero note and b
 
 Create a `.njk` or `.md` file in `src/`. Set `layout: layouts/base.njk` (or a more specific layout). Eleventy will generate the page at the matching URL. Add the page to the nav in `src/_includes/header.njk` and footer in `src/_includes/footer.njk` if needed.
 
-### Update a screenshot
+### Add or replace a screenshot
 
-Replace the file in `src/images/`. The filename and `alt` text are referenced directly in templates — update `alt` in the template if the content changes significantly.
+See [Images and Screenshots](#images-and-screenshots) for the full workflow, naming convention, and manifest update steps.
 
 ### Test the path prefix locally
 
