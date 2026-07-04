@@ -16,7 +16,7 @@ description: Marker tracks scores live, manages your side games, and settles the
     <div class="hero__actions">
       <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
     </div>
-    <p class="hero__pricing-note">Your first 3 events are included. No credit card required.</p>
+    <p class="hero__pricing-note">{{ pricing.heroNote }}</p>
     <div class="hero__screenshot">
       <img src="{{ '/images/screen-home.png' | url }}" alt="Marker scorecard on iPhone" width="320" height="690" loading="eager">
     </div>
@@ -33,45 +33,30 @@ description: Marker tracks scores live, manages your side games, and settles the
 <section class="section pricing" id="pricing">
   <div class="container">
     <div class="pricing__header">
-      <h2>Simple Pricing</h2>
-      <p>Start free. Upgrade when you're ready for more.</p>
+      <h2>{{ pricing.header.heading }}</h2>
+      <p>{{ pricing.header.subheading }}</p>
     </div>
     <div class="pricing__grid">
 
-      <div class="pricing-card pricing-card--free">
-        <p class="pricing-card__plan">Free</p>
+      {% for plan in pricing.plans %}
+      <div class="pricing-card pricing-card--{{ plan.id }}">
+        <p class="pricing-card__plan">{{ plan.name }}</p>
         <div class="pricing-card__price">
-          <span class="pricing-card__amount">$0</span>
+          <span class="pricing-card__amount">{{ plan.amount }}</span>
+          {% if plan.period %}<span class="pricing-card__period">{{ plan.period }}</span>{% endif %}
         </div>
-        <p class="pricing-card__alt">Always free. No credit card required.</p>
+        <p class="pricing-card__alt">{{ plan.altText }}</p>
         <div class="pricing-card__divider" aria-hidden="true"></div>
         <ul class="pricing-card__features">
-          <li>Up to 3 events</li>
-          <li>Live scoring</li>
-          <li>Leaderboards</li>
-          <li>Invite golfers</li>
-          <li>Core game formats</li>
+          {% for feature in plan.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
         </ul>
+        {% if plan.cta %}
+        <a href="{{ plan.cta.href }}" class="btn btn-ghost">{{ plan.cta.text }}</a>
+        {% endif %}
       </div>
-
-      <div class="pricing-card pricing-card--premium">
-        <p class="pricing-card__plan">Premium</p>
-        <div class="pricing-card__price">
-          <span class="pricing-card__amount">$67</span>
-          <span class="pricing-card__period">/year</span>
-        </div>
-        <p class="pricing-card__alt">or $6.99&nbsp;/ month</p>
-        <div class="pricing-card__divider" aria-hidden="true"></div>
-        <ul class="pricing-card__features">
-          <li>Unlimited events</li>
-          <li>Wolf</li>
-          <li>Hammer</li>
-          <li>Ryder Cup</li>
-          <li>TeamCountX</li>
-          <li>Future premium features</li>
-        </ul>
-        <a href="https://app.marker.golf" class="btn btn-ghost">Start Free</a>
-      </div>
+      {% endfor %}
 
     </div>
   </div>

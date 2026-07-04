@@ -1,0 +1,43 @@
+{
+  "header": {
+    "heading": "Simple Pricing",
+    "subheading": "Start free. Upgrade when you're ready for more."
+  },
+  "heroNote": "Your first 3 events are included. No credit card required.",
+  "plans": [
+    {
+      "id": "free",
+      "name": "Free",
+      "amount": "$0",
+      "period": null,
+      "altText": "Always free. No credit card required.",
+      "features": [
+        "Up to 3 events",
+        "Live scoring",
+        "Leaderboards",
+        "Invite golfers",
+        "Core game formats"
+      ],
+      "cta": null
+    },
+    {
+      "id": "premium",
+      "name": "Premium",
+      "amount": "$67",
+      "period": "/year",
+      "altText": "or $6.99 / month",
+      "features": [
+        "Unlimited events",
+        "Wolf",
+        "Hammer",
+        "Ryder Cup",
+        "TeamCountX",
+        "Future premium features"
+      ],
+      "cta": {
+        "text": "Start Free",
+        "href": "https://app.marker.golf"
+      }
+    }
+  ]
+}

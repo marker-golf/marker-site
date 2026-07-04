@@ -24,7 +24,7 @@ heroSubtitle: "Marker started because someone's Nassau math was wrong again. We 
 <section class="section">
 <div class="container" style="max-width:660px;">
 <h2 style="margin-bottom:20px;">The story</h2>
-<p style="margin-bottom:18px;">Every golf group has the same post-round ritual: huddle around someone's phone, squint at the scorecard, argue about whether the press was two holes or three, and hope the guy who carries a calculator in his bag is still around.</p>
+<p style="margin-bottom:18px;">Every golf group has the same post-round ritual: huddle around the table, squint at the scorecard, argue about whether the press was two holes or three, and hope the guy who carries a calculator in his bag is still around.</p>
 <p style="margin-bottom:18px;">We made Marker so that moment could be instant instead of painful. Set up your games on the first tee, keep score on any device, and walk off 18 knowing exactly who owes who — without the mental math.</p>
 <p style="margin-bottom:18px;">Marker is designed for the way real groups actually play: mixed handicaps, multiple side games running simultaneously, commissioners managing leagues, and the one guy who always forgets to bring cash.</p>
 <p style="margin-bottom:48px;">We're a small team and we play every week. Marker is the app we always wanted.</p>
