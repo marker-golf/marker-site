@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Match Play — Golf Game Guide
 description: "Match Play rules explained: hole-by-hole scoring, handicaps, presses, and how Marker tracks the standing automatically. Learn what 3&2 means, how dormie works, and how to run match play with handicaps."
+status: available
+category: classic
+order: 2
+players: "2 or 4"
+format: "Hole by Hole"
+cardDescription: "Hole-by-hole head-to-head competition. Win the hole, halve it, or lose it. Marker tracks the standing (e.g. 2UP, 3DOWN) and closes the match automatically when it's won."
 game:
   name: Match Play
   difficulty: beginner

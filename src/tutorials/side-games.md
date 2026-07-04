@@ -3,9 +3,11 @@ layout: layouts/tutorial-guide.njk
 title: Side Games
 description: Set up cross-group side matches in Marker — run a Nassau against players in another cart even when you're teeing off in separate groups.
 subtitle: "Run a bet against players in another cart — cross-group side matches that update automatically as everyone enters scores."
-category: Getting Started
-order: 6
+category: Running Events
+order: 1
 estimatedTime: "4 min read"
+cardDescription: "Set up cross-group side matches — run a Nassau against another cart even when you're playing in separate groups."
+iconSvg: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>'
 relatedTutorials:
   - title: "Browse All Games →"
     url: "/games/"

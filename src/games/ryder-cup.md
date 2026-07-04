@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Ryder Cup — Marker Golf Games
 description: "Ryder Cup format explained: Foursomes, Four-Ball, and Singles sessions, team points, and how to run your own Ryder Cup-style event. Coming to Marker."
+status: coming-soon
+category: featured
+order: 3
+players: "Any (2 teams)"
+format: "Team Match Play"
+cardDescription: "Multi-session team match play — Foursomes, Four-Ball, and Singles — with a live points table and cumulative standings. Perfect for golf trips and club events."
 game:
   name: Ryder Cup
   difficulty: advanced

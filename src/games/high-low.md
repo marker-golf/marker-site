@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: High-Low — Golf Game Guide
 description: "High-Low explained: rules, handicaps, strategy, and how to run it in Marker. Every player counts every hole — the best golf team format you're not playing enough."
+status: available
+category: classic
+order: 1
+players: "4 (2v2)"
+format: "Team Match"
+cardDescription: "Each hole, compare the best and worst scores across two teams. Win the \"high\" ball, win the \"low\" ball, or sweep both. Marker calculates team totals and net results hole by hole."
 game:
   name: High-Low
   difficulty: intermediate

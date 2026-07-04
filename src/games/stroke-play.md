@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Stroke Play — Golf Game Guide
 description: "Stroke Play explained: gross vs net scoring, handicap configuration, pool settlement, and how Marker tracks every score and settles the bet. The foundation of all tournament golf."
+status: available
+category: classic
+order: 9
+players: "Any number"
+format: "Total strokes"
+cardDescription: "Total strokes wins. Simple, official, and the format used in most tournaments. Marker tracks gross and net scores, computes handicap differentials, and exports clean scorecards."
 game:
   name: Stroke Play
   difficulty: beginner

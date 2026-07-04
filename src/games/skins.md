@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Skins — Golf Game Guide
 description: "Skins golf rules explained: how to win a skin, carryover rules, gross vs net scoring, and how Marker tracks skins and settlements automatically. The most dramatic format in golf."
+status: available
+category: classic
+order: 6
+players: "2 or more"
+format: "Hole by Hole"
+cardDescription: "Win the hole outright to claim the skin. Ties carry the pot over to the next hole. Marker shows the current skin value and reveals winners the moment the hole is cleared."
 game:
   name: Skins
   difficulty: beginner

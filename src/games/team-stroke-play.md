@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Team Stroke Play — Golf Game Guide
 description: "Team Stroke Play explained: how ball allocation works, gross vs net scoring, handicaps, sub-total bets, and how Marker aggregates team scores across multiple foursomes automatically."
+status: available
+category: classic
+order: 10
+players: "4+"
+format: "Team Stroke Play"
+cardDescription: "Combine individual stroke-play scores into team totals. Best-ball or aggregate — Marker handles both. Perfect for corporate outings, charity events, and league team competitions."
 game:
   name: Team Stroke Play
   difficulty: beginner

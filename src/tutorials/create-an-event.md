@@ -6,6 +6,8 @@ subtitle: "Set up a new round or tournament — choose your course, name the eve
 category: Getting Started
 order: 2
 estimatedTime: "4 min read"
+cardDescription: "Set up a new round or tournament — choose your course, name the event, pick a date, and save."
+iconSvg: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/>'
 relatedTutorials:
   - title: "Add Players →"
     url: "/tutorials/add-players/"

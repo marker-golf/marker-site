@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Wolf Golf Game — Rules, Strategy & How to Play | Marker
 description: "Wolf golf explained: player rotation, partner selection, Lone Wolf strategy, Blind Wolf, and how Marker handles every decision automatically. The most strategically demanding golf betting game."
+status: available
+category: featured
+order: 1
+players: "4"
+format: "Rotating Match"
+cardDescription: "One player per hole is the Wolf — pick a partner after each tee shot, go Lone Wolf against all three opponents, or declare Blind Wolf before anyone hits for triple points. Marker tracks every partner choice, applies the right multiplier, and shows live standings after each hole."
 game:
   name: Wolf
   difficulty: advanced

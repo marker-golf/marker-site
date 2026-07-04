@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Hammer — Golf Game Guide
 description: "Hammer explained: how to drop a Hammer, when to accept or double back, worked examples, and strategy. The pressure game that makes every shot feel different."
+status: coming-soon
+category: featured
+order: 2
+players: "2 or 4"
+format: "Match Play overlay"
+cardDescription: "Double the bet on any hole by dropping a Hammer. The other side can accept or double back. Marker tracks all active multipliers and calculates the final payout."
 game:
   name: Hammer
   difficulty: intermediate

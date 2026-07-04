@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Nines Golf Game (5-3-1) — Rules, Strategy & How to Play | Marker
 description: "Nines (5-3-1) explained: how nine points are distributed each hole among three players, tie-splitting, scoops, birdies-double, handicap, settlement, and how Marker tracks every point automatically."
+status: available
+category: classic
+order: 4
+players: "3 exactly"
+format: "Points-based"
+cardDescription: "Three players share 9 points per hole based on finish order. Best score takes 5, second takes 3, third takes 1. Ties split the points. Marker totals each player's running score instantly."
 game:
   name: Nines
   difficulty: beginner

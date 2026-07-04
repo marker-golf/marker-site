@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Team Stableford — Golf Game Guide
 description: "Team Stableford rules explained: how teams earn Stableford points, ball allocation, handicap handling, Quota mode, and how Marker tracks team totals and settlement automatically."
+status: available
+category: classic
+order: 8
+players: "4 or more"
+format: "Team Points"
+cardDescription: "Teams compete using Stableford points. Each hole, the team member with the best net score contributes their points to the team total. Supports Quota mode, handicaps, and pool settlement."
 game:
   name: Team Stableford
   difficulty: intermediate

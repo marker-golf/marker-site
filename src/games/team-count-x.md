@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: TeamCountX Golf Game — Rules, Strategy & How to Play | Marker
 description: "TeamCountX explained: team stroke play where each team selects X scores to count from all player-hole combinations. Strategic, flexible, and ideal for groups of any size."
+status: available
+category: featured
+order: 4
+players: "4+"
+format: "Team Stroke Play"
+cardDescription: "Each team collects every player's score on every hole, then selects exactly X of them to count. Choose which scores to include, discard the rest. Lowest net total wins. Works for any team size."
 game:
   name: TeamCountX
   difficulty: intermediate

@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Scotch Golf Game — Rules, Points & Strategy | Marker
 description: "Scotch golf game rules explained: how Low Ball, Low Team, Birdie, and KP points work, the Blitz rule, handicap application, and how Marker tracks all four scoring components automatically."
+status: available
+category: classic
+order: 5
+players: "4 (2 v 2)"
+format: "Points per hole"
+cardDescription: "2v2 points format with four scoring components per hole — Low Ball, Low Team, Birdie, and Closest to Pin. Sweep all four and trigger a Blitz for double points. Marker tracks every component and settles at point differential automatically."
 game:
   name: Scotch
   difficulty: intermediate

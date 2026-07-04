@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Stableford — Golf Game Guide
 description: "Stableford golf scoring explained: how points work, net vs gross Stableford, the Quota system, and how Marker handles the point table, handicaps, and settlement automatically."
+status: available
+category: classic
+order: 7
+players: "1 or more"
+format: "Points-based"
+cardDescription: "Points for every hole based on score vs. par. Birdie earns 3 points, par earns 2, bogey earns 1. One bad hole barely costs you. Marker calculates points and net handicap adjustments automatically."
 game:
   name: Stableford
   difficulty: beginner

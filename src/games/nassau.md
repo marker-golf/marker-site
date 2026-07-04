@@ -2,6 +2,12 @@
 layout: layouts/game-guide.njk
 title: Nassau — Golf Game Guide
 description: "Nassau explained: rules, presses, handicaps, and how to run it in Marker. Three simultaneous match play bets — front nine, back nine, and overall. The classic money game."
+status: available
+category: classic
+order: 3
+players: "2 or 4"
+format: "Match Play"
+cardDescription: "Three bets in one — front 9, back 9, and overall 18. The classic money game with optional presses. Marker runs all three simultaneously and handles automatic or manual press rules."
 game:
   name: Nassau
   difficulty: intermediate

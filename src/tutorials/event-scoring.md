@@ -6,6 +6,8 @@ subtitle: "Track all-group standings live, settle every game at the end, and rec
 category: Getting Started
 order: 5
 estimatedTime: "3 min read"
+cardDescription: "Use the live leaderboard, track all-group standings, settle bets, and record results for a series."
+iconSvg: '<polyline points="18 20 18 10"/><polyline points="12 20 12 4"/><polyline points="6 20 6 14"/>'
 relatedTutorials:
   - title: "Side Games →"
     url: "/tutorials/side-games/"
