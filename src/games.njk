@@ -1,15 +1,15 @@
 ---
 layout: layouts/base.njk
 title: Golf Games
-description: Marker supports nine of the most popular golf side games. Set them up before you tee off and Marker handles all the math.
+description: Marker supports the most popular golf side games — from Skins and Nassau to Wolf, Nines, and team formats. Set them up before you tee off and Marker handles all the math.
 ---
 
 {% from "components/badges.njk" import AppStoreBadge, PlayStoreBadge %}
 
 <section class="page-hero">
   <div class="container">
-    <h1>Nine games. Zero math.</h1>
-    <p>Choose your games before you tee off and Marker tracks every bet, point, and payout automatically.</p>
+    <h1>Every game. Zero math.</h1>
+    <p>From classic formats like Skins and Nassau to games built for serious golf trips and multi-group events, Marker handles the scoring so you can focus on the game.</p>
   </div>
 </section>
 
@@ -93,8 +93,8 @@ description: Marker supports nine of the most popular golf side games. Set them 
 
         <a href="{{ '/games/scotch/' | url }}" class="game-card game-card--link">
           <span class="game-badge game-badge--available">Available in Marker</span>
-          <h3>Scotch (Foursomes)</h3>
-          <p>Partners alternate hitting the same ball. Marker keeps track of who's hitting next, combines team scores, and shows net results against handicap.</p>
+          <h3>Scotch</h3>
+          <p>2v2 points format with four scoring components per hole — Low Ball, Low Team, Birdie, and Closest to Pin. Sweep all four and trigger a Blitz for double points. Marker tracks every component and settles at point differential automatically.</p>
           <span class="game-card__cta">Learn about Scotch →</span>
         </a>
 
@@ -108,8 +108,15 @@ description: Marker supports nine of the most popular golf side games. Set them 
         <a href="{{ '/games/stableford/' | url }}" class="game-card game-card--link">
           <span class="game-badge game-badge--available">Available in Marker</span>
           <h3>Stableford</h3>
-          <p>Points for every hole based on score vs. par. Birdie scores big, bogey costs you. Marker handles the Modified Stableford point table and net handicap adjustments automatically.</p>
+          <p>Points for every hole based on score vs. par. Birdie earns 3 points, par earns 2, bogey earns 1. One bad hole barely costs you. Marker calculates points and net handicap adjustments automatically.</p>
           <span class="game-card__cta">Learn about Stableford →</span>
+        </a>
+
+        <a href="{{ '/games/team-stableford/' | url }}" class="game-card game-card--link">
+          <span class="game-badge game-badge--available">Available in Marker</span>
+          <h3>Team Stableford</h3>
+          <p>Teams compete using Stableford points. Each hole, the team member with the best net score contributes their points to the team total. Supports Quota mode, handicaps, and pool settlement.</p>
+          <span class="game-card__cta">Learn about Team Stableford →</span>
         </a>
 
         <a href="{{ '/games/stroke-play/' | url }}" class="game-card game-card--link">
