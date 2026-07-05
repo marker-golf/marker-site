@@ -2,36 +2,36 @@
   "_comment": "Screenshot manifest. Status: placeholder | draft | stale | approved. See docs/screenshot-automation.md.",
 
   "homepageHero": {
-    "src": "/images/screenshots/web/homepage-hero-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-hero-mobile-demo.png",
-    "alt": "Marker scorecard on iPhone showing a live golf round",
+    "src": "/images/screenshots/web/homepage-hero-mobile-expo-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-hero-mobile-expo-demo.png",
+    "alt": "Marker scorecard showing an active golf round",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Replace after hero flow is finalized in Expo app."
+    "status": "draft",
+    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
   },
 
   "homepageLeaderboard": {
-    "src": "/images/screenshots/web/homepage-leaderboard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-leaderboard-mobile-demo.png",
-    "alt": "Live leaderboard on Marker showing player standings during a round",
+    "src": "/images/screenshots/web/homepage-leaderboard-mobile-expo-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-leaderboard-mobile-expo-demo.png",
+    "alt": "Live leaderboard showing player standings during a golf round",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Replace after leaderboard screen is finalized."
+    "status": "draft",
+    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
   },
 
   "homepageGames": {
-    "src": "/images/screenshots/web/homepage-games-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-games-mobile-demo.png",
-    "alt": "Side games list on Marker showing Skins, Nassau, and Wolf",
+    "src": "/images/screenshots/web/homepage-games-mobile-expo-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-games-mobile-expo-demo.png",
+    "alt": "Marker showing configured games for a golf event",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Replace after games list screen is finalized."
+    "status": "draft",
+    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
   },
 
   "homepageEndRound": {
