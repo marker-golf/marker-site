@@ -1,35 +1,113 @@
 ---
 layout: layouts/base.njk
 title: Tutorials — Learn Marker
-description: Step-by-step guides for getting started with Marker and running every supported golf game format.
+description: Step-by-step guides for every part of Marker — from a casual round with your group to running a full tournament.
 ---
 
 <section class="page-hero">
   <div class="container">
     <h1>Tutorials</h1>
-    <p>Step-by-step guides for every part of Marker — from your first event to running a Ryder Cup.</p>
+    <p>Step-by-step guides for every part of Marker — from a round with your group to running a full tournament.</p>
   </div>
 </section>
 
 <section class="section section--white tutorials-index">
   <div class="container">
 
-    <!-- ── Getting Started ───────────────────────────────── -->
+    {% set groupTutorials = collections.tutorials | tutorialsByPath("group") %}
+    {% set eventTutorials = collections.tutorials | tutorialsByPath("event") %}
+    {% set refTutorials   = collections.tutorials | tutorialsByPath("reference") %}
+
+    <!-- ── Playing with Your Group ───────────────────────────── -->
+    <div class="tutorial-category">
+      <div class="tutorial-category__header">
+        <div class="tutorial-category__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 17l4-4 4 4 4-6 4 3"/>
+            <circle cx="5" cy="6" r="2"/>
+            <line x1="5" y1="8" x2="5" y2="14"/>
+          </svg>
+          Playing with Your Group
+        </div>
+        <h2>Create a scorecard and play.</h2>
+        <p>For a single group or foursome — create a scorecard, add players, set up games, and settle up when the round ends.</p>
+      </div>
+      {% if groupTutorials | length %}
+      <div class="tutorial-grid">
+        {% for tut in groupTutorials %}
+        <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
+          <div class="tutorial-card__media" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              {{ tut.data.iconSvg | safe }}
+            </svg>
+          </div>
+          <div class="tutorial-card__body">
+            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
+            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="tutorial-coming-soon">Tutorials for this path are coming soon.</p>
+      {% endif %}
+    </div>
+
+    <!-- ── Running an Event ──────────────────────────────────── -->
+    <div class="tutorial-category">
+      <div class="tutorial-category__header">
+        <div class="tutorial-category__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Running an Event
+        </div>
+        <h2>From field setup to final settlement.</h2>
+        <p>For commissioners organizing multiple groups — create the event, build the field, set up scorecards and games, then publish and settle.</p>
+      </div>
+      {% if eventTutorials | length %}
+      <div class="tutorial-grid">
+        {% for tut in eventTutorials %}
+        <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
+          <div class="tutorial-card__media" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+              {{ tut.data.iconSvg | safe }}
+            </svg>
+          </div>
+          <div class="tutorial-card__body">
+            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
+            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="tutorial-coming-soon">Tutorials for this path are coming soon.</p>
+      {% endif %}
+    </div>
+
+    <!-- ── Learn More ────────────────────────────────────────── -->
     <div class="tutorial-category">
       <div class="tutorial-category__header">
         <div class="tutorial-category__label">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
           </svg>
-          Getting Started
+          Learn More
         </div>
-        <h2>New to Marker? Start here.</h2>
-        <p>Learn how to create an account, set up your first event, and run a round from start to finish.</p>
+        <h2>Reference guides and advanced features.</h2>
+        <p>Account setup, handicap configuration, side games, and AI-powered game creation.</p>
       </div>
+      {% if refTutorials | length %}
       <div class="tutorial-grid">
-        {% for tut in collections.tutorials %}
-        {% if tut.data.category == "Getting Started" %}
+        {% for tut in refTutorials %}
         <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
           <div class="tutorial-card__media" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
@@ -42,43 +120,11 @@ description: Step-by-step guides for getting started with Marker and running eve
             <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
           </div>
         </a>
-        {% endif %}
         {% endfor %}
       </div>
-    </div>
-
-    <!-- ── Running Events ─────────────────────────────────── -->
-    <div class="tutorial-category">
-      <div class="tutorial-category__header">
-        <div class="tutorial-category__label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          Running Events
-        </div>
-        <h2>From game setup to final settlement.</h2>
-        <p>Step-by-step guides for running events — adding games, configuring handicaps, scoring, and settling up.</p>
-      </div>
-      <div class="tutorial-grid">
-
-        {% for tut in collections.tutorials %}
-        {% if tut.data.category == "Running Events" %}
-        <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
-          <div class="tutorial-card__media" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-              {{ tut.data.iconSvg | safe }}
-            </svg>
-          </div>
-          <div class="tutorial-card__body">
-            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
-            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
-            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
-          </div>
-        </a>
-        {% endif %}
-        {% endfor %}
-
-      </div>
+      {% else %}
+      <p class="tutorial-coming-soon">Tutorials for this path are coming soon.</p>
+      {% endif %}
     </div>
 
   </div>

@@ -1,12 +1,14 @@
 ---
 layout: layouts/tutorial-guide.njk
-title: Add and Configure Games
-description: "Add a game to your Marker event — select a format, configure handicap and players, and set any game-specific options before the round starts."
-subtitle: "Select a game format, configure handicap and players, and save it to your event — all before the round starts."
+title: Add Event Games
+description: "Add games to your Marker event — choose a format, configure handicap and players, and set accounting options before the round starts."
+subtitle: "Choose a game format, configure handicap and players, and save — event games are visible to all groups on the shared leaderboard."
 category: Running Events
 order: 1
+tutorialPath: event
+tutorialOrder: 4
 estimatedTime: "4 min read"
-cardDescription: "Select a game format, configure handicap settings and players, and add it to your event before the round starts."
+cardDescription: "Choose a game format, configure handicap settings and players, and add it to your event before the round starts."
 iconSvg: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'
 relatedTutorials:
   - title: "Using Handicaps in Marker →"
@@ -23,9 +25,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Open Add game from your event</h3>
-<p>From the event dashboard, scroll to the <strong>Games</strong> section and tap the <strong>+</strong> button. This opens the <strong>Add game</strong> screen.</p>
-<p>You can also add games from within a scorecard — the same Add game flow is available from any scorecard in the event. Games added from a scorecard are scoped to that scorecard rather than the full event.</p>
-<p>Only the event commissioner can add games. If you don't see the + button, confirm you're signed in as the commissioner.</p>
+<p>From the event dashboard, scroll to the <strong>Games</strong> section and tap the <strong>+</strong> button. This opens the <strong>Add game</strong> screen. Only the event commissioner can add games from the event dashboard.</p>
+<p><strong>Event-wide games</strong> added here appear on the event leaderboard and are visible to all groups. <strong>Scorecard-level games</strong> can also be added from within an individual scorecard — these appear only on that scorecard's leaderboard and are not aggregated across the event. Use scorecard-level games for side bets that involve only the players in one group.</p>
 </div>
 </div>
 
@@ -33,21 +34,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Select a game format</h3>
-<p>The <strong>Select Game</strong> section lists all available game formats in alphabetical order, each with a short description. Available formats:</p>
-<ul>
-<li><strong>High-Low</strong> — best and worst ball scoring for teams</li>
-<li><strong>Match Play</strong> — head-to-head hole-by-hole competition</li>
-<li><strong>Nassau</strong> — three separate bets: front 9, back 9, and full 18</li>
-<li><strong>Nines</strong> — points-based game awarding 9 points per hole</li>
-<li><strong>Scotch</strong> — alternate-shot foursomes</li>
-<li><strong>Skins</strong> — hole-by-hole competition with carryover</li>
-<li><strong>Stableford</strong> — points awarded relative to par</li>
-<li><strong>Stroke Play</strong> — total stroke count over the round</li>
-<li><strong>Team Stableford</strong> — team Stableford with combined points</li>
-<li><strong>Team Stroke Play</strong> — combined team stroke total</li>
-<li><strong>Wolf</strong> — rotating lone wolf with per-hole team selection</li>
-</ul>
-<p>Formats marked <strong>Premium</strong> require an active subscription. Tap a format to open its configuration form.</p>
+<p>The game picker lists all available formats in alphabetical order, each with a short description. Marker includes 11 built-in formats — from Skins and Nassau to Wolf, Match Play, and Stableford. Formats marked <strong>Premium</strong> require an active subscription.</p>
+<p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Game Guides</a>. Tap a format in the app to open its configuration form.</p>
 </div>
 </div>
 

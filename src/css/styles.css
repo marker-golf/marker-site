@@ -1331,6 +1331,20 @@ p { color: var(--ink-muted); line-height: 1.75; }
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.32);
 }
+.tutorial-subnav__path {
+  padding: 5px 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  margin-right: 4px;
+}
+.tutorial-coming-soon {
+  color: var(--ink-muted);
+  font-size: 0.925rem;
+  padding: 32px 0 8px;
+}
 
 .tutorial-steps {
   max-width: 720px;

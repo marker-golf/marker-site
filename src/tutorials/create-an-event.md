@@ -5,6 +5,8 @@ description: Learn how to set up a new Marker event — select a course, optiona
 subtitle: "Select a course, name your event, set a date, and save — the whole setup takes less than a minute."
 category: Getting Started
 order: 2
+tutorialPath: event
+tutorialOrder: 1
 estimatedTime: "3 min read"
 cardDescription: "Select a course, name your event, pick a date, and save — it takes less than a minute."
 iconSvg: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/>'
@@ -45,7 +47,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
 <h3>Choose a series (optional)</h3>
-<p>If this event is part of a series — a league season, a club trip, or any group of related events — select the series here. Series track cumulative standings and results across all connected events.</p>
+<p>If you're on a commissioner plan and this event is part of a series — a league season, a club trip, or any group of related events — select the series here. Series track cumulative standings and results across all connected events.</p>
 <p>If this is a standalone round, leave this blank. You can attach an event to a series from event settings after it's created.</p>
 </div>
 </div>

@@ -2,25 +2,36 @@
 layout: layouts/base.njk
 ---
 
+{% if tutorialPath == "group" %}
+  {% set pathLabel = "Playing with Your Group" %}
+{% elif tutorialPath == "event" %}
+  {% set pathLabel = "Running an Event" %}
+{% else %}
+  {% set pathLabel = "Learn More" %}
+{% endif %}
+
+{% set pathNav = collections.tutorials | prevNextInPath(page.url, tutorialPath) %}
+
 <section class="tutorial-hero">
   <div class="container">
     <nav class="tutorial-breadcrumb" aria-label="Breadcrumb">
       <a href="{{ '/tutorials/' | url }}">Tutorials</a>
+      <span aria-hidden="true">›</span>
+      <span>{{ pathLabel }}</span>
       <span aria-hidden="true">›</span>
       <span aria-current="page">{{ title }}</span>
     </nav>
     <h1>{{ title }}</h1>
     <p>{{ subtitle }}</p>
     <nav class="tutorial-subnav" aria-label="Tutorial navigation">
-      <a href="{{ '/tutorials/getting-started/' | url }}"{% if page.url == '/tutorials/getting-started/' %} aria-current="page"{% endif %}>Getting Started</a>
-      <a href="{{ '/tutorials/create-an-event/' | url }}"{% if page.url == '/tutorials/create-an-event/' %} aria-current="page"{% endif %}>Create an Event</a>
-      <a href="{{ '/tutorials/add-players/' | url }}"{% if page.url == '/tutorials/add-players/' %} aria-current="page"{% endif %}>Add Players</a>
-      <a href="{{ '/tutorials/create-scorecards/' | url }}"{% if page.url == '/tutorials/create-scorecards/' %} aria-current="page"{% endif %}>Create Scorecards</a>
-      <a href="{{ '/tutorials/add-and-configure-games/' | url }}"{% if page.url == '/tutorials/add-and-configure-games/' %} aria-current="page"{% endif %}>Add and Configure Games</a>
-      <a href="{{ '/tutorials/event-scoring/' | url }}"{% if page.url == '/tutorials/event-scoring/' %} aria-current="page"{% endif %}>Event Scoring</a>
-      <a href="{{ '/tutorials/handicap-settings/' | url }}"{% if page.url == '/tutorials/handicap-settings/' %} aria-current="page"{% endif %}>Handicap Settings</a>
-      <a href="{{ '/tutorials/side-games/' | url }}"{% if page.url == '/tutorials/side-games/' %} aria-current="page"{% endif %}>Side Games</a>
-      <a href="{{ '/tutorials/ai-game-generation/' | url }}"{% if page.url == '/tutorials/ai-game-generation/' %} aria-current="page"{% endif %}>AI Game Generation</a>
+      <span class="tutorial-subnav__path">{{ pathLabel }}{% if pathNav.totalSteps > 1 %} · {{ pathNav.currentStep }} of {{ pathNav.totalSteps }}{% endif %}</span>
+      {% if pathNav.prev %}
+      <a href="{{ pathNav.prev.url | url }}">← {{ pathNav.prev.data.title }}</a>
+      {% endif %}
+      {% if pathNav.next %}
+      <a href="{{ pathNav.next.url | url }}">{{ pathNav.next.data.title }} →</a>
+      {% endif %}
+      <a href="{{ '/tutorials/' | url }}">All tutorials</a>
     </nav>
   </div>
 </section>
@@ -30,13 +41,13 @@ layout: layouts/base.njk
 
     {{ content | safe }}
 
-    {% if relatedTutorials and relatedTutorials.length %}
     <div class="tutorial-footer-nav">
-      <span class="tutorial-footer-nav__label">{{ nextLabel | default("Up next") }}</span>
-      <a href="{{ relatedTutorials[0].url | url }}" class="btn btn-primary btn-sm">{{ relatedTutorials[0].title }}</a>
+      {% if pathNav.next %}
+      <span class="tutorial-footer-nav__label">Up next</span>
+      <a href="{{ pathNav.next.url | url }}" class="btn btn-primary btn-sm">{{ pathNav.next.data.title }} →</a>
+      {% endif %}
       <a href="{{ '/tutorials/' | url }}" class="btn btn-ghost btn-sm">All Tutorials</a>
     </div>
-    {% endif %}
 
   </div>
 </section>

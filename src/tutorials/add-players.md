@@ -1,15 +1,17 @@
 ---
 layout: layouts/tutorial-guide.njk
 title: Add Players
-description: Three ways to add players to your Marker event — add from recent playing partners, search for previous partners, or invite someone new.
-subtitle: "Build your group from recent playing partners, search for previous partners, or invite someone new to Marker."
+description: Add players to your event — from recent playing partners, searching previous partners, or inviting someone new — then set tees for the group.
+subtitle: "Add players from your recent partners, search for someone you've played with before, or invite a new player — then set tees."
 category: Getting Started
 order: 3
-estimatedTime: "2 min read"
-cardDescription: "Add recent playing partners, search for previous playing partners, or invite new players to join your event."
+tutorialPath: event
+tutorialOrder: 2
+estimatedTime: "3 min read"
+cardDescription: "Add recent playing partners, search for previous playing partners, or invite new players — then set tees for the group."
 iconSvg: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'
 relatedTutorials:
-  - title: "Create Scorecards →"
+  - title: "Create & Organize Scorecards →"
     url: "/tutorials/create-scorecards/"
 nextLabel: "Up next"
 cta:
@@ -23,7 +25,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Open the Players section</h3>
-<p>From the event dashboard, tap the <strong>+</strong> button next to <strong>Players</strong>. This opens the add players flow. You can add players at any point before the round starts.</p>
+<p>From the event dashboard, tap the <strong>+</strong> button next to <strong>Players</strong>. You can add players at any point before the round starts and select multiple players at once before continuing.</p>
 </div>
 </div>
 
@@ -31,8 +33,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Method 1 — Add from recent playing partners</h3>
-<p>Marker keeps a list of players you've played with before. Your recent playing partners appear at the top for quick one-tap adding. Tap any name from the list to add them to the event — their profile and handicap are pulled in automatically.</p>
-<p>This is the fastest way to rebuild your regular group.</p>
+<p>Your most recent playing partners appear at the top of the player list for quick one-tap selection. Tap a name to check them off. This is the fastest way to add your regular group — Marker remembers everyone you've played with.</p>
 </div>
 </div>
 
@@ -40,7 +41,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
 <h3>Method 2 — Search for a previous playing partner</h3>
-<p>Use the search field to find a player by name. This searches across players you've previously played with in Marker. Tap a result to add them to the event.</p>
+<p>Type in the search field to filter by name. The search covers players you've previously played with in Marker — it doesn't search every Marker user, only your playing history. Tap a result to select them.</p>
 </div>
 </div>
 
@@ -48,7 +49,16 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
 <h3>Method 3 — Invite a new player</h3>
-<p>To add someone who hasn't played with you in Marker before, use the Invite option. Enter their details and they'll receive an invitation to join the event. Once they accept, they'll appear on the player roster.</p>
+<p>Tap <strong>Invite new player</strong> to add someone who isn't in your playing history. Enter their name, handicap index, gender, and tee. Optionally add their phone number — Marker will notify them when scorecards are published. If they already have a Marker account linked to that number, their profile is matched automatically.</p>
+</div>
+</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step__marker" aria-hidden="true">5</div>
+<div class="tutorial-step__content">
+<h3>Set tees for the group</h3>
+<p>After selecting players via Methods 1 or 2 and tapping <strong>Continue</strong>, Marker shows a tee assignment screen. Choose the default tee for each gender present in your selection — the tee you pick applies to all newly added players of that gender at once.</p>
+<p>Individual tee adjustments can be made at any time from each player's profile in the event.</p>
 </div>
 </div>
 

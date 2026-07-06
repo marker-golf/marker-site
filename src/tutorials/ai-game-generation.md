@@ -5,6 +5,8 @@ description: "Use Marker's AI game generation to create a custom scoring format 
 subtitle: "Describe your format in plain English. Marker generates the scoring rules — you review, adjust if needed, and run it with your group."
 category: Running Events
 order: 4
+tutorialPath: reference
+tutorialOrder: 4
 estimatedTime: "4 min read"
 cardDescription: "Describe a custom game in plain English and let Marker generate the scoring rules — then review and run it with your group."
 iconSvg: '<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>'
