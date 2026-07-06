@@ -1,12 +1,12 @@
 ---
 layout: layouts/tutorial-guide.njk
 title: Add Players
-description: Three ways to add players to your Marker event — search by name, add a guest directly, or send a join link by SMS.
-subtitle: "Three ways to build your group — search existing Marker users, add a guest, or send a join link by SMS."
+description: Three ways to add players to your Marker event — add from recent playing partners, search for previous partners, or invite someone new.
+subtitle: "Build your group from recent playing partners, search for previous partners, or invite someone new to Marker."
 category: Getting Started
 order: 3
 estimatedTime: "2 min read"
-cardDescription: "Invite players by search, add guests directly, or send an SMS join link — and set tees for each player."
+cardDescription: "Add recent playing partners, search for previous playing partners, or invite new players to join your event."
 iconSvg: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'
 relatedTutorials:
   - title: "Create Scorecards →"
@@ -22,46 +22,38 @@ cta:
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
-<h3>Open the Players tab in your event</h3>
-<p>From your event dashboard, tap <strong>Players</strong>. This is where you build the roster before creating scorecards. You can add players at any point before the round starts.</p>
+<h3>Open the Players section</h3>
+<p>From the event dashboard, tap the <strong>+</strong> button next to <strong>Players</strong>. This opens the add players flow. You can add players at any point before the round starts.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
-<h3>Method 1 — Search by name or phone</h3>
-<p>Tap <strong>Add Player</strong> and search by name or phone number. If the person has a Marker account, they'll appear in the results. Tap their name to add them to the event. Their handicap and profile will be pulled in automatically.</p>
+<h3>Method 1 — Add from recent playing partners</h3>
+<p>Marker keeps a list of players you've played with before. Your recent playing partners appear at the top for quick one-tap adding. Tap any name from the list to add them to the event — their profile and handicap are pulled in automatically.</p>
+<p>This is the fastest way to rebuild your regular group.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
-<h3>Method 2 — Add a guest</h3>
-<p>If a player doesn't have a Marker account yet, tap <strong>Add Guest</strong> and enter their name. They'll be added to the event as a guest — you can enter their scores manually during the round. You can also add their handicap index here so Marker can calculate strokes.</p>
+<h3>Method 2 — Search for a previous playing partner</h3>
+<p>Use the search field to find a player by name. This searches across players you've previously played with in Marker. Tap a result to add them to the event.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
-<h3>Method 3 — Send a join link</h3>
-<p>Tap <strong>Invite via SMS</strong> to generate a join link and send it to a player's phone. When they open the link, they'll be prompted to sign in (or create an account) and they'll be added to your event automatically.</p>
-<p>This is the easiest way to get players set up if they're new to Marker — they can enter their own scores and see the leaderboard in real time.</p>
-</div>
-</div>
-
-<div class="tutorial-step">
-<div class="tutorial-step__marker" aria-hidden="true">5</div>
-<div class="tutorial-step__content">
-<h3>Set tees for each player</h3>
-<p>After adding a player, select which tees they're playing. This determines the course rating and slope used for their handicap calculation. Players can play different tees and Marker will handle the course handicap conversion correctly.</p>
+<h3>Method 3 — Invite a new player</h3>
+<p>To add someone who hasn't played with you in Marker before, use the Invite option. Enter their details and they'll receive an invitation to join the event. Once they accept, they'll appear on the player roster.</p>
 </div>
 </div>
 
 </div>
 
 <div class="tutorial-note">
-<p><strong>Tip:</strong> Marker remembers the players you've played with before. Returning group members appear in your recent players list so you can add them with a single tap.</p>
+<p><strong>Tip:</strong> You can add or remove players at any point before the round starts. Come back to the Players section to fill out the roster as your group confirms.</p>
 </div>

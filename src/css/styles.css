@@ -1369,6 +1369,10 @@ p { color: var(--ink-muted); line-height: 1.75; }
 .tutorial-step__content p + p { margin-top: 10px; }
 .tutorial-step__content strong { color: var(--ink); }
 .tutorial-step__content em { color: var(--ink-muted); }
+.tutorial-step__screenshot {
+  margin-top: 24px;
+  max-width: 200px;
+}
 
 .tutorial-note {
   max-width: 720px;

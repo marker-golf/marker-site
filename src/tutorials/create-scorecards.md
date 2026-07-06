@@ -1,12 +1,12 @@
 ---
 layout: layouts/tutorial-guide.njk
 title: Create Scorecards
-description: Configure start times, set up a shotgun start, group players into carts, and publish scorecards to your group by SMS.
-subtitle: "Configure start times, group players into carts, and publish scorecards to everyone by SMS — all before you tee off."
+description: Create scorecards individually or in bulk — set the number of groups, start time for the first group, and the interval between groups.
+subtitle: "Create scorecards one at a time or all at once — set the number of groups, the first tee time, and the interval between groups."
 category: Getting Started
 order: 4
-estimatedTime: "3 min read"
-cardDescription: "Configure start times, set up shotgun starts, group players into carts, and publish via SMS."
+estimatedTime: "2 min read"
+cardDescription: "Create scorecards individually or in bulk — choose the number of groups, start time, and interval."
 iconSvg: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="16" x2="11" y2="16"/>'
 relatedTutorials:
   - title: "Event Scoring →"
@@ -22,49 +22,49 @@ cta:
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
-<h3>Open Scorecards in your event</h3>
-<p>From the event dashboard, tap <strong>Scorecards</strong>. You'll see all players who have been added to the event. Tap <strong>Create Scorecards</strong> to begin the setup flow.</p>
-<p>Make sure all players are added before creating scorecards. You can add players after the fact, but it's easier to set up groups before you start.</p>
+<h3>Open the Scorecards section</h3>
+<p>From the event dashboard, tap the <strong>+</strong> button next to <strong>Scorecards</strong>. Make sure all players have been added to the event first — every player needs to be on a scorecard to enter scores.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
-<h3>Choose start format: tee time or shotgun</h3>
-<p>Select <strong>Tee Time</strong> if groups are starting sequentially from hole 1, or <strong>Shotgun</strong> if all groups are starting at the same time from different holes.</p>
-<p>For shotgun starts, you'll assign each group to a starting hole. Marker handles the hole rotation automatically so every scorecard starts on the right hole.</p>
+<h3>Choose individual or bulk creation</h3>
+<p>Two options for creating scorecards:</p>
+<ul>
+<li><strong>Individual</strong> — create one scorecard at a time. Use this for small groups or when you want to configure each group separately.</li>
+<li><strong>Bulk</strong> — create all scorecards at once with sequential start times. Use this for larger events where every group follows the same tee-time interval.</li>
+</ul>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
-<h3>Set the start time</h3>
-<p>Enter the start time for the first group (or the shotgun gun time). This is used for display purposes and for scheduling — particularly useful when running back-to-back rounds or tournaments.</p>
+<h3>For bulk: choose the number of scorecards</h3>
+<p>Enter how many scorecards to create — one per group. For a round with four groups of four players, enter 4.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
-<h3>Group players into carts</h3>
-<p>Drag players into groups of 2–4. Each group gets its own scorecard. You can name groups if you like (e.g. "Cart 1" or "Jones / Smith") — the name appears on the scorecard and the leaderboard.</p>
-<p>For shotgun starts, assign each group to their starting hole after you've built the groups.</p>
+<h3>For bulk: set the start time and interval</h3>
+<p>Select the tee time for the first group, then set the interval between groups. Marker assigns start times sequentially — if the first group is at 8:00 AM and the interval is 10 minutes, the second group tees off at 8:10, the third at 8:20, and so on.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">5</div>
 <div class="tutorial-step__content">
-<h3>Publish and share by SMS</h3>
-<p>Tap <strong>Publish Scorecards</strong>. Marker will send each player an SMS with a link to their personal scorecard. When they open the link, they can enter scores, see the live leaderboard, and track any games you've configured.</p>
-<p>The scorecard link works without the players having the Marker app installed — it opens in the browser on any phone.</p>
+<h3>Scorecards are created</h3>
+<p>Your scorecards are generated and listed in the event dashboard, each with its assigned start time. Players can now be assigned to groups and will see their scorecard once the round begins.</p>
 </div>
 </div>
 
 </div>
 
 <div class="tutorial-note">
-<p><strong>Editing after publishing:</strong> You can adjust groups and re-publish scorecards right up until scores start being entered. Players who already opened their scorecard will see the updated version automatically.</p>
+<p><strong>Tip:</strong> You can return to the Scorecards section at any time before the round starts to adjust groups or start times.</p>
 </div>

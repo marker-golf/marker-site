@@ -184,6 +184,23 @@ All current screenshot slots are `viewport: "mobile"`. Desktop/tablet slots can 
 
 Before running automated screenshot capture, the following must be true:
 
+### 0. Expo web dev server running (required)
+
+Start the Marker app's Expo web server from the app project directory:
+
+```bash
+npx expo start --web
+# or: npx expo start  →  press w to open web
+```
+
+The dev server defaults to **http://localhost:8081**. This is the URL the capture script reads from `EXPO_APP_URL`:
+
+```bash
+EXPO_APP_URL=http://localhost:8081 node scripts/capture-screenshots.js
+```
+
+If the port differs, set `EXPO_APP_URL` accordingly before running. Confirm the app is fully loaded (no spinners, fonts stable) before triggering capture.
+
 ### 1. Demo user account (required)
 
 A dedicated demo user must exist with:

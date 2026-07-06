@@ -338,8 +338,19 @@ Do not hardcode `src/images/screenshots/` paths in templates. The component reso
 
 This workflow was validated replacing the `homepageHero` screenshot with an Expo capture.
 
-1. Capture a screenshot of the Expo app as PNG.
-2. Save the original PNG to `src/images/screenshots/source/` using the naming convention.
+1. Start the Expo web dev server locally from the Marker app project:
+
+   ```bash
+   npx expo start --web
+   # default URL: http://localhost:8081
+   ```
+
+   Navigate to the screen you want to capture. Capture a PNG at the exact viewport dimensions for the manifest slot — 390×844 for mobile. Two options:
+
+   - **Playwright** (preferred): see `docs/screenshot-automation.md` for the recommended viewport and clip settings.
+   - **Chrome DevTools**: open DevTools → device toolbar → set 390×844 → ⌘+Shift+P → "Capture screenshot".
+
+2. Save the PNG to `src/images/screenshots/source/` using the naming convention.
 3. Convert to WebP using Sharp (already a project devDependency):
 
    ```bash

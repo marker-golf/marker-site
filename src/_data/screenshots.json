@@ -80,24 +80,35 @@
 
   "tutorialCreateEventStep1": {
     "src": "/images/screenshots/web/tutorial-create-event-01-event-list-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Marker event list with the button to create a new golf event",
-    "caption": "Tap the + button on the Events tab to start a new event.",
+    "fallback": "/images/screenshots/source/tutorial-create-event-01-event-list-mobile-demo.png",
+    "alt": "Course search step of the Create Event flow in Marker, showing a search field with the query pinehur and a list of 16 matching courses",
+    "caption": "Search by course name — Marker's database includes hole-by-hole data for thousands of courses.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Replace after create-event flow is stable in Expo app. Capture from Events tab with the + CTA visible."
+    "status": "draft",
+    "notes": "Expo screenshot. Shows course search with results. No personal data visible. Verify fictional event context before approving."
   },
 
   "tutorialCreateEventStep2": {
     "src": "/images/screenshots/web/tutorial-create-event-02-event-form-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "New event form in Marker showing course search, event name, and date fields",
-    "caption": "Search for your course, name the event, and set the date.",
+    "fallback": "/images/screenshots/source/tutorial-create-event-02-event-form-mobile-demo.png",
+    "alt": "Completed Create Event form in Marker showing a selected course, an event name, a date, and the Save button",
+    "caption": "With course, name, and date filled in, tap Save to create the event.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Replace after event form is stable. Show course search field with a result selected."
+    "status": "draft",
+    "notes": "Expo screenshot. Shows fully completed form: course No. 2, event name Pinehurst Pandemonium, date 07/06/2026, Save button. Event name is fictional demo data."
+  },
+
+  "tutorialCreateEventStep3": {
+    "src": "/images/screenshots/web/tutorial-create-event-03-event-created-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-create-event-03-event-created-mobile-demo.png",
+    "alt": "Marker event dashboard for a newly created event showing empty Players, Scorecards, and Games sections each with an add button",
+    "caption": "Your event is ready — add players, create scorecards, and configure games in any order.",
+    "usage": ["tutorials/create-an-event"],
+    "viewport": "mobile",
+    "status": "draft",
+    "notes": "Expo screenshot. Empty event dashboard immediately after creation. Event name Pinehurst Pandemonium is fictional demo data."
   },
 
   "tutorialAddGamesStep1": {
