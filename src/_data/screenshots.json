@@ -179,12 +179,34 @@
 
   "commissionersHero": {
     "src": "/images/screenshots/web/commissioners-event-overview-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Marker event overview screen showing groups, games, and live scoring status",
+    "fallback": "/images/screenshots/source/commissioners-event-overview-mobile-demo.png",
+    "alt": "Marker event overview showing four scorecard groups with tee times, multiple game formats including Skins and Team Stroke Play, and centralized commissioner controls for managing a tournament",
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Replace after event overview screen is stable. Show a multi-group event with games configured."
+    "status": "draft",
+    "notes": "4 four-player groups with tee times, Skins + Stroke Play + Team Stroke Play + Team Stableford configured, centralized event controls visible. Verify all names are fictional before approving."
+  },
+
+  "commissionersLiveScoring": {
+    "src": "/images/screenshots/web/commissioners-live-leaderboard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/commissioners-live-leaderboard-mobile-demo.png",
+    "alt": "Live event leaderboard in Marker showing multiple teams in a Team Stroke Play event with front and back scoring, total standings, and accounting values during a round in progress",
+    "caption": null,
+    "usage": ["commissioners"],
+    "viewport": "mobile",
+    "status": "draft",
+    "notes": "Event-wide Team Stroke Play leaderboard. Multiple four-player teams, round in progress, front/back splits, accounting values visible. Verify all names are fictional before approving."
+  },
+
+  "commissionersSettlement": {
+    "src": "/images/screenshots/web/commissioners-settlement-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/commissioners-settlement-mobile-demo.png",
+    "alt": "Event settlement screen in Marker showing buy-ins collected, payouts distributed from the pot to winners, profit and loss per player, and calculated payment amounts",
+    "caption": null,
+    "usage": ["commissioners"],
+    "viewport": "mobile",
+    "status": "draft",
+    "notes": "Post-round settlement showing pot-based payouts, settlement and P&L views, share leaderboard action. Verify all player names are fictional before approving."
   }
 }

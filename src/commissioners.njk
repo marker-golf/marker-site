@@ -5,15 +5,23 @@ description: Marker gives golf commissioners everything to run the game — crea
 ---
 
 {% from "components/trust-stats.njk" import TrustStats %}
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
 
 <!-- Hero -->
 <section class="page-hero">
   <div class="container">
-    <p class="page-hero__label">For Commissioners</p>
-    <h1>Run the whole golf game<br>without the spreadsheet.</h1>
-    <p>Create the event, invite your group, build groups, add games, and settle results — Marker handles the administration so you can focus on the game.</p>
-    <a href="https://app.marker.golf" class="btn btn-primary">Start Your First Event</a>
-    <p class="comm-hero__note">Your first 3 events are free. No credit card required.</p>
+    <div class="comm-hero__split">
+      <div class="comm-hero__text">
+        <p class="page-hero__label">For Commissioners</p>
+        <h1>Run the whole golf game<br>without the spreadsheet.</h1>
+        <p>Create the event, invite your group, build groups, add games, and settle results — Marker handles the administration so you can focus on the game.</p>
+        <a href="https://app.marker.golf" class="btn btn-primary">Start Your First Event</a>
+        <p class="comm-hero__note">Your first 3 events are free. No credit card required.</p>
+      </div>
+      <div class="comm-hero__media">
+        {{ ProductScreenshot("commissionersHero", screenshots, frame="phone", caption=false) }}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -195,6 +203,35 @@ description: Marker gives golf commissioners everything to run the game — crea
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- Product showcase: live scoring + settlement -->
+<section class="section feature-showcase">
+  <div class="container">
+
+    <div class="feature-row">
+      <div class="feature-row__text">
+        <h2>One leaderboard for the whole field.</h2>
+        <p>Every group scores on their own device. Standings update hole by hole across every group simultaneously — commissioner and players follow the same live event leaderboard, not just their own cart.</p>
+        <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Start Your First Event</a>
+      </div>
+      <div class="feature-row__media">
+        {{ ProductScreenshot("commissionersLiveScoring", screenshots, frame="phone", caption=false) }}
+      </div>
+    </div>
+
+    <div class="feature-row feature-row--flip">
+      <div class="feature-row__text">
+        <h2>Settlement calculated across every game.</h2>
+        <p>When the round ends, Marker calculates the final payout across every game — whether winnings come from a collected pot or settle directly between players. Lock the event and the full breakdown is ready before anyone leaves the parking lot.</p>
+        <a href="https://app.marker.golf" class="btn btn-primary btn-sm">Start Your First Event</a>
+      </div>
+      <div class="feature-row__media">
+        {{ ProductScreenshot("commissionersSettlement", screenshots, frame="phone", caption=false) }}
+      </div>
+    </div>
+
   </div>
 </section>
 
