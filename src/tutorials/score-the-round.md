@@ -58,7 +58,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
 <h3>Follow your games</h3>
-<p>Game tabs scroll horizontally across the top of the scorecard. Each tab represents one scoring layer — Nassau shows three tabs (Front, Back, Total); most other formats show one. Tap a tab to activate that game's view. The tab turns green when active, and the game column on the right updates to show live standings for that format.</p>
+<p>Game tabs scroll horizontally across the top of the scorecard. Each game appears as one tab — including Nassau, which shows current match status in the game column when selected. Tap a tab to activate that game's view. The tab turns green when active, and the game column on the right updates to show live standings for that format.</p>
 <p>Tap the active tab again to deactivate it and return to the plain scoring view.</p>
 <p>Only one game can be active at a time. The active game's standings update in real time as scores are entered.</p>
 </div>

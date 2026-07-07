@@ -219,5 +219,38 @@
     "viewport": "mobile",
     "status": "draft",
     "notes": "Post-round settlement showing pot-based payouts, settlement and P&L views, share leaderboard action. Verify all player names are fictional before approving."
+  },
+
+  "followGamesNassauScorecard": {
+    "src": "/images/screenshots/web/tutorial-follow-games-01-nassau-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-follow-games-01-nassau-scorecard-mobile-demo.png",
+    "alt": "Nassau game selected on a Marker scorecard showing live match status and presses during the round",
+    "caption": "Switch between game tabs to follow each game as scores are entered.",
+    "usage": ["tutorials/follow-games-and-results"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Active-round standalone scorecard with Nassau selected. Demonstrates the game-specific scorecard column and live match status."
+  },
+
+  "followGamesLiveLeaderboard": {
+    "src": "/images/screenshots/web/tutorial-follow-games-02-live-leaderboard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-follow-games-02-live-leaderboard-mobile-demo.png",
+    "alt": "Marker live leaderboard showing Net Skins standings and Nassau match results during an active round",
+    "caption": "The Leaderboard brings every game's standings together in one view.",
+    "usage": ["tutorials/follow-games-and-results"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Active-round standalone leaderboard showing multiple configured games and Round in progress state."
+  },
+
+  "followGamesDayTotal": {
+    "src": "/images/screenshots/web/tutorial-follow-games-03-day-total-settlement-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-follow-games-03-day-total-settlement-mobile-demo.png",
+    "alt": "Marker Day total showing current settlement transactions across games during an active round",
+    "caption": "Day total combines the current accounting impact of all games on the scorecard.",
+    "usage": ["tutorials/follow-games-and-results"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Active-round Day total in Settlement view. Values remain provisional while the round is in progress."
   }
 }
