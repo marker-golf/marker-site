@@ -14,9 +14,43 @@ description: Step-by-step guides for every part of Marker — from a casual roun
 <section class="section section--white tutorials-index">
   <div class="container">
 
+    {% set gettingStartedTutorials = collections.tutorials | tutorialsByPath("getting-started") %}
     {% set groupTutorials = collections.tutorials | tutorialsByPath("group") %}
     {% set eventTutorials = collections.tutorials | tutorialsByPath("event") %}
     {% set refTutorials   = collections.tutorials | tutorialsByPath("reference") %}
+
+    <!-- ── Getting Started ───────────────────────────────────── -->
+    <div class="tutorial-category">
+      <div class="tutorial-category__header">
+        <div class="tutorial-category__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+          Getting Started
+        </div>
+        <h2>New to Marker? Start here.</h2>
+        <p>Sign in, set up your profile, and choose how you want to play.</p>
+      </div>
+      {% if gettingStartedTutorials | length %}
+      <div class="tutorial-grid">
+        {% for tut in gettingStartedTutorials %}
+        <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
+          <div class="tutorial-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              {{ tut.data.iconSvg | safe }}
+            </svg>
+          </div>
+          <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+          <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="tutorial-coming-soon">Tutorials for this path are coming soon.</p>
+      {% endif %}
+    </div>
 
     <!-- ── Playing with Your Group ───────────────────────────── -->
     <div class="tutorial-category">
@@ -36,16 +70,14 @@ description: Step-by-step guides for every part of Marker — from a casual roun
       <div class="tutorial-grid">
         {% for tut in groupTutorials %}
         <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
-          <div class="tutorial-card__media" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <div class="tutorial-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               {{ tut.data.iconSvg | safe }}
             </svg>
           </div>
-          <div class="tutorial-card__body">
-            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
-            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
-            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
-          </div>
+          <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+          <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
         </a>
         {% endfor %}
       </div>
@@ -73,16 +105,14 @@ description: Step-by-step guides for every part of Marker — from a casual roun
       <div class="tutorial-grid">
         {% for tut in eventTutorials %}
         <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
-          <div class="tutorial-card__media" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <div class="tutorial-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               {{ tut.data.iconSvg | safe }}
             </svg>
           </div>
-          <div class="tutorial-card__body">
-            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
-            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
-            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
-          </div>
+          <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+          <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
         </a>
         {% endfor %}
       </div>
@@ -109,16 +139,14 @@ description: Step-by-step guides for every part of Marker — from a casual roun
       <div class="tutorial-grid">
         {% for tut in refTutorials %}
         <a href="{{ tut.url | url }}" class="tutorial-card" aria-label="{{ tut.data.title }} tutorial">
-          <div class="tutorial-card__media" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+          <div class="tutorial-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
               {{ tut.data.iconSvg | safe }}
             </svg>
           </div>
-          <div class="tutorial-card__body">
-            <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
-            <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
-            <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
-          </div>
+          <h3 class="tutorial-card__title">{{ tut.data.title }}</h3>
+          <p class="tutorial-card__desc">{{ tut.data.cardDescription }}</p>
+          <span class="tutorial-card__time">{{ tut.data.estimatedTime }}</span>
         </a>
         {% endfor %}
       </div>

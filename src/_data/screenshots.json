@@ -362,5 +362,27 @@
     "viewport": "mobile",
     "status": "approved",
     "notes": "Nassau configuration. Shows Handicap (Net selected, Gross available, Stroke off the low ball checked, show advanced link), Players (4) with all checked (Bob Smith, Allan Albatross, Bert Bailout, Edward Eagle — Blue/White tee with C.H./P.H./S.O. values), Teams (Side A vs Side B partially visible). Save game button at bottom. Accounting fields not visible in this capture."
+  },
+
+  "welcomeMarkerHome": {
+    "src": "/images/screenshots/web/tutorial-welcome-01-home-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-welcome-01-home-mobile-demo.png",
+    "alt": "Marker Home screen showing player name, Connect USGA ID button, New Game and Host Event tiles, and recent scorecards and events",
+    "caption": "The Home screen is your starting point for a New Game, a larger Event, or returning to recent play.",
+    "usage": ["tutorials/welcome-to-marker"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Signed-in Home screen for demo account Bob Smith without a connected USGA ID. Hero shows player name and Connect USGA ID button (no handicap index or club visible). New Game (1-5 players) and Host Event (6+ players) tiles visible. Three recent scorecards and two recent events visible with fictional demo data."
+  },
+
+  "setupProfileEdit": {
+    "src": "/images/screenshots/web/tutorial-profile-01-edit-profile-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-profile-01-edit-profile-mobile-demo.png",
+    "alt": "Marker profile edit form showing Phone, Email, USGA Handicap ID, Name, and Handicap Settings fields with a Save button",
+    "caption": "Complete your player information here and optionally connect your USGA Handicap ID.",
+    "usage": ["tutorials/set-up-your-profile"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Profile Edit screen using fictitious demo data (Bob Smith, (000) 555-0001, bob@testgolfer.org). USGA Handicap ID field is empty — no validated USGA identity shown. Handicap Settings (Male/Female) is visible because no USGA ID is connected. Save button visible at bottom."
   }
 }

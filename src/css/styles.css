@@ -1118,10 +1118,10 @@ p { color: var(--ink-muted); line-height: 1.75; }
 }
 
 .tutorial-card {
-  background: var(--white);
+  background: var(--gray-50);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -1133,38 +1133,19 @@ p { color: var(--ink-muted); line-height: 1.75; }
   border-color: transparent;
 }
 
-.tutorial-card__media {
-  aspect-ratio: 16 / 10;
-  background: var(--gray-50);
-  border-bottom: 1px solid var(--border);
+.tutorial-card__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--cream);
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  color: var(--green-600);
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
-.tutorial-card__media svg {
-  width: 28px;
-  height: 28px;
-  color: var(--ink-light);
-  opacity: 0.45;
-}
-
-.tutorial-card__body {
-  padding: 20px 20px 24px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.tutorial-card__time {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-bottom: 8px;
-}
+.tutorial-card__icon svg { width: 22px; height: 22px; }
 
 .tutorial-card__title {
   font-size: 1rem;
@@ -1177,6 +1158,17 @@ p { color: var(--ink-muted); line-height: 1.75; }
   font-size: 0.85rem;
   color: var(--ink-muted);
   line-height: 1.65;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.tutorial-card__time {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
 }
 
 /* ---- 20. Legal pages ---- */
@@ -1362,10 +1354,38 @@ p ~ .tutorial-steps { margin-top: 40px; }
   margin-bottom: 10px;
   line-height: 1.3;
 }
-.tutorial-step__content p { font-size: 0.975rem; line-height: 1.75; }
-.tutorial-step__content p + p { margin-top: 10px; }
-.tutorial-step__content strong { color: var(--ink); }
-.tutorial-step__content em { color: var(--ink-muted); }
+.tutorial-step__content p,
+.tutorial-prose p { font-size: 0.975rem; line-height: 1.75; }
+.tutorial-step__content p + p,
+.tutorial-prose p + p { margin-top: 10px; }
+.tutorial-step__content strong,
+.tutorial-prose strong { color: var(--ink); }
+.tutorial-step__content em,
+.tutorial-prose em { color: var(--ink-muted); }
+.tutorial-prose {
+  max-width: 720px;
+}
+.tutorial-prose h3 {
+  font-size: 1.1rem;
+  color: var(--ink);
+  margin-top: 32px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.tutorial-prose h3:first-child { margin-top: 0; }
+.tutorial-prose ul,
+.tutorial-prose ol {
+  padding-left: 1.5rem;
+  margin-top: 12px;
+}
+.tutorial-prose ul { list-style: disc; }
+.tutorial-prose ol { list-style: decimal; }
+.tutorial-prose li {
+  font-size: 0.975rem;
+  line-height: 1.75;
+  color: var(--ink-muted);
+}
+.tutorial-prose li + li { margin-top: 6px; }
 .tutorial-step__screenshot {
   margin-top: 24px;
   max-width: 200px;

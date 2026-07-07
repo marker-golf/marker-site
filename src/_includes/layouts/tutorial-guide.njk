@@ -2,7 +2,9 @@
 layout: layouts/base.njk
 ---
 
-{% if tutorialPath == "group" %}
+{% if tutorialPath == "getting-started" %}
+  {% set pathLabel = "Getting Started" %}
+{% elif tutorialPath == "group" %}
   {% set pathLabel = "Playing with Your Group" %}
 {% elif tutorialPath == "event" %}
   {% set pathLabel = "Running an Event" %}

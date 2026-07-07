@@ -5,7 +5,7 @@ description: Sign in with your phone number, set up your profile, and install Ma
 subtitle: "Sign in with your phone number, complete your profile, and get Marker on your home screen. Takes under two minutes."
 category: Getting Started
 order: 1
-tutorialPath: reference
+tutorialPath: archive
 tutorialOrder: 1
 estimatedTime: "3 min read"
 cardDescription: "Sign in with your phone number, set up your profile, and install Marker on your home screen."
