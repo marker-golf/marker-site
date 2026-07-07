@@ -15,6 +15,8 @@ cta:
   body: "Build your group and start a round in Marker."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <p>After creating the scorecard and adding yourself, you're on the Scorecard screen. The PLAYERS section shows you already listed. From here, add the rest of your group — up to four more players, five total.</p>
 
 <p>Marker remembers everyone you've played with before, so repeat groups are quick to assemble.</p>
@@ -44,6 +46,9 @@ cta:
 <h3>Search for someone you've played with before</h3>
 <p>If the player you want isn't in your recent list, type in the search field. The search filters by name across your full playing history in Marker — it is not a global user search. Tap a result to open their player settings form.</p>
 <p>This is useful when you have a longer playing history and the partner you want has scrolled past the ten most recent results.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("addPlayersPlayerPicker", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -54,6 +59,9 @@ cta:
 <p>If the player hasn't played a round with you in Marker before, tap <strong>Invite player</strong> at the top right of the partner list. This opens a blank player settings form.</p>
 <p>An optional <strong>mobile number</strong> field appears at the top. If you enter a US phone number, Marker will look up whether that number belongs to an existing Marker account and pre-fill the form if it finds a match. If not, the number is used to share the scorecard by text.</p>
 <p>Fill in their name, handicap index, gender, and tee, then tap <strong>Save</strong>.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("addPlayersInvitePlayer", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 

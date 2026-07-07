@@ -15,6 +15,8 @@ cta:
   body: "Start a round and let Marker track the competition."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <p>With players set, the last step before scoring is choosing what to play. Marker runs multiple games simultaneously from a single set of entered scores — your group enters scores once and Marker calculates results for every format you've configured.</p>
 
 <div class="tutorial-steps">
@@ -35,6 +37,9 @@ cta:
 <p>Marker supports eleven formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Stableford, Team Stroke Play, and Wolf.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="/games/">Games guide library</a>. This tutorial explains how to configure them in Marker — not how to play them.</p>
 <p>Tap a game to open its configuration form.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("addGamesGamePicker", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -63,6 +68,9 @@ cta:
 <li><strong>Override player handicaps</strong> — set a manual handicap for individual players in this game only, without changing their profile.</li>
 </ul>
 <p>For a full explanation of course handicap calculation, see <a href="/tutorials/handicap-settings/">Using Handicaps in Marker</a>.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("addGamesGameConfiguration", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 

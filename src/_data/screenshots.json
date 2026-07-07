@@ -274,5 +274,93 @@
     "viewport": "mobile",
     "status": "approved",
     "notes": "Final standalone scorecard Day total in Settlement view after the round is locked."
+  },
+
+  "createScorecardNewGame": {
+    "src": "/images/screenshots/web/tutorial-create-scorecard-01-new-game-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-create-scorecard-01-new-game-mobile-demo.png",
+    "alt": "Marker home screen showing the New Game and Host Event options for starting a round",
+    "caption": "Tap New Game to start a standalone scorecard for your group.",
+    "usage": ["tutorials/create-a-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Home screen with New Game (1-5 players) and Host Event (6+ players) buttons. Demo account Bob Smith. No personal data visible."
+  },
+
+  "createScorecardSelectCourse": {
+    "src": "/images/screenshots/web/tutorial-create-scorecard-02-select-course-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-create-scorecard-02-select-course-mobile-demo.png",
+    "alt": "Create scorecard flow in Marker showing the course search screen with results for Shinnecock",
+    "caption": "Choose the course for your round.",
+    "usage": ["tutorials/create-a-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Course selection step of scorecard creation. Search query 'shinnecock' showing 2 matching courses. No tee selection visible on this screen."
+  },
+
+  "createScorecardSetup": {
+    "src": "/images/screenshots/web/tutorial-create-scorecard-03-setup-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-create-scorecard-03-setup-mobile-demo.png",
+    "alt": "Add Player screen in Marker showing name, handicap index, gender, and tee selection for a player",
+    "caption": "Marker takes you into player setup — confirm your handicap, gender, and tee before continuing.",
+    "usage": ["tutorials/create-a-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Player settings panel showing demo player Bob Smith, handicap 4.7, Male selected, tee options with Blue/White selected. Fictional demo data."
+  },
+
+  "addPlayersPlayerPicker": {
+    "src": "/images/screenshots/web/tutorial-add-players-01-player-picker-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-add-players-01-player-picker-mobile-demo.png",
+    "alt": "Marker Add Player screen showing a list of ten recent playing partners and a search field for filtering by name",
+    "caption": "Choose from people you've played with before, or use search to filter your playing-partner list.",
+    "usage": ["tutorials/add-players-to-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Shows 'Select past partners' section with 'Search players' field and 'RECENT PARTNERS · 10' list. Invite player link visible top-right. All names are fictional demo data. Search filters the user's playing-partner history only — not a global Marker user search."
+  },
+
+  "addPlayersInvitePlayer": {
+    "src": "/images/screenshots/web/tutorial-add-players-02-invite-player-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-add-players-02-invite-player-mobile-demo.png",
+    "alt": "Blank Add Player form in Marker showing fields for mobile number, name, handicap index, gender, and tee when adding a new playing partner",
+    "caption": "Enter a name, handicap, and tee for someone new — adding a phone number shares the scorecard with them by text.",
+    "usage": ["tutorials/add-players-to-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Blank player settings form (Adjust player settings) reached via Invite player. Shows Add/find by mobile number field, Name (First/Last), Handicap index (0), Handicap Settings (Male/Female), and Tee list (Red/Green/Blue visible). Save button at bottom."
+  },
+
+  "addGamesGamePicker": {
+    "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-add-games-01-game-picker-mobile-demo.png",
+    "alt": "Marker Add Game screen listing all eleven available game formats with one-line descriptions, and Premium badges on Scotch, Team Stableford, and Wolf",
+    "caption": "Choose the game your group wants to play.",
+    "usage": ["tutorials/add-games-to-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Standalone scorecard game picker. Shows SELECT GAME list with all 11 formats: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch (Premium), Skins, Stableford, Stroke Play, Team Stableford (Premium), Team Stroke Play, Wolf (Premium). No search or category filters visible."
+  },
+
+  "scoreRoundMainScorecard": {
+    "src": "/images/screenshots/web/tutorial-score-round-01-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-score-round-01-scorecard-mobile-demo.png",
+    "alt": "Marker scorecard showing players, hole scores, handicap indicators, and game status during a round",
+    "caption": "Enter scores in the grid and Marker updates the scorecard and game status as the round progresses.",
+    "usage": ["tutorials/score-the-round"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Active Nassau scorecard on Shinnecock Hills. Shows four players (BS, AA, BB, EE) split into Side A/B teams, holes 1–5 scored with gross/net stacked display, handicap dot indicators, birdie circles, and the Nassau game-status column with front/press/total match rows and press pills."
+  },
+
+  "addGamesGameConfiguration": {
+    "src": "/images/screenshots/web/tutorial-add-games-02-game-configuration-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-add-games-02-game-configuration-mobile-demo.png",
+    "alt": "Nassau configuration screen in Marker showing the Handicap section set to Net with Stroke off the low ball checked, all four players selected with tee and course handicap details, and the Teams section partially visible at the bottom",
+    "caption": "Each game's form shows handicap controls at the top, the full player list with tee and course handicap details, and game-specific settings below.",
+    "usage": ["tutorials/add-games-to-scorecard"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Nassau configuration. Shows Handicap (Net selected, Gross available, Stroke off the low ball checked, show advanced link), Players (4) with all checked (Bob Smith, Allan Albatross, Bert Bailout, Edward Eagle — Blue/White tee with C.H./P.H./S.O. values), Teams (Side A vs Side B partially visible). Save game button at bottom. Accounting fields not visible in this capture."
   }
 }

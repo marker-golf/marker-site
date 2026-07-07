@@ -15,6 +15,8 @@ cta:
   body: "Create your first scorecard in Marker right now."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <p>A standalone scorecard is the fastest way to play in Marker — pick a course and you're in. Use it for a single group or foursome. If you need a shared leaderboard across multiple groups, use an Event instead.</p>
 
 <div class="tutorial-steps">
@@ -24,6 +26,9 @@ cta:
 <div class="tutorial-step__content">
 <h3>Tap New Game</h3>
 <p>From the Marker home screen, tap <strong>New Game</strong>. There's no event name, no date picker, and no options screen — you go straight to course selection.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("createScorecardNewGame", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -32,6 +37,9 @@ cta:
 <div class="tutorial-step__content">
 <h3>Select a course</h3>
 <p>Search for your course by name or browse nearby. Tap the correct course from the results. Marker creates the scorecard immediately — today's date and hole 1 are set automatically.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("createScorecardSelectCourse", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -40,6 +48,9 @@ cta:
 <div class="tutorial-step__content">
 <h3>Review your player settings</h3>
 <p>Marker takes you into player setup, starting with yourself. Review your handicap, gender, and tee selection. Change your tee here if needed before continuing.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("createScorecardSetup", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 

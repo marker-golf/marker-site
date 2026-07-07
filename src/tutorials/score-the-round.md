@@ -15,6 +15,8 @@ cta:
   body: "Start a round and let Marker track the competition."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <p>Once the scorecard is set up with players and games, tap <strong>View Scorecard</strong> to open the scoring grid. This is where you enter and track scores for the entire round.</p>
 
 <div class="tutorial-steps">
@@ -25,6 +27,9 @@ cta:
 <h3>Read the scorecard grid</h3>
 <p>The grid is organized with holes as rows and players as columns. Each column header shows the player's initials. When a game is active, additional columns on the right show the current game position — how each player stands for that format.</p>
 <p>The grid shows front nine, an OUT total row, back nine, an IN total row, and a TOT row at the bottom. Totals update automatically as scores are entered.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("scoreRoundMainScorecard", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -47,7 +52,7 @@ cta:
 <p>Small indicators in the top-right corner of each score cell show handicap strokes for the current game:</p>
 <ul>
 <li><strong>Dots (•)</strong> — the player is receiving strokes on that hole. One dot per stroke, up to three. A player receiving four or more strokes on a hole still shows three dots.</li>
-<li><strong>Plus signs (+)</strong> — the player is giving strokes back. This appears when stroke-off-low-ball is configured and a player's course handicap is lower than the field.</li>
+<li><strong>Plus sign (+)</strong> — the player has a plus course handicap for this tee and gives a stroke back on that hole. For net scoring, a stroke is added to their gross score on that hole rather than subtracted.</li>
 <li><strong>½ suffix</strong> — half strokes are in play. The indicator shows the whole-stroke count plus the ½ symbol.</li>
 </ul>
 <p>When no game is active, indicators reflect overall course handicap allocation. When a game is active, they reflect that game's handicap settings — including any allowance percentage or advanced overrides you configured.</p>
