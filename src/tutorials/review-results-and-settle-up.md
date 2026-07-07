@@ -15,6 +15,8 @@ cta:
   body: "Start a round and let Marker track the competition."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <p>Until you end the round, game results are live and provisional — they update with every score entered. Ending the round locks the scorecard, freezes the game summaries, and makes the results safe to settle.</p>
 
 <div class="tutorial-steps">
@@ -35,6 +37,9 @@ cta:
 <p>Tapping <strong>End round</strong> opens a confirmation panel:</p>
 <blockquote><em>By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.</em></blockquote>
 <p>Tap <strong>End round</strong> in the panel to confirm.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("reviewResultsEndRound", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -78,6 +83,9 @@ cta:
 <p>If any game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears above the table. Check it if players already put money in the pot before the round — Marker settles from the pot first, then lists any remaining player-to-player payments. Uncheck it to show all settlements as direct payments.</p>
 <p><strong>Profit / loss</strong> shows each player's overall financial position: <strong>Gross</strong> winnings from all games combined. When buy-ins are involved, <strong>Buy-in</strong> and <strong>Net</strong> columns also appear — Net is the gross amount minus the player's total buy-in contribution. Green values are positive; red values are negative.</p>
 <p>Use Settlement to run the actual payout. Use Profit / loss to see the bigger picture of who came out ahead.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("reviewResultsFinalSettlement", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 

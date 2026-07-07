@@ -252,5 +252,27 @@
     "viewport": "mobile",
     "status": "approved",
     "notes": "Active-round Day total in Settlement view. Values remain provisional while the round is in progress."
+  },
+
+  "reviewResultsEndRound": {
+    "src": "/images/screenshots/web/tutorial-settle-01-end-round-confirmation-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-settle-01-end-round-confirmation-mobile-demo.png",
+    "alt": "Marker End round confirmation explaining that ending the round locks the scorecard",
+    "caption": "Ending the round locks the scorecard and finalizes the game results. You can unlock it later from scorecard settings if a correction is needed.",
+    "usage": ["tutorials/review-results-and-settle-up"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Standalone scorecard End round confirmation state. Demonstrates the transition from provisional results to locked final results."
+  },
+
+  "reviewResultsFinalSettlement": {
+    "src": "/images/screenshots/web/tutorial-settle-02-final-settlement-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-settle-02-final-settlement-mobile-demo.png",
+    "alt": "Marker final Day total showing settlement transactions after a completed round",
+    "caption": "The final Day total shows exactly who pays whom across all games on the scorecard.",
+    "usage": ["tutorials/review-results-and-settle-up"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Final standalone scorecard Day total in Settlement view after the round is locked."
   }
 }
