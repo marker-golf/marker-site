@@ -8,8 +8,8 @@
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Home screen for demo account Bob Smith, no USGA ID connected. Recent Scorecards show Pebble Beach GL rounds with first names Greg/Larry/Mike/Bob and Bob/Joe/Greg/Harry. Recent Events shows PebblePayday. All fictional demo data. No personal data."
   },
 
   "homepageLeaderboard": {
@@ -19,63 +19,19 @@
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Scorecard-level leaderboard in PebblePayday event (breadcrumb PebblePayday > Leaderboard) with Round in progress badge and Event Games > Team Stroke Play standings. Four teams with front/back/total/$ columns. All names fictional: Debbie Dogleg, Ben Birdie, Bert Bailout, Kevin Kickin, Tom Triple, George Green, Joe Jar, Harry Hazard, Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan. No personal data. Appropriate for homepage product illustration."
   },
 
   "homepageGames": {
     "src": "/images/screenshots/web/homepage-games-mobile-expo-demo.webp",
     "fallback": "/images/screenshots/source/homepage-games-mobile-expo-demo.png",
-    "alt": "Marker showing configured games for a golf event",
+    "alt": "Add game screen in Marker listing all eleven available game formats with one-line descriptions",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Complete visual, accuracy, and privacy review before marking approved."
-  },
-
-  "homepageEndRound": {
-    "src": "/images/screenshots/web/homepage-end-round-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-end-round-mobile-demo.png",
-    "alt": "End-of-round settlement screen showing who owes who",
-    "caption": null,
-    "usage": [],
-    "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Not currently placed on any page. Good candidate for homepage settlement feature row."
-  },
-
-  "homepageEventList": {
-    "src": "/images/screenshots/web/homepage-event-list-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-event-list-mobile-demo.png",
-    "alt": "Marker event list showing upcoming and past golf events",
-    "caption": null,
-    "usage": [],
-    "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for Create an Event tutorial."
-  },
-
-  "homepageScorecard": {
-    "src": "/images/screenshots/web/homepage-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-scorecard-mobile-demo.png",
-    "alt": "Scorecard view in Marker showing hole-by-hole scores",
-    "caption": null,
-    "usage": [],
-    "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for event-scoring tutorial."
-  },
-
-  "homepageScoring": {
-    "src": "/images/screenshots/web/homepage-scoring-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-scoring-mobile-demo.png",
-    "alt": "Score entry screen in Marker for entering hole scores",
-    "caption": null,
-    "usage": [],
-    "viewport": "mobile",
-    "status": "stale",
-    "notes": "Pre-Expo screenshot. Not currently placed. Good candidate for event-scoring tutorial."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Add game picker showing SELECT GAME list with all 11 formats: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch (PREMIUM), Skins, Stableford, Stroke Play, Team Stableford (PREMIUM), Team Stroke Play, Wolf (PREMIUM). No player names or personal data visible."
   },
 
   "tutorialCreateEventStep1": {
@@ -188,48 +144,26 @@
     "notes": "Event Skins game configuration. 'Players (15)' heading confirms the full Event roster is available. Net selected; P.H. visible for checked players; Stroke off the low ball unchecked so S.O. not shown. 6 players visible: Mike Mulligan White Tees C.H. 13 P.H. 13 (checked), Harry Hazard White Tees C.H. 2 P.H. 2 (checked), Allan Albatross White Tees C.H. 15 (unchecked, no P.H.), Joe Jar White Tees C.H. 14 P.H. 14 (checked), Debbie Dogleg Red Tees C.H. 5 P.H. 5 (checked), Dave Divot (partially visible, checked). Skins-specific settings are below the visible frame. Save game button at bottom. All names are fictional golf-themed demo data. No personal data."
   },
 
-  "tutorialAddGamesStep1": {
-    "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Marker game picker showing all available game formats",
-    "caption": "Tap + in the Games section to open the game picker.",
-    "usage": [],
-    "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Superseded by eventGamesPicker for the Event tutorial. Replace or remove after standalone Add Games tutorial is reviewed."
-  },
-
-  "tutorialAddGamesStep2": {
-    "src": "/images/screenshots/web/tutorial-add-games-02-game-form-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Game configuration form in Marker showing handicap and player settings",
-    "caption": "Configure handicap, select players, and set any game-specific options.",
-    "usage": [],
-    "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Superseded by eventGamesConfiguration for the Event tutorial. Replace or remove after standalone Add Games tutorial is reviewed."
-  },
-
   "eventScoringLiveLeaderboard": {
     "src": "/images/screenshots/web/tutorial-event-scoring-01-live-leaderboard-mobile-demo.webp",
     "fallback": "/images/screenshots/source/tutorial-event-scoring-01-live-leaderboard-mobile-demo.png",
-    "alt": "Scorecard leaderboard showing the Event Games section with Team Stroke Play standings for four teams and a Round in progress badge",
-    "caption": "Follow Event standings while groups are still playing — the Event Games section shows standings across all teams.",
+    "alt": "Event leaderboard for PebblePayday showing Team Stroke Play standings for four teams with an Event in progress badge",
+    "caption": "Follow Event standings while groups are still playing — the Event leaderboard shows results across all teams.",
     "usage": ["tutorials/event-scoring"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Scorecard leaderboard in an Event context. Shows 'Round in progress' badge (yellow pill) — this is the scorecard-level leaderboard, not the event leaderboard. 'Event Games' section label (green) above Team Stroke Play standings card. 4 teams with THRU, 1-9, 10-18, TO PAR, $ columns: Kevin Kickin/Bert Bailout/Ben Birdie/Debbie Dogleg (✓18, -5, -4, -9, $640); Harry Hazard/Joe Jar/George Green/Tom Triple (✓18, -4, -3, -7, $0); Mike Mulligan/Larry Lateral/Greg Gimme/Bob Smith (18, -2, +3, +1, $0); Paul Press/Dave Divot/Edward Eagle/Allan Albatross (17, E, +4, +4, $0). Teams 1-3 through 18 holes; Team 4 still on hole 17. All names fictional golf-themed demo data. No personal data."
+    "notes": "Recaptured Jul 2026 to show the Event-level leaderboard (trophy icon from event dashboard). Title 'Leaderboard', event header PebblePayday Jul 10 2026 Pebble Beach GL, 'Event in progress' badge (yellow pill). Team Stroke Play card: Kevin Kickin/Bert Bailout/Ben Birdie/Debbie Dogleg (#1, ✓18, -5, -4, -9, $640); Harry Hazard/Joe Jar/George Green/Tom Triple (#2, ✓18, -4, -3, -7, $0); Mike Mulligan/Larry Lateral/Greg Gimme/Bob Smith (#3, 18, -2, +3, +1, $0); Paul Press/Dave Divot/Edward Eagle/Allan Albatross (#4, 18, -1, +4, +3, $0). All names fictional demo data. No personal data."
   },
 
   "eventCompleteConfirm": {
     "src": "/images/screenshots/web/tutorial-event-complete-01-confirm-mobile-demo.webp",
     "fallback": "/images/screenshots/source/tutorial-event-complete-01-confirm-mobile-demo.png",
-    "alt": "End round confirmation sheet on a Marker Event scorecard with attestation text and an End round button",
-    "caption": "Players can end their individual scorecard when scores are final — this locks that scorecard before the organizer completes the Event.",
+    "alt": "Complete event confirmation sheet on the Marker event dashboard explaining that scorecards lock and per-game results freeze, with a Complete event button",
+    "caption": "Tap Complete event from the event dashboard — all scorecards lock and per-game results freeze.",
     "usage": ["tutorials/complete-event-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Shows the 'End round' confirmation modal (scorecard-level), not the 'Complete event' modal (event-level). Background is a Pebble Beach GL Event scorecard with game tabs (Team Stroke Play, Net Skins, Team Stableford) and a score grid through holes 1–5. Modal: title 'End round' (green), body 'By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.', confirm button 'End round' (green). Note: the event-level 'Complete event' modal uses different wording ('Scorecards lock and per-game results freeze'). Consider re-capturing the event-level Complete event confirmation for a more precise illustration. All data is fictional demo Event content. No personal data."
+    "notes": "Recaptured Jul 2026 to show the event-level Complete event confirmation modal. Background is event dashboard ('Event' title, gear icon) for PebblePayday Jul 10 2026 showing Players · 16 with player list. Modal: title 'Complete event' (green), body 'By completing this event, you attest that the scores are correct. Scorecards lock and per-game results freeze. You can unlock later if you need to make changes.', confirm button 'Complete event' (dark green). Visible player names: Allan Albatross, Bert Bailout, Ben Birdie, Dave Divot, Debbie Dogleg — all fictional demo data. No personal data."
   },
 
   "eventCompleteFinalSettlement": {
@@ -240,29 +174,7 @@
     "usage": ["tutorials/complete-event-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Shows the Event total section of the leaderboard in Settlement view. Top of frame shows bottom rows of a game standings card: Team 3 (Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan, THRU 18, 91, $0) and Team 4 (Allan Albatross, Edward Eagle, Dave Divot, Paul Press, THRU 18, 91, $0). Event total section: Settlement tab active (dark green), Profit / loss tab inactive. Buy-ins collected checkbox (checked, green) with description 'Settle from the pot for buy-in games, then between players for the rest.' FROM / TO / AMOUNT table: Pot→Bert Bailout $320, Pot→George Green $240, Pot→Kevin Kickin $160, Pot→Ben Birdie $160, Pot→Debbie Dogleg $160, Pot→Harry Hazard $80, Pot→Joe Jar $80, Pot→Tom Triple $80. Share leaderboard button at bottom. The Event in progress / complete badge is scrolled above the visible frame. All names fictional golf-themed demo data. No personal data."
-  },
-
-  "tutorialEventScoringStep1": {
-    "src": "/images/screenshots/web/tutorial-event-scoring-01-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Scorecard view in Marker during an active golf round",
-    "caption": "The scorecard updates as each player enters their score.",
-    "usage": ["tutorials/event-scoring"],
-    "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Replace after scoring screen is stable. Show an active round with a few holes entered."
-  },
-
-  "tutorialHandicapSettings": {
-    "src": "/images/screenshots/web/tutorial-handicap-01-settings-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Handicap settings panel in Marker showing Net/Gross toggle and allowance options",
-    "caption": "Configure handicap allowance, stroke limits, and half-stroke rules per game.",
-    "usage": ["tutorials/handicap-settings"],
-    "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "Replace after handicap settings panel is stable. Show expanded advanced settings."
+    "notes": "Shows the Event total section of the leaderboard in Settlement view. Top of frame shows bottom rows of a game standings card: Team 3 (Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan, THRU 18, 91, $0) and Team 4 (Allan Albatross, Edward Eagle, Dave Divot, Paul Press, THRU 18, 91, $0). Event total section: Settlement tab active (dark green), Profit / loss tab inactive. Buy-ins collected checkbox (checked, green) with description 'Settle from the pot for buy-in games, then between players for the rest.' FROM / TO / AMOUNT table: Pot→Bert Bailout $320, Pot→George Green $240, Pot→Kevin Kickin $160, Pot→Ben Birdie $160, Pot→Debbie Dogleg $160, Pot→Harry Hazard $80, Pot→Joe Jar $80, Pot→Tom Triple $80. Share leaderboard button at bottom. All names fictional golf-themed demo data. No personal data."
   },
 
   "gameWolfSetup": {
@@ -270,10 +182,10 @@
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
     "alt": "Wolf game setup screen in Marker showing the lone wolf assignment for a hole",
     "caption": "The wolf chooses their partner (or goes alone) before anyone else tees off.",
-    "usage": ["games/wolf"],
+    "usage": [],
     "viewport": "mobile",
     "status": "placeholder",
-    "notes": "Replace after Wolf game screen is stable. Show hole view with wolf selection prompt."
+    "notes": "No game guide page currently renders this key. Placeholder reserved for future Wolf game guide screenshot. Replace after Wolf game screen is stable. Show hole view with wolf selection prompt."
   },
 
   "gameNassauSetup": {
@@ -281,10 +193,10 @@
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
     "alt": "Nassau game configuration in Marker showing match amounts for front, back, and full 18",
     "caption": "Set separate match amounts for front 9, back 9, and the full 18.",
-    "usage": ["games/nassau"],
+    "usage": [],
     "viewport": "mobile",
     "status": "placeholder",
-    "notes": "Replace after Nassau configuration is stable. Show the three-bet setup form."
+    "notes": "No game guide page currently renders this key. Placeholder reserved for future Nassau game guide screenshot. Replace after Nassau configuration is stable. Show the three-bet setup form."
   },
 
   "gameSkinsPayout": {
@@ -292,10 +204,10 @@
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
     "alt": "Skins payout screen in Marker showing hole-by-hole skin winners and carry amounts",
     "caption": "Skins accumulate when a hole is halved — Marker tracks every carry automatically.",
-    "usage": ["games/skins"],
+    "usage": [],
     "viewport": "mobile",
     "status": "placeholder",
-    "notes": "Replace after Skins results screen is stable. Show a game with several carries."
+    "notes": "No game guide page currently renders this key. Placeholder reserved for future Skins game guide screenshot. Replace after Skins results screen is stable. Show a game with several carries."
   },
 
   "commissionersHero": {
@@ -305,8 +217,8 @@
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "4 four-player groups with tee times, Skins + Stroke Play + Team Stroke Play + Team Stableford configured, centralized event controls visible. Verify all names are fictional before approving."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Event dashboard for PebblePayday showing SCORECARDS · 4 with tee times and player first names (Mike/Greg/Bob/Larry at 8:00, Kevin/Debbie/Ben/Bert at 8:30, Harry/Joe/Tom/George at 8:20, Dave/Allan/Edward/Paul at 8:10) and GAMES · 4 (Skins, Stroke Play, Team Stroke Play, Team Stableford — all 16 players). Republish scorecards link and Complete event CTA visible. All names fictional demo data. No personal data."
   },
 
   "commissionersLiveScoring": {
@@ -316,8 +228,8 @@
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Event-wide Team Stroke Play leaderboard. Multiple four-player teams, round in progress, front/back splits, accounting values visible. Verify all names are fictional before approving."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Scorecard-level leaderboard in PebblePayday event (breadcrumb PebblePayday > Leaderboard) with Round in progress badge and Event Games > Team Stroke Play standings. Teams: Debbie Dogleg/Ben Birdie/Bert Bailout/Kevin Kickin (#1, ✓18, -5/-4, -9, $640); Tom Triple/George Green/Joe Jar/Harry Hazard (#2, ✓18, -4/-3, -7, $0); Bob Smith/Greg Gimme/Larry Lateral/Mike Mulligan (#3, 18, -2/+3, +1, $0); Allan (partial, #4). All names fictional demo data. No personal data. Appropriate for commissioner page product illustration."
   },
 
   "commissionersSettlement": {
@@ -327,8 +239,8 @@
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Post-round settlement showing pot-based payouts, settlement and P&L views, share leaderboard action. Verify all player names are fictional before approving."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Event leaderboard bottom section: Team 3 (Bob Smith/Greg Gimme/Larry Lateral/Mike Mulligan, 18, 91, $0) and Team 4 (Allan Albatross/Edward Eagle/Dave Divot/Paul Press, 17, 85, $0). Event total: Settlement tab active, Buy-ins collected checked. Pot payouts: Bert Bailout $480, George Green $240, Tom Triple $240, Kevin Kickin $160, Ben Birdie $160, Debbie Dogleg $160, Harry Hazard $80, Joe Jar $80. Share leaderboard button. All names fictional demo data. No personal data."
   },
 
   "followGamesNassauScorecard": {
