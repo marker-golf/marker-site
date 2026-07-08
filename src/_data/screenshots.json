@@ -166,15 +166,37 @@
     "notes": "Edit Event Scorecard screen. Scorecard tee time 08:50 AM, Start hole 1. PLAYERS section shows 4 checked (Mike Mulligan White Tees C.H. 13, Harry Hazard White Tees C.H. 2, Allan Albatross White Tees C.H. 15, Joe Jar White Tees C.H. 14) and 5 visible unchecked unassigned event players (Debbie Dogleg Red Tees C.H. 5, Dave Divot White Tees C.H. 27, George Green White Tees C.H. 41, Tom Triple White Tees C.H. 10, Kevin Kickin White Tees C.H. 18). List may continue below the fold. Save button visible; Remove Group action is not visible in this frame. All names are fictional golf-themed demo data. No personal data."
   },
 
+  "eventGamesPicker": {
+    "src": "/images/screenshots/web/tutorial-event-games-01-game-picker-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-games-01-game-picker-mobile-demo.png",
+    "alt": "Add game screen showing all 11 game formats in the SELECT GAME list, with Premium badges on Scotch, Team Stableford, and Wolf",
+    "caption": "Tap any format to open its configuration — formats marked Premium require an active subscription.",
+    "usage": ["tutorials/add-and-configure-games"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Event game picker. All 11 formats visible: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Stableford, Team Stroke Play, Wolf. Premium badges on Scotch, Team Stableford, and Wolf. Captured from the Event game-management workflow using fictional demo Event data. No personal data."
+  },
+
+  "eventGamesConfiguration": {
+    "src": "/images/screenshots/web/tutorial-event-games-02-game-configuration-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-games-02-game-configuration-mobile-demo.png",
+    "alt": "Skins game configuration screen showing Handicap set to Net and the Players section listing 15 Event players, with five of six visible players checked",
+    "caption": "Configure handicap, select participants from the Event roster, and save — the player list shows everyone in your event.",
+    "usage": ["tutorials/add-and-configure-games"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Event Skins game configuration. 'Players (15)' heading confirms the full Event roster is available. Net selected; P.H. visible for checked players; Stroke off the low ball unchecked so S.O. not shown. 6 players visible: Mike Mulligan White Tees C.H. 13 P.H. 13 (checked), Harry Hazard White Tees C.H. 2 P.H. 2 (checked), Allan Albatross White Tees C.H. 15 (unchecked, no P.H.), Joe Jar White Tees C.H. 14 P.H. 14 (checked), Debbie Dogleg Red Tees C.H. 5 P.H. 5 (checked), Dave Divot (partially visible, checked). Skins-specific settings are below the visible frame. Save game button at bottom. All names are fictional golf-themed demo data. No personal data."
+  },
+
   "tutorialAddGamesStep1": {
     "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
     "alt": "Marker game picker showing all available game formats",
     "caption": "Tap + in the Games section to open the game picker.",
-    "usage": ["tutorials/add-and-configure-games"],
+    "usage": [],
     "viewport": "mobile",
     "status": "placeholder",
-    "notes": "Replace after GamePicker screen is stable. Show full list of formats including Premium pills."
+    "notes": "Superseded by eventGamesPicker for the Event tutorial. Replace or remove after standalone Add Games tutorial is reviewed."
   },
 
   "tutorialAddGamesStep2": {
@@ -182,10 +204,43 @@
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
     "alt": "Game configuration form in Marker showing handicap and player settings",
     "caption": "Configure handicap, select players, and set any game-specific options.",
-    "usage": ["tutorials/add-and-configure-games"],
+    "usage": [],
     "viewport": "mobile",
     "status": "placeholder",
-    "notes": "Replace after GameForm screen is stable. Show Skins or Nassau configuration as example."
+    "notes": "Superseded by eventGamesConfiguration for the Event tutorial. Replace or remove after standalone Add Games tutorial is reviewed."
+  },
+
+  "eventScoringLiveLeaderboard": {
+    "src": "/images/screenshots/web/tutorial-event-scoring-01-live-leaderboard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-scoring-01-live-leaderboard-mobile-demo.png",
+    "alt": "Scorecard leaderboard showing the Event Games section with Team Stroke Play standings for four teams and a Round in progress badge",
+    "caption": "Follow Event standings while groups are still playing — the Event Games section shows standings across all teams.",
+    "usage": ["tutorials/event-scoring"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Scorecard leaderboard in an Event context. Shows 'Round in progress' badge (yellow pill) — this is the scorecard-level leaderboard, not the event leaderboard. 'Event Games' section label (green) above Team Stroke Play standings card. 4 teams with THRU, 1-9, 10-18, TO PAR, $ columns: Kevin Kickin/Bert Bailout/Ben Birdie/Debbie Dogleg (✓18, -5, -4, -9, $640); Harry Hazard/Joe Jar/George Green/Tom Triple (✓18, -4, -3, -7, $0); Mike Mulligan/Larry Lateral/Greg Gimme/Bob Smith (18, -2, +3, +1, $0); Paul Press/Dave Divot/Edward Eagle/Allan Albatross (17, E, +4, +4, $0). Teams 1-3 through 18 holes; Team 4 still on hole 17. All names fictional golf-themed demo data. No personal data."
+  },
+
+  "eventCompleteConfirm": {
+    "src": "/images/screenshots/web/tutorial-event-complete-01-confirm-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-complete-01-confirm-mobile-demo.png",
+    "alt": "End round confirmation sheet on a Marker Event scorecard with attestation text and an End round button",
+    "caption": "Players can end their individual scorecard when scores are final — this locks that scorecard before the organizer completes the Event.",
+    "usage": ["tutorials/complete-event-and-settle-up"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Shows the 'End round' confirmation modal (scorecard-level), not the 'Complete event' modal (event-level). Background is a Pebble Beach GL Event scorecard with game tabs (Team Stroke Play, Net Skins, Team Stableford) and a score grid through holes 1–5. Modal: title 'End round' (green), body 'By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.', confirm button 'End round' (green). Note: the event-level 'Complete event' modal uses different wording ('Scorecards lock and per-game results freeze'). Consider re-capturing the event-level Complete event confirmation for a more precise illustration. All data is fictional demo Event content. No personal data."
+  },
+
+  "eventCompleteFinalSettlement": {
+    "src": "/images/screenshots/web/tutorial-event-complete-02-final-settlement-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-complete-02-final-settlement-mobile-demo.png",
+    "alt": "Event total section of the Event leaderboard showing the Settlement tab with Buy-ins collected checked and pot payouts to eight players",
+    "caption": "Event total combines all Event Game results — Settlement shows who receives what from the pot.",
+    "usage": ["tutorials/complete-event-and-settle-up"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Shows the Event total section of the leaderboard in Settlement view. Top of frame shows bottom rows of a game standings card: Team 3 (Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan, THRU 18, 91, $0) and Team 4 (Allan Albatross, Edward Eagle, Dave Divot, Paul Press, THRU 18, 91, $0). Event total section: Settlement tab active (dark green), Profit / loss tab inactive. Buy-ins collected checkbox (checked, green) with description 'Settle from the pot for buy-in games, then between players for the rest.' FROM / TO / AMOUNT table: Pot→Bert Bailout $320, Pot→George Green $240, Pot→Kevin Kickin $160, Pot→Ben Birdie $160, Pot→Debbie Dogleg $160, Pot→Harry Hazard $80, Pot→Joe Jar $80, Pot→Tom Triple $80. Share leaderboard button at bottom. The Event in progress / complete badge is scrolled above the visible frame. All names fictional golf-themed demo data. No personal data."
   },
 
   "tutorialEventScoringStep1": {

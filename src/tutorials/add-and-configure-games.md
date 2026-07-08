@@ -19,14 +19,16 @@ cta:
   body: "Open an event and tap the + in the Games section to get started."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <div class="tutorial-steps">
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Open Add game from your event</h3>
-<p>From the event dashboard, scroll to the <strong>Games</strong> section and tap the <strong>+</strong> button. This opens the <strong>Add game</strong> screen. Only the event commissioner can add games from the event dashboard.</p>
-<p><strong>Event-wide games</strong> added here appear on the event leaderboard and are visible to all groups. <strong>Scorecard-level games</strong> can also be added from within an individual scorecard — these appear only on that scorecard's leaderboard and are not aggregated across the event. Use scorecard-level games for side bets that involve only the players in one group.</p>
+<p>From the event dashboard, scroll to the <strong>Games</strong> section and tap the <strong>+</strong> button. This opens the <strong>Add game</strong> screen. Only the event organizer can add and edit games — the + button and game rows are only tappable while the event is unlocked.</p>
+<p><strong>Event-wide games</strong> added here appear on the event leaderboard and on every scorecard's leaderboard under <strong>Event Games</strong>. <strong>Side games</strong> can also be added from within an individual scorecard — these appear on that scorecard's leaderboard only (labeled <strong>Side Games</strong> when event games are also present) and are not aggregated across the event. Side games support up to five participants; players on the local scorecard are selected by default, and the player selector can include players from other event scorecards, enabling cross-group bets. See <a href="{{ '/tutorials/side-games/' | url }}">Side Games</a> for a walkthrough.</p>
 </div>
 </div>
 
@@ -36,6 +38,9 @@ cta:
 <h3>Select a game format</h3>
 <p>The game picker lists all available formats in alphabetical order, each with a short description. Marker includes 11 built-in formats — from Skins and Nassau to Wolf, Match Play, and Stableford. Formats marked <strong>Premium</strong> require an active subscription.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Game Guides</a>. Tap a format in the app to open its configuration form.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventGamesPicker", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -68,6 +73,9 @@ cta:
 <li><strong>S.O.</strong> — Strokes Off (net strokes the player receives in this game) — visible when Stroke off the low ball is enabled</li>
 </ul>
 <p>Not all players need to be in every game. Side bets between two specific players — a Nassau between the cart partners, for example — are common and supported.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventGamesConfiguration", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -100,6 +108,15 @@ cta:
 <h3>Save the game</h3>
 <p>Tap <strong>Save game</strong> at the bottom of the form. The game appears immediately on the event dashboard.</p>
 <p>You can add multiple games to the same event. A Skins game and a Nassau can run simultaneously with the same players — each game tracks scores and settles independently. Add games before the round starts, or add a new game mid-round if the group decides to run another bet.</p>
+</div>
+</div>
+
+<div class="tutorial-step">
+<div class="tutorial-step__marker" aria-hidden="true">7</div>
+<div class="tutorial-step__content">
+<h3>Edit or remove a game</h3>
+<p>From the event dashboard, tap any game row to open the <strong>Edit game</strong> screen. The same configuration form opens with your saved settings — adjust handicap, players, or game-specific settings and tap <strong>Save changes</strong>.</p>
+<p>To remove a game, tap <strong>Remove Game</strong> at the bottom of the form and confirm when prompted. Both editing and removal are only available while the event is unlocked.</p>
 </div>
 </div>
 
