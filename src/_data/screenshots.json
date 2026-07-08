@@ -85,8 +85,8 @@
     "caption": "Search by course name — Marker's database includes hole-by-hole data for thousands of courses.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Shows course search with results. No personal data visible. Verify fictional event context before approving."
+    "status": "approved",
+    "notes": "Expo screenshot. Shows course search with 'pinehur' query and 16 matching courses. No personal data. Reviewed and approved."
   },
 
   "tutorialCreateEventStep2": {
@@ -96,8 +96,8 @@
     "caption": "With course, name, and date filled in, tap Save to create the event.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Shows fully completed form: course No. 2, event name Pinehurst Pandemonium, date 07/06/2026, Save button. Event name is fictional demo data."
+    "status": "approved",
+    "notes": "Expo screenshot. Shows fully completed form: course No. 2, event name Pinehurst Pandemonium, date 07/06/2026, Save button. All fictional demo data. Series picker not shown — demo account is not a commissioner. Reviewed and approved."
   },
 
   "tutorialCreateEventStep3": {
@@ -107,8 +107,30 @@
     "caption": "Your event is ready — add players, create scorecards, and configure games in any order.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
-    "status": "draft",
-    "notes": "Expo screenshot. Empty event dashboard immediately after creation. Event name Pinehurst Pandemonium is fictional demo data."
+    "status": "approved",
+    "notes": "Expo screenshot. Empty event dashboard immediately after creation: Players 0, Scorecards 0, Games 0, each with + button. Event name Pinehurst Pandemonium is fictional demo data. Reviewed and approved."
+  },
+
+  "eventAddPlayersPicker": {
+    "src": "/images/screenshots/web/tutorial-event-add-players-01-player-picker-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-add-players-01-player-picker-mobile-demo.png",
+    "alt": "Event Add Players screen showing 5 players selected as chips above a Recent Partners list with 5 of 10 partners checked and a Continue (5) button",
+    "caption": "Tap past partners to check them off — select your whole group before tapping Continue.",
+    "usage": ["tutorials/add-players"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Event player picker in multi-select state. 5 of 10 recent partners selected: Bert Bailout, Ben Birdie, Debbie Dogleg, Paul Press, Bob Smith. Invite new player link visible in section header. All fictional golf-themed demo names. No personal data."
+  },
+
+  "eventAddPlayersTees": {
+    "src": "/images/screenshots/web/tutorial-event-add-players-02-tee-assignment-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-add-players-02-tee-assignment-mobile-demo.png",
+    "alt": "Set Tees screen showing a Men's tee picker with White selected and a Women's tee section with Blue and White options visible",
+    "caption": "Set a default tee for each gender in the selected batch — individual players can be adjusted later from the event dashboard.",
+    "usage": ["tutorials/add-players"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Event bulk tee assignment screen. Men's tee: Championship, Green, Blue, White (selected, green highlight), Brown, Gold, Fairway Tees — all with yardage, rating, and slope. Women's tee section visible with Blue and White; selection is below the visible fold. Back and Save buttons at bottom. No personal data; course is fictional demo data. Tees apply only to the current batch of newly added players."
   },
 
   "tutorialAddGamesStep1": {

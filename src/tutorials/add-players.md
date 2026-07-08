@@ -19,6 +19,8 @@ cta:
   body: "Build your group and start a round in Marker."
 ---
 
+{% from "components/product-screenshot.njk" import ProductScreenshot %}
+
 <div class="tutorial-steps">
 
 <div class="tutorial-step">
@@ -42,6 +44,9 @@ cta:
 <div class="tutorial-step__content">
 <h3>Method 2 — Search for a previous playing partner</h3>
 <p>Type in the search field to filter by name. The search covers players you've previously played with in Marker — it doesn't search every Marker user, only your playing history. Tap a result to select them.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventAddPlayersPicker", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -49,7 +54,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
 <h3>Method 3 — Invite a new player</h3>
-<p>Tap <strong>Invite new player</strong> to add someone who isn't in your playing history. Enter their name, handicap index, gender, and tee. Optionally add their phone number — Marker will notify them when scorecards are published. If they already have a Marker account linked to that number, their profile is matched automatically.</p>
+<p>Tap <strong>Invite new player</strong> to add someone who isn't in your playing history. The form opens with an optional mobile number field first — enter their US phone number to send them a scorecard link; if the number matches an existing Marker account, the form pre-fills automatically. Fill in their name, handicap index, gender, and tee, then tap <strong>Save</strong>.</p>
 </div>
 </div>
 
@@ -58,7 +63,10 @@ cta:
 <div class="tutorial-step__content">
 <h3>Set tees for the group</h3>
 <p>After selecting players via Methods 1 or 2 and tapping <strong>Continue</strong>, Marker shows a tee assignment screen. Choose the default tee for each gender present in your selection — the tee you pick applies to all newly added players of that gender at once.</p>
-<p>Individual tee adjustments can be made at any time from each player's profile in the event.</p>
+<p>Individual tee adjustments can be made at any time by tapping a player's name on the event dashboard.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventAddPlayersTees", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 

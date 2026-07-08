@@ -27,7 +27,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Open the Create Event form</h3>
-<p>From the Marker app, start the event creation flow. The Create Event form guides you through selecting a course, naming the event, and setting a date.</p>
+<p>From the Home screen, tap <strong>Host Event</strong>. This opens your Events list. Tap the <strong>+</strong> button in the top-right corner to open the Create Event form.</p>
 </div>
 </div>
 
@@ -35,8 +35,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Select your course</h3>
-<p>Search for your course by name or browse nearby courses. Marker has a large database of courses with tee and hole data pre-loaded. Select the correct course from the results — this sets the par values and yardages for your scorecards.</p>
-<p>If your course isn't listed, you can add it manually with a custom name and hole-by-hole par configuration.</p>
+<p>Search for your course by name or browse recent courses. Marker has a large database of courses with tee and hole data pre-loaded. Select the correct course from the results — this sets the par values and yardages for your scorecards.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("tutorialCreateEventStep1", screenshots, frame="phone", caption=true) }}
 </div>
@@ -64,7 +63,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">5</div>
 <div class="tutorial-step__content">
 <h3>Set the date</h3>
-<p>Pick the date of the round. It defaults to today but can be adjusted for future or past events.</p>
+<p>Tap the date field to pick the date of the round. The picker opens to today's date by default; adjust it for future or past events.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("tutorialCreateEventStep2", screenshots, frame="phone", caption=true) }}
 </div>
