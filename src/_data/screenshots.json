@@ -133,6 +133,39 @@
     "notes": "Event bulk tee assignment screen. Men's tee: Championship, Green, Blue, White (selected, green highlight), Brown, Gold, Fairway Tees — all with yardage, rating, and slope. Women's tee section visible with Blue and White; selection is below the visible fold. Back and Save buttons at bottom. No personal data; course is fictional demo data. Tees apply only to the current batch of newly added players."
   },
 
+  "eventScorecardsTeeTimes": {
+    "src": "/images/screenshots/web/tutorial-event-scorecards-01-tee-times-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-scorecards-01-tee-times-mobile-demo.png",
+    "alt": "Add Event Scorecard screen with Tee Times selected, showing Start time 08:30 AM, Start hole 1, Number of groups 4, Spacing (minutes) 10, and a Save (4) button",
+    "caption": "For tee-time starts, set the first group's start time, starting hole, number of groups, and spacing — Marker calculates each group's tee time automatically.",
+    "usage": ["tutorials/create-scorecards"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Add Event Scorecard form in Tee Times mode. Section label reads TEE TIME (singular). Start time 08:30 AM, Start hole 1, Number of groups 4 (highlighted), Tee Times toggle selected (green), Spacing (minutes) 10, Save (4) button. Spacing field is visible in Tee Times mode and hidden in Shotgun mode. No preview text in Tee Times mode. No personal data."
+  },
+
+  "eventScorecardsShotgun": {
+    "src": "/images/screenshots/web/tutorial-event-scorecards-02-shotgun-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-scorecards-02-shotgun-mobile-demo.png",
+    "alt": "Add Event Scorecard screen with Shotgun Start selected, Start hole 17, and a preview reading 'This will add groups starting at 8:30 AM on holes: 17, 18, 1, 2'",
+    "caption": "For a shotgun start, Marker previews the exact hole assignments before you save — starting at hole 17 with 4 groups wraps around through holes 18, 1, and 2.",
+    "usage": ["tutorials/create-scorecards"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Add Event Scorecard form in Shotgun Start mode. Start time 08:30 AM, Start hole 17 (highlighted), Number of groups 4, Shotgun Start toggle selected (green). Spacing (minutes) field is not shown in Shotgun mode. Preview text visible: 'This will add groups starting at 8:30 AM on holes: 17, 18, 1, 2' — demonstrates consecutive hole assignment with wraparound from hole 18 back to hole 1. Save (4) button. No personal data."
+  },
+
+  "eventScorecardsPlayerAssignment": {
+    "src": "/images/screenshots/web/tutorial-event-scorecards-03-player-assignment-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-event-scorecards-03-player-assignment-mobile-demo.png",
+    "alt": "Edit Event Scorecard screen showing the Players section with four checked players assigned to this scorecard and five unchecked unassigned event players listed below",
+    "caption": "Check players from the unassigned pool to add them to this scorecard — players already on other scorecards are not shown as candidates.",
+    "usage": ["tutorials/create-scorecards"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Edit Event Scorecard screen. Scorecard tee time 08:50 AM, Start hole 1. PLAYERS section shows 4 checked (Mike Mulligan White Tees C.H. 13, Harry Hazard White Tees C.H. 2, Allan Albatross White Tees C.H. 15, Joe Jar White Tees C.H. 14) and 5 visible unchecked unassigned event players (Debbie Dogleg Red Tees C.H. 5, Dave Divot White Tees C.H. 27, George Green White Tees C.H. 41, Tom Triple White Tees C.H. 10, Kevin Kickin White Tees C.H. 18). List may continue below the fold. Save button visible; Remove Group action is not visible in this frame. All names are fictional golf-themed demo data. No personal data."
+  },
+
   "tutorialAddGamesStep1": {
     "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
     "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",

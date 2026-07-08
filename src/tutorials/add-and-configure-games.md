@@ -62,11 +62,10 @@ cta:
 <div class="tutorial-step__content">
 <h3>Select players</h3>
 <p>The <strong>Players</strong> section lists everyone added to the event. Check each player you want to include in this game.</p>
-<p>Each player row shows their tee selection and three handicap values:</p>
+<p>Each player row shows their tee name and Course Handicap (<strong>C.H.</strong>). Two additional values appear conditionally:</p>
 <ul>
-<li><strong>C.H.</strong> — Course Handicap (full calculated value for their tee)</li>
-<li><strong>P.H.</strong> — Playing Handicap (after any allowance or override you've set)</li>
-<li><strong>S.O.</strong> — Strokes Off (net strokes the player receives in this game)</li>
+<li><strong>P.H.</strong> — Playing Handicap (after any allowance or override) — visible when Net mode is selected</li>
+<li><strong>S.O.</strong> — Strokes Off (net strokes the player receives in this game) — visible when Stroke off the low ball is enabled</li>
 </ul>
 <p>Not all players need to be in every game. Side bets between two specific players — a Nassau between the cart partners, for example — are common and supported.</p>
 </div>
@@ -87,11 +86,11 @@ cta:
 <p><strong>Nassau</strong></p>
 <ul>
 <li>Teams — configure the two sides (MatchSides) for each match</li>
-<li>Match amount — set separate dollar amounts for Front 9 (Match: 1–9), Back 9 (Match: 10–18), and Full 18 (Match: 1–18)</li>
-<li>Press settings — configure automatic or manual press rules per match</li>
+<li>Press settings — configure automatic or manual press rules, set per match (Front 9, Back 9, Full 18)</li>
+<li>Match amount — set the dollar wager for each of the three matches independently</li>
 <li>Ball allocation — how balls are assigned for the match</li>
 </ul>
-<p>Other formats (Stroke Play, Stableford, Match Play, etc.) do not have additional settings beyond Handicap and Players.</p>
+<p>Every format has a settings section below Players. Match Play includes Teams, holes, press settings, and a match wager — similar to a single-match Nassau. Stableford lets you customize point values per score type. Stroke Play and other formats include payout configuration. Wolf has a Wolf order setup and a points/wager amount.</p>
 </div>
 </div>
 
