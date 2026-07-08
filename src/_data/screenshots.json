@@ -494,5 +494,27 @@
     "viewport": "mobile",
     "status": "approved",
     "notes": "Profile Edit screen using fictitious demo data (Bob Smith, (000) 555-0001, bob@testgolfer.org). USGA Handicap ID field is empty — no validated USGA identity shown. Handicap Settings (Male/Female) is visible because no USGA ID is connected. Save button visible at bottom."
+  },
+
+  "handicapsGameSettings": {
+    "src": "/images/screenshots/web/tutorial-handicaps-01-game-settings-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-handicaps-01-game-settings-mobile-demo.png",
+    "alt": "Marker game handicap settings showing Net scoring, stroke off the low ball, handicap allowance, and advanced handicap options",
+    "caption": "Choose Net scoring, then adjust the handicap allowance and advanced stroke settings for the game.",
+    "usage": ["tutorials/handicap-settings"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Game configuration handicap section with Net selected, Stroke off the low ball checkbox, and show advanced expanded to reveal Handicap Allowance, Limit Playing Handicap, Use half strokes, No strokes on par 3's, and Override player handicaps options."
+  },
+
+  "handicapsScorecardIndicators": {
+    "src": "/images/screenshots/web/tutorial-handicaps-02-scorecard-indicators-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/tutorial-handicaps-02-scorecard-indicators-mobile-demo.png",
+    "alt": "Marker scorecard showing handicap stroke indicators in player score cells",
+    "caption": "Dots show strokes received on a hole; a plus sign shows a stroke the player gives back.",
+    "usage": ["tutorials/handicap-settings"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Scorecard mid-round showing dot (•) indicators for strokes received and plus (+) indicators for strokes given back in the top corner of score cells."
   }
 }
