@@ -67,7 +67,8 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 {# ================================================================
    1. OVERVIEW
@@ -179,6 +180,8 @@ Marker's default behavior requires a **natural (gross) birdie**: the player's ra
 All point values (Low Ball, Low Team, Birdie, KP) are configurable in the Marker game settings.
 
 </div>
+
+{{ GameGuideScreenshot("gameScotchActionModal", screenshots) }}
 
 </div>
 </section>
@@ -301,14 +304,6 @@ Normal total: 6 points to Team A.<br>
 
 </div>
 
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Scotch Setup Screen", "Teams · Point values · Blitz · Natural birdie · Amount") }}
-{{ ScreenshotPlaceholder("Hole Scorecard", "Per-component result shown after each hole") }}
-{{ ScreenshotPlaceholder("Match Leaderboard", "Team totals · Point differential · $ result") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Scotch in action.
-</p>
 
 </div>
 </section>
@@ -485,6 +480,8 @@ Each player plays their own ball. Handicap strokes applied by Stroke Index. Net 
 <p><strong>Settlement at $1/point:</strong> After 4 holes, Team A leads 21–4, a differential of +17. At $1 per point: Team A wins $17, Team B pays $17. The Blitz on hole 4 (12 points) accounts for 7 more points than a normal sweep — one hole reshapes the entire match.</p>
 </div>
 
+{{ GameGuideScreenshot("gameScotchScorecard", screenshots) }}
+
 </div>
 </section>
 
@@ -560,8 +557,6 @@ Net Scotch is the standard form: each player's Course Handicap is applied by Str
 - **Birdie (natural birdie mode)**: The birdie check uses the GROSS score regardless of handicap. A net birdie from a handicap stroke does not count. The player must actually shoot below par on that hole in raw strokes.
 - **Birdie (net birdie mode)**: If natural birdie is turned off, the net score is used. A gross bogey on a stroke hole (net par) does not count as a birdie. A gross par on a stroke hole (net birdie) does count.
 - **KP**: Closest to pin in terms of physical proximity to the hole. Handicap does not apply to KP — it's a distance judgment.
-
-**`strokeOffLowBall: true`** — Marker's Scotch defaults to applying handicap strokes relative to the low-ball player within each team. This is the standard USGA team handicap procedure for best-ball formats.
 
 </div>
 

@@ -69,7 +69,8 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 {# ================================================================
    1. OVERVIEW
@@ -217,6 +218,8 @@ Presses extend this further. A side that falls behind on any match can press —
 
 </div>
 
+{{ GameGuideScreenshot("gameNassauScorecard", screenshots) }}
+
 </div>
 </section>
 
@@ -254,8 +257,6 @@ A press is the mechanism that keeps Nassau from going stale when one side goes a
 </div>
 
 </div>
-
-{{ ScreenshotPlaceholder("Press Settings — per match", "Auto press threshold · Manual press toggle") }}
 
 </div>
 </section>
@@ -315,15 +316,6 @@ A press is the mechanism that keeps Nassau from going stale when one side goes a
 ) }}
 
 </div>
-
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Nassau Setup Screen", "Teams · Amounts · Ball allocation") }}
-{{ ScreenshotPlaceholder("Press Settings", "Auto press · Manual press · Per match") }}
-{{ ScreenshotPlaceholder("Live Leaderboard", "Front 9 · Back 9 · Total") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Nassau in action.
-</p>
 
 </div>
 </section>
@@ -396,6 +388,8 @@ Both teams have two players. On each hole, Marker takes the best net score from 
 <div class="gg-callout gg-callout--info" style="margin-top:16px;">
 <p><strong>Leaderboard view:</strong> In Marker, the leaderboard shows Front 9, Back 9, and Total as three separate match sections, each with the current standing and dollar amount. The per-hole scorecard shows the live standing for the two matches covering that hole — Front + Total on holes 1–9, Back + Total on holes 10–18.</p>
 </div>
+
+{{ GameGuideScreenshot("gameNassauLeaderboard", screenshots) }}
 
 </div>
 </section>
@@ -709,7 +703,7 @@ Both teams have two players. On each hole, Marker takes the best net score from 
 <details class="gg-faq-item">
 <summary>Can Nassau be played with more than 4 players?</summary>
 <div class="gg-faq-body">
-<p>Not in Marker's current implementation. Nassau requires equal team sizes and is designed for 2-player or 4-player groups. Larger groups typically use other formats like <a href="{{ '/games/skins/' | url }}">Skins</a> or <a href="{{ '/games/stableford/' | url }}">Stableford</a>, or split into multiple independent Nassau matches.</p>
+<p>Nassau requires equal-sized sides — two players, four players, or any even split — and Marker enforces this at setup. Groups larger than four are less common for Nassau; many prefer formats like <a href="{{ '/games/skins/' | url }}">Skins</a> or <a href="{{ '/games/stableford/' | url }}">Stableford</a> for larger outings, or split into multiple independent Nassau matches.</p>
 </div>
 </details>
 

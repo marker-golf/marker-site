@@ -1000,6 +1000,12 @@ p { color: var(--ink-muted); line-height: 1.75; }
 }
 
 
+/* Game guide screenshot — matches tutorial-step__screenshot sizing and alignment */
+.product-screenshot--game {
+  max-width: 200px;
+  margin-top: 24px;
+}
+
 /* Tutorial step badge */
 .product-screenshot--tutorial {
   position: relative;

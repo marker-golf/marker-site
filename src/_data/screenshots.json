@@ -177,37 +177,59 @@
     "notes": "Shows the Event total section of the leaderboard in Settlement view. Top of frame shows bottom rows of a game standings card: Team 3 (Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan, THRU 18, 91, $0) and Team 4 (Allan Albatross, Edward Eagle, Dave Divot, Paul Press, THRU 18, 91, $0). Event total section: Settlement tab active (dark green), Profit / loss tab inactive. Buy-ins collected checkbox (checked, green) with description 'Settle from the pot for buy-in games, then between players for the rest.' FROM / TO / AMOUNT table: Pot→Bert Bailout $320, Pot→George Green $240, Pot→Kevin Kickin $160, Pot→Ben Birdie $160, Pot→Debbie Dogleg $160, Pot→Harry Hazard $80, Pot→Joe Jar $80, Pot→Tom Triple $80. Share leaderboard button at bottom. All names fictional golf-themed demo data. No personal data."
   },
 
-  "gameWolfSetup": {
-    "src": "/images/screenshots/web/game-wolf-setup-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Wolf game setup screen in Marker showing the lone wolf assignment for a hole",
-    "caption": "The wolf chooses their partner (or goes alone) before anyone else tees off.",
-    "usage": [],
+  "gameNassauScorecard": {
+    "src": "/images/screenshots/web/game-nassau-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-scorecard-mobile-demo.png",
+    "alt": "Marker Nassau scorecard showing Front and Total match status with automatic presses tracked during play",
+    "caption": "Front and Total run simultaneously, while presses create additional matches from the hole where they begin.",
+    "usage": ["games/nassau"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "No game guide page currently renders this key. Placeholder reserved for future Wolf game guide screenshot. Replace after Wolf game screen is stable. Show hole view with wolf selection prompt."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Shinnecock Hills Golf scorecard with Nassau selected as the active game chip (dark green, BS vs AA vs BB/EE). Side A = BS (ch.4) and AA (ch.13); Side B = BB (ch.15) and EE. Holes 1–5 scored, holes 6–8 blank. Nassau column: hole 1 shows 'start' labels for Front and Total; hole 3 shows 'auto' label where 2-down auto press fired; hole 5 shows three standings (-3/-1/+1) as cascading presses accumulate. Press pills visible on unplayed holes. All player abbreviations represent fictional demo players (BS=Bob Smith, AA=Allan Albatross, BB=Bert Bailout, EE=Edward Eagle). No personal data."
   },
 
-  "gameNassauSetup": {
-    "src": "/images/screenshots/web/game-nassau-setup-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Nassau game configuration in Marker showing match amounts for front, back, and full 18",
-    "caption": "Set separate match amounts for front 9, back 9, and the full 18.",
-    "usage": [],
+  "gameNassauLeaderboard": {
+    "src": "/images/screenshots/web/game-nassau-leaderboard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-leaderboard-mobile-demo.png",
+    "alt": "Marker Nassau leaderboard showing separate Front 9, Back 9, and Total matches with automatic presses and accounting",
+    "caption": "Front 9, Back 9, and Total are tracked as separate matches. Each press creates another match with its own status and result.",
+    "usage": ["games/nassau"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "No game guide page currently renders this key. Placeholder reserved for future Nassau game guide screenshot. Replace after Nassau configuration is stable. Show the three-bet setup form."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Leaderboard screen with Nassau card. Front 9 · Holes 1–9 · Auto 2-Down: original match (Side B 3-up, 4 to play), press from hole 3 auto (Side B 1-up), press from hole 5 auto (Side A 1-up); -$10/$10 dollar row. Back 9 · Holes 10–18 · Auto 2-Down: not started, $0/$0. Total · Holes 1–18: Side B 3-up, 13 to play; -$20/$20. Stroke Play card partially visible below. Round mid-progress (5 holes scored). All names fictional demo data: Bob Smith, Allan Albatross, Bert Bailout, Edward Eagle. No personal data."
   },
 
-  "gameSkinsPayout": {
-    "src": "/images/screenshots/web/game-skins-payout-mobile-demo.webp",
-    "fallback": "/images/screenshots/placeholders/placeholder-mobile.svg",
-    "alt": "Skins payout screen in Marker showing hole-by-hole skin winners and carry amounts",
-    "caption": "Skins accumulate when a hole is halved — Marker tracks every carry automatically.",
-    "usage": [],
+  "gameWolfPartnerModal": {
+    "src": "/images/screenshots/web/game-wolf-partner-modal-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-wolf-partner-modal-mobile-demo.png",
+    "alt": "Marker Wolf partner-selection modal on hole 6 showing three partner choices, Lone Wolf selected, and Blind Wolf with the triples-points hint",
+    "caption": "The Wolf can choose any of the other three players as a partner, play Lone Wolf, or declare Blind Wolf for triple points.",
+    "usage": ["games/wolf"],
     "viewport": "mobile",
-    "status": "placeholder",
-    "notes": "No game guide page currently renders this key. Placeholder reserved for future Skins game guide screenshot. Replace after Skins results screen is stable. Show a game with several carries."
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows WolfActionModal bottom sheet on hole 6: header 'Wolf: Hole #6', Wolf player identified. Three non-Wolf players listed as partner options (checkboxes). 'Lone Wolf' row checked (selected). 'Blind Wolf' row unchecked with 'triples points' hint text visible. Mutual exclusion visible — Lone Wolf is selected, no partner checked. All player names are fictional demo data. No personal data."
+  },
+
+  "gameSkinsScorecardCarryover": {
+    "src": "/images/screenshots/web/game-skins-scorecard-carryover-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-skins-scorecard-carryover-mobile-demo.png",
+    "alt": "Marker Skins scorecard showing tied holes accumulating carryovers and a later player winning three skins",
+    "caption": "Tied holes build the carryover from +1 to +2. The next outright winner collects all three skins.",
+    "usage": ["games/skins"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows in-round Skins scorecard with carryover indicators visible in hole cells: hole 2 tied showing +1 carryover, hole 3 tied showing +2 carryover, hole 4 showing three-skin win. All player names fictional demo data. No personal data."
+  },
+
+  "gameSkinsLeaderboard": {
+    "src": "/images/screenshots/web/game-skins-leaderboard-hole-by-hole-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-skins-leaderboard-hole-by-hole-mobile-demo.png",
+    "alt": "Marker Skins leaderboard showing player standings, accounting, tied holes, and a three-skin carryover win",
+    "caption": "The leaderboard shows skins won and accounting, while the expanded hole-by-hole view shows how ties carried forward into a three-skin win.",
+    "usage": ["games/skins"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Skins leaderboard with hole-by-hole section expanded. Main table: player rankings with skins won and dollar amounts. Hole-by-hole: tied holes showing '2 ties' result, hole 4 showing three-skin carryover win. All player names fictional demo data. No personal data."
   },
 
   "commissionersHero": {
@@ -428,5 +450,38 @@
     "viewport": "mobile",
     "status": "approved",
     "notes": "Scorecard mid-round showing dot (•) indicators for strokes received and plus (+) indicators for strokes given back in the top corner of score cells."
+  },
+
+  "gameScotchActionModal": {
+    "src": "/images/screenshots/web/game-scotch-action-modal-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-scotch-action-modal-mobile-demo.png",
+    "alt": "Marker Scotch hole action modal showing Closest to Pin selection, Match Press, and Hole Press controls",
+    "caption": "Use the Scotch hole menu to record the KP winner and add a match press or hole press during play.",
+    "usage": ["games/scotch"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows ScotchActionModal bottom sheet: header 'Scotch: Hole #N' in green. KP section lists all 4 players with checkboxes; one player checked (green highlight). Press options section shows Match Press checkbox with multiplier hint and Hole Press stepper with +/- buttons. All player names are fictional demo data. No personal data."
+  },
+
+  "gameScotchScorecard": {
+    "src": "/images/screenshots/web/game-scotch-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-scotch-scorecard-mobile-demo.png",
+    "alt": "Marker Scotch scorecard showing running point differential, KP results, presses, and increasing point multipliers during live play",
+    "caption": "The Scotch column tracks the running point differential, presses, multipliers, and KP results as the match unfolds.",
+    "usage": ["games/scotch"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Scotch scorecard mid-round: hole cells display running cumulative point differential in center, per-hole team points in top corners, 2x/4x multiplier labels for Blitz and pressed holes, 'kp' label when KP is designated. KP badge visible on winning player's row. All player names are fictional demo data. No personal data."
+  },
+
+  "gameMatchPlayScorecard": {
+    "src": "/images/screenshots/web/game-matchplay-scorecard-mobile-demo.webp",
+    "fallback": "/images/screenshots/source/game-matchplay-scorecard-mobile-demo.png",
+    "alt": "Marker Match Play scorecard showing an original team match and multiple concurrent press standings during live play",
+    "caption": "The original match and each press run independently. Automatic presses begin new matches when a side falls two down, while manual presses remain available during play.",
+    "usage": ["games/match-play"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Match Play scorecard mid-round with original match and at least one automatic press both active. Hole cells display concurrent standings separated by /. Auto press label visible. Manual press pill visible on future holes. All player names are fictional demo data. No personal data."
   }
 }

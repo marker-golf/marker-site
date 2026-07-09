@@ -7,7 +7,7 @@ category: featured
 order: 4
 players: "4+"
 format: "Team Stroke Play"
-cardDescription: "Each team collects every player's score on every hole, then selects exactly X of them to count. Choose which scores to include, discard the rest. Lowest net total wins. Works for any team size."
+cardDescription: "Each team evaluates its player's scores on every hole, then selects exactly X of them to count toward the team score. Choose which scores to include, discard the rest. Lowest net total wins. Works for any team size."
 game:
   name: TeamCountX
   difficulty: intermediate

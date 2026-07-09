@@ -98,7 +98,8 @@ sections:
     - Leaderboard: Rank · Player · Holes · Gross pts · Net pts · $ amount
 #}
 
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 {# ================================================================
    2. OVERVIEW
@@ -256,6 +257,8 @@ Experienced Wolf players think through a few factors before each shot:
 - **Your own game.** If you're playing well today, going Lone Wolf is more tempting. If you're struggling, a reliable partner is priceless.
 
 </div>
+
+{{ GameGuideScreenshot("gameWolfPartnerModal", screenshots) }}
 
 </div>
 </section>
@@ -469,12 +472,6 @@ After all four players complete the hole, each side contributes their **best ind
       <p><strong>Recommended first-time settings:</strong> Net scoring at 100% handicap, auto-seeded rotation order, $1–2 per point. Keep it simple until everyone understands the Lone Wolf and Blind Wolf mechanics.</p>
 </div>
 
-<h3 style="font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:20px; margin-top:40px;">App Screens</h3>
-<div class="gg-screenshot-row">
-      {{ ScreenshotPlaceholder("Wolf Setup Screen", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Partner Selection Modal", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Live Leaderboard", "iOS · Android") }}
-</div>
 
 </div>
 </section>

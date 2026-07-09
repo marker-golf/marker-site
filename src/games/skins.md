@@ -67,7 +67,8 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 {# ================================================================
    1. OVERVIEW
@@ -242,7 +243,7 @@ Hole 3: Player A wins outright → Player A collects all 3 skins at once</p>
 </table>
 </div>
 
-{{ ScreenshotPlaceholder("Skins Scorecard — Carryover Display", "Carryover count shown in lower right of hole cell") }}
+{{ GameGuideScreenshot("gameSkinsScorecardCarryover", screenshots) }}
 
 </div>
 </section>
@@ -311,14 +312,6 @@ Hole 3: Player A wins outright → Player A collects all 3 skins at once</p>
 
 </div>
 
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Skins Setup Screen", "Carryovers · Holes · Buy-in mode") }}
-{{ ScreenshotPlaceholder("Live Leaderboard", "Skin counts · Running totals") }}
-{{ ScreenshotPlaceholder("Hole-by-Hole Detail", "Low score · Ties · Winner") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Skins in action.
-</p>
 
 </div>
 </section>
@@ -494,6 +487,8 @@ $20 total pot (4 × $5). Five skins distributed. Winners divide the pot by skin 
 <div class="gg-callout gg-callout--info" style="margin-top:16px;">
 <p><strong>Per-skin mode (same $5 amount, different accounting):</strong> Each skin won earns the winner $5 from each other player. B wins 2 skins: B collects $5 × 3 × 2 = +$30, each of the other 3 pays $10 to B. A also wins 2 skins, same math. The total swings are larger — per-skin mode rewards prolific skin winners much more heavily than pool mode. Marker supports both; choose at setup.</p>
 </div>
+
+{{ GameGuideScreenshot("gameSkinsLeaderboard", screenshots) }}
 
 </div>
 </section>
@@ -715,7 +710,7 @@ $20 total pot (4 × $5). Five skins distributed. Winners divide the pot by skin 
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
 </div>
 <h4>Live Skin Totals</h4>
-<p>The leaderboard shows each player's running skin count throughout the round. The header summary shows "N skins · M tied" so everyone knows the round state at a glance. No scorecard math mid-round.</p>
+<p>The leaderboard keeps each player's running skin count and accounting together throughout the round. Expand the hole-by-hole view to see wins, ties, and carryover results at any point — no scorecard math required.</p>
 </div>
 
 <div class="gg-benefit">

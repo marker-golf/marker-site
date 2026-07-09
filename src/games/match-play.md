@@ -67,7 +67,8 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 {# ================================================================
    1. OVERVIEW
@@ -87,7 +88,7 @@ This structure fundamentally changes how golf feels. A triple bogey on hole 3 is
 **The language of match play.** Match status is expressed as holes, not strokes:
 
 - **All Square** — tied; each side has won the same number of holes
-- **1 Up, 2 Up** — ahead by 1 or 2 holes; displayed as "1 UP" in Marker
+- **1 Up, 2 Up** — ahead by 1 or 2 holes; shown as "1-up" in Marker
 - **1 Down, 2 Down** — behind by 1 or 2 holes
 - **Dormie** — ahead by exactly as many holes as remain to play; the trailing side can only tie, not win
 - **3 & 2** — won 3 Up with 2 holes remaining; the match was closed on hole 16. The first number is the lead, the second is how many holes were left when the match ended.
@@ -240,7 +241,7 @@ The scorecard shows all concurrent match and press standings stacked in the hole
 
 </div>
 
-{{ ScreenshotPlaceholder("Match Play — Presses", "Auto press toggle · Manual press pill · Concurrent standings") }}
+{{ GameGuideScreenshot("gameMatchPlayScorecard", screenshots) }}
 
 </div>
 </section>
@@ -310,14 +311,6 @@ The scorecard shows all concurrent match and press standings stacked in the hole
 
 </div>
 
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Match Play Setup", "Teams · Hole range · Wager") }}
-{{ ScreenshotPlaceholder("Handicap Settings", "Net scoring · Percentage") }}
-{{ ScreenshotPlaceholder("Live Scorecard", "Standing · Dormie · Press") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Match Play in action.
-</p>
 
 </div>
 </section>
