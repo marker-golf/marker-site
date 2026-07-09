@@ -39,8 +39,8 @@ game:
       text: Start Your Skins Game
       href: "https://app.marker.golf"
     secondary:
-      text: Read the Setup Guide
-      href: "/tutorials/getting-started/"
+      text: Get Started with Marker
+      href: "/tutorials/welcome-to-marker/"
 sections:
   - id: overview
     label: Overview

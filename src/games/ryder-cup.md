@@ -12,6 +12,7 @@ game:
   name: Ryder Cup
   difficulty: advanced
   difficultyLabel: Advanced
+  premium: true
   subtitle: "Three session types, two teams, one trophy. The most storied team format in golf — coming to Marker."
   heroSubtitleWidth: "540px"
   heroStats:

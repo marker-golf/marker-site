@@ -2429,3 +2429,70 @@ details.gg-faq-item[open] summary {
 @media (max-width: 480px) {
   .gg-related-grid { grid-template-columns: 1fr; }
 }
+
+/* ---- 30. Path router (homepage: New Game vs. Event) ---- */
+.path-router__question {
+  text-align: center;
+  max-width: 540px;
+  margin-inline: auto;
+  margin-bottom: 48px;
+  color: var(--ink);
+}
+.path-router__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 760px;
+  margin-inline: auto;
+}
+.path-router__path {
+  padding-left: clamp(24px, 4vw, 48px);
+  padding-right: clamp(24px, 4vw, 48px);
+}
+.path-router__path:first-child {
+  border-right: 1px solid var(--border);
+  padding-left: 0;
+}
+.path-router__path:last-child {
+  padding-right: 0;
+}
+.path-router__eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.path-router__name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.05;
+  margin-bottom: 4px;
+}
+.path-router__audience {
+  font-size: 0.875rem;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.path-router__body {
+  margin-bottom: 24px;
+}
+@media (max-width: 640px) {
+  .path-router__grid { grid-template-columns: 1fr; }
+  .path-router__path:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 32px;
+  }
+  .path-router__path:last-child {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 32px;
+  }
+}

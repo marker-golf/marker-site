@@ -12,6 +12,7 @@ game:
   name: TeamCountX
   difficulty: intermediate
   difficultyLabel: Intermediate
+  premium: true
   subtitle: "Each team collects all of its players' scores on every hole — then selects exactly X of them to count toward the team total. Choose wisely. Discard the rest. Lowest total wins."
   heroSubtitleWidth: "560px"
   heroStats:

@@ -128,7 +128,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>Keep playing</h3>
 <p>Return to the scorecard to continue entering scores. Switch between game tabs, open the Leaderboard to check standings, and share the link as often as you like — all while the round is in progress.</p>
-<p>When the last hole is scored and your group is ready to finalize results, the next step is ending the round. See <a href="/tutorials/end-the-round/">End the Round</a> to lock the scorecard and run final settlement.</p>
+<p>When the last hole is scored and your group is ready to finalize results, the next step is ending the round. See <a href="/tutorials/review-results-and-settle-up/">Review Results &amp; Settle Up</a> to lock the scorecard and run final settlement.</p>
 </div>
 </div>
 

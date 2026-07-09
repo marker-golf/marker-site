@@ -37,7 +37,7 @@ game:
     heading: Ready to Play High-Low?
     body: "..."
     primary: {text: "Start Your First Event", href: "https://app.marker.golf"}
-    secondary: {text: "Read the Setup Guide", href: "/tutorials/getting-started/"}
+    secondary: {text: "Get Started with Marker", href: "/tutorials/welcome-to-marker/"}
 sections:                  # in-page navigation links
   - {id: overview, label: Overview}
   - {id: how-it-works, label: "How It Works"}

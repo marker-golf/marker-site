@@ -1,14 +1,14 @@
 ---
 layout: layouts/tutorial-guide.njk
-title: Create a Custom Game with AI
-description: "Use Marker's AI game generation to create a custom scoring format from a plain-English description — then review and run it with your group."
-subtitle: "Describe your format in plain English. Marker generates the scoring rules — you review, adjust if needed, and run it with your group."
+title: Configure Games with AI
+description: "Describe how you want to play and Marker configures the right game and settings. Review before activating — then run it with your group."
+subtitle: "Describe how you want to play. Marker selects and configures the game — you review, adjust if needed, and run it with your group."
 category: Running Events
 order: 4
 tutorialPath: reference
 tutorialOrder: 4
 estimatedTime: "4 min read"
-cardDescription: "Describe a custom game in plain English and let Marker generate the scoring rules — then review and run it with your group."
+cardDescription: "Describe how you want to play and Marker configures the game and settings — then review and run it with your group."
 iconSvg: '<path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/>'
 relatedTutorials:
   - title: "Side Games →"
@@ -16,7 +16,7 @@ relatedTutorials:
 nextLabel: "See also"
 cta:
   heading: "Ready to try it?"
-  body: "Open Marker as commissioner and try AI game generation on your next round."
+  body: "Open Marker as commissioner and try AI game configuration on your next round."
 ---
 
 <div class="tutorial-steps">
@@ -24,31 +24,31 @@ cta:
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
-<h3>What AI game generation does</h3>
-<p>AI game generation lets you describe a custom scoring format in plain English and receive back a configured game. Marker interprets your description and generates the scoring logic, hole-by-hole rules, and settlement calculation. You review the result before the game is activated.</p>
-<p>This is useful when no built-in format fits your group's game exactly, or when you want to create something specific for a one-off event. It works best for formats that are clearly defined — the more precisely you describe the rules, the closer the result will be to what you have in mind.</p>
+<h3>What Configure Games with AI does</h3>
+<p>Configure Games with AI lets you describe how you want to play in plain English and receive back a ready-to-use game configuration. Marker interprets your description, selects the appropriate game format, and pre-fills the settings — stakes, handicap mode, team structure, and format-specific options. You review the result before the game is activated.</p>
+<p>This is useful when you know the outcome you want but don't want to manually work through every setting, or when you want to quickly set up a specific variant of a familiar format. The more clearly you describe how you want to play, the closer the configuration will be to what you have in mind.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
-<h3>When to use it (and when to use built-in games)</h3>
-<p>AI game generation is the right choice when your format doesn't match any of Marker's built-in games. Good candidates:</p>
+<h3>When to use it (and when to configure directly)</h3>
+<p>Configure Games with AI works best when you want to set up a game quickly by describing your intent, rather than navigating the full configuration form yourself. Good candidates:</p>
 <ul>
-<li>A house format your group has played for years that doesn't map to any built-in game</li>
-<li>A hybrid format combining elements of two games in an unusual way</li>
-<li>A one-off format invented for a specific event or outing</li>
+<li>A specific variant of a familiar format — for example, a Nassau with automatic 2-down presses and a particular dollar amount</li>
+<li>A team format with a specific handicap allowance or count target you want pre-filled</li>
+<li>Any supported format where describing the setup is faster than filling out each setting individually</li>
 </ul>
-<p>If your format is close to a built-in game — Wolf, Skins, Nassau, Match Play, Stableford, and the others — configure that instead. Built-in games are fully tested and handle edge cases reliably. Use AI generation for the gaps, not as a substitute for formats that already exist.</p>
+<p>If you know exactly which format you want and prefer to set options manually, tap the format name directly from the game picker — the standard configuration form gives you full control over every setting. Use AI configuration when describing your intent is faster than manual setup.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
-<h3>Access AI game generation (commissioner only)</h3>
-<p>Only the event commissioner can create games. From your event, go to <strong>Games → Add Game → Describe a Format</strong>. This opens the AI prompt interface.</p>
+<h3>Access Configure Games with AI (commissioner only)</h3>
+<p>Only the event commissioner can create games. From your event, go to <strong>Games → Add Game → Describe a Format</strong>. This opens the AI configuration interface.</p>
 <p>Players cannot create or modify games — only the commissioner can. If you're not seeing this option, confirm you're signed in as the commissioner for the event.</p>
 </div>
 </div>

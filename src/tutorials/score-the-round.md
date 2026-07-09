@@ -85,7 +85,7 @@ cta:
 <p>Tap the <strong>trophy icon</strong> in the game bar to open the Leaderboard screen. The trophy appears when at least one game on the scorecard has standings to show.</p>
 <p>The Leaderboard shows a results card for each game, with current standings, hole-by-hole results, and accounting totals if you set a wager. An <strong>In Progress</strong> badge appears at the top while the round is active — results are live and subject to change until the round is ended.</p>
 <p>A <strong>Share</strong> button at the bottom lets you send the leaderboard link to players who aren't on the scorecard.</p>
-<p>When you're done with the round, see <a href="/tutorials/end-the-round/">End the Round</a> to lock the scorecard and finalize settlement.</p>
+<p>When you're done with the round, see <a href="/tutorials/review-results-and-settle-up/">Review Results &amp; Settle Up</a> to lock the scorecard and finalize settlement.</p>
 </div>
 </div>
 

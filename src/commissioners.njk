@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Marker for Commissioners — Run Any Golf Event Without the Spreadsheet
-description: Marker gives golf commissioners everything to run the game — create events, invite players, build groups, add games, track live scores, and settle results automatically. First 3 events free.
+description: Marker gives golf commissioners everything to run the game — create events, invite players, build groups, add games, track live scores, and settle results automatically. Create up to 3 Events free.
 ---
 
 {% from "components/trust-stats.njk" import TrustStats %}
@@ -16,7 +16,7 @@ description: Marker gives golf commissioners everything to run the game — crea
         <h1>Run the whole golf game<br>without the spreadsheet.</h1>
         <p>Create the event, invite your group, build groups, add games, and settle results — Marker handles the administration so you can focus on the game.</p>
         <a href="https://app.marker.golf" class="btn btn-primary">Start Your First Event</a>
-        <p class="comm-hero__note">Your first 3 events are free. No credit card required.</p>
+        <p class="comm-hero__note">Create up to 3 Events free. No credit card required.</p>
       </div>
       <div class="comm-hero__media">
         {{ ProductScreenshot("commissionersHero", screenshots, frame="phone", caption=false) }}
@@ -117,7 +117,7 @@ description: Marker gives golf commissioners everything to run the game — crea
         <div class="comm-step__num" aria-hidden="true">4</div>
         <div class="comm-step__content">
           <h3>Add games</h3>
-          <p>Choose from 11 built-in formats — Skins, Nassau, Wolf, Stableford, and more. Configure handicap, select which players are in, and set stakes. Marker handles all the math from there.</p>
+          <p>Choose from built-in game formats — Skins, Nassau, Wolf, Stableford, and more. Configure handicap, select which players are in, and set stakes. Marker handles all the math from there.</p>
         </div>
       </div>
 
@@ -195,11 +195,11 @@ description: Marker gives golf commissioners everything to run the game — crea
       <div class="comm-feature-card">
         <div class="comm-feature-card__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72z"/><path d="m14 7 3 3"/>
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
         </div>
-        <h3>AI Game Generation</h3>
-        <p>Describe a custom format in plain English and Marker generates the scoring rules. Review before activating. Useful for group-specific house formats that don't fit a standard built-in game.</p>
+        <h3>Tee Times &amp; Shotgun Starts</h3>
+        <p>Set individual tee times or configure a shotgun start. Set the first group's time and spacing and Marker assigns each group's tee time — or choose shotgun and assign each group's starting hole.</p>
       </div>
 
     </div>
@@ -275,7 +275,7 @@ description: Marker gives golf commissioners everything to run the game — crea
       </a>
 
     </div>
-    <p class="comm-games__all"><a href="{{ '/games/' | url }}">Browse all 11 game formats →</a></p>
+    <p class="comm-games__all"><a href="{{ '/games/' | url }}">Browse all game formats →</a></p>
   </div>
 </section>
 
@@ -291,7 +291,7 @@ description: Marker gives golf commissioners everything to run the game — crea
   <div class="container">
     <div class="pricing__header">
       <h2>Start free. Upgrade when you need more.</h2>
-      <p>Your first 3 events are included — no credit card, no time limit. Premium unlocks Wolf, TeamCountX, and season series.</p>
+      <p>Create up to 3 Events free. Upgrade to Premium for unlimited Events, Wolf, Hammer, Ryder Cup, and TeamCountX.</p>
     </div>
     <div class="pricing__grid">
       {% for plan in pricing.plans %}

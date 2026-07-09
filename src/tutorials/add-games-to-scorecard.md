@@ -119,5 +119,5 @@ cta:
 </div>
 
 <div class="tutorial-note">
-<p><strong>Need a custom format?</strong> If none of the standard formats match how your group plays, Marker's AI game generation can help you build a custom game. See <a href="/tutorials/ai-game-generation/">Create a Custom Game with AI</a>.</p>
+<p><strong>Want help configuring a game?</strong> Describe how you want to play and Marker will select and configure the right format. See <a href="/tutorials/ai-game-generation/">Configure Games with AI</a>.</p>
 </div>

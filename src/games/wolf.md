@@ -12,6 +12,7 @@ game:
   name: Wolf
   difficulty: advanced
   difficultyLabel: Advanced
+  premium: true
   subtitle: "One player per hole is the Wolf — pick a partner after each tee shot, or back yourself alone against all three opponents. Every hole is a new decision."
   heroSubtitleWidth: "540px"
   heroStats:
