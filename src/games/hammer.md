@@ -64,7 +64,7 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    OVERVIEW

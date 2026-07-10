@@ -67,7 +67,7 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    1. OVERVIEW
@@ -301,7 +301,6 @@ Three players — Player A (scratch, 0 handicap), Player B (10 handicap), Player
 
 </div>
 
-{{ ScreenshotPlaceholder("Stableford Leaderboard — Quota Mode", "Player quota shown under name · +/− column · running resolved score") }}
 
 </div>
 </section>
@@ -369,14 +368,6 @@ Three players — Player A (scratch, 0 handicap), Player B (10 handicap), Player
 
 </div>
 
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Stableford Settings", "Points · Quota · Handicap · Buy-in") }}
-{{ ScreenshotPlaceholder("Live Scorecard", "Per-hole points with running total") }}
-{{ ScreenshotPlaceholder("Leaderboard", "Rankings · Quota shown under name · $ if configured") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Stableford in action.
-</p>
 
 </div>
 </section>

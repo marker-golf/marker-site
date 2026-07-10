@@ -71,6 +71,7 @@ sections:
 ---
 
 {% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/product-screenshot.njk" import GameGuideScreenshot %}
 
 <section class="section section--white" id="overview">
 <div class="container">
@@ -203,9 +204,9 @@ You can configure any combination of net and gross balls, up to the size of the 
 
 **Mixed net and gross.** You can configure both net and gross balls at the same time — for example, 1 net ball and 1 gross ball from a team of 3. When mixing net and gross, Marker uses the **lowest total** selection by default: it finds the combination of players (one contributing their net score, one contributing their gross score) that produces the lowest combined total. An alternate "gross first" mode picks the lowest gross score first, then picks the lowest net score from the remaining players.
 
-**Per-hole-range overrides.** Marker supports multiple ball allocation rules applied to different hole ranges. A commissioner could configure 2 balls on holes 1–9 and 1 ball on holes 10–18. Each range has its own net/gross settings.
+**Per-hole-range overrides.** The scoring engine supports multiple ball allocation rules applied to different hole ranges, each with its own net/gross settings. Per-range configuration is not yet available in the Expo settings form; the configured ball count applies to all 18 holes.
 
-**Incomplete holes.** If a team does not have enough scores entered for a hole to satisfy the ball allocation — for example, 1 of 2 players hasn't scored yet — Marker does not count that hole until all required scores are available.
+**Incomplete holes.** Marker counts a hole once enough player scores exist to satisfy the configured ball count. In 1-ball play — the most common setup — the team result appears as soon as any one team member posts a score for that hole. If more balls are configured, Marker waits until enough players have scored to fill the required count before showing a team result.
 
 </div>
 
@@ -229,8 +230,8 @@ You can configure any combination of net and gross balls, up to the size of the 
 {{ ConfigCard(
   "Ball Allocation",
   "Counting Balls Per Hole",
-  "Set how many net and/or gross balls count per hole. The default is 1 net ball. The maximum is the size of the smallest team. Multiple allocation ranges can be added for different hole groups.",
-  ["Net balls: 0 to team size", "Gross balls: 0 to team size", "Total balls ≤ team size", "Per-hole-range overrides available"]
+  "Set how many net and/or gross balls count per hole. The default is 1 net ball. The maximum is the size of the smallest team.",
+  ["Net balls: 0 to team size", "Gross balls: 0 to team size", "Total balls ≤ team size", "Applies to all 18 holes"]
 ) }}
 
 {{ ConfigCard(
@@ -485,6 +486,8 @@ Each hole, Marker selects the player with the lowest net score from each team. T
 - On Hole 4, Blake's stroke turns a gross 5 into a net 4, giving Team A a significant edge over Team B.
 
 </div>
+
+{{ GameGuideScreenshot("eventScoringLiveLeaderboard", screenshots) }}
 
 </div>
 </section>

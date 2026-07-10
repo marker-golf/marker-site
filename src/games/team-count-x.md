@@ -105,7 +105,7 @@ sections:
     - premium: true
 #}
 
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    2. OVERVIEW
@@ -321,12 +321,6 @@ Checking a player's name adds their score to the team's running total. Uncheckin
 
 </div>
 
-<h3 style="font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:20px; margin-top:36px;">App Screens</h3>
-<div class="gg-screenshot-row">
-      {{ ScreenshotPlaceholder("Score Selection Modal", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Team Scorecard View", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Live Leaderboard", "iOS · Android") }}
-</div>
 
 </div>
 </section>

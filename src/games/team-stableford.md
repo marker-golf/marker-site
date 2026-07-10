@@ -67,7 +67,7 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    1. OVERVIEW
@@ -218,7 +218,6 @@ The ball allocation setting is flexible. You can configure it to count more scor
 
 </div>
 
-{{ ScreenshotPlaceholder("Ball Allocation Settings", "Net balls · Gross balls · Configure per hole range") }}
 
 </div>
 </section>
@@ -298,14 +297,6 @@ The ball allocation setting is flexible. You can configure it to count more scor
 
 </div>
 
-<div class="gg-screenshot-row">
-{{ ScreenshotPlaceholder("Team Setup Screen", "Team roster · Ball allocation · Points · Quota") }}
-{{ ScreenshotPlaceholder("Team Scorecard", "Per-hole team points with running total") }}
-{{ ScreenshotPlaceholder("Team Leaderboard", "Team rankings · Pts or +/- quota") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see Team Stableford in action.
-</p>
 
 </div>
 </section>

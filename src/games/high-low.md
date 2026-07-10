@@ -67,7 +67,7 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    2. WHAT IS HIGH-LOW?
@@ -338,16 +338,6 @@ Marker maintains standings for all three matches simultaneously as scores are en
       <p><strong>Recommended first-time settings:</strong> Net scoring at 100% handicap, 1 point per ball, $5 per point, no presses. This gives every player a fair shot and keeps the math simple on the first round.</p>
 </div>
 
-    {# Expo screenshot placeholders #}
-<h3 style="font-size:1rem; font-weight:600; color:var(--ink); margin-bottom:20px; margin-top:40px;">App Screens</h3>
-<div class="gg-screenshot-row">
-      {{ ScreenshotPlaceholder("Game Setup Screen", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Live Scorecard", "iOS · Android") }}
-      {{ ScreenshotPlaceholder("Hole-by-Hole Results", "iOS · Android") }}
-</div>
-<p style="font-size:0.78rem; color:var(--ink-light); margin-top:12px; max-width:420px;">
-      Screenshots from the Marker app will appear here. <a href="https://app.marker.golf" style="color:var(--green-600);">Open Marker</a> to see High-Low in action.
-</p>
 
 </div>
 </section>

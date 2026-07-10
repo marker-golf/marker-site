@@ -149,7 +149,7 @@
     "fallback": "/images/screenshots/source/tutorial-event-scoring-01-live-leaderboard-mobile-demo.png",
     "alt": "Event leaderboard for PebblePayday showing Team Stroke Play standings for four teams with an Event in progress badge",
     "caption": "Follow Event standings while groups are still playing — the Event leaderboard shows results across all teams.",
-    "usage": ["tutorials/event-scoring"],
+    "usage": ["tutorials/event-scoring", "games/team-stroke-play"],
     "viewport": "mobile",
     "status": "approved",
     "notes": "Recaptured Jul 2026 to show the Event-level leaderboard (trophy icon from event dashboard). Title 'Leaderboard', event header PebblePayday Jul 10 2026 Pebble Beach GL, 'Event in progress' badge (yellow pill). Team Stroke Play card: Kevin Kickin/Bert Bailout/Ben Birdie/Debbie Dogleg (#1, ✓18, -5, -4, -9, $640); Harry Hazard/Joe Jar/George Green/Tom Triple (#2, ✓18, -4, -3, -7, $0); Mike Mulligan/Larry Lateral/Greg Gimme/Bob Smith (#3, 18, -2, +3, +1, $0); Paul Press/Dave Divot/Edward Eagle/Allan Albatross (#4, 18, -1, +4, +3, $0). All names fictional demo data. No personal data."

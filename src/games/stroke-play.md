@@ -67,7 +67,7 @@ sections:
 ---
 
 {# ── Import game-guide macros ──────────────────────────────────────────── #}
-{% from "components/game-guide.njk" import SectionHeader, ConfigCard, ScreenshotPlaceholder, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
+{% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, FaqItem, RelatedCard, MarkerImplNote %}
 
 {# ================================================================
    OVERVIEW
@@ -233,29 +233,29 @@ When you create a Stroke Play game in Marker, the settings form has three sectio
 {{ ConfigCard(
   "Gross / Net",
   "useHandicap",
-  "Off by default",
-  "Toggle on for net play. Marker will allocate handicap strokes per hole based on each player's course handicap and the hole's Stroke Index."
+  "Off by default. Toggle on for net play. Marker will allocate handicap strokes per hole based on each player's course handicap and the hole's Stroke Index.",
+  []
 ) }}
 
 {{ ConfigCard(
   "Percent of Handicap",
   "percentOfHandicap",
-  "100%",
-  "Play at a fraction of full handicap for competitive events. 75% is common for club championships. 100% is standard for recreational rounds."
+  "100% by default. Play at a fraction of full handicap for competitive events. 75% is common for club championships. 100% is standard for recreational rounds.",
+  []
 ) }}
 
 {{ ConfigCard(
   "Entry Amount",
   "accounting.amount",
-  "None",
-  "Set a dollar amount per player to create a prize pool. Total pot = amount × number of players. Leave blank to track scores without a wager."
+  "None by default. Set a dollar amount per player to create a prize pool. Total pot = amount × number of players. Leave blank to track scores without a wager.",
+  []
 ) }}
 
 {{ ConfigCard(
   "Payout Positions",
   "accounting.payouts",
-  "Winner takes all",
-  "Configure how the pot is split. Add dollar amounts for 1st, 2nd, 3rd, etc. Tied players at a paid position split the combined payout. Unused pot goes to the winner if no split is configured."
+  "Winner takes all by default. Configure how the pot is split. Add dollar amounts for 1st, 2nd, 3rd, etc. Tied players at a paid position split the combined payout. Unused pot goes to the winner if no split is configured.",
+  []
 ) }}
 
 </div>
