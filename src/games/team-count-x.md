@@ -7,13 +7,13 @@ category: featured
 order: 4
 players: "4+"
 format: "Team Stroke Play"
-cardDescription: "Each team evaluates its player's scores on every hole, then selects exactly X of them to count toward the team score. Choose which scores to include, discard the rest. Lowest net total wins. Works for any team size."
+cardDescription: "Each team evaluates its players' scores on every hole, then selects which scores will count toward the team total. Choose which scores to include and discard the rest. Lowest net total wins. Works for any team size."
 game:
   name: TeamCountX
   difficulty: intermediate
   difficultyLabel: Intermediate
   premium: true
-  subtitle: "Each team collects all of its players' scores on every hole — then selects exactly X of them to count toward the team total. Choose wisely. Discard the rest. Lowest total wins."
+  subtitle: "Each team collects all of its players' scores on every hole — then selects which scores will count toward the team total. Choose wisely. Discard the rest. Lowest net total wins."
   heroSubtitleWidth: "560px"
   heroStats:
     - label: Players
@@ -118,14 +118,14 @@ sections:
 
 <div class="gg-prose">
 
-TeamCountX is strategic team stroke play built around a single constraint: each team must choose exactly X scores from Y total possible to form its final team total. Every player scores every hole individually, generating one score per player per hole — a 2-player team accumulates 36 scores over 18 holes; a 3-player team accumulates 54. The commissioner sets X before the round begins. Each team selects exactly X of their scores to count toward their total. The rest are discarded.
+TeamCountX is strategic team stroke play built around a single constraint: each team must choose exactly X scores from Y total possible to form its final team total. Every player scores every hole individually, generating one score per player per hole — a 2-player team accumulates 36 scores over 18 holes; a 3-player team accumulates 54. The commissioner sets X before the round begins. Each team selects exactly X of its scores to count toward its total. The rest are discarded.
 
-The critical rule is _when_ those decisions happen. Teams choose hole by hole, right after scores are entered — not at the end of the round. Once a hole is saved in Marker, that hole's selections are locked. There is no going back to change an earlier hole after seeing what happens on a later one.
+The critical rule is _when_ those decisions happen. Teams choose hole by hole, right after scores are entered — not at the end of the round. Once a score is counted, the selection should be considered final. An earlier selection may be corrected if an honest mistake was made, but it should not be changed based on what happens later in the round.
 
 This creates a sustained strategic tension across all 18 holes. Count too many scores early and you may be forced to include poor scores later when Forced Count kicks in. Save too many selections and you leave good scores behind as the round ends. Every hole is a live decision: count this score now, or preserve the remaining quota for a better score later.
 
 <div class="gg-callout">
-<p><strong>Marker handles the math:</strong> Marker tracks each team's remaining selections throughout the round, displays the live Selected&thinsp;/&thinsp;X count on the leaderboard, and automatically enforces Forced Count when a team no longer has enough remaining opportunities to discard.</p>
+<p><strong>Marker handles the math:</strong> Marker tracks each team's remaining selections throughout the round, displays the live Selected&thinsp;/&thinsp;X count on the leaderboard, and automatically announces Forced Count when a team no longer has enough remaining opportunities to discard.</p>
 </div>
 
 </div>
@@ -145,7 +145,7 @@ This creates a sustained strategic tension across all 18 holes. Count too many s
 </div>
 </div>
 
-    {{ MarkerImplNote("TeamCountX is fully supported in Marker. The commissioner sets the count target and teams before the round. During play, each team uses the in-app selection modal to choose which scores to count. Marker tracks the running total, enforces the quota, and updates the leaderboard automatically.") }}
+    {{ MarkerImplNote("TeamCountX is fully supported in Marker. The commissioner sets the count target and teams before the round. During play, each team uses the in-app selection modal to choose which scores to count. Marker tracks the running total and remaining quota and updates the leaderboard automatically.") }}
 
 <div class="gg-quick-rules">
       <div class="gg-quick-rules__title">Quick Rules</div>
@@ -206,7 +206,7 @@ This creates a sustained strategic tension across all 18 holes. Count too many s
 <h3>Teams select which scores to count, hole by hole</h3>
           <p>After scores are posted for a hole, each team taps their hole cell in Marker to open the <strong>selection modal</strong>. They see all their players' scores for that hole and choose which ones to include in their running total. Any combination is valid — count both, count one, count neither — as long as the team stays within their overall quota.</p>
 <div class="gg-callout gg-callout--info">
-            <p><strong>Selections lock when a hole is saved.</strong> Teams can adjust checkboxes freely before tapping Save — but once the hole is saved, those choices are permanent. There is no rule about how many scores to count on any given hole, but the decision for each hole must be made before moving on. The strategic question is always present-tense: count this score now, or skip it and preserve quota for a better score on a future hole?</p>
+            <p><strong>Selections are final when a hole is saved.</strong> Teams can adjust checkboxes freely before tapping Save — but once the hole is completed and scores selected, they should be considered permanent. There is no rule about how many scores to count on any given hole, but the decision for each hole must be made before moving on. The strategic question is always present-tense: count this score now, or skip it and preserve quota for a better score on a future hole?</p>
 </div>
 </div>
 </div>
@@ -215,7 +215,7 @@ This creates a sustained strategic tension across all 18 holes. Count too many s
         <div class="gg-step__num">4</div>
 <div class="gg-step__body">
 <h3>Quota fills toward X as the round progresses</h3>
-          <p>Marker tracks each team's running count on the leaderboard, displayed as <strong>Selected / X</strong> (e.g., "14 / 24"). Teams can always see how many selections they've used and how many remain. As the quota nears, teams enter <strong>Forced Count</strong> — a state where every remaining unselected score must be counted to reach X.</p>
+          <p>Marker tracks each team's running count on the leaderboard, displayed as <strong>Selected / X</strong> (e.g., "14 / 24"). Teams can always see how many selections they've used and how many remain. As the quota nears, teams may enter <strong>Forced Count</strong> — a state where every remaining unselected score must be counted to reach X.</p>
 </div>
 </div>
 
@@ -303,7 +303,7 @@ A practical rule of thumb: count **two-thirds of possible scores**. For a 2-play
 
 During the round, score selection in Marker is handled through the **Count modal** — a slide-up panel that appears when a team member taps their hole cell on the scorecard. The modal shows all of the team's players along with their scores for that hole, each with a checkbox.
 
-Checking a player's name adds their score to the team's running total. Unchecking removes it. Teams can revise selections up until the hole is saved — but once saved, the choices are committed.
+Checking a player's name adds their score to the team's running total. Unchecking removes it. Once a selection is made, it should be considered final except when correcting an honest mistake.
 
 </div>
 
