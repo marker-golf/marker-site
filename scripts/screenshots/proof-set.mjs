@@ -1,4 +1,4 @@
-// Proof set for the Vue screenshot pipeline (13 images). Each shot names the
+// Proof set for the Vue screenshot pipeline (18 images). Each shot names the
 // draft output file, the route to open and the steps that produce the state.
 // Draft names never collide with existing Expo assets.
 //
@@ -277,6 +277,58 @@ export default [
     }
   },
   {
+    name: 'game-scotch-action-modal',
+    path: ids => `/scorecards/${ids.f2Scorecard}`,
+    async prepare (page) {
+      await showGameColumn(page, 'Scotch: 1 - 18', 'Scotch')
+      // Hole 8: Harry's KP and Harry and Kevin's match press are stored in the
+      // fixture; opening the modal only reads them (no write).
+      const gameCell = holeRow(page, 8).locator('td').last()
+      await gameCell.getByText('2x').first().waitFor()
+      await gameCell.click()
+      await page.getByText('Scotch: Hole #8', { exact: true }).waitFor()
+      await page.getByText('Closest to Pin (KP)', { exact: true }).waitFor()
+      const option = name => page.locator('.player-option').filter({ hasText: name })
+      await option('Harry Hazard').locator('.checkbox.checked').waitFor()
+      await option('Match Press').locator('.checkbox.checked').waitFor()
+    }
+  },
+  {
+    name: 'game-scotch-scorecard',
+    path: ids => `/scorecards/${ids.f2Scorecard}/leaderboard`,
+    async prepare (page, ids) {
+      // F2 accounting must reconcile before its scorecards are captured.
+      await assertSideGamesReconcile(page)
+      await page.goto(`${new URL(page.url()).origin}/scorecards/${ids.f2Scorecard}`, { waitUntil: 'networkidle' })
+      await showGameColumn(page, 'Scotch: 1 - 18', 'Scotch')
+      // Holes 2-8: Bob's birdie KP on 3, the running points and the match
+      // press from 8 (2x).
+      await scrollBelowHeader(holeRow(page, 2), 0)
+      await holeRow(page, 8).getByText('(match)').waitFor()
+    }
+  },
+  {
+    name: 'game-match-play-scorecard',
+    path: ids => `/scorecards/${ids.f2Scorecard}`,
+    async prepare (page) {
+      await showGameColumn(page, 'Matchplay: 1 - 18', 'Match Play')
+      // Holes 3-9: Bob and Greg go 2 up, the first automatic press starts on
+      // 4 ("auto"), a second on 8, so three bets run at once.
+      await scrollBelowHeader(holeRow(page, 3), 0)
+      await holeRow(page, 4).getByText('auto').waitFor()
+    }
+  },
+  {
+    name: 'end-round-confirm',
+    path: ids => `/scorecards/${ids.f3Scorecard}`,
+    async prepare (page) {
+      // Opens Vue's End round sheet only; it is never confirmed here.
+      const attest = page.getByText('By ending this round, you attest that the scores are correct.')
+      if (!(await attest.count())) await page.getByRole('button', { name: 'End round', exact: true }).first().click()
+      await attest.waitFor()
+    }
+  },
+  {
     // Must stay last: confirming Lone Wolf saves the hole 6 decision.
     name: 'game-wolf-partner-modal',
     mayWrite: true,
@@ -288,6 +340,32 @@ export default [
       const loneWolf = page.locator('.player-option').filter({ hasText: /^\s*Lone Wolf\s*$/ })
       if (!(await loneWolf.locator('.checkbox.checked').count())) await loneWolf.click()
       await loneWolf.locator('.checkbox.checked').waitFor()
+    }
+  },
+  {
+    // Must stay last: confirms End round on F3, which locks that scorecard.
+    name: 'final-settlement-completed-round',
+    path: ids => `/scorecards/${ids.f3Scorecard}`,
+    mayWrite: true,
+    locks: ['f3'],
+    async prepare (page) {
+      await page.getByRole('button', { name: 'End round', exact: true }).first().click()
+      const sheet = page.getByText('By ending this round, you attest that the scores are correct.').locator('xpath=ancestor::*[.//button][1]')
+      await sheet.waitFor()
+      const locked = page.waitForResponse(response => /\/api\/app\/scorecards\/[^/]+$/.test(new URL(response.url()).pathname) && response.request().method() === 'PUT')
+      await sheet.getByRole('button', { name: 'End round', exact: true }).click()
+      if ((await locked).status() !== 200) throw new Error('End round did not lock the scorecard')
+      await page.locator('.right > .leaderboard').click() // the trophy button beside the game tabs
+      await page.waitForURL(/\/leaderboard$/)
+      await section(page, 'Overall - side games').getByText('Who pays whom.').waitFor()
+      if (await page.getByText('Round in progress', { exact: true }).count()) throw new Error('Leaderboard still shows the round in progress')
+      // Final transfers must reconcile with every game, to the cent.
+      await assertSideGamesReconcile(page)
+      // Collapse the game sections so the final settlement is in view under
+      // the games it combines.
+      const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
+      for (const game of games) await collapseSection(page, game)
+      await expandSection(page, 'Overall - side games')
     }
   }
 ]

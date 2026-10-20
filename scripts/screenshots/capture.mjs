@@ -8,7 +8,9 @@
 //   4. require: all recipes succeeded, no network/WebSocket/redirect
 //      violation, no page error, only allowlisted console noise, every file
 //      present with the expected dimensions; then encode WebPs in staging;
-//   5. only then move PNGs and WebPs into the draft folders.
+//   5. back outside the sandbox, check in the database that only the
+//      intended fixtures changed (see lib/state.mjs);
+//   6. only then move PNGs and WebPs into the draft folders.
 //
 // A failed run leaves the existing drafts untouched.
 //
@@ -30,7 +32,7 @@ import { spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { log, redact } from './lib/proc.mjs'
 import { sandboxArgs } from './lib/sandbox.mjs'
-import { claimForCapture } from './lib/state.mjs'
+import { claimForCapture, verifyFixturesAfterCapture } from './lib/state.mjs'
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import {
   VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
@@ -57,7 +59,28 @@ if (process.env.SCREENS_SANDBOX !== 'browser') {
     stdio: 'inherit',
     env: { HOME: process.env.HOME, PATH: '/usr/bin:/bin', LANG: 'en_US.UTF-8', SCREENS_SANDBOX: 'browser' }
   })
-  process.exit(result.status ?? 1)
+  if (result.status !== 0) process.exit(result.status ?? 1)
+
+  // The sandboxed run staged and validated everything. Before publishing,
+  // confirm in the database that only the intended fixtures changed.
+  const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
+  verifyFixturesAfterCapture(ids, { locked: [...new Set(selected.flatMap(shot => shot.locks || []))] })
+  log('fixture check passed: only the intended fixtures changed')
+  const manifestFile = path.join(CAPTURE_STAGING_DIR, 'publish.json')
+  const { runId, files } = JSON.parse(fs.readFileSync(manifestFile, 'utf8'))
+  for (const [, dest] of files) {
+    if (!path.basename(dest).startsWith(DRAFT_PREFIX) || ![SOURCE_DIR, WEB_DIR].includes(path.dirname(dest))) {
+      throw new Error(`Refusing to publish ${dest}`)
+    }
+  }
+  for (const [from, dest] of files) {
+    const temp = `${dest}.tmp-${runId}`
+    fs.copyFileSync(from, temp)
+    fs.renameSync(temp, dest)
+  }
+  fs.rmSync(CAPTURE_STAGING_DIR, { recursive: true, force: true })
+  log(`published ${files.length} draft files (${files.length / 2} PNG + ${files.length / 2} WebP)`)
+  process.exit(0)
 }
 
 // Inner process: prove the sandbox is really in force (an unapproved
@@ -172,7 +195,7 @@ try {
       await page.evaluate(port => fetch(`http://127.0.0.1:${port}/injected-unapproved-request`).catch(() => null), 4799)
     }
     try {
-      await shot.prepare(page)
+      await shot.prepare(page, ids)
     } catch (error) {
       fs.mkdirSync(DEBUG_DIR, { recursive: true })
       await page.screenshot({ path: path.join(DEBUG_DIR, `${shot.name}.png`) })
@@ -220,7 +243,8 @@ if (problems.length) {
 }
 log(`network policy held: no unexpected requests, WebSockets or redirects (${selected.length} captures)`)
 
-// Encode WebPs in staging, then publish. Only draft-prefixed names are written.
+// Encode WebPs in staging and hand the list to the outer process, which
+// publishes only after the fixture check. Only draft-prefixed names are written.
 const publish = []
 for (const shot of selected) {
   const base = outputName(shot)
@@ -230,13 +254,5 @@ for (const shot of selected) {
   if (width !== expected[0] || height !== expected[1]) throw new Error(`${base}.webp has unexpected dimensions ${width}x${height}`)
   publish.push([path.join(staging, `${base}.png`), path.join(SOURCE_DIR, `${base}.png`)], [webp, path.join(WEB_DIR, `${base}.webp`)])
 }
-for (const [, dest] of publish) {
-  if (!path.basename(dest).startsWith(DRAFT_PREFIX)) throw new Error(`Refusing to publish non-draft file ${dest}`)
-}
-for (const [from, dest] of publish) {
-  const temp = `${dest}.tmp-${runId}`
-  fs.copyFileSync(from, temp)
-  fs.renameSync(temp, dest)
-}
-fs.rmSync(staging, { recursive: true, force: true })
-log(`published ${publish.length} draft files (${selected.length} PNG + ${selected.length} WebP, ${expected.join('x')})`)
+fs.writeFileSync(path.join(CAPTURE_STAGING_DIR, 'publish.json'), JSON.stringify({ runId, files: publish }))
+log(`staged and validated ${publish.length} draft files (${expected.join('x')}); publishing after the fixture check`)

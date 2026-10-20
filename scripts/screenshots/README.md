@@ -79,12 +79,19 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    against the real clock and is written only to the 0600 auth-state file.
 5. `servers.mjs start`: re-check the Hub Repo target, then start the Hub and
    Vue, each in its own process group and sandbox, with `env -i`.
-6. `fixtures.mjs`: build F1 (Shinnecock standalone scorecard) and F4
-   (PebblePayday event) through the Hub REST API; marker becomes
+6. `fixtures.mjs`: build the fixtures through the Hub REST API and record a
+   digest of each (scores, game settings, lock state); marker becomes
    `fixtures-ready`.
+   - F1: Shinnecock scorecard through 9 (Nassau, Net Skins, Wolf).
+   - F2: Torrey Pines South scorecard through 11 (Scotch, Match Play).
+   - F3: Cypress Point scorecard through 18, left unlocked (Nassau, Net
+     Skins); the last recipe confirms End round on it.
+   - F4: PebblePayday event.
 7. `capture.mjs`: claim the fixtures (marker becomes `captured`), re-run
-   inside the browser sandbox, capture into staging, validate, encode WebP,
-   then publish the drafts.
+   inside the browser sandbox, capture into staging, validate and encode
+   WebP; then, outside the sandbox, compare the fixture digests (scores and
+   game settings unchanged everywhere; only fixtures a recipe declares in
+   `locks` may be locked, i.e. F3) and only then publish the drafts.
 
 Cleanup, always (success, failure, timeout, Ctrl-C, SIGTERM, SIGHUP):
 `servers.mjs stop`, then `scan.mjs`.

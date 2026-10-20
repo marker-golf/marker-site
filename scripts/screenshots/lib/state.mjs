@@ -6,6 +6,11 @@
 //   db-reset  -> stage "reset"          (database OID of the new fourball_screens)
 //   fixtures  -> stage "fixtures-ready" (same OID, fixture definition hash)
 //   capture   -> stage "captured"       (claimed before any recipe runs)
+//
+// fixtures also records a digest of every fixture (scores, game settings and
+// lock state). Before any draft is published, capture compares it again: F1,
+// F2 and F4 must be unchanged and unlocked; F3 must be unchanged except that
+// it is now locked (End round).
 
 import crypto from 'node:crypto'
 import fs from 'node:fs'
@@ -39,9 +44,63 @@ function requireStage (stage) {
 
 export const markReset = () => write({ stage: 'reset', dbOid: screensDbOid() })
 
-export function markFixturesReady () {
+const uuid = id => {
+  if (!/^[0-9a-f-]{36}$/.test(id)) throw new Error(`Invalid id ${id}`)
+  return `'${id}'`
+}
+
+function scorecardDigest (id) {
+  const [scores, games, locked] = screensSql(`select
+    coalesce(md5(string_agg(p.id || ':' || s.hole_number || ':' || s.score, ',' order by p.id, s.hole_number)), '-'),
+    (select coalesce(md5(string_agg(g.settings::text, ',' order by g.id)), '-') from games g where g.event_id is null and exists
+      (select 1 from game_players gp join players gpp on gpp.id = gp.player_id where gp.game_id = g.id and gpp.scorecard_id = ${uuid(id)})),
+    (select locked from scorecards where id = ${uuid(id)})
+    from scores s join players p on p.id = s.player_id where p.scorecard_id = ${uuid(id)}`).split('|')
+  return { scores, games, locked: locked === 't' }
+}
+
+function eventDigest (id) {
+  const [scores, games, locked, lockedCards] = screensSql(`select
+    coalesce(md5(string_agg(p.id || ':' || s.hole_number || ':' || s.score, ',' order by p.id, s.hole_number)), '-'),
+    (select coalesce(md5(string_agg(g.settings::text, ',' order by g.id)), '-') from games g where g.event_id = ${uuid(id)}),
+    (select locked from events where id = ${uuid(id)}),
+    (select count(*) from scorecards where event_id = ${uuid(id)} and locked)
+    from scores s join players p on p.id = s.player_id where p.event_id = ${uuid(id)}`).split('|')
+  return { scores, games, locked: locked === 't' || lockedCards !== '0' }
+}
+
+export function fixtureDigests (ids) {
+  return {
+    f1: scorecardDigest(ids.f1Scorecard),
+    f2: scorecardDigest(ids.f2Scorecard),
+    f3: scorecardDigest(ids.f3Scorecard),
+    f4: eventDigest(ids.f4Event)
+  }
+}
+
+export function markFixturesReady (ids) {
   const { oid } = requireStage('reset')
-  write({ stage: 'fixtures-ready', dbOid: oid, fixtureHash: fixtureDefinitionHash() })
+  const digests = fixtureDigests(ids)
+  if (Object.values(digests).some(d => d.locked)) throw new Error('Refusing: a fixture is locked straight after building')
+  write({ stage: 'fixtures-ready', dbOid: oid, fixtureHash: fixtureDefinitionHash(), digests })
+}
+
+// After capture: scores and game settings are unchanged everywhere, and a
+// fixture is locked only if a selected recipe locks it (End round on F3).
+export function verifyFixturesAfterCapture (ids, { locked = [] } = {}) {
+  const state = read()
+  if (!state?.digests || state.dbOid !== screensDbOid()) throw new Error('Refusing to publish: fixture digests are missing for this database build')
+  const now = fixtureDigests(ids)
+  const problems = []
+  for (const key of ['f1', 'f2', 'f3', 'f4']) {
+    if (now[key].scores !== state.digests[key].scores) problems.push(`${key} scores changed`)
+    if (now[key].games !== state.digests[key].games) problems.push(`${key} game settings changed`)
+  }
+  for (const key of ['f1', 'f2', 'f3', 'f4']) {
+    if (now[key].locked !== locked.includes(key)) problems.push(`${key} is ${now[key].locked ? '' : 'not '}locked`)
+  }
+  if (problems.length) throw new Error(`Refusing to publish: ${problems.join('; ')}`)
+  return now
 }
 
 export function claimForCapture () {

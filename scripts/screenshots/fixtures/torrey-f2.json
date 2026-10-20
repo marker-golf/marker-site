@@ -1,0 +1,38 @@
+{
+  "_comment": "F2: standalone scorecard in progress through hole 11 with Scotch and Match Play, configured as Vue's forms create them. Sides follow Vue's balanced-sides rule (Harry and Kevin vs Bob and Greg). Scores are designed so Match Play shows the main match plus three automatic presses (Harry and Kevin press after holes 3 and 7; Bob and Greg press after hole 10), and Scotch shows a natural-birdie KP on 3, a KP on 8, a KP on 11 and Harry and Kevin's match press from hole 8 (2x points for the remaining holes).",
+  "course": { "facility": "Torrey Pines Municipal Golf Course", "courseId": "a2185d42-1b9b-4860-a99d-3d4d23a02354" },
+  "date": "2026-07-08",
+  "teeTime": "08:00",
+  "utcOffset": "-07:00",
+  "startHole": 1,
+  "players": [
+    { "user": "harry", "tee": { "name": "White", "gender": "Male" } },
+    { "user": "kevin", "tee": { "name": "White", "gender": "Male" } },
+    { "user": "bob",   "tee": { "name": "White", "gender": "Male" } },
+    { "user": "greg",  "tee": { "name": "White", "gender": "Male" } }
+  ],
+  "scores": {
+    "harry": [5, 4, 3, 4, 5, 6, 5, 3, 5, 4, 3],
+    "kevin": [6, 5, 4, 4, 6, 6, 5, 3, 6, 4, 4],
+    "bob":   [4, 4, 2, 5, 4, 4, 4, 3, 5, 4, 3],
+    "greg":  [5, 5, 4, 5, 5, 6, 6, 4, 6, 5, 3]
+  },
+  "games": [
+    {
+      "game": "Scotch",
+      "players": ["harry", "kevin", "bob", "greg"],
+      "sides": { "left": ["harry", "kevin"], "right": ["bob", "greg"] },
+      "amountPerPoint": 2,
+      "closestToPin": { "3": "bob", "8": "harry", "11": "greg" },
+      "matchPresses": [8],
+      "holePresses": {}
+    },
+    {
+      "game": "Matchplay",
+      "players": ["harry", "kevin", "bob", "greg"],
+      "sides": { "left": ["harry", "kevin"], "right": ["bob", "greg"] },
+      "amount": 10,
+      "autoPressDown": 2
+    }
+  ]
+}

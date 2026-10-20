@@ -1,4 +1,5 @@
-// Builds the proof-set fixtures through the isolated Hub's REST API, signed in
+// Builds the proof-set fixtures (F1, F2, F3 scorecards and the F4 event)
+// through the isolated Hub's REST API, signed in
 // as the fictional demo user. Requires a freshly reset fourball_screens (the
 // "reset" fixture-state marker for this exact database build, and no events or
 // scorecards), which makes every run produce identical data.
@@ -13,6 +14,8 @@ import { API_BASE, API_TIMEOUT, AUTH_STATE, FIXTURE_IDS, SCRIPTS_DIR } from './l
 const readFixture = name => JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', name), 'utf8'))
 const { users } = readFixture('users.json')
 const f1 = readFixture('shinnecock-f1.json')
+const f2 = readFixture('torrey-f2.json')
+const f3 = readFixture('cypress-f3.json')
 const f4 = readFixture('pebblepayday-f4.json')
 const userByKey = Object.fromEntries(users.map(u => [u.key, u]))
 
@@ -116,58 +119,110 @@ if (screensSql('select (select count(*) from events) + (select count(*) from sco
   throw new Error('Refusing: fourball_screens is not freshly reset (run db-reset first)')
 }
 
-// F1: Shinnecock standalone scorecard -------------------------------------
-const f1Card = idOf(await api('POST', 'scorecards', {
-  scorecard: { course_id: f1.course.courseId, date: f1.date, start_hole: f1.startHole }
-}), 'scorecard')
+// Standalone scorecards (F1, F2, F3) --------------------------------------
+// Builds one scorecard: players, games (settings shaped as Vue's game forms
+// create them) and scores, either explicit (fx.scores) or seeded
+// (fx.scoreSeed, fx.holesPlayed).
+async function buildScorecard (fx, label) {
+  const card = idOf(await api('POST', 'scorecards', {
+    scorecard: { course_id: fx.course.courseId, date: fx.date, start_hole: fx.startHole }
+  }), 'scorecard')
 
-const f1Players = {}
-for (const p of f1.players) {
-  const params = playerParams(p.user, teeId(f1.course.courseId, p.tee), { scorecard_id: f1Card })
-  f1Players[p.user] = idOf(await api('POST', 'players', { player: params }), 'player')
-}
-const ids = keys => keys.map(k => f1Players[k])
-
-for (const g of f1.games) {
-  let settings
-  if (g.game === 'Nassau') {
-    settings = {
-      // Per-match accounting, as Vue's Nassau form creates it (Vue offers no
-      // pool option for Nassau; a pool here would turn match results into
-      // pot payouts and invent buy-ins).
-      game: 'Nassau', balls: [{ start: 1, end: 18, net: 1, gross: 0 }], stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
-      accounting: { amount: null, is_pool: false },
-      matches: g.matches.map(m => ({
-        sides: { left: ids(g.sides.left), right: ids(g.sides.right) },
-        accounting: { amount: m.amount, is_pool: false },
-        press_settings: { auto: { down: m.autoPressDown, enabled: m.autoPressDown > 0 }, manual: {}, close_out: false, hole_presses: {} },
-        stipulated_round: { start: m.start, end: m.end }
-      }))
-    }
-  } else if (g.game === 'Skins') {
-    settings = {
-      game: 'Skins', accounting: { amount: g.amount, is_pool: false }, carry_ties: g.carryTies,
-      use_validations: false, stipulated_round: { start: 1, end: 18 }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS
-    }
-  } else if (g.game === 'Wolf') {
-    settings = {
-      game: 'Wolf', accounting: { amount: g.amount }, wolf_order: ids(g.order), stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
-      wolf_holes: Object.fromEntries(Object.entries(g.picks).map(([hole, pick]) => [hole, { blind: false, partner_id: f1Players[pick.partner] }]))
-    }
+  const players = {}
+  for (const p of fx.players) {
+    const params = playerParams(p.user, teeId(fx.course.courseId, p.tee), { scorecard_id: card })
+    players[p.user] = idOf(await api('POST', 'players', { player: params }), 'player')
   }
-  await api('POST', 'games', { game: { settings, game_players: ids(g.players).map(id => ({ player_id: id })) } })
+  const ids = keys => keys.map(k => players[k])
+  const pressSettings = (autoDown, manual = {}, holePresses = {}) =>
+    ({ auto: { down: autoDown || 2, enabled: autoDown > 0 }, manual, close_out: false, hole_presses: holePresses })
+
+  for (const g of fx.games) {
+    let settings
+    if (g.game === 'Nassau') {
+      settings = {
+        // Per-match accounting, as Vue's Nassau form creates it (Vue offers no
+        // pool option for Nassau; a pool here would turn match results into
+        // pot payouts and invent buy-ins).
+        game: 'Nassau', balls: [{ start: 1, end: 18, net: 1, gross: 0 }], stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
+        accounting: { amount: null, is_pool: false },
+        matches: g.matches.map(m => ({
+          sides: { left: ids(g.sides.left), right: ids(g.sides.right) },
+          accounting: { amount: m.amount, is_pool: false },
+          press_settings: { auto: { down: m.autoPressDown, enabled: m.autoPressDown > 0 }, manual: {}, close_out: false, hole_presses: {} },
+          stipulated_round: { start: m.start, end: m.end }
+        }))
+      }
+    } else if (g.game === 'Skins') {
+      settings = {
+        game: 'Skins', accounting: { amount: g.amount, is_pool: false }, carry_ties: g.carryTies,
+        use_validations: false, stipulated_round: { start: 1, end: 18 }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS
+      }
+    } else if (g.game === 'Wolf') {
+      settings = {
+        game: 'Wolf', accounting: { amount: g.amount }, wolf_order: ids(g.order), stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
+        wolf_holes: Object.fromEntries(Object.entries(g.picks).map(([hole, pick]) => [hole, { blind: false, partner_id: players[pick.partner] }]))
+      }
+    } else if (g.game === 'Scotch') {
+      // Vue's Scotch defaults: 2/2/1/1 points, two net balls, blitzes on,
+      // natural birdies only, one 1-18 match with an amount per point. KPs and
+      // presses are what the hole-action modal stores.
+      settings = {
+        game: 'Scotch', points: { low_ball: 2, low_team: 2, birdie: 1, proximity: 1 },
+        balls: [{ start: 1, end: 18, net: 2, gross: 0 }], allow_blitzes: true, require_natural_birdie: true,
+        stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
+        proximity: Object.fromEntries(Object.entries(g.closestToPin).map(([hole, key]) => [hole, players[key]])),
+        matches: [{
+          sides: { left: ids(g.sides.left), right: ids(g.sides.right) },
+          accounting: { amount: g.amountPerPoint, is_pool: false },
+          press_settings: pressSettings(0, Object.fromEntries(g.matchPresses.map(hole => [String(hole), {}])),
+            Object.fromEntries(Object.entries(g.holePresses).map(([hole, count]) => [hole, { count }]))),
+          stipulated_round: { start: 1, end: 18 }
+        }]
+      }
+    } else if (g.game === 'Matchplay') {
+      // Vue's Match Play form: one 1-18 match, best net ball, wager per match,
+      // optional automatic press.
+      settings = {
+        game: 'Matchplay', balls: [{ start: 1, end: 18, net: 1, gross: 0 }], stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
+        matches: [{
+          sides: { left: ids(g.sides.left), right: ids(g.sides.right) },
+          accounting: { amount: g.amount, is_pool: false },
+          press_settings: pressSettings(g.autoPressDown),
+          stipulated_round: { start: 1, end: 18 }
+        }]
+      }
+    } else {
+      throw new Error(`Unsupported fixture game ${g.game}`)
+    }
+    await api('POST', 'games', { game: { settings, game_players: ids(g.players).map(id => ({ player_id: id })) } })
+  }
+
+  let clock = Date.parse(`${fx.date}T${fx.teeTime || '08:00'}:00${fx.utcOffset || '-04:00'}`)
+  const random = fx.scoreSeed ? prng(fx.scoreSeed) : null
+  const holesScored = fx.scores ? Object.values(fx.scores)[0].length : fx.holesPlayed
+  for (let hole = 1; hole <= holesScored; hole++) {
+    for (const p of (fx.scores ? Object.keys(fx.scores) : fx.players.map(pl => pl.user))) {
+      let score
+      if (fx.scores) {
+        score = fx.scores[p][hole - 1]
+      } else {
+        const tee = fx.players.find(pl => pl.user === p).tee
+        const layout = holes(fx.course.courseId, tee)[hole - 1]
+        score = generatedGross(random, layout.par, userByKey[p].handicapIndex, layout.handicap)
+      }
+      await postScore(players[p], hole, score, clock)
+      clock += 15000
+    }
+    clock += 12 * 60000
+  }
+  log(`${label} scorecard ready: ${fx.players.length} players, ${fx.games.length} games, holes 1-${holesScored} scored`)
+  return { card, players }
 }
 
-const f1HolesScored = f1.scores.bob.length
-let clock = Date.parse(`${f1.date}T08:00:00-04:00`)
-for (let hole = 1; hole <= f1HolesScored; hole++) {
-  for (const [key, scores] of Object.entries(f1.scores)) {
-    await postScore(f1Players[key], hole, scores[hole - 1], clock)
-    clock += 15000
-  }
-  clock += 12 * 60000
-}
-log(`F1 scorecard ready: 4 players, ${f1.games.length} games, holes 1-${f1HolesScored} scored`)
+const { card: f1Card, players: f1Players } = await buildScorecard(f1, 'F1')
+const { card: f2Card, players: f2Players } = await buildScorecard(f2, 'F2')
+const { card: f3Card, players: f3Players } = await buildScorecard(f3, 'F3')
 
 // F4: PebblePayday event ---------------------------------------------------
 const eventId = idOf(await api('POST', 'events', {
@@ -252,6 +307,7 @@ screensSql('update users set code = null where code is not null')
 // a genuine rendering of the production app.
 
 fs.mkdirSync(path.dirname(FIXTURE_IDS), { recursive: true })
-fs.writeFileSync(FIXTURE_IDS, JSON.stringify({ f1Scorecard: f1Card, f1Players, f4Event: eventId, f4Scorecards: groupCards }, null, 2))
+const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards }
+fs.writeFileSync(FIXTURE_IDS, JSON.stringify(fixtureIds, null, 2))
 log(`fixture ids written to ${FIXTURE_IDS}`)
-markFixturesReady()
+markFixturesReady(fixtureIds)
