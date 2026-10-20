@@ -1,5 +1,5 @@
 // Builds the proof-set fixtures (F1, F2, F3 scorecards, the F4 event and the
-// F5 event-setup states, the F6 new scorecard)
+// F5 event-setup states, the F6 new scorecard, the F7 event to be completed)
 // through the isolated Hub's REST API, signed in
 // as the fictional demo user. Requires a freshly reset fourball_screens (the
 // "reset" fixture-state marker for this exact database build, and no events or
@@ -20,6 +20,7 @@ const f3 = readFixture('cypress-f3.json')
 const f4 = readFixture('pebblepayday-f4.json')
 const f5 = readFixture('event-setup-f5.json')
 const f6 = readFixture('new-scorecard-f6.json')
+const f7 = readFixture('completed-event-f7.json')
 const userByKey = Object.fromEntries(users.map(u => [u.key, u]))
 
 const token = JSON.parse(fs.readFileSync(AUTH_STATE, 'utf8')).origins[0].localStorage
@@ -224,81 +225,96 @@ async function buildScorecard (fx, label) {
   return { card, players, games }
 }
 
+// Events (F7, F4) -----------------------------------------------------------
+// Builds one published event: players (tee by gender), group scorecards,
+// games (settings shaped as Vue's event game forms create them; every game
+// covers every event player), then seeded scores group by group.
+async function buildEvent (fx, label) {
+  const eventId = idOf(await api('POST', 'events', {
+    event: { name: fx.name, date: fx.date, course_id: fx.course.courseId }
+  }), 'event')
+
+  const tees = {
+    male: teeId(fx.course.courseId, fx.tees.male),
+    female: teeId(fx.course.courseId, fx.tees.female)
+  }
+  const eventPlayers = {}
+  for (const group of fx.groups) {
+    for (const key of group.players) {
+      const params = playerParams(key, tees[userByKey[key].gender], { event_id: eventId })
+      eventPlayers[key] = idOf(await api('POST', 'players', { player: params }), 'player')
+    }
+  }
+
+  const groupCards = []
+  for (const group of fx.groups) {
+    const card = idOf(await api('POST', 'scorecards', {
+      scorecard: { event_id: eventId, course_id: fx.course.courseId, date: fx.date, tee_time: group.teeTime, start_hole: group.startHole },
+      player_ids: group.players.map(k => eventPlayers[k])
+    }), 'scorecard')
+    groupCards.push(card)
+  }
+
+  const allEventPlayerIds = fx.groups.flatMap(g => g.players.map(k => eventPlayers[k]))
+  const teams = fx.groups.map(g => ({ members: g.players.map(k => ({ player_id: eventPlayers[k] })) }))
+  const games = {}
+  for (const g of fx.games) {
+    let settings
+    if (g.game === 'Skins') {
+      settings = { game: 'Skins', accounting: { amount: g.amount, is_pool: g.isPool }, carry_ties: g.carryTies, use_validations: false, stipulated_round: { start: 1, end: 18 }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS }
+    } else if (g.game === 'Stroke Play') {
+      settings = { game: 'Stroke Play', accounting: { amount: g.amount, is_pool: g.isPool, payouts: g.payouts || [] }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS }
+    } else if (g.game === 'Team Stroke Play') {
+      // Each sub-total is its own pot; without explicit sub-totals: the
+      // 18-hole pot plus half pots for each nine (F4).
+      const subTotals = g.subTotals || [{ start: 1, end: 18, amount: g.amount }, { start: 1, end: 9, amount: g.amount / 2 }, { start: 10, end: 18, amount: g.amount / 2 }]
+      settings = {
+        game: 'Team Stroke Play', balls: [{ start: 1, end: 18, net: g.netBalls, gross: 0 }], teams, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS,
+        sub_totals: subTotals.map((s, i) => ({ start: s.start, end: s.end, primary: i === 0, accounting: { amount: s.amount, is_pool: true, payouts: [] } }))
+      }
+    } else if (g.game === 'Team Stableford') {
+      settings = {
+        game: 'Team Stableford', balls: [{ start: 1, end: 18, net: g.netBalls, gross: 0 }], teams, quota: false, quota_points: 36,
+        points: { double_eagle: 5, eagle: 4, birdie: 3, par: 2, bogey: 1, double_bogey: 0, triple_bogey: 0 },
+        stroke_off_low_ball: false, ...HANDICAP_DEFAULTS,
+        sub_totals: [{ start: 1, end: 18, primary: true, accounting: { amount: g.amount, is_pool: true, payouts: [] } }]
+      }
+    } else {
+      throw new Error(`Unsupported event game ${g.game}`)
+    }
+    games[g.game] = idOf(await api('POST', 'games', { game: { event_id: eventId, settings, game_players: allEventPlayerIds.map(id => ({ player_id: id })) } }), 'game')
+  }
+
+  await api('PUT', `events/${eventId}/publish`)
+
+  const random = prng(fx.scoreSeed)
+  for (const [index, group] of fx.groups.entries()) {
+    let t = Date.parse(`${fx.date}T${group.teeTime}:00${fx.utcOffset || '-07:00'}`)
+    for (let hole = 1; hole <= group.holesPlayed; hole++) {
+      for (const key of group.players) {
+        const tee = userByKey[key].gender === 'female' ? fx.tees.female : fx.tees.male
+        const layout = holes(fx.course.courseId, tee)[hole - 1]
+        await postScore(eventPlayers[key], hole, generatedGross(random, layout.par, userByKey[key].handicapIndex, layout.handicap), t)
+        t += 10000
+      }
+      t += 13 * 60000
+    }
+    log(`${label} group ${index + 1} (${group.teeTime}) scored through ${group.holesPlayed}`)
+  }
+  log(`${label} event ready: ${allEventPlayerIds.length} players, ${groupCards.length} groups, ${fx.games.length} games`)
+  return { eventId, groupCards, games }
+}
+
+// F7 first: its players are then the oldest player rows of every user, so the
+// recent-partner order (latest player row first) is exactly as without it.
+const { eventId: f7Event, groupCards: f7Scorecards, games: f7Games } = await buildEvent(f7, 'F7')
+
 const { card: f1Card, players: f1Players, games: f1Games } = await buildScorecard(f1, 'F1')
 const { card: f2Card, players: f2Players } = await buildScorecard(f2, 'F2')
 const { card: f3Card, players: f3Players } = await buildScorecard(f3, 'F3')
 
-// F4: PebblePayday event ---------------------------------------------------
-const eventId = idOf(await api('POST', 'events', {
-  event: { name: f4.name, date: f4.date, course_id: f4.course.courseId }
-}), 'event')
-
-const tees = {
-  male: teeId(f4.course.courseId, f4.tees.male),
-  female: teeId(f4.course.courseId, f4.tees.female)
-}
-const eventPlayers = {}
-for (const group of f4.groups) {
-  for (const key of group.players) {
-    const params = playerParams(key, tees[userByKey[key].gender], { event_id: eventId })
-    eventPlayers[key] = idOf(await api('POST', 'players', { player: params }), 'player')
-  }
-}
-
-const groupCards = []
-for (const group of f4.groups) {
-  const card = idOf(await api('POST', 'scorecards', {
-    scorecard: { event_id: eventId, course_id: f4.course.courseId, date: f4.date, tee_time: group.teeTime, start_hole: group.startHole },
-    player_ids: group.players.map(k => eventPlayers[k])
-  }), 'scorecard')
-  groupCards.push(card)
-}
-
-const allEventPlayerIds = f4.groups.flatMap(g => g.players.map(k => eventPlayers[k]))
-const teams = f4.groups.map(g => ({ members: g.players.map(k => ({ player_id: eventPlayers[k] })) }))
-for (const g of f4.games) {
-  let settings
-  if (g.game === 'Skins') {
-    settings = { game: 'Skins', accounting: { amount: g.amount, is_pool: g.isPool }, carry_ties: g.carryTies, use_validations: false, stipulated_round: { start: 1, end: 18 }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS }
-  } else if (g.game === 'Stroke Play') {
-    settings = { game: 'Stroke Play', accounting: { amount: g.amount, is_pool: g.isPool, payouts: [] }, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS }
-  } else if (g.game === 'Team Stroke Play') {
-    settings = {
-      game: 'Team Stroke Play', balls: [{ start: 1, end: 18, net: g.netBalls, gross: 0 }], teams, stroke_off_low_ball: false, ...HANDICAP_DEFAULTS,
-      sub_totals: [
-        { start: 1, end: 18, primary: true, accounting: { amount: g.amount, is_pool: true, payouts: [] } },
-        { start: 1, end: 9, primary: false, accounting: { amount: g.amount / 2, is_pool: true, payouts: [] } },
-        { start: 10, end: 18, primary: false, accounting: { amount: g.amount / 2, is_pool: true, payouts: [] } }
-      ]
-    }
-  } else if (g.game === 'Team Stableford') {
-    settings = {
-      game: 'Team Stableford', balls: [{ start: 1, end: 18, net: g.netBalls, gross: 0 }], teams, quota: false, quota_points: 36,
-      points: { double_eagle: 5, eagle: 4, birdie: 3, par: 2, bogey: 1, double_bogey: 0, triple_bogey: 0 },
-      stroke_off_low_ball: false, ...HANDICAP_DEFAULTS,
-      sub_totals: [{ start: 1, end: 18, primary: true, accounting: { amount: g.amount, is_pool: true, payouts: [] } }]
-    }
-  }
-  await api('POST', 'games', { game: { event_id: eventId, settings, game_players: allEventPlayerIds.map(id => ({ player_id: id })) } })
-}
-
-await api('PUT', `events/${eventId}/publish`)
-
-const random = prng(f4.scoreSeed)
-for (const [index, group] of f4.groups.entries()) {
-  let t = Date.parse(`${f4.date}T${group.teeTime}:00-07:00`)
-  for (let hole = 1; hole <= group.holesPlayed; hole++) {
-    for (const key of group.players) {
-      const tee = userByKey[key].gender === 'female' ? f4.tees.female : f4.tees.male
-      const layout = holes(f4.course.courseId, tee)[hole - 1]
-      await postScore(eventPlayers[key], hole, generatedGross(random, layout.par, userByKey[key].handicapIndex, layout.handicap), t)
-      t += 10000
-    }
-    t += 13 * 60000
-  }
-  log(`F4 group ${index + 1} (${group.teeTime}) scored through ${group.holesPlayed}`)
-}
-log(`F4 event ready: ${allEventPlayerIds.length} players, ${groupCards.length} groups, ${f4.games.length} games`)
+// F4: PebblePayday event (in progress) ----------------------------------
+const { eventId, groupCards } = await buildEvent(f4, 'F4')
 
 // F5: event-setup states --------------------------------------------------
 async function createEvent ({ name, date, course }) {
@@ -360,7 +376,7 @@ screensSql('update users set code = null where code is not null')
 // a genuine rendering of the production app.
 
 fs.mkdirSync(path.dirname(FIXTURE_IDS), { recursive: true })
-const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups, f1Games, f6Scorecard: f6Card, bobUserId: userByKey.bob.id }
+const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups, f1Games, f6Scorecard: f6Card, f7Event, f7Scorecards, f7Games, bobUserId: userByKey.bob.id }
 fs.writeFileSync(FIXTURE_IDS, JSON.stringify(fixtureIds, null, 2))
 log(`fixture ids written to ${FIXTURE_IDS}`)
 markFixturesReady(fixtureIds)

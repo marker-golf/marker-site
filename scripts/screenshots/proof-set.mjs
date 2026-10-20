@@ -1,4 +1,4 @@
-// Proof set for the Vue screenshot pipeline (34 images). The event game
+// Proof set for the Vue screenshot pipeline (35 images). The event game
 // picker reuses game-picker: Vue's event route shows the same picker. Each shot names the
 // draft output file, the route to open and the steps that produce the state.
 // Draft names never collide with existing Expo assets.
@@ -10,9 +10,14 @@
 //
 // Recipes are read-only unless marked `mayWrite: true`; capture.mjs fails a
 // read-only recipe that sends any non-GET request to the Hub, and requires
-// every writing recipe to run after all read-only ones.
+// every writing recipe to run after all read-only ones. A writing recipe
+// lists every Hub write it may send in `writes` (any other write fails the
+// run) and every fixture it locks in `locks`; locking recipes run after
+// every recipe that does not lock, so no capture sees a fixture locked early.
 
-import { VIEWPORT } from './lib/config.mjs'
+import fs from 'node:fs'
+import path from 'node:path'
+import { SCRIPTS_DIR, VIEWPORT } from './lib/config.mjs'
 
 // Shows the scorecard column for one game (tabs toggle, so click only if needed).
 async function showGameColumn (page, tabTitle, columnTitle) {
@@ -119,6 +124,153 @@ async function assertSideGamesReconcile (page) {
   await overall.getByText('Settlement', { exact: true }).click()
   await overall.getByText('Who pays whom.').waitFor()
   if (!overallWasOpen) await collapseSection(page, 'Overall - side games')
+}
+
+// Completed-event accounting (F7) must reconcile before it is captured. Every
+// F7 game is a buy-in game, so for each game:
+//  - every player's buy-in is the game's defined buy-in, and the buy-ins add
+//    up to the defined pool (buy-in times players);
+//  - the payouts (Gross) add up to exactly that pool, none negative, and
+//    Net = Gross - Buy-in for every player;
+//  - Stroke Play pays exactly the defined place payouts; the team pot goes
+//    whole to one team, split evenly between its members;
+//  - the game's settlement pays only from the pot, each winner their payout;
+//  - a game without a buy-in (none in F7) would have to settle player to
+//    player and sum to zero.
+// Then "Overall - event": every player's Gross, Buy-in and Net equal the sum
+// over the games; Net sums to zero; and the settlement resolves every
+// player's Net exactly with nothing left in or owed to the pot, both with
+// "Buy-ins collected" (Vue's default) and without it. The checkbox is
+// display state only: toggling it must not send any request at all, and it
+// is restored before the capture. Only normal taps are used (Game accounting
+// / Hide details, Settlement / Profit/loss, the checkbox).
+const F7 = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'completed-event-f7.json'), 'utf8'))
+
+// The first table in scope with a column headed `header` (game leaderboards
+// above it have their own Player columns).
+async function tableRows (scope, header) {
+  const table = scope.locator('table.leaderboard-table').filter({ has: scope.page().locator('th', { hasText: new RegExp(`^\\s*${header}\\s*$`) }) }).first()
+  await table.waitFor()
+  return table.locator('tr').evaluateAll(trs => trs.map(tr => [...tr.cells].map(c => c.innerText.trim())))
+}
+
+// Reads one LeaderboardDaySummary (a game's or the overall one): the
+// Profit/loss table, then the settlement as Vue shows it now.
+async function readDaySummary (scope) {
+  await scope.getByText('Profit/loss', { exact: true }).click()
+  const [header, ...rows] = await tableRows(scope, 'Buy-in')
+  if (header.join('|') !== 'Player|Gross|Buy-in|Net') throw new Error(`Profit/loss columns are ${header.join(', ')}`)
+  const players = {}
+  for (const [player, gross, buyIn, net] of rows) {
+    if (player in players) throw new Error(`${player} is listed twice in Profit/loss`)
+    players[player] = { gross: money(gross), buyIn: money(buyIn), net: money(net) }
+    if (players[player].net !== players[player].gross - players[player].buyIn) throw new Error(`${player}: Net is not Gross - Buy-in`)
+  }
+  await scope.getByText('Settlement', { exact: true }).click()
+  await scope.getByText('Who pays whom.').waitFor()
+  const transfers = (await tableRows(scope, 'From')).slice(1).map(([from, to, amount]) => ({ from, to, amount: money(amount) }))
+  return { players, transfers }
+}
+
+// Applies the transfers to every player's position (starting from -buy-in
+// when buy-ins were collected into the pot) and requires each to land
+// exactly on the player's Net, with the pot fully paid out.
+function assertResolves (label, players, transfers, buyInsCollected) {
+  const position = Object.fromEntries(Object.entries(players).map(([p, v]) => [p, buyInsCollected ? -v.buyIn : 0]))
+  let pot = buyInsCollected ? Object.values(players).reduce((sum, v) => sum + v.buyIn, 0) : 0
+  for (const { from, to, amount } of transfers) {
+    if (amount <= 0) throw new Error(`${label}: non-positive transfer`)
+    if (from === 'Pot') {
+      if (!buyInsCollected) throw new Error(`${label}: pays from the pot although buy-ins were not collected`)
+      pot -= amount
+    } else {
+      if (!(from in position)) throw new Error(`${label}: unknown payer ${from}`)
+      position[from] -= amount
+    }
+    if (to === 'Pot') throw new Error(`${label}: pays into the pot`)
+    if (!(to in position)) throw new Error(`${label}: unknown payee ${to}`)
+    position[to] += amount
+  }
+  if (pot !== 0) throw new Error(`${label}: ${pot}c left in the pot`)
+  for (const [player, v] of Object.entries(players)) {
+    if (position[player] !== v.net) throw new Error(`${label}: settlement leaves ${player} at ${position[player]}c, Net is ${v.net}c`)
+  }
+}
+
+const sumBy = (values, key) => Object.values(values).reduce((sum, v) => sum + v[key], 0)
+
+async function assertEventAccountingReconciles (page) {
+  const playerCount = F7.groups.reduce((n, g) => n + g.players.length, 0)
+  const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
+  if (games.join('|') !== F7.games.map(g => g.game).join('|')) throw new Error(`Event games are ${games.join(', ')}`)
+  const expected = {}
+  const report = { games: {} }
+  for (const definition of F7.games) {
+    const block = section(page, definition.game)
+    await block.getByText('Game accounting', { exact: true }).click()
+    const { players, transfers } = await readDaySummary(block)
+    const buyIn = 100 * (definition.subTotals ? definition.subTotals.reduce((sum, s) => sum + s.amount, 0) : definition.amount)
+    const pool = buyIn * playerCount
+    const label = definition.game
+    if (Object.keys(players).length !== playerCount) throw new Error(`${label}: ${Object.keys(players).length} players, expected ${playerCount}`)
+    if (Object.values(players).some(v => v.buyIn !== buyIn)) throw new Error(`${label}: a buy-in differs from ${buyIn}c`)
+    if (sumBy(players, 'buyIn') !== pool) throw new Error(`${label}: buy-ins do not equal the ${pool}c pool`)
+    if (sumBy(players, 'gross') !== pool) throw new Error(`${label}: payouts ${sumBy(players, 'gross')}c do not equal the ${pool}c pool`)
+    if (Object.values(players).some(v => v.gross < 0)) throw new Error(`${label}: negative payout`)
+    const paid = Object.values(players).map(v => v.gross).filter(g => g > 0).sort((a, b) => b - a)
+    if (definition.payouts && paid.join() !== definition.payouts.map(d => d * 100).join()) throw new Error(`${label}: payouts ${paid} are not the defined ${definition.payouts}`)
+    if (definition.teamsFromGroups) {
+      const size = pool / paid.length
+      if (paid.length !== F7.groups[0].players.length || paid.some(p => p !== size)) throw new Error(`${label}: the pot is not split evenly within one team`)
+    }
+    if (transfers.some(t => t.from !== 'Pot')) throw new Error(`${label}: a buy-in game settles player to player`)
+    for (const t of transfers) if (players[t.to]?.gross !== t.amount) throw new Error(`${label}: pays ${t.to} ${t.amount}c, payout is ${players[t.to]?.gross}c`)
+    assertResolves(label, players, transfers, true)
+    for (const [player, v] of Object.entries(players)) {
+      const e = expected[player] ||= { gross: 0, buyIn: 0 }
+      e.gross += v.gross
+      e.buyIn += v.buyIn
+    }
+    report.games[label] = { pool, buyIn, payouts: Object.fromEntries(Object.entries(players).filter(([, v]) => v.gross > 0).map(([p, v]) => [p, v.gross])) }
+    await block.getByText('Hide details', { exact: true }).click()
+    await block.getByText('Game accounting', { exact: true }).waitFor()
+  }
+
+  const overall = section(page, 'Overall - event')
+  await overall.getByText('Consolidated accounting for event.').waitFor()
+  const checkbox = overall.getByLabel('Buy-ins collected')
+  if (!(await checkbox.isChecked())) throw new Error('Buy-ins collected is not Vue\'s default (checked)')
+  const collected = await readDaySummary(overall)
+  for (const [player, e] of Object.entries(expected)) {
+    const v = collected.players[player]
+    if (!v || v.gross !== e.gross || v.buyIn !== e.buyIn) throw new Error(`Overall for ${player} does not equal the sum of the games`)
+  }
+  if (Object.keys(collected.players).length !== Object.keys(expected).length) throw new Error('Overall lists players outside the games')
+  if (sumBy(collected.players, 'net') !== 0) throw new Error('Overall Net does not sum to zero')
+  if (sumBy(collected.players, 'buyIn') !== sumBy(collected.players, 'gross')) throw new Error('Overall payouts do not equal the buy-ins')
+  await overall.getByText('Settle from the pot for buy-in games, then between players for the rest.').waitFor()
+  assertResolves('Overall (buy-ins collected)', collected.players, collected.transfers, true)
+
+  // "Buy-ins collected" is a local checkbox: any request while it is toggled
+  // fails the capture.
+  const requests = []
+  const onRequest = request => requests.push(`${request.method()} ${new URL(request.url()).pathname}`)
+  page.on('request', onRequest)
+  await checkbox.uncheck()
+  await overall.getByText('Settle between players when buy-ins were not collected.').waitFor()
+  const playerToPlayer = (await tableRows(overall, 'From')).slice(1).map(([from, to, amount]) => ({ from, to, amount: money(amount) }))
+  assertResolves('Overall (buy-ins not collected)', collected.players, playerToPlayer, false)
+  await checkbox.check()
+  await overall.getByText('Settle from the pot for buy-in games, then between players for the rest.').waitFor()
+  const restored = (await tableRows(overall, 'From')).slice(1).map(([from, to, amount]) => ({ from, to, amount: money(amount) }))
+  page.off('request', onRequest)
+  if (requests.length) throw new Error(`Buy-ins collected sent requests: ${requests.join(', ')}`)
+  if (JSON.stringify(restored) !== JSON.stringify(collected.transfers)) throw new Error('Settlement changed after restoring Buy-ins collected')
+
+  report.overall = collected.players
+  report.settlement = collected.transfers
+  report.settlementWithoutBuyIns = playerToPlayer
+  return report
 }
 
 // The capture fixes the browser clock, which freezes Date.now(); debounced
@@ -574,6 +726,7 @@ export default [
     // Must stay last: confirming Lone Wolf saves the hole 6 decision.
     name: 'game-wolf-partner-modal',
     mayWrite: true,
+    writes: ids => [['PUT', `/api/app/games/${ids.f1Games.Wolf}`]],
     path: ids => `/scorecards/${ids.f1Scorecard}`,
     async prepare (page) {
       await showGameColumn(page, 'Wolf', 'Wolf')
@@ -585,11 +738,12 @@ export default [
     }
   },
   {
-    // Must stay last: confirms End round on F3, which locks that scorecard.
+    // Locks F3: confirms End round, which locks that scorecard.
     name: 'final-settlement-completed-round',
     path: ids => `/scorecards/${ids.f3Scorecard}`,
     mayWrite: true,
     locks: ['f3'],
+    writes: ids => [['PUT', `/api/app/scorecards/${ids.f3Scorecard}`]],
     async prepare (page) {
       await page.getByRole('button', { name: 'End round', exact: true }).first().click()
       const sheet = page.getByText('By ending this round, you attest that the scores are correct.').locator('xpath=ancestor::*[.//button][1]')
@@ -608,6 +762,38 @@ export default [
       const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
       for (const game of games) await collapseSection(page, game)
       await expandSection(page, 'Overall - side games')
+    }
+  },
+  {
+    // Must stay last: confirms Complete event on F7, which locks the event
+    // and its group scorecards and stores each game's final results.
+    name: 'event-final-settlement',
+    path: ids => `/events/${ids.f7Event}`,
+    mayWrite: true,
+    locks: ['f7'],
+    writes: ids => [['PUT', `/api/app/events/${ids.f7Event}`]],
+    async prepare (page, ids, results) {
+      await page.getByText(F7.name, { exact: true }).first().waitFor()
+      await page.locator('.sticky-footer').getByText('Complete event', { exact: true }).click()
+      await page.getByText('Complete this event', { exact: true }).waitFor()
+      const completed = page.waitForResponse(response => new URL(response.url()).pathname === `/api/app/events/${ids.f7Event}` && response.request().method() === 'PUT')
+      await page.getByRole('button', { name: 'Yes', exact: true }).click()
+      if ((await completed).status() !== 200) throw new Error('Complete event did not succeed')
+      // Vue's own completed state: the lock notice replaces the footer.
+      await page.getByText('This round is complete.').waitFor()
+      if (await page.locator('.sticky-footer').getByText('Complete event', { exact: true }).count()) throw new Error('Complete event is still offered')
+      await page.locator('.event-details .icon-button').click() // the trophy beside the event name
+      await page.waitForURL(/\/leaderboard$/)
+      await section(page, 'Overall - event').getByText('Who pays whom.').waitFor()
+      if (await page.getByText('Event in progress').count()) throw new Error('Leaderboard still shows the event in progress')
+      // Every amount must reconcile, game by game and overall, to the cent.
+      results.eventSettlement = await assertEventAccountingReconciles(page)
+      // Collapse the game sections so the final settlement is in view under
+      // the games it combines.
+      const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
+      for (const game of games) await collapseSection(page, game)
+      await expandSection(page, 'Overall - event')
+      await section(page, 'Overall - event').getByLabel('Buy-ins collected').waitFor()
     }
   }
 ]

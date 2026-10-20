@@ -9,7 +9,9 @@
 //      violation, no page error, only allowlisted console noise, every file
 //      present with the expected dimensions; then encode WebPs in staging;
 //   5. back outside the sandbox, check in the database that only the
-//      intended fixtures changed (see lib/state.mjs);
+//      intended fixtures changed (see lib/state.mjs) and, when F7 was
+//      completed, that its stored final results reconcile and match the
+//      settlement the capture displayed;
 //   6. only then move PNGs and WebPs into the draft folders.
 //
 // A failed run leaves the existing drafts untouched.
@@ -32,7 +34,7 @@ import { spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { log, redact } from './lib/proc.mjs'
 import { sandboxArgs } from './lib/sandbox.mjs'
-import { claimForCapture, verifyFixturesAfterCapture } from './lib/state.mjs'
+import { claimForCapture, verifyFixturesAfterCapture, finalizedEventPositions } from './lib/state.mjs'
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import {
   VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
@@ -50,6 +52,16 @@ const firstWriter = shots.findIndex(shot => shot.mayWrite)
 if (firstWriter !== -1 && shots.slice(firstWriter).some(shot => !shot.mayWrite)) {
   throw new Error('Refusing: every state-changing recipe (mayWrite) must run after all read-only recipes')
 }
+// Recipes that lock a fixture run after every recipe that does not, so no
+// capture can depend on a fixture that is already locked.
+const firstLocker = shots.findIndex(shot => shot.locks?.length)
+if (firstLocker !== -1 && shots.slice(firstLocker).some(shot => !shot.locks?.length)) {
+  throw new Error('Refusing: every locking recipe must run after all recipes that do not lock')
+}
+for (const shot of shots) {
+  if (shot.mayWrite && typeof shot.writes !== 'function') throw new Error(`Refusing: ${shot.name} may write but declares no writes`)
+  if (!shot.mayWrite && (shot.writes || shot.locks)) throw new Error(`Refusing: ${shot.name} declares writes or locks without mayWrite`)
+}
 
 // Outer process: claim the fixture state, then re-run inside the sandbox.
 if (process.env.SCREENS_SANDBOX !== 'browser') {
@@ -64,10 +76,34 @@ if (process.env.SCREENS_SANDBOX !== 'browser') {
   // The sandboxed run staged and validated everything. Before publishing,
   // confirm in the database that only the intended fixtures changed.
   const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
-  verifyFixturesAfterCapture(ids, { locked: [...new Set(selected.flatMap(shot => shot.locks || []))] })
-  log('fixture check passed: only the intended fixtures changed')
+  const locked = [...new Set(selected.flatMap(shot => shot.locks || []))]
+  verifyFixturesAfterCapture(ids, { locked })
+  log(`fixture check passed: only the intended fixtures changed${locked.length ? ` (locked and finalized: ${locked.join(', ')})` : ''}`)
   const manifestFile = path.join(CAPTURE_STAGING_DIR, 'publish.json')
-  const { runId, files } = JSON.parse(fs.readFileSync(manifestFile, 'utf8'))
+  const { runId, files, results } = JSON.parse(fs.readFileSync(manifestFile, 'utf8'))
+  if (locked.includes('f7')) {
+    // The stored final results must reconcile on their own and equal what
+    // the capture showed in Overall - event, player by player.
+    const stored = finalizedEventPositions(ids.f7Event)
+    const shown = results?.eventSettlement?.overall
+    if (!shown) throw new Error('Refusing to publish: the F7 capture recorded no settlement')
+    const names = new Set([...Object.keys(stored), ...Object.keys(shown)])
+    for (const name of names) {
+      const s = stored[name]
+      const d = shown[name]
+      if (!s || !d || Math.round(s.gross * 100) !== d.gross || Math.round(s.buyIn * 100) !== d.buyIn) {
+        throw new Error(`Refusing to publish: finalized results for ${name} differ from the displayed settlement`)
+      }
+    }
+    const dollars = cents => `${cents < 0 ? '-' : ''}$${Math.abs(cents / 100)}`
+    log(`F7 finalized results match the displayed settlement for ${names.size} players`)
+    for (const [game, g] of Object.entries(results.eventSettlement.games)) {
+      log(`  ${game}: pool ${dollars(g.pool)} (${dollars(g.buyIn)} x ${g.pool / g.buyIn}); paid ${Object.entries(g.payouts).map(([p, c]) => `${p} ${dollars(c)}`).join(', ')}`)
+    }
+    log(`  overall (gross / buy-in / net): ${Object.entries(shown).map(([p, v]) => `${p} ${dollars(v.gross)}/${dollars(v.buyIn)}/${dollars(v.net)}`).join('; ')}`)
+    log(`  settlement, buy-ins collected: ${results.eventSettlement.settlement.map(t => `${t.from} -> ${t.to} ${dollars(t.amount)}`).join('; ')}`)
+    log(`  settlement, buy-ins not collected: ${results.eventSettlement.settlementWithoutBuyIns.map(t => `${t.from} -> ${t.to} ${dollars(t.amount)}`).join('; ')}`)
+  }
   for (const [, dest] of files) {
     if (!path.basename(dest).startsWith(DRAFT_PREFIX) || ![SOURCE_DIR, WEB_DIR].includes(path.dirname(dest))) {
       throw new Error(`Refusing to publish ${dest}`)
@@ -136,6 +172,7 @@ const report = createReport()
 const consoleErrors = []
 const pageErrors = []
 const hubWrites = []
+const results = {}
 const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
 const runId = new Date().toISOString().replace(/[:.]/g, '-')
 const staging = path.join(CAPTURE_STAGING_DIR, runId)
@@ -184,11 +221,14 @@ try {
       if (!ALLOWED_CONSOLE_ERRORS.some(pattern => pattern.test(text))) consoleErrors.push(`${shot.name}: ${redact(text).slice(0, 200)}`)
     })
     page.on('pageerror', err => pageErrors.push(`${shot.name}: ${redact(err.message).slice(0, 200)}`))
-    // Read-only recipes must not change Hub data (any non-GET API request).
+    // Read-only recipes must not change Hub data (any non-GET API request);
+    // writing recipes may send only the writes they declare.
+    const declared = shot.mayWrite ? shot.writes(ids) : []
     page.on('request', request => {
       const url = new URL(request.url())
-      if (url.host === `${LOOPBACK}:${HUB_PORT}` && !['GET', 'HEAD', 'OPTIONS'].includes(request.method()) && !shot.mayWrite) {
-        hubWrites.push(`${shot.name}: ${request.method()} ${url.pathname}`)
+      if (url.host !== `${LOOPBACK}:${HUB_PORT}` || ['GET', 'HEAD', 'OPTIONS'].includes(request.method())) return
+      if (!declared.some(([method, pathname]) => method === request.method() && pathname === url.pathname)) {
+        hubWrites.push(`${shot.name}: ${shot.mayWrite ? 'undeclared ' : ''}${request.method()} ${url.pathname}`)
       }
     })
 
@@ -214,7 +254,7 @@ try {
       await page.evaluate(port => fetch(`http://127.0.0.1:${port}/injected-unapproved-request`).catch(() => null), 4799)
     }
     try {
-      await shot.prepare(page, ids)
+      await shot.prepare(page, ids, results)
     } catch (error) {
       fs.mkdirSync(DEBUG_DIR, { recursive: true })
       await page.screenshot({ path: path.join(DEBUG_DIR, `${shot.name}.png`) })
@@ -245,7 +285,7 @@ const problems = []
 if (failure) problems.push(`recipe failed: ${redact(failure.message)}`)
 if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[...new Set(report.unexpected)].join('\n  ')}`)
 if (pageErrors.length) problems.push(`page errors:\n  ${pageErrors.join('\n  ')}`)
-if (hubWrites.length) problems.push(`read-only recipes changed Hub data:\n  ${hubWrites.join('\n  ')}`)
+if (hubWrites.length) problems.push(`Hub writes outside the declared ones:\n  ${hubWrites.join('\n  ')}`)
 if (consoleErrors.length) problems.push(`console errors outside the allowlist:\n  ${consoleErrors.join('\n  ')}`)
 
 const expected = [VIEWPORT.width * DEVICE_SCALE_FACTOR, VIEWPORT.height * DEVICE_SCALE_FACTOR]
@@ -274,5 +314,5 @@ for (const shot of selected) {
   if (width !== expected[0] || height !== expected[1]) throw new Error(`${base}.webp has unexpected dimensions ${width}x${height}`)
   publish.push([path.join(staging, `${base}.png`), path.join(SOURCE_DIR, `${base}.png`)], [webp, path.join(WEB_DIR, `${base}.webp`)])
 }
-fs.writeFileSync(path.join(CAPTURE_STAGING_DIR, 'publish.json'), JSON.stringify({ runId, files: publish }))
+fs.writeFileSync(path.join(CAPTURE_STAGING_DIR, 'publish.json'), JSON.stringify({ runId, files: publish, results }))
 log(`staged and validated ${publish.length} draft files (${expected.join('x')}); publishing after the fixture check`)

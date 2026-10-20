@@ -81,8 +81,15 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    Vue, each in its own process group and sandbox, with `env -i`.
 6. `fixtures.mjs`: build the fixtures through the Hub REST API and record a
    digest of each (scores, game settings, lock state; for events also
-   players, tees and groups; plus the fictional user records); marker becomes
-   `fixtures-ready`.
+   players, tees and groups; plus the fictional user records) and a per-row
+   snapshot of the users, events, scorecards, players, game_players, games
+   and scores tables; marker becomes `fixtures-ready`.
+   - F7 (built first): Chambers Bay Cup, a published event with three
+     groups of four scored through 18 and three buy-in games (net Skins,
+     net Stroke Play paying $60/$40/$20, Team Stroke Play with groups as
+     teams), unlocked; the last recipe completes it. Built before the other
+     fixtures and dated a week earlier, so it changes no recent-scorecard,
+     recent-event or recent-partner list.
    - F1: Shinnecock scorecard through 9 (Nassau, Net Skins, Wolf).
    - F2: Torrey Pines South scorecard through 11 (Scotch, Match Play).
    - F3: Cypress Point scorecard through 18, left unlocked (Nassau, Net
@@ -99,15 +106,19 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    inside the browser sandbox, capture into staging, validate and encode
    WebP; then, outside the sandbox, compare the fixture digests (scores and
    game settings unchanged everywhere; only fixtures a recipe declares in
-   `locks` may be locked, i.e. F3) and only then publish the drafts.
+   `locks` may be locked, i.e. F3 and F7, and those must be fully locked
+   and finalized), require that no row changed outside the locked fixtures'
+   own scorecard, event and game rows, check that F7's stored final results
+   reconcile and equal the settlement the capture displayed, and only then
+   publish the drafts.
 
 Cleanup, always (success, failure, timeout, Ctrl-C, SIGTERM, SIGHUP):
 `servers.mjs stop`, then `scan.mjs`.
 
 ### Fixture state and re-running pieces
 
-Captures change data (the Wolf modal confirms a Lone Wolf decision), so each
-capture needs a fresh build. `capture.mjs` refuses unless the marker says
+Captures change data (End round locks F3, Complete event locks F7; the Wolf
+modal may save a Lone Wolf decision), so each capture needs a fresh build. `capture.mjs` refuses unless the marker says
 `fixtures-ready` for the current `fourball_screens` (matched by database OID)
 and the fixture definitions are unchanged since they were built. To re-run
 by hand: `screens:stop`, `screens:db`, `screens:auth`, `screens:start`,
@@ -131,10 +142,27 @@ was no network, WebSocket or redirect violation, no page error and no console
 error outside `ALLOWED_CONSOLE_ERRORS`, and every PNG and WebP exists at
 780×1688. Recipes are read-only unless marked `mayWrite: true`: a read-only recipe that
 sends any non-GET request to the Hub rejects the run, and writing recipes must
-come after every read-only one (today only the Wolf modal). A rejected run
+come after every read-only one (the Wolf modal, End round on F3, Complete
+event on F7). A writing recipe lists every Hub write it may send in `writes`
+(method and exact path); any other write rejects the run. Recipes that lock
+a fixture (`locks`) must come after every recipe that does not. A rejected run
 prints the reasons and leaves the drafts unchanged
 (staged files stay in `capture-staging` for inspection; recipe failures also
 write `debug/<recipe>.png|txt`).
+
+### Completed-event accounting (F7)
+
+Before the F7 settlement is published, the recipe checks, to the cent and
+only with normal taps: each game's buy-ins equal its defined pool, its
+payouts equal that pool (Stroke Play pays exactly the defined places, the
+team pot is split evenly within one team), its settlement pays each winner
+from the pot; Overall - event equals the sum of the games for every player,
+Net sums to zero, and the settlement resolves every player's Net exactly
+with the pot fully paid out, both with and without "Buy-ins collected".
+That checkbox is local display state (toggling it must send no request);
+it is left at Vue's default, checked. Outside the sandbox, the results Vue
+stored when the event was completed are checked again the same way and
+compared with what was displayed.
 
 ### Reproducibility
 
@@ -142,9 +170,11 @@ Fixture data is identical on every run. Some Hub queries return players
 without `ORDER BY`, so these can change order between builds:
 
 - names within an event group
-- the Wolf partner buttons
+- the Wolf partner buttons and the Scotch closest-to-pin options
 - tied leaderboard rows
 - the counting-ball tick on a tied hole
+- recent partners whose latest player rows were inserted in the same second
+  (the Hub's `inserted_at` has one-second resolution)
 
 Each variant is a genuine rendering of the production app. Review the
 specific files you intend to approve.
