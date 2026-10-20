@@ -17,7 +17,7 @@
 // report.unexpected is not empty.
 
 export function createReport () {
-  return { unexpected: [], expectedBlocked: [], fulfilled: 0 }
+  return { unexpected: [], expectedBlocked: [], fulfilled: 0, mocked: [] }
 }
 
 function parse (raw) {

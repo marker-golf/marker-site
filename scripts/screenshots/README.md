@@ -87,6 +87,11 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    - F3: Cypress Point scorecard through 18, left unlocked (Nassau, Net
      Skins); the last recipe confirms End round on it.
    - F4: PebblePayday event.
+   - F5A: an empty saved event (Poppy Hills); F5B: an event at Spyglass Hill
+     with nine unassigned players and one empty group (event-setup screens).
+   - The isolated Hub's own response to the new-event course search is
+     recorded to `run/mocks/course-search.json` (local course data; its USGA
+     lookup fails on the dead loopback port).
 7. `capture.mjs`: claim the fixtures (marker becomes `captured`), re-run
    inside the browser sandbox, capture into staging, validate and encode
    WebP; then, outside the sandbox, compare the fixture digests (scores and
@@ -105,6 +110,15 @@ and the fixture definitions are unchanged since they were built. To re-run
 by hand: `screens:stop`, `screens:db`, `screens:auth`, `screens:start`,
 `screens:fixtures`, `screens:capture`, `screens:stop`. Or just run
 `screens:proof`.
+
+### Recorded responses and the fixed clock
+
+A recipe can list `mocks`; capture then answers exactly those recorded Hub
+GET requests (same path and query, with the Hub's own CORS and content-type
+headers) and lets every other request through the normal network policy.
+Each replay is logged. The browser clock is fixed per recipe; recipes that
+type into debounced inputs call `letDebounceRun`, which moves the fixed time
+forward so the debounce can fire.
 
 ### Transactional output
 

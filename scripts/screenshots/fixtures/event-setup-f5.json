@@ -1,0 +1,22 @@
+{
+  "_comment": "F5: event-setup states. F5A is a saved, empty event (no players, groups or games). F5B has nine players added but not assigned, plus one empty group so the group-edit screen can show assignment. Neither is published or locked. The course-search response used by the new-event captures is recorded from the isolated Hub's own GET courses/search for the query below (its USGA half fails locally on the dead loopback port, so only local course data is returned) and replayed in the browser.",
+  "courseSearch": { "query": "sp", "expect": "Spyglass Hill GC" },
+  "f5a": {
+    "name": "Poppy Hills Spring Classic",
+    "date": "2026-07-24",
+    "course": { "facility": "Poppy Hills GC", "courseId": "624fddbb-d89d-4eb7-b7b1-3405c23093e1" }
+  },
+  "f5b": {
+    "name": "Spyglass Club Day",
+    "date": "2026-07-18",
+    "course": { "facility": "Spyglass Hill GC", "courseId": "634ac465-f55f-464d-957f-5fc958409ccb" },
+    "tees": {
+      "male": { "name": "White", "gender": "Male" },
+      "female": { "name": "Red", "gender": "Female" }
+    },
+    "players": ["allan", "ben", "bert", "dave", "edward", "george", "greg", "harry", "joe"],
+    "groups": [
+      { "teeTime": "08:00", "startHole": 1, "players": [] }
+    ]
+  }
+}

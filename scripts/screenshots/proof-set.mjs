@@ -1,4 +1,5 @@
-// Proof set for the Vue screenshot pipeline (18 images). Each shot names the
+// Proof set for the Vue screenshot pipeline (26 images). The event game
+// picker reuses game-picker: Vue's event route shows the same picker. Each shot names the
 // draft output file, the route to open and the steps that produce the state.
 // Draft names never collide with existing Expo assets.
 //
@@ -118,6 +119,39 @@ async function assertSideGamesReconcile (page) {
   await overall.getByText('Settlement', { exact: true }).click()
   await overall.getByText('Who pays whom.').waitFor()
   if (!overallWasOpen) await collapseSection(page, 'Overall - side games')
+}
+
+// The capture fixes the browser clock, which freezes Date.now(); debounced
+// inputs (lodash debounce measures elapsed time with Date.now) would never
+// fire. Moving the fixed time forward lets the pending debounce run once.
+async function letDebounceRun (page, ms = 1000) {
+  const now = await page.evaluate(() => Date.now())
+  await page.clock.setFixedTime(new Date(now + ms))
+}
+
+// Players added in the event-setup captures (F5B): recent partners who are
+// not yet in the event, including one woman so both tee pickers appear.
+const EVENT_NEW_PLAYERS = ['Debbie Dogleg', 'Larry Lateral', 'Mike Mulligan']
+const EVENT_GROUP_PLAYERS = ['Allan Albatross', 'Ben Birdie', 'Bert Bailout', 'Dave Divot']
+
+async function selectRecentPlayers (page, names) {
+  const recent = section(page, 'Recent Players')
+  for (const name of names) {
+    const [first, last] = name.split(' ')
+    const item = recent.locator('.BlockItem').filter({ hasText: new RegExp(`^\\s*${first}\\s+${last}\\s*$`) })
+    if (!(await item.locator('.checkedSquare').count())) await item.click()
+    await item.locator('.checkedSquare').waitFor()
+  }
+}
+
+// A <select> identified by its visible label text.
+const labelledSelect = (page, label) => page.locator('label', { hasText: new RegExp(`^\\s*${label.replace(/[()]/g, '\\$&')}\\s*$`) }).locator('xpath=..').locator('select')
+
+// Presses a ButtonGroup option only if it is not already active.
+async function chooseButton (page, text) {
+  const option = page.locator('.button-group > div').filter({ hasText: new RegExp(`^\\s*${text}\\s*$`) })
+  if (!(await option.evaluate(el => el.classList.contains('active')))) await option.click()
+  await page.locator('.button-group > div.active').filter({ hasText: new RegExp(`^\\s*${text}\\s*$`) }).waitFor()
 }
 
 const holeRow = (page, hole) => page.locator('tbody tr').filter({ has: page.locator('td.scorecard-hole', { hasText: new RegExp(`^\\s*${hole}\\s*$`) }) })
@@ -326,6 +360,116 @@ export default [
       const attest = page.getByText('By ending this round, you attest that the scores are correct.')
       if (!(await attest.count())) await page.getByRole('button', { name: 'End round', exact: true }).first().click()
       await attest.waitFor()
+    }
+  },
+  {
+    name: 'event-course-search',
+    path: () => '/events/new',
+    mocks: ['course-search'],
+    async prepare (page) {
+      // New event, step 1: search for the course. The search response is the
+      // isolated Hub's recorded answer (see fixtures/event-setup-f5.json).
+      await page.getByText('Select course', { exact: true }).waitFor()
+      await page.getByPlaceholder('Search courses').fill('sp')
+      await letDebounceRun(page)
+      await page.getByText('2 matching courses', { exact: true }).waitFor()
+      await page.locator('.BlockItem.clickable').filter({ hasText: 'Spyglass Hill GC' }).waitFor()
+    }
+  },
+  {
+    name: 'event-form-filled',
+    path: () => '/events/new',
+    mocks: ['course-search'],
+    async prepare (page) {
+      // Course chosen, name and date filled; Save is never pressed.
+      await page.getByPlaceholder('Search courses').fill('sp')
+      await letDebounceRun(page)
+      await page.locator('.BlockItem.clickable').filter({ hasText: 'Spyglass Hill GC' }).click()
+      await page.locator('input[name="name"]').fill('Monterey Summer Shootout')
+      await page.locator('input[name="date"]').fill('2026-07-25')
+      await page.getByRole('button', { name: 'Save', exact: true }).waitFor()
+      if (await page.locator('input[name="date"]').inputValue() !== '2026-07-25') throw new Error('Event date was not set')
+      await page.locator('input[name="date"]').blur() // no focus ring in the capture
+    }
+  },
+  {
+    name: 'event-empty-dashboard',
+    path: ids => `/events/${ids.f5aEvent}`,
+    async prepare (page) {
+      await page.getByText('Poppy Hills Spring Classic').first().waitFor()
+      await sectionTitle(page, 'Players \\(0\\)').waitFor()
+      await sectionTitle(page, 'Scorecards').waitFor()
+      await sectionTitle(page, 'Games').waitFor()
+    }
+  },
+  {
+    name: 'event-add-players-picker',
+    path: ids => `/events/${ids.f5bEvent}/players/select`,
+    async prepare (page) {
+      // Select three recent players (local selection only; Continue is not pressed).
+      await page.getByText('Recent Players', { exact: true }).waitFor()
+      await selectRecentPlayers(page, EVENT_NEW_PLAYERS)
+      await page.getByText(`${EVENT_NEW_PLAYERS.length} selected players`, { exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'event-add-players-tees',
+    path: ids => `/events/${ids.f5bEvent}/players/select`,
+    async prepare (page) {
+      // Continue moves to Vue's Set Player Tees step without saving; Save is
+      // never pressed.
+      await page.getByText('Recent Players', { exact: true }).waitFor()
+      await selectRecentPlayers(page, EVENT_NEW_PLAYERS)
+      await page.getByRole('button', { name: 'Continue', exact: true }).click()
+      await page.getByText('Set Player Tees', { exact: true }).waitFor()
+      await page.getByRole('button', { name: 'Save', exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'event-groups-tee-times',
+    path: ids => `/events/${ids.f5bEvent}/groups/new`,
+    async prepare (page) {
+      // Four groups from 8:30 at 10-minute intervals; Save is never pressed.
+      await page.getByText('Adjust group settings', { exact: true }).waitFor()
+      await page.locator('input[name="teeTime"]').fill('08:30')
+      await labelledSelect(page, 'Start hole').selectOption('1')
+      await labelledSelect(page, 'Number of groups').selectOption('4')
+      await chooseButton(page, 'Tee Times')
+      await labelledSelect(page, 'Spacing (minutes)').selectOption('10')
+      await page.locator('input[name="teeTime"]').blur()
+      await page.getByRole('button', { name: 'Save (4)', exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'event-groups-shotgun',
+    path: ids => `/events/${ids.f5bEvent}/groups/new`,
+    async prepare (page) {
+      // Shotgun start at 8:00 across holes 1-6; Save is never pressed. (Start
+      // hole 1 keeps Vue's preview accurate: the preview text does not wrap
+      // past hole 18, although the groups it creates do.)
+      await page.getByText('Adjust group settings', { exact: true }).waitFor()
+      await page.locator('input[name="teeTime"]').fill('08:00')
+      await labelledSelect(page, 'Start hole').selectOption('1')
+      await labelledSelect(page, 'Number of groups').selectOption('6')
+      await chooseButton(page, 'Shotgun Start')
+      await page.locator('input[name="teeTime"]').blur()
+      await page.getByText('This will add groups starting at 08:00 AM on holes: 1, 2, 3, 4, 5, 6', { exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'event-group-assign-players',
+    path: ids => `/events/${ids.f5bEvent}/groups/${ids.f5bGroups[0]}/edit`,
+    async prepare (page) {
+      // Tick four of the nine unassigned players. In Vue this only changes the
+      // screen until Save, which is never pressed.
+      await page.getByText('Edit Event Scorecard', { exact: true }).waitFor()
+      const players = section(page, 'Players')
+      for (const name of EVENT_GROUP_PLAYERS) {
+        const row = players.locator('.BlockItem').filter({ hasText: name })
+        if (!(await row.locator('.checkedSquare').count())) await row.click()
+        await row.locator('.checkedSquare').waitFor()
+      }
+      await scrollBelowHeader(sectionTitle(page, 'Players'))
     }
   },
   {

@@ -174,6 +174,9 @@ if (inject === 'page-error') {
 let failure = null
 try {
   for (const shot of selected) {
+    // Every recipe starts at the same fixed browser time (a recipe may move
+    // it forward, see letDebounceRun in proof-set.mjs).
+    await context.clock.setFixedTime(new Date(BROWSER_FIXED_TIME))
     const page = await context.newPage()
     page.on('console', msg => {
       if (msg.type() !== 'error') return
@@ -189,6 +192,22 @@ try {
       }
     })
 
+    // Recorded Hub responses a recipe replays (for example the course search
+    // the new-event form performs). Only GET requests to the allowed Hub host
+    // and the exact recorded path and query are answered; everything else
+    // falls through to the network policy.
+    for (const name of shot.mocks || []) {
+      const mock = JSON.parse(fs.readFileSync(path.join(path.dirname(FIXTURE_IDS), 'mocks', `${name}.json`), 'utf8'))
+      await page.route('**/*', route => {
+        const request = route.request()
+        const url = new URL(request.url())
+        const matches = request.method() === 'GET' && url.host === `${LOOPBACK}:${HUB_PORT}` &&
+          url.pathname === mock.path && url.searchParams.toString() === new URLSearchParams(mock.params).toString()
+        if (!matches) return route.fallback()
+        report.mocked.push(`${shot.name}: GET ${url.pathname}?${url.searchParams}`)
+        return route.fulfill({ status: 200, headers: mock.headers, body: JSON.stringify(mock.body) })
+      })
+    }
     await page.goto(`${VUE_URL}${shot.path(ids)}`, { waitUntil: 'networkidle' })
     if (new URL(page.url()).pathname.startsWith('/login')) throw new Error(`${shot.name}: redirected to login`)
     if (inject === 'external-request') {
@@ -221,6 +240,7 @@ try {
 
 // Verdict ------------------------------------------------------------------
 log(`fonts served locally: ${report.fulfilled}; expected blocked: ${[...new Set(report.expectedBlocked)].join(', ') || 'none'}`)
+if (report.mocked.length) log(`replayed recorded Hub responses: ${[...new Set(report.mocked)].join('; ')}`)
 const problems = []
 if (failure) problems.push(`recipe failed: ${redact(failure.message)}`)
 if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[...new Set(report.unexpected)].join('\n  ')}`)

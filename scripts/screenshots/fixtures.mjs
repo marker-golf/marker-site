@@ -1,4 +1,5 @@
-// Builds the proof-set fixtures (F1, F2, F3 scorecards and the F4 event)
+// Builds the proof-set fixtures (F1, F2, F3 scorecards, the F4 event and the
+// F5 event-setup states)
 // through the isolated Hub's REST API, signed in
 // as the fictional demo user. Requires a freshly reset fourball_screens (the
 // "reset" fixture-state marker for this exact database build, and no events or
@@ -17,6 +18,7 @@ const f1 = readFixture('shinnecock-f1.json')
 const f2 = readFixture('torrey-f2.json')
 const f3 = readFixture('cypress-f3.json')
 const f4 = readFixture('pebblepayday-f4.json')
+const f5 = readFixture('event-setup-f5.json')
 const userByKey = Object.fromEntries(users.map(u => [u.key, u]))
 
 const token = JSON.parse(fs.readFileSync(AUTH_STATE, 'utf8')).origins[0].localStorage
@@ -296,6 +298,49 @@ for (const [index, group] of f4.groups.entries()) {
 }
 log(`F4 event ready: ${allEventPlayerIds.length} players, ${groupCards.length} groups, ${f4.games.length} games`)
 
+// F5: event-setup states --------------------------------------------------
+async function createEvent ({ name, date, course }) {
+  return idOf(await api('POST', 'events', { event: { name, date, course_id: course.courseId } }), 'event')
+}
+const f5aEvent = await createEvent(f5.f5a)
+log(`F5A event ready: "${f5.f5a.name}" saved with no players, groups or games`)
+
+const f5bEvent = await createEvent(f5.f5b)
+const f5bTees = { male: teeId(f5.f5b.course.courseId, f5.f5b.tees.male), female: teeId(f5.f5b.course.courseId, f5.f5b.tees.female) }
+const f5bPlayers = {}
+for (const key of f5.f5b.players) {
+  const params = playerParams(key, f5bTees[userByKey[key].gender], { event_id: f5bEvent })
+  f5bPlayers[key] = idOf(await api('POST', 'players', { player: params }), 'player')
+}
+const f5bGroups = []
+for (const group of f5.f5b.groups) {
+  f5bGroups.push(idOf(await api('POST', 'scorecards', {
+    scorecard: { event_id: f5bEvent, course_id: f5.f5b.course.courseId, date: f5.f5b.date, tee_time: group.teeTime, start_hole: group.startHole },
+    player_ids: group.players.map(k => f5bPlayers[k])
+  }), 'scorecard'))
+}
+log(`F5B event ready: ${f5.f5b.players.length} players added, none assigned; ${f5bGroups.length} empty group`)
+
+// Record the isolated Hub's own course-search response for the new-event
+// captures. They replay it in the browser instead of calling the Hub, so the
+// screenshot never depends on (or triggers) a USGA lookup.
+const searchResponse = await fetch(`${API_BASE}/courses/search?name=${encodeURIComponent(f5.courseSearch.query)}`, {
+  headers: { Accept: 'application/vnd.fourball.v2+json', Authorization: `Bearer ${token}`, Origin: 'http://127.0.0.1:8090' },
+  signal: AbortSignal.timeout(API_TIMEOUT)
+})
+if (searchResponse.status !== 200) throw new Error(httpErrorSummary('GET', 'courses/search', searchResponse.status, await searchResponse.text()))
+const search = await searchResponse.json()
+if (!search?.courses?.some(course => course.name === f5.courseSearch.expect)) {
+  throw new Error(`Course search for "${f5.courseSearch.query}" did not return ${f5.courseSearch.expect}`)
+}
+// Keep the Hub's own CORS and content-type headers so the browser treats the
+// replay exactly like the real cross-origin response.
+const searchHeaders = Object.fromEntries([...searchResponse.headers].filter(([name]) => /^(access-control-|content-type$)/.test(name)))
+fs.mkdirSync(path.join(path.dirname(FIXTURE_IDS), 'mocks'), { recursive: true })
+fs.writeFileSync(path.join(path.dirname(FIXTURE_IDS), 'mocks', 'course-search.json'),
+  JSON.stringify({ path: '/api/app/courses/search', params: { name: f5.courseSearch.query }, headers: searchHeaders, body: search }))
+log(`recorded course search "${f5.courseSearch.query}": ${search.courses.map(c => c.name).join(', ')}`)
+
 // Hygiene: publishing and sharing issue login codes to fixture users. Clear
 // them so the isolated database holds no usable login codes.
 screensSql('update users set code = null where code is not null')
@@ -307,7 +352,7 @@ screensSql('update users set code = null where code is not null')
 // a genuine rendering of the production app.
 
 fs.mkdirSync(path.dirname(FIXTURE_IDS), { recursive: true })
-const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards }
+const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups }
 fs.writeFileSync(FIXTURE_IDS, JSON.stringify(fixtureIds, null, 2))
 log(`fixture ids written to ${FIXTURE_IDS}`)
 markFixturesReady(fixtureIds)

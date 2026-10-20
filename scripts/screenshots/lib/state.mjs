@@ -8,9 +8,10 @@
 //   capture   -> stage "captured"       (claimed before any recipe runs)
 //
 // fixtures also records a digest of every fixture (scores, game settings and
-// lock state). Before any draft is published, capture compares it again: F1,
-// F2 and F4 must be unchanged and unlocked; F3 must be unchanged except that
-// it is now locked (End round).
+// lock state; for events also players, tee assignments and groups). Before
+// any draft is published, capture compares it again: every fixture must be
+// unchanged and unlocked, except fixtures a recipe declares it locks (F3,
+// End round).
 
 import crypto from 'node:crypto'
 import fs from 'node:fs'
@@ -60,13 +61,18 @@ function scorecardDigest (id) {
 }
 
 function eventDigest (id) {
-  const [scores, games, locked, lockedCards] = screensSql(`select
+  const [scores, games, locked, lockedCards, players, groups] = screensSql(`select
     coalesce(md5(string_agg(p.id || ':' || s.hole_number || ':' || s.score, ',' order by p.id, s.hole_number)), '-'),
     (select coalesce(md5(string_agg(g.settings::text, ',' order by g.id)), '-') from games g where g.event_id = ${uuid(id)}),
     (select locked from events where id = ${uuid(id)}),
-    (select count(*) from scorecards where event_id = ${uuid(id)} and locked)
+    (select count(*) from scorecards where event_id = ${uuid(id)} and locked),
+    (select coalesce(md5(string_agg(ep.id || ':' || coalesce(ep.scorecard_id::text, '-') || ':' || coalesce(ep.rating_id::text, '-') || ':' || coalesce(ep.tee_set_rating_v2_id::text, '-'), ',' order by ep.id)), '-')
+      from players ep where ep.event_id = ${uuid(id)}),
+    (select coalesce(md5(string_agg(sc.id || ':' || coalesce(sc.tee_time::text, '-') || ':' || coalesce(sc.start_hole::text, '-') || ':' || coalesce(sc.published::text, '-'), ',' order by sc.id)), '-')
+      from scorecards sc where sc.event_id = ${uuid(id)})
     from scores s join players p on p.id = s.player_id where p.event_id = ${uuid(id)}`).split('|')
-  return { scores, games, locked: locked === 't' || lockedCards !== '0' }
+  // Players and groups count as the event's "games" for change detection.
+  return { scores, games: `${games}/${players}/${groups}`, locked: locked === 't' || lockedCards !== '0' }
 }
 
 export function fixtureDigests (ids) {
@@ -74,7 +80,9 @@ export function fixtureDigests (ids) {
     f1: scorecardDigest(ids.f1Scorecard),
     f2: scorecardDigest(ids.f2Scorecard),
     f3: scorecardDigest(ids.f3Scorecard),
-    f4: eventDigest(ids.f4Event)
+    f4: eventDigest(ids.f4Event),
+    f5a: eventDigest(ids.f5aEvent),
+    f5b: eventDigest(ids.f5bEvent)
   }
 }
 
@@ -92,11 +100,11 @@ export function verifyFixturesAfterCapture (ids, { locked = [] } = {}) {
   if (!state?.digests || state.dbOid !== screensDbOid()) throw new Error('Refusing to publish: fixture digests are missing for this database build')
   const now = fixtureDigests(ids)
   const problems = []
-  for (const key of ['f1', 'f2', 'f3', 'f4']) {
+  for (const key of Object.keys(state.digests)) {
     if (now[key].scores !== state.digests[key].scores) problems.push(`${key} scores changed`)
     if (now[key].games !== state.digests[key].games) problems.push(`${key} game settings changed`)
   }
-  for (const key of ['f1', 'f2', 'f3', 'f4']) {
+  for (const key of Object.keys(state.digests)) {
     if (now[key].locked !== locked.includes(key)) problems.push(`${key} is ${now[key].locked ? '' : 'not '}locked`)
   }
   if (problems.length) throw new Error(`Refusing to publish: ${problems.join('; ')}`)
