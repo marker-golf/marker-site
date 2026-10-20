@@ -132,10 +132,14 @@ for (const g of f1.games) {
   let settings
   if (g.game === 'Nassau') {
     settings = {
+      // Per-match accounting, as Vue's Nassau form creates it (Vue offers no
+      // pool option for Nassau; a pool here would turn match results into
+      // pot payouts and invent buy-ins).
       game: 'Nassau', balls: [{ start: 1, end: 18, net: 1, gross: 0 }], stroke_off_low_ball: true, ...HANDICAP_DEFAULTS,
+      accounting: { amount: null, is_pool: false },
       matches: g.matches.map(m => ({
         sides: { left: ids(g.sides.left), right: ids(g.sides.right) },
-        accounting: { amount: m.amount, is_pool: true },
+        accounting: { amount: m.amount, is_pool: false },
         press_settings: { auto: { down: m.autoPressDown, enabled: m.autoPressDown > 0 }, manual: {}, close_out: false, hole_presses: {} },
         stipulated_round: { start: m.start, end: m.end }
       }))

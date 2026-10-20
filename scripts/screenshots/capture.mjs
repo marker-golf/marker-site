@@ -35,7 +35,7 @@ import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import {
   VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
   BROWSER_FIXED_TIME, BROWSER_ALLOWED_HOSTS, EXPECTED_BLOCKED_REQUESTS, ALLOWED_CONSOLE_ERRORS,
-  SOURCE_DIR, WEB_DIR, DRAFT_PREFIX, DEBUG_DIR, CAPTURE_STAGING_DIR, USGA_DEAD_PORT, LOOPBACK
+  SOURCE_DIR, WEB_DIR, DRAFT_PREFIX, DEBUG_DIR, CAPTURE_STAGING_DIR, USGA_DEAD_PORT, LOOPBACK, HUB_PORT
 } from './lib/config.mjs'
 import shots from './proof-set.mjs'
 
@@ -44,6 +44,10 @@ const inject = process.argv.find(arg => arg.startsWith('--inject-failure='))?.sl
 if (inject && !['page-error', 'external-request'].includes(inject)) throw new Error(`Unknown --inject-failure=${inject}`)
 const selected = only ? shots.filter(s => s.name === only) : shots
 if (!selected.length) throw new Error(`No proof shot named ${only}`)
+const firstWriter = shots.findIndex(shot => shot.mayWrite)
+if (firstWriter !== -1 && shots.slice(firstWriter).some(shot => !shot.mayWrite)) {
+  throw new Error('Refusing: every state-changing recipe (mayWrite) must run after all read-only recipes')
+}
 
 // Outer process: claim the fixture state, then re-run inside the sandbox.
 if (process.env.SCREENS_SANDBOX !== 'browser') {
@@ -108,6 +112,7 @@ const STABILIZE_CSS = `
 const report = createReport()
 const consoleErrors = []
 const pageErrors = []
+const hubWrites = []
 const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
 const runId = new Date().toISOString().replace(/[:.]/g, '-')
 const staging = path.join(CAPTURE_STAGING_DIR, runId)
@@ -153,6 +158,13 @@ try {
       if (!ALLOWED_CONSOLE_ERRORS.some(pattern => pattern.test(text))) consoleErrors.push(`${shot.name}: ${redact(text).slice(0, 200)}`)
     })
     page.on('pageerror', err => pageErrors.push(`${shot.name}: ${redact(err.message).slice(0, 200)}`))
+    // Read-only recipes must not change Hub data (any non-GET API request).
+    page.on('request', request => {
+      const url = new URL(request.url())
+      if (url.host === `${LOOPBACK}:${HUB_PORT}` && !['GET', 'HEAD', 'OPTIONS'].includes(request.method()) && !shot.mayWrite) {
+        hubWrites.push(`${shot.name}: ${request.method()} ${url.pathname}`)
+      }
+    })
 
     await page.goto(`${VUE_URL}${shot.path(ids)}`, { waitUntil: 'networkidle' })
     if (new URL(page.url()).pathname.startsWith('/login')) throw new Error(`${shot.name}: redirected to login`)
@@ -190,6 +202,7 @@ const problems = []
 if (failure) problems.push(`recipe failed: ${redact(failure.message)}`)
 if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[...new Set(report.unexpected)].join('\n  ')}`)
 if (pageErrors.length) problems.push(`page errors:\n  ${pageErrors.join('\n  ')}`)
+if (hubWrites.length) problems.push(`read-only recipes changed Hub data:\n  ${hubWrites.join('\n  ')}`)
 if (consoleErrors.length) problems.push(`console errors outside the allowlist:\n  ${consoleErrors.join('\n  ')}`)
 
 const expected = [VIEWPORT.width * DEVICE_SCALE_FACTOR, VIEWPORT.height * DEVICE_SCALE_FACTOR]

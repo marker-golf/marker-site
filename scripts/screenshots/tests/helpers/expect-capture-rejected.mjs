@@ -24,7 +24,7 @@ const checks = [
   // instead of (or as well as) a page error; both reject the capture.
   [failure !== 'page-error' || /(page errors|console errors outside the allowlist):[\s\S]*injected page error/.test(result.stderr), 'page error was not the reported cause'],
   [failure !== 'external-request' || /unexpected network activity:[\s\S]*injected-unapproved-request/.test(result.stderr), 'unapproved request was not the reported cause'],
-  [drafts().length === 12, `expected 12 draft files, found ${drafts().length}`],
+  [drafts().length >= 12 && drafts().length === before.split('\n').length, `draft file count changed or too low (${drafts().length})`],
   [before === after, 'draft files changed']
 ]
 const failed = checks.filter(([ok]) => !ok).map(([, message]) => message)

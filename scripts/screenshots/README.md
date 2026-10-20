@@ -104,7 +104,10 @@ by hand: `screens:stop`, `screens:db`, `screens:auth`, `screens:start`,
 `capture.mjs` publishes nothing unless every selected recipe succeeded, there
 was no network, WebSocket or redirect violation, no page error and no console
 error outside `ALLOWED_CONSOLE_ERRORS`, and every PNG and WebP exists at
-780×1688. A rejected run prints the reasons and leaves the drafts unchanged
+780×1688. Recipes are read-only unless marked `mayWrite: true`: a read-only recipe that
+sends any non-GET request to the Hub rejects the run, and writing recipes must
+come after every read-only one (today only the Wolf modal). A rejected run
+prints the reasons and leaves the drafts unchanged
 (staged files stay in `capture-staging` for inspection; recipe failures also
 write `debug/<recipe>.png|txt`).
 
