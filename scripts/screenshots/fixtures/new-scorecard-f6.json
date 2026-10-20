@@ -1,0 +1,10 @@
+{
+  "_comment": "F6: a new standalone scorecard as it is right after Vue's create-scorecard flow and the add-self step: course chosen, Bob added on the White tees, no other players, no games, no scores, unlocked. Used for the add-self form, the recent-partner picker (Bob is excluded because he is already on the card) and the blank invite form. The standalone course search for the query below is recorded from the isolated Hub like the event search.",
+  "courseSearch": { "query": "shinn", "expect": "Shinnecock Hills Golf Club" },
+  "course": { "facility": "Pebble Beach GL", "courseId": "de34ef06-9d12-4d40-958a-73f9069522f1" },
+  "date": "2026-07-11",
+  "startHole": 1,
+  "players": [
+    { "user": "bob", "tee": { "name": "White", "gender": "Male" } }
+  ]
+}

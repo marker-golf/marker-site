@@ -1,4 +1,4 @@
-// Proof set for the Vue screenshot pipeline (26 images). The event game
+// Proof set for the Vue screenshot pipeline (34 images). The event game
 // picker reuses game-picker: Vue's event route shows the same picker. Each shot names the
 // draft output file, the route to open and the steps that produce the state.
 // Draft names never collide with existing Expo assets.
@@ -123,10 +123,19 @@ async function assertSideGamesReconcile (page) {
 
 // The capture fixes the browser clock, which freezes Date.now(); debounced
 // inputs (lodash debounce measures elapsed time with Date.now) would never
-// fire. Moving the fixed time forward lets the pending debounce run once.
-async function letDebounceRun (page, ms = 1000) {
-  const now = await page.evaluate(() => Date.now())
-  await page.clock.setFixedTime(new Date(now + ms))
+// fire. Moving the fixed time forward lets pending debounces run; inputs that
+// chain two debounces need more than one step, so step until `expected`
+// appears (at most five one-second steps).
+async function letDebounceRun (page, expected) {
+  for (let step = 0; step < 5; step++) {
+    const now = await page.evaluate(() => Date.now())
+    await page.clock.setFixedTime(new Date(now + 1000))
+    try {
+      await expected.waitFor({ timeout: 2000 })
+      return
+    } catch (error) { /* another debounce is still pending */ }
+  }
+  await expected.waitFor({ timeout: 1000 })
 }
 
 // Players added in the event-setup captures (F5B): recent partners who are
@@ -371,8 +380,7 @@ export default [
       // isolated Hub's recorded answer (see fixtures/event-setup-f5.json).
       await page.getByText('Select course', { exact: true }).waitFor()
       await page.getByPlaceholder('Search courses').fill('sp')
-      await letDebounceRun(page)
-      await page.getByText('2 matching courses', { exact: true }).waitFor()
+      await letDebounceRun(page, page.getByText('2 matching courses', { exact: true }))
       await page.locator('.BlockItem.clickable').filter({ hasText: 'Spyglass Hill GC' }).waitFor()
     }
   },
@@ -383,7 +391,7 @@ export default [
     async prepare (page) {
       // Course chosen, name and date filled; Save is never pressed.
       await page.getByPlaceholder('Search courses').fill('sp')
-      await letDebounceRun(page)
+      await letDebounceRun(page, page.getByText('2 matching courses', { exact: true }))
       await page.locator('.BlockItem.clickable').filter({ hasText: 'Spyglass Hill GC' }).click()
       await page.locator('input[name="name"]').fill('Monterey Summer Shootout')
       await page.locator('input[name="date"]').fill('2026-07-25')
@@ -470,6 +478,96 @@ export default [
         await row.locator('.checkedSquare').waitFor()
       }
       await scrollBelowHeader(sectionTitle(page, 'Players'))
+    }
+  },
+  {
+    // Serves both Home slots (createScorecardNewGame, welcomeMarkerHome).
+    name: 'home-recent-games',
+    path: () => '/',
+    async prepare (page) {
+      await page.getByText('Bob Smith', { exact: true }).first().waitFor()
+      await page.getByText('New Game', { exact: true }).waitFor()
+      await page.getByText('Recent scorecards', { exact: true }).waitFor()
+      await page.getByText('Recent events', { exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'scorecard-course-search',
+    path: () => '/scorecards/new',
+    mocks: ['scorecard-course-search'],
+    async prepare (page) {
+      // New game, step 1: search for the course (recorded Hub response).
+      await page.getByText('Select course', { exact: true }).waitFor()
+      await page.getByPlaceholder('Search courses').fill('shinn')
+      await letDebounceRun(page, sectionTitle(page, '1 matching course'))
+      await page.locator('.BlockItem.clickable').filter({ hasText: 'Shinnecock Hills Golf Club' }).waitFor()
+      await page.getByPlaceholder('Search courses').blur()
+    }
+  },
+  {
+    name: 'scorecard-add-self',
+    path: ids => `/scorecards/${ids.f6Scorecard}/players/new?userId=${ids.bobUserId}`,
+    async prepare (page) {
+      // Where Vue lands after creating a scorecard: Add Player prefilled with
+      // the signed-in golfer. Save is never pressed.
+      await page.getByText('Adjust player settings', { exact: true }).waitFor()
+      await page.waitForFunction(() => document.querySelector('input[placeholder="First"]')?.value === 'Bob')
+      await page.getByText('Handicap Settings', { exact: true }).waitFor()
+    }
+  },
+  {
+    name: 'scorecard-partner-picker',
+    path: ids => `/scorecards/${ids.f6Scorecard}/players/select`,
+    async prepare (page) {
+      // Recent partners, most recent first; Bob is already on the card.
+      await page.getByText('Recent partners', { exact: true }).waitFor()
+      if (await section(page, 'Recent partners').getByText('Bob Smith', { exact: true }).count()) {
+        throw new Error('Recent partners lists a player who is already on the scorecard')
+      }
+    }
+  },
+  {
+    name: 'scorecard-invite-player',
+    path: ids => `/scorecards/${ids.f6Scorecard}/players/new`,
+    async prepare (page) {
+      // Blank Add Player form; nothing is entered or saved.
+      await page.getByText('Add / find by mobile number (optional)').first().waitFor()
+      const phone = page.getByPlaceholder('enter US phone number')
+      if (await phone.inputValue() !== '' || await page.getByPlaceholder('First').inputValue() !== '') throw new Error('Invite form is not blank')
+      await phone.blur() // no focus ring in the capture
+    }
+  },
+  {
+    name: 'nassau-configuration',
+    path: ids => `/scorecards/${ids.f1Scorecard}/games/${ids.f1Games.Nassau}/edit`,
+    async prepare (page) {
+      // F1's Nassau: per-match automatic presses and stakes. Save is never pressed.
+      await sectionTitle(page, 'Match: 1 - 9').waitFor()
+      await scrollBelowHeader(sectionTitle(page, 'Match: 1 - 9'))
+      await section(page, 'Match: 1 - 18').getByText('Enter the amount per match.').waitFor()
+    }
+  },
+  {
+    name: 'handicap-advanced-settings',
+    path: ids => `/scorecards/${ids.f1Scorecard}/games/${ids.f1Games.Nassau}/edit`,
+    async prepare (page) {
+      // Opens the advanced handicap controls (a display toggle; Save is never pressed).
+      if (await page.getByText('show advanced', { exact: true }).count()) await page.getByText('show advanced', { exact: true }).click()
+      await page.getByText('Handicap Allowance', { exact: true }).waitFor()
+      await page.getByText('Stroke off of low ball').waitFor()
+    }
+  },
+  {
+    name: 'profile-edit',
+    path: () => '/profile/edit',
+    async prepare (page) {
+      // Fictional Bob only: 000-555 phone, example.com email, no USGA ID.
+      await page.getByText('Update profile information', { exact: true }).waitFor()
+      await page.waitForFunction(() => [...document.querySelectorAll('input')].some(i => i.value.includes('example.com')))
+      const values = await page.locator('input').evaluateAll(inputs => inputs.map(i => i.value))
+      if (!values.some(v => /\(000\) 555-0001/.test(v))) throw new Error('Profile phone is not the fictional 000-555 number')
+      if (values.some(v => /@/.test(v) && !/@example\.com$/.test(v))) throw new Error('Profile shows a non-example.com email')
+      if (await page.getByPlaceholder('e.g. GHIN #').inputValue() !== '') throw new Error('Profile shows a USGA Handicap ID')
     }
   },
   {

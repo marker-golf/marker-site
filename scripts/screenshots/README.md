@@ -80,7 +80,8 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
 5. `servers.mjs start`: re-check the Hub Repo target, then start the Hub and
    Vue, each in its own process group and sandbox, with `env -i`.
 6. `fixtures.mjs`: build the fixtures through the Hub REST API and record a
-   digest of each (scores, game settings, lock state); marker becomes
+   digest of each (scores, game settings, lock state; for events also
+   players, tees and groups; plus the fictional user records); marker becomes
    `fixtures-ready`.
    - F1: Shinnecock scorecard through 9 (Nassau, Net Skins, Wolf).
    - F2: Torrey Pines South scorecard through 11 (Scotch, Match Play).
@@ -89,9 +90,11 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    - F4: PebblePayday event.
    - F5A: an empty saved event (Poppy Hills); F5B: an event at Spyglass Hill
      with nine unassigned players and one empty group (event-setup screens).
-   - The isolated Hub's own response to the new-event course search is
-     recorded to `run/mocks/course-search.json` (local course data; its USGA
-     lookup fails on the dead loopback port).
+   - F6: a new Pebble Beach scorecard with only Bob on it, as Vue leaves it
+     after create + add-self (add-self, partner picker, invite form).
+   - The isolated Hub's own responses to the new-event ("sp") and
+     new-scorecard ("shinn") course searches are recorded to `run/mocks/`
+     (local course data; its USGA lookup fails on the dead loopback port).
 7. `capture.mjs`: claim the fixtures (marker becomes `captured`), re-run
    inside the browser sandbox, capture into staging, validate and encode
    WebP; then, outside the sandbox, compare the fixture digests (scores and
@@ -118,7 +121,8 @@ GET requests (same path and query, with the Hub's own CORS and content-type
 headers) and lets every other request through the normal network policy.
 Each replay is logged. The browser clock is fixed per recipe; recipes that
 type into debounced inputs call `letDebounceRun`, which moves the fixed time
-forward so the debounce can fire.
+forward one second at a time until the expected result appears (inputs can
+chain two debounces).
 
 ### Transactional output
 

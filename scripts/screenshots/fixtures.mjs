@@ -1,5 +1,5 @@
 // Builds the proof-set fixtures (F1, F2, F3 scorecards, the F4 event and the
-// F5 event-setup states)
+// F5 event-setup states, the F6 new scorecard)
 // through the isolated Hub's REST API, signed in
 // as the fictional demo user. Requires a freshly reset fourball_screens (the
 // "reset" fixture-state marker for this exact database build, and no events or
@@ -19,6 +19,7 @@ const f2 = readFixture('torrey-f2.json')
 const f3 = readFixture('cypress-f3.json')
 const f4 = readFixture('pebblepayday-f4.json')
 const f5 = readFixture('event-setup-f5.json')
+const f6 = readFixture('new-scorecard-f6.json')
 const userByKey = Object.fromEntries(users.map(u => [u.key, u]))
 
 const token = JSON.parse(fs.readFileSync(AUTH_STATE, 'utf8')).origins[0].localStorage
@@ -139,7 +140,8 @@ async function buildScorecard (fx, label) {
   const pressSettings = (autoDown, manual = {}, holePresses = {}) =>
     ({ auto: { down: autoDown || 2, enabled: autoDown > 0 }, manual, close_out: false, hole_presses: holePresses })
 
-  for (const g of fx.games) {
+  const games = {}
+  for (const g of fx.games || []) {
     let settings
     if (g.game === 'Nassau') {
       settings = {
@@ -197,12 +199,12 @@ async function buildScorecard (fx, label) {
     } else {
       throw new Error(`Unsupported fixture game ${g.game}`)
     }
-    await api('POST', 'games', { game: { settings, game_players: ids(g.players).map(id => ({ player_id: id })) } })
+    games[g.game] = idOf(await api('POST', 'games', { game: { settings, game_players: ids(g.players).map(id => ({ player_id: id })) } }), 'game')
   }
 
   let clock = Date.parse(`${fx.date}T${fx.teeTime || '08:00'}:00${fx.utcOffset || '-04:00'}`)
   const random = fx.scoreSeed ? prng(fx.scoreSeed) : null
-  const holesScored = fx.scores ? Object.values(fx.scores)[0].length : fx.holesPlayed
+  const holesScored = fx.scores ? Object.values(fx.scores)[0].length : (fx.holesPlayed || 0)
   for (let hole = 1; hole <= holesScored; hole++) {
     for (const p of (fx.scores ? Object.keys(fx.scores) : fx.players.map(pl => pl.user))) {
       let score
@@ -218,11 +220,11 @@ async function buildScorecard (fx, label) {
     }
     clock += 12 * 60000
   }
-  log(`${label} scorecard ready: ${fx.players.length} players, ${fx.games.length} games, holes 1-${holesScored} scored`)
-  return { card, players }
+  log(`${label} scorecard ready: ${fx.players.length} players, ${(fx.games || []).length} games, ${holesScored ? `holes 1-${holesScored} scored` : 'no scores'}`)
+  return { card, players, games }
 }
 
-const { card: f1Card, players: f1Players } = await buildScorecard(f1, 'F1')
+const { card: f1Card, players: f1Players, games: f1Games } = await buildScorecard(f1, 'F1')
 const { card: f2Card, players: f2Players } = await buildScorecard(f2, 'F2')
 const { card: f3Card, players: f3Players } = await buildScorecard(f3, 'F3')
 
@@ -321,25 +323,31 @@ for (const group of f5.f5b.groups) {
 }
 log(`F5B event ready: ${f5.f5b.players.length} players added, none assigned; ${f5bGroups.length} empty group`)
 
-// Record the isolated Hub's own course-search response for the new-event
-// captures. They replay it in the browser instead of calling the Hub, so the
-// screenshot never depends on (or triggers) a USGA lookup.
-const searchResponse = await fetch(`${API_BASE}/courses/search?name=${encodeURIComponent(f5.courseSearch.query)}`, {
-  headers: { Accept: 'application/vnd.fourball.v2+json', Authorization: `Bearer ${token}`, Origin: 'http://127.0.0.1:8090' },
-  signal: AbortSignal.timeout(API_TIMEOUT)
-})
-if (searchResponse.status !== 200) throw new Error(httpErrorSummary('GET', 'courses/search', searchResponse.status, await searchResponse.text()))
-const search = await searchResponse.json()
-if (!search?.courses?.some(course => course.name === f5.courseSearch.expect)) {
-  throw new Error(`Course search for "${f5.courseSearch.query}" did not return ${f5.courseSearch.expect}`)
+// F6: a new standalone scorecard right after create + add-self ------------
+const { card: f6Card } = await buildScorecard(f6, 'F6')
+
+// Record the isolated Hub's own course-search responses for the new-event
+// and new-scorecard captures. They replay them in the browser instead of
+// calling the Hub, so a screenshot never depends on (or triggers) a USGA
+// lookup.
+async function recordCourseSearch (name, { query, expect }) {
+  const response = await fetch(`${API_BASE}/courses/search?name=${encodeURIComponent(query)}`, {
+    headers: { Accept: 'application/vnd.fourball.v2+json', Authorization: `Bearer ${token}`, Origin: 'http://127.0.0.1:8090' },
+    signal: AbortSignal.timeout(API_TIMEOUT)
+  })
+  if (response.status !== 200) throw new Error(httpErrorSummary('GET', 'courses/search', response.status, await response.text()))
+  const body = await response.json()
+  if (!body?.courses?.some(course => course.name === expect)) throw new Error(`Course search for "${query}" did not return ${expect}`)
+  // Keep the Hub's own CORS and content-type headers so the browser treats
+  // the replay exactly like the real cross-origin response.
+  const headers = Object.fromEntries([...response.headers].filter(([header]) => /^(access-control-|content-type$)/.test(header)))
+  fs.mkdirSync(path.join(path.dirname(FIXTURE_IDS), 'mocks'), { recursive: true })
+  fs.writeFileSync(path.join(path.dirname(FIXTURE_IDS), 'mocks', `${name}.json`),
+    JSON.stringify({ path: '/api/app/courses/search', params: { name: query }, headers, body }))
+  log(`recorded course search "${query}": ${body.courses.map(c => c.name).join(', ')}`)
 }
-// Keep the Hub's own CORS and content-type headers so the browser treats the
-// replay exactly like the real cross-origin response.
-const searchHeaders = Object.fromEntries([...searchResponse.headers].filter(([name]) => /^(access-control-|content-type$)/.test(name)))
-fs.mkdirSync(path.join(path.dirname(FIXTURE_IDS), 'mocks'), { recursive: true })
-fs.writeFileSync(path.join(path.dirname(FIXTURE_IDS), 'mocks', 'course-search.json'),
-  JSON.stringify({ path: '/api/app/courses/search', params: { name: f5.courseSearch.query }, headers: searchHeaders, body: search }))
-log(`recorded course search "${f5.courseSearch.query}": ${search.courses.map(c => c.name).join(', ')}`)
+await recordCourseSearch('course-search', f5.courseSearch)
+await recordCourseSearch('scorecard-course-search', f6.courseSearch)
 
 // Hygiene: publishing and sharing issue login codes to fixture users. Clear
 // them so the isolated database holds no usable login codes.
@@ -352,7 +360,7 @@ screensSql('update users set code = null where code is not null')
 // a genuine rendering of the production app.
 
 fs.mkdirSync(path.dirname(FIXTURE_IDS), { recursive: true })
-const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups }
+const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups, f1Games, f6Scorecard: f6Card, bobUserId: userByKey.bob.id }
 fs.writeFileSync(FIXTURE_IDS, JSON.stringify(fixtureIds, null, 2))
 log(`fixture ids written to ${FIXTURE_IDS}`)
 markFixturesReady(fixtureIds)

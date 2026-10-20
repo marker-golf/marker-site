@@ -75,11 +75,21 @@ function eventDigest (id) {
   return { scores, games: `${games}/${players}/${groups}`, locked: locked === 't' || lockedCards !== '0' }
 }
 
+// Fictional user records (profiles, handicap settings): the profile and
+// partner screens read them and must not change them.
+function usersDigest () {
+  const rows = screensSql(`select coalesce(md5(string_agg(u.id || ':' || coalesce(u.phone, '-') || ':' || coalesce(u.email, '-') || ':' ||
+    u.first_name || ':' || u.last_name || ':' || coalesce(u.gender, '-') || ':' || coalesce(u.ghin_number::text, '-') || ':' || coalesce(u.level::text, '-'), ',' order by u.id)), '-') from users u`)
+  return { scores: rows, games: '-', locked: false }
+}
+
 export function fixtureDigests (ids) {
   return {
+    users: usersDigest(),
     f1: scorecardDigest(ids.f1Scorecard),
     f2: scorecardDigest(ids.f2Scorecard),
     f3: scorecardDigest(ids.f3Scorecard),
+    f6: scorecardDigest(ids.f6Scorecard),
     f4: eventDigest(ids.f4Event),
     f5a: eventDigest(ids.f5aEvent),
     f5b: eventDigest(ids.f5bEvent)
