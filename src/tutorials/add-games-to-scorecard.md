@@ -33,8 +33,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Choose a game</h3>
-<p>The <strong>Select Game</strong> screen lists all available formats alphabetically. Each entry shows a one-line description so you can identify the format at a glance. Games labeled <strong>Premium</strong> require a Marker premium subscription.</p>
-<p>Marker supports eleven formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Stableford, Team Stroke Play, and Wolf.</p>
+<p>The <strong>Select game</strong> screen shows one button per format. Games labeled <strong>Premium</strong> require a Marker premium subscription.</p>
+<p>Marker supports twelve formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf. Scotch, Team Count X, Team Stableford, and Wolf are Premium.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="/games/">Games guide library</a>. This tutorial explains how to configure them in Marker — not how to play them.</p>
 <p>Tap a game to open its configuration form.</p>
 <div class="tutorial-step__screenshot">
@@ -65,12 +65,9 @@ cta:
 <li><strong>Limit Playing Handicap</strong> — caps strokes at a maximum number.</li>
 <li><strong>Use half strokes</strong> — rounds half-stroke allowances down.</li>
 <li><strong>No strokes on par 3's</strong> — removes handicap stroke allocation from par 3 holes.</li>
-<li><strong>Override player handicaps</strong> — set a manual handicap for individual players in this game only, without changing their profile.</li>
+<li><strong>Use handicap overrides</strong> — set a manual handicap for individual players in this game only, without changing their profile.</li>
 </ul>
 <p>For a full explanation of course handicap calculation, see <a href="/tutorials/handicap-settings/">Using Handicaps in Marker</a>.</p>
-<div class="tutorial-step__screenshot">
-{{ ProductScreenshot("addGamesGameConfiguration", screenshots, frame="phone", caption=true) }}
-</div>
 </div>
 </div>
 
@@ -87,6 +84,10 @@ cta:
 <li><strong>Team games</strong> (Team Stroke Play, Team Stableford) — accounting is set per sub-total segment; configure teams first, then set the amount for the full round or any sub-round.</li>
 <li><strong>Most other formats</strong> — a single pool buy-in amount that winners split at settlement.</li>
 </ul>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("addGamesGameConfiguration", screenshots, frame="phone", caption=true) }}
+</div>
+
 </div>
 </div>
 
@@ -94,7 +95,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">6</div>
 <div class="tutorial-step__content">
 <h3>Save the game</h3>
-<p>Tap <strong>Save game</strong>. Marker returns you to the Scorecard screen, where the new game appears in the Games list showing the format name and player count.</p>
+<p>Tap <strong>Save</strong>. Marker returns you to the Scorecard screen, where the new game appears in the Games list showing the format name and player count.</p>
 <p>To add another game, tap <strong>+</strong> again and repeat the process. There's no limit on the number of games per scorecard. Your group could run Skins and Nassau at the same time — you enter scores once and Marker calculates both.</p>
 </div>
 </div>

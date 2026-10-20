@@ -237,7 +237,7 @@ Both bets track independently from hole 7 forward. Side B can win the press even
 - **"auto"** — an automatic press fired starting from this hole
 - **"start"** / **"end"** — marks the first and last hole of a match or press range
 
-The scorecard shows all concurrent match and press standings stacked in the hole cell, separated by a slash (e.g., `+1 / -1` means ahead in the original, behind in the press).
+The scorecard shows all concurrent match and press standings stacked in the hole cell, separated by a slash (e.g., `+1 / -1` means ahead in the original, behind in the press). The game's tab on the scorecard reads **Matchplay**; the column it adds reads **Match Play**.
 
 </div>
 

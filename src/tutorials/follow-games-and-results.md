@@ -1,14 +1,14 @@
 ---
 layout: layouts/tutorial-guide.njk
 title: Follow Games & Results
-description: Learn how to follow multiple active games in Marker while a round is in progress — switch game views on the scorecard, check standings on the Leaderboard, and read the Day total.
+description: Learn how to follow multiple active games in Marker while a round is in progress — switch game views on the scorecard, check standings on the Leaderboard, and read Overall - side games.
 subtitle: "Enter golf scores once. Marker tracks every game you've configured and updates standings in real time."
 category: Playing with Your Group
 order: 5
 tutorialPath: group
 tutorialOrder: 5
 estimatedTime: "5 min read"
-cardDescription: "Switch between game views on the scorecard, check live standings on the Leaderboard, and read the Day total — all from the same entered scores."
+cardDescription: "Switch between game views on the scorecard, check live standings on the Leaderboard, and read Overall - side games — all from the same entered scores."
 iconSvg: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'
 cta:
   heading: "Ready to play?"
@@ -38,10 +38,10 @@ cta:
 <h3>Follow Skins hole by hole on the scorecard</h3>
 <p>When the Skins tab is active, the game column shows the current skin result for every hole:</p>
 <ul>
-<li><strong>Winner pill</strong> — a small label in the top-left corner of the cell shows the skin winner's name. A solid green pill means all scores for that hole are in; a lighter pill means scores are still pending.</li>
+<li><strong>Winner pill</strong> — a small label in the top-left corner of the cell shows the skin winner's name (last name and initial, for example "BAILOUT, B"). A solid green pill means all scores for that hole are in; a lighter pill means scores are still pending.</li>
 <li><strong>Winning score</strong> — the low score for the hole, shown in the center of the cell. For net Skins, the net score is displayed when it differs from gross.</li>
 <li><strong>Score count</strong> — the bottom-right corner shows how many scores have been entered out of the total players (for example, "2/4").</li>
-<li><strong>Tied holes and carryovers</strong> — if multiple players tie the low score, the cell shows the number of tied players instead of a winner name. A carry indicator (for example, "+2") in the bottom-right shows how many skins have accumulated and are at stake on the next hole.</li>
+<li><strong>Tied holes and carryovers</strong> — if multiple players tie the low score, the label shows how many players tied (for example, "2 TIES") instead of a winner name. When carryovers are on, the next outright winner's label shows how many skins they collect in brackets — for example, "SMITH, B (3)" for a three-skin win.</li>
 </ul>
 <p>For Skins rules, scoring examples, and strategy, see the <a href="/games/skins/">Skins game guide</a>.</p>
 </div>
@@ -72,7 +72,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>Open the Leaderboard</h3>
 <p>Tap the <strong>trophy icon</strong> on the right side of the game bar to open the Leaderboard. The trophy appears once at least one game on the scorecard has standings to show.</p>
-<p>An <strong>Round in progress</strong> badge at the top of the Leaderboard confirms the round is still active. Results shown are live and will continue updating as scores are entered.</p>
+<p>A <strong>Round in progress</strong> badge at the top of the Leaderboard confirms the round is still active. Results shown are live and will continue updating as scores are entered.</p>
 <p>The Leaderboard gives you a broader picture than the scorecard column: complete standings for every game, accounting summaries, and a way to share results with the group. The scorecard view is best for entering scores and following one game hole by hole; the Leaderboard is best for seeing the full competitive picture and the overall financial position.</p>
 </div>
 </div>
@@ -82,8 +82,8 @@ cta:
 <div class="tutorial-step__content">
 <h3>Review each game's standings</h3>
 <p>Each configured game has its own results card on the Leaderboard, with a header showing the game name.</p>
-<p>The <strong>Skins card</strong> shows a ranked table with each player's name, skins won, and dollar result (if accounting is configured). A total row at the bottom shows the aggregate skin count. Tap <strong>Show hole by hole</strong> to expand a hole-by-hole breakdown showing the hole number, how many scores were in when the result was determined, the low score for the hole, and the result — either the winner's name (with a confirmed or pending indicator) or a ties count that expands to show who tied.</p>
-<p>The <strong>Nassau card</strong> is organized by match: <strong>Front 9 · Holes 1–9</strong>, <strong>Back 9 · Holes 10–18</strong>, and <strong>Total · Holes 1–18</strong>. Each section shows the left and right teams, the match status for the main match and any active presses, and the current dollar result per team if accounting is set. Press rows appear below the main match row and show their starting hole.</p>
+<p>The <strong>Skins card</strong> shows a ranked table with each player's name, skins won, and dollar result (if accounting is configured). A total row at the bottom shows the aggregate skin count. Tap <strong>Show hole-by-hole</strong> to expand a hole-by-hole breakdown showing the hole number, how many scores were in when the result was determined, the low score for the hole, and the result — either the winner's name (with a confirmed or pending indicator) or a ties count that expands to show who tied.</p>
+<p>The <strong>Nassau card</strong> is organized by match: <strong>Front</strong> (holes 1–9), <strong>Back</strong> (holes 10–18), and <strong>Total</strong> (holes 1–18), each noting its press rule. Each section shows the left and right teams, the match status for the main match and any active presses, and the current dollar result per team if accounting is set. Press rows appear below the main match row and show their starting hole.</p>
 <p>Other game formats present results according to their own structure. The Leaderboard card for each game shows what's relevant to that format.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("followGamesLiveLeaderboard", screenshots, frame="phone", caption=true) }}
@@ -94,20 +94,20 @@ cta:
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">6</div>
 <div class="tutorial-step__content">
-<h3>Read the Day total</h3>
-<p>Below the individual game cards, a <strong>Day total</strong> panel combines the accounting from all games on the scorecard into a single summary. It only appears when at least one game has an accounting amount configured.</p>
-<p>Because the round is still in progress, the values in the Day total panel are provisional. They reflect the current state of each game and will continue changing as scores are entered on remaining holes.</p>
+<h3>Read Overall - side games</h3>
+<p>Below the individual game cards, <strong>Overall - side games</strong> combines the accounting from all games on the scorecard into a single summary ("Consolidated accounting for side games"). It only appears when at least one game has an accounting amount configured.</p>
+<p>While the round is in progress the section is marked <em>Round in progress...</em> and its values are provisional. They reflect the current state of each game and will continue changing as scores are entered on remaining holes.</p>
 </div>
 </div>
 
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">7</div>
 <div class="tutorial-step__content">
-<h3>Settlement vs. Profit / loss</h3>
-<p>The Day total panel offers two views, selectable with the pill tabs at the top.</p>
-<p><strong>Settlement</strong> (the default view) answers the question: who pays whom, and how much? It shows a table with <strong>From</strong>, <strong>To</strong>, and <strong>Amount</strong> columns — each row is one payment needed to settle the current results. If any game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears above the table. Check it if players have already contributed to the pot; Marker will settle from the pot first and only list residual player-to-player payments. Uncheck it to see all settlements as direct payments between players.</p>
-<p><strong>Profit / loss</strong> answers a different question: how is each player doing overall? It shows a table with each player's <strong>Gross</strong> earnings from all games combined. When a game has a buy-in, <strong>Buy-in</strong> and <strong>Net</strong> columns also appear — Net is the gross amount minus what the player contributed to the pot. Green values are positive; red values are negative.</p>
-<p>Use Settlement when you're ready to pay out. Use Profit / loss to see each player's overall position across all games without worrying about the mechanics of who pays whom.</p>
+<h3>Settlement vs. Profit/loss</h3>
+<p>Overall - side games offers two views, selectable with the pill tabs at the top.</p>
+<p><strong>Settlement</strong> (the default view) answers the question: who pays whom, and how much? It shows a table with <strong>From</strong>, <strong>To</strong>, and <strong>Amount</strong> columns — each row is one payment needed to settle the current results. If any game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears above the table, checked by default. Checked, Marker settles from the pot for buy-in games, then between players for the rest; unchecked, it settles everything directly between players. The checkbox only changes how the settlement is displayed — it isn't saved and doesn't change anyone's results.</p>
+<p><strong>Profit/loss</strong> answers a different question: how is each player doing overall? It shows a table with each player's <strong>Gross</strong> earnings from all games combined. When a game has a buy-in, <strong>Buy-in</strong> and <strong>Net</strong> columns also appear — Net is the gross amount minus what the player contributed to the pot.</p>
+<p>Use Settlement when you're ready to pay out — Marker calculates and displays the amounts but doesn't process payments. Use Profit/loss to see each player's overall position across all games without worrying about the mechanics of who pays whom.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("followGamesDayTotal", screenshots, frame="phone", caption=true) }}
 </div>

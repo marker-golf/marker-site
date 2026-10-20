@@ -334,24 +334,14 @@ The `screenshots` variable is globally available from `src/_data/screenshots.jso
 
 Do not hardcode `src/images/screenshots/` paths in templates. The component resolves the correct path from the manifest and handles fallback automatically.
 
-### Tested manual screenshot workflow
+### Screenshot workflow
 
-This workflow was validated replacing the `homepageHero` screenshot with an Expo capture.
+Every site screenshot is captured from the production Vue app (`marker-golf/app`) by the isolated pipeline in `scripts/screenshots/` — see `scripts/screenshots/README.md`. It writes `vue-draft-*` PNGs and WebPs (390×844 at 2×, 780×1688 pixels) that no page references until they are reviewed and promoted.
 
-1. Start the Expo web dev server locally from the Marker app project:
+1. Run `npm run screens:proof` to capture drafts from fictional fixture data. Review them, then promote an approved draft by renaming it from `vue-draft-<capture>-mobile-demo` to `<capture>-mobile-vue-demo` in both `source/` and `web/`.
 
-   ```bash
-   npx expo start --web
-   # default URL: http://localhost:8081
-   ```
-
-   Navigate to the screen you want to capture. Capture a PNG at the exact viewport dimensions for the manifest slot — 390×844 for mobile. Two options:
-
-   - **Playwright** (preferred): see `docs/screenshot-automation.md` for the recommended viewport and clip settings.
-   - **Chrome DevTools**: open DevTools → device toolbar → set 390×844 → ⌘+Shift+P → "Capture screenshot".
-
-2. Save the PNG to `src/images/screenshots/source/` using the naming convention.
-3. Convert to WebP using Sharp (already a project devDependency):
+2. (Manual captures only — the pipeline does this itself.) Save the PNG to `src/images/screenshots/source/` using the naming convention.
+3. (Manual captures only.) Convert to WebP using Sharp (already a project devDependency):
 
    ```bash
    node -e "require('sharp')('src/images/screenshots/source/<filename>.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/<filename>.webp')"
@@ -374,8 +364,8 @@ This workflow was validated replacing the `homepageHero` screenshot with an Expo
 | | |
 |---|---|
 | Manifest key | `homepageHero` (stable — survives future filename changes) |
-| Source PNG | `src/images/screenshots/source/homepage-hero-mobile-expo-demo.png` |
-| Optimized WebP | `src/images/screenshots/web/homepage-hero-mobile-expo-demo.webp` |
+| Source PNG | `src/images/screenshots/source/homepage-hero-scorecard-mobile-vue-demo.png` |
+| Optimized WebP | `src/images/screenshots/web/homepage-hero-scorecard-mobile-vue-demo.webp` |
 
 The key `homepageHero` stays constant even if the underlying filename changes in a future UI refresh — only the manifest `src` and `fallback` values update.
 

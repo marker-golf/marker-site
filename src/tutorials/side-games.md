@@ -43,7 +43,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
 <h3>Add a game</h3>
-<p>Scroll to the <strong>Games</strong> section on the info screen and tap the <strong>+</strong> button. The game picker opens — the same picker used for event-wide games, listing all 11 available formats. Tap any format to open its configuration form.</p>
+<p>Scroll to the <strong>Games</strong> section on the info screen and tap the <strong>+</strong> button. The game picker opens — the same picker used for event-wide games, listing all 12 available formats. Tap any format to open its configuration form.</p>
 <p>The <strong>+</strong> button is only visible while the scorecard is unlocked. If the round has already been ended, tap <strong>Unlock</strong> on the info screen to make changes.</p>
 </div>
 </div>
@@ -68,8 +68,8 @@ cta:
 <div class="tutorial-step__content">
 <h3>Track results and settle</h3>
 <p>Side game results appear on the scorecard leaderboard. Tap the leaderboard icon from your scorecard to open it. The game section is labeled <strong>Games</strong> for standalone rounds, or <strong>Side Games</strong> when event-wide games are also active on the same scorecard.</p>
-<p>The settlement panel below the standings shows <strong>Day total</strong> for standalone rounds, or <strong>Side games total</strong> when event games are also present. Results are based on the scores each participant has entered on their own scorecard and become final when the scorecard is locked.</p>
-<p>Side game settlement is entirely separate from the event leaderboard. Event Games settle under <strong>Event total</strong> on the event leaderboard — side game winnings and losses are kept on the scorecard leaderboard and are not included in that total.</p>
+<p>The settlement section below the standings is <strong>Overall - side games</strong>. Results are based on the scores each participant has entered on their own scorecard and become final when the scorecard is locked.</p>
+<p>Side game settlement is entirely separate from the event leaderboard. Event Games settle under <strong>Overall - event</strong> on the event leaderboard — side game winnings and losses are kept on the scorecard leaderboard and are not included in that total.</p>
 </div>
 </div>
 

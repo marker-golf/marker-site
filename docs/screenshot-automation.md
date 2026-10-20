@@ -1,6 +1,8 @@
 # Screenshot Automation
 
-This document covers the screenshot management system for the Marker marketing site — how screenshots are organized, named, referenced in templates, and how to capture and update them with Playwright once the Expo app is stable.
+This document covers the screenshot management system for the Marker marketing site — how screenshots are organized, named, referenced in templates, and how to capture and update them with Playwright.
+
+> **Current pipeline:** site screenshots are now captured from the production Vue app by `scripts/screenshots/` (see `scripts/screenshots/README.md`), and promoted files are named `<capture>-mobile-vue-demo`. The Expo-based prerequisites and capture script below describe the earlier plan and are kept for reference.
 
 ---
 
@@ -313,10 +315,10 @@ Convert a single PNG to WebP at the command line:
 node -e "require('sharp')('src/images/screenshots/source/<filename>.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/<filename>.webp')"
 ```
 
-This command was tested successfully for the `homepageHero` replacement:
+For example, for the `homepageHero` capture (the Vue pipeline encodes WebPs itself, with the same settings):
 
 ```bash
-node -e "require('sharp')('src/images/screenshots/source/homepage-hero-mobile-expo-demo.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/homepage-hero-mobile-expo-demo.webp')"
+node -e "require('sharp')('src/images/screenshots/source/homepage-hero-scorecard-mobile-vue-demo.png').webp({ quality: 85 }).toFile('src/images/screenshots/web/homepage-hero-scorecard-mobile-vue-demo.webp')"
 ```
 
 ### Batch conversion script (future)

@@ -386,7 +386,7 @@ Both teams have two players. On each hole, Marker takes the best net score from 
 </div>
 
 <div class="gg-callout gg-callout--info" style="margin-top:16px;">
-<p><strong>Leaderboard view:</strong> In Marker, the leaderboard shows Front 9, Back 9, and Total as three separate match sections, each with the current standing and dollar amount. The per-hole scorecard shows the live standing for the two matches covering that hole — Front + Total on holes 1–9, Back + Total on holes 10–18.</p>
+<p><strong>Leaderboard view:</strong> In Marker, the leaderboard shows Front (holes 1–9), Back (holes 10–18), and Total as three separate match sections, each listing the original match and any presses with their standing and dollar amount. The per-hole scorecard shows the live standing for the two matches covering that hole — Front + Total on holes 1–9, Back + Total on holes 10–18.</p>
 </div>
 
 {{ GameGuideScreenshot("gameNassauLeaderboard", screenshots) }}
