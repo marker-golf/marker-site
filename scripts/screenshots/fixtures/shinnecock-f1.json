@@ -1,0 +1,52 @@
+{
+  "_comment": "F1: standalone scorecard scored through hole 9. Holes 1-5 match the Expo-era Nassau screenshot so existing captions stay accurate. Holes 6-9 add Net Skins carryovers and winners (short last names, so the winner badges fit the Skins column); their Wolf results net to zero for every player (hole 6 Lone Wolf and hole 9 tie, holes 7 and 8 cancel), so the Wolf totals behind the hole 6 partner modal are unchanged. Hole 6 has no stored Wolf pick because the capture makes it.",
+  "course": { "facility": "Shinnecock Hills Golf Club", "courseId": "c6e6b997-6e10-4b7d-982b-24b4ebe2807f" },
+  "date": "2026-07-07",
+  "startHole": 1,
+  "players": [
+    { "user": "bob",    "tee": { "name": "Blue", "gender": "Male" } },
+    { "user": "allan",  "tee": { "name": "Blue", "gender": "Male" } },
+    { "user": "bert",   "tee": { "name": "Blue", "gender": "Male" } },
+    { "user": "edward", "tee": { "name": "Blue", "gender": "Male" } }
+  ],
+  "scores": {
+    "bob":    [4, 5, 5, 5, 4, 5, 2, 4, 6],
+    "allan":  [5, 5, 5, 5, 5, 5, 4, 5, 6],
+    "bert":   [4, 5, 4, 5, 6, 6, 4, 4, 5],
+    "edward": [5, 3, 4, 3, 5, 4, 3, 4, 4]
+  },
+  "games": [
+    {
+      "game": "Nassau",
+      "players": ["bob", "allan", "bert", "edward"],
+      "sides": { "left": ["bob", "allan"], "right": ["bert", "edward"] },
+      "matches": [
+        { "start": 1,  "end": 9,  "amount": 10, "autoPressDown": 2 },
+        { "start": 10, "end": 18, "amount": 10, "autoPressDown": 2 },
+        { "start": 1,  "end": 18, "amount": 10, "autoPressDown": 0 }
+      ]
+    },
+    {
+      "game": "Skins",
+      "players": ["bob", "allan", "bert", "edward"],
+      "amount": 5,
+      "carryTies": true
+    },
+    {
+      "game": "Wolf",
+      "players": ["bob", "allan", "bert", "edward"],
+      "order": ["bob", "allan", "bert", "edward"],
+      "amount": 5,
+      "picks": {
+        "1": { "partner": "bert" },
+        "2": { "partner": "bob" },
+        "3": { "partner": "edward" },
+        "4": { "partner": "allan" },
+        "5": { "partner": "allan" },
+        "7": { "partner": "allan" },
+        "8": { "partner": "bob" },
+        "9": { "partner": "edward" }
+      }
+    }
+  ]
+}

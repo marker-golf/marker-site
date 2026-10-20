@@ -1,3 +1,7 @@
 node_modules/
 _site/
 .DS_Store
+
+# Vue screenshot pipeline: auth state, logs and dumps live in ../.marker-screens
+# (outside the repo). Guard against a Playwright auth-state file being copied in.
+*.storage-state.json

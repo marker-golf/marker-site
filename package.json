@@ -5,10 +5,26 @@
   "type": "module",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve --watch"
+    "start": "eleventy --serve --watch",
+    "screens:prepare": "node scripts/screenshots/prepare.mjs",
+    "screens:db": "node scripts/screenshots/db-reset.mjs",
+    "screens:auth": "node scripts/screenshots/auth.mjs",
+    "screens:start": "node scripts/screenshots/servers.mjs start",
+    "screens:stop": "node scripts/screenshots/servers.mjs stop",
+    "screens:status": "node scripts/screenshots/servers.mjs status",
+    "screens:fixtures": "node scripts/screenshots/fixtures.mjs",
+    "screens:capture": "node scripts/screenshots/capture.mjs",
+    "screens:scan": "node scripts/screenshots/scan.mjs",
+    "screens:proof": "node scripts/screenshots/proof.mjs",
+    "screens:test": "node --test scripts/screenshots/tests/",
+    "screens:test:capture-failure": "node scripts/screenshots/tests/capture-failure.integration.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@fontsource/marck-script": "5.3.0",
+    "@fontsource/pragati-narrow": "5.3.0",
+    "@fontsource/source-sans-pro": "5.3.0",
+    "playwright": "1.60.0",
     "sharp": "^0.35.3"
   }
 }
