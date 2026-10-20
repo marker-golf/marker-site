@@ -75,7 +75,7 @@ cta:
 <li><strong>Limit Playing Handicap</strong> — caps the maximum strokes any player can receive. Enable the checkbox and enter a number. Players whose playing handicap exceeds the cap receive the capped amount instead.</li>
 <li><strong>Use half strokes</strong> — allocates fractional strokes rather than rounding to whole strokes. Half strokes are shown as <strong>½</strong> alongside the dot or plus indicator in the score cell.</li>
 <li><strong>No strokes on par 3's</strong> — excludes par-3 holes from stroke allocation. Players' total stroke count is unchanged but strokes are distributed only across par-4 and par-5 holes.</li>
-<li><strong>Override player handicaps</strong> — manually enter stroke values for individual players, bypassing the automatic course handicap calculation. Use this for committee-assigned handicaps, mutual-agreement matches, or any situation where the USGA formula should not apply.</li>
+<li><strong>Use handicap overrides</strong> — manually enter stroke values for individual players, bypassing the automatic course handicap calculation. Use this for committee-assigned handicaps, mutual-agreement matches, or any situation where the USGA formula should not apply.</li>
 </ul>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("handicapsGameSettings", screenshots, frame="phone", caption=true) }}
@@ -93,6 +93,7 @@ cta:
 <li><strong>Plus (+)</strong> — the player gives a stroke back on this hole. This appears when the player has a plus course handicap for the selected tees, or when Stroke off the low ball is enabled and this player's adjusted count is negative.</li>
 <li><strong>Half (½)</strong> — appears alongside a dot or plus when Use half strokes is enabled and a fractional stroke applies to this hole.</li>
 </ul>
+<p>Indicators follow the handicap settings of the game whose tab is active, so they can change when you switch games — for example, a game that strokes off the low ball shows fewer strokes than one using full handicaps.</p>
 <p>Indicators are informational and do not affect how scores are entered. Gross scores are always entered on the scorecard; Marker applies stroke adjustments when computing net results and game standings.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("handicapsScorecardIndicators", screenshots, frame="phone", caption=true) }}

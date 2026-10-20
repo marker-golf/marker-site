@@ -36,7 +36,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Select a game format</h3>
-<p>The game picker lists all available formats in alphabetical order, each with a short description. Marker includes 11 built-in formats — from Skins and Nassau to Wolf, Match Play, and Stableford. Formats marked <strong>Premium</strong> require an active subscription.</p>
+<p>The game picker shows a button for each of Marker's 12 built-in formats — High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf. Formats marked <strong>Premium</strong> (Scotch, Team Count X, Team Stableford, and Wolf) require an active subscription.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Game Guides</a>. Tap a format in the app to open its configuration form.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventGamesPicker", screenshots, frame="phone", caption=true) }}
@@ -56,7 +56,7 @@ cta:
 <li><strong>Limit Playing Handicap</strong> — cap the maximum strokes any player can receive</li>
 <li><strong>Use half strokes</strong> — round fractional stroke allocations to the nearest half stroke</li>
 <li><strong>No strokes on par 3's</strong> — exclude par-3 holes from stroke allocation</li>
-<li><strong>Override player handicaps</strong> — manually enter stroke values for individual players</li>
+<li><strong>Use handicap overrides</strong> — manually enter stroke values for individual players</li>
 </ul>
 <p>For a full explanation of each option, see <a href="{{ '/tutorials/handicap-settings/' | url }}">Using Handicaps in Marker</a>.</p>
 </div>
@@ -73,9 +73,6 @@ cta:
 <li><strong>S.O.</strong> — Strokes Off (net strokes the player receives in this game) — visible when Stroke off the low ball is enabled</li>
 </ul>
 <p>Not all players need to be in every game. Side bets between two specific players — a Nassau between the cart partners, for example — are common and supported.</p>
-<div class="tutorial-step__screenshot">
-{{ ProductScreenshot("eventGamesConfiguration", screenshots, frame="phone", caption=true) }}
-</div>
 </div>
 </div>
 
@@ -89,8 +86,12 @@ cta:
 <li>Carry over skins on ties — unwinnable holes roll the skin to the next hole</li>
 <li>Validate skins — marks a skin invalid unless the winner makes a net par on the following hole</li>
 <li>Holes — set start and end hole for the game</li>
-<li>Buy-in — choose Pool buy-in (split among all skins won) or Per-skin (fixed amount per skin)</li>
+<li>Buy-in — choose Pool Buy-in (winners split the pot by number of skins won) or Per-Skin (fixed amount per skin)</li>
 </ul>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventGamesConfiguration", screenshots, frame="phone", caption=true) }}
+</div>
+
 <p><strong>Nassau</strong></p>
 <ul>
 <li>Teams — configure the two sides (MatchSides) for each match</li>
@@ -106,7 +107,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">6</div>
 <div class="tutorial-step__content">
 <h3>Save the game</h3>
-<p>Tap <strong>Save game</strong> at the bottom of the form. The game appears immediately on the event dashboard.</p>
+<p>Tap <strong>Save</strong> at the bottom of the form. The game appears immediately on the event dashboard.</p>
 <p>You can add multiple games to the same event. A Skins game and a Nassau can run simultaneously with the same players — each game tracks scores and settles independently. Add games before the round starts, or add a new game mid-round if the group decides to run another bet.</p>
 </div>
 </div>

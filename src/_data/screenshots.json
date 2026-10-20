@@ -2,486 +2,486 @@
   "_comment": "Screenshot manifest. Status: placeholder | draft | stale | approved. See docs/screenshot-automation.md.",
 
   "homepageHero": {
-    "src": "/images/screenshots/web/homepage-hero-mobile-expo-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-hero-mobile-expo-demo.png",
-    "alt": "Marker scorecard showing an active golf round",
+    "src": "/images/screenshots/web/homepage-hero-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/homepage-hero-scorecard-mobile-vue-demo.png",
+    "alt": "Marker scorecard at Shinnecock Hills with the Net Skins game active, showing hole-by-hole scores, skins winners and tied holes",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Home screen for demo account Bob Smith, no USGA ID connected. Recent Scorecards show Pebble Beach GL rounds with first names Greg/Larry/Mike/Bob and Bob/Joe/Greg/Harry. Recent Events shows PebblePayday. All fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 Shinnecock scorecard through hole 9, Net Skins tab active: skins totals per player, winner labels (BAILOUT, B; EAGLE, E; SMITH, B (3)), 2 TIES and 3 TIES holes."
   },
 
   "homepageLeaderboard": {
-    "src": "/images/screenshots/web/homepage-leaderboard-mobile-expo-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-leaderboard-mobile-expo-demo.png",
-    "alt": "Live leaderboard showing player standings during a golf round",
+    "src": "/images/screenshots/web/event-live-leaderboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-live-leaderboard-mobile-vue-demo.png",
+    "alt": "Live event leaderboard for PebblePayday with an Event in progress badge and Team Stroke Play standings for four teams",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Scorecard-level leaderboard in PebblePayday event (breadcrumb PebblePayday > Leaderboard) with Round in progress badge and Event Games > Team Stroke Play standings. Four teams with front/back/total/$ columns. All names fictional: Debbie Dogleg, Ben Birdie, Bert Bailout, Kevin Kickin, Tom Triple, George Green, Joe Jar, Harry Hazard, Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan. No personal data. Appropriate for homepage product illustration."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses event-live-leaderboard (F4 PebblePayday, in progress). Skins and Stroke Play sections collapsed; Team Stroke Play table with front, back, to-par and amount columns."
   },
 
   "homepageGames": {
-    "src": "/images/screenshots/web/homepage-games-mobile-expo-demo.webp",
-    "fallback": "/images/screenshots/source/homepage-games-mobile-expo-demo.png",
-    "alt": "Add game screen in Marker listing all eleven available game formats with one-line descriptions",
+    "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
+    "alt": "Marker Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Add game picker showing SELECT GAME list with all 11 formats: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch (PREMIUM), Skins, Stableford, Stroke Play, Team Stableford (PREMIUM), Team Stroke Play, Wolf (PREMIUM). No player names or personal data visible."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker (shared with eventGamesPicker and addGamesGamePicker). Twelve formats: High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, Wolf. No per-format descriptions are shown."
   },
 
   "tutorialCreateEventStep1": {
-    "src": "/images/screenshots/web/tutorial-create-event-01-event-list-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-event-01-event-list-mobile-demo.png",
-    "alt": "Course search step of the Create Event flow in Marker, showing a search field with the query pinehur and a list of 16 matching courses",
-    "caption": "Search by course name — Marker's database includes hole-by-hole data for thousands of courses.",
+    "src": "/images/screenshots/web/event-course-search-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-course-search-mobile-vue-demo.png",
+    "alt": "Course search step of the Create event flow in Marker, with the query sp and two matching courses: Spyglass Hill GC and Spanish Bay (Links at)",
+    "caption": "Search by course name, then tap the course for your event.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Shows course search with 'pinehur' query and 16 matching courses. No personal data. Reviewed and approved."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. New-event course search; the isolated Hub's own course-search response is replayed. Query \"sp\", 2 matching courses."
   },
 
   "tutorialCreateEventStep2": {
-    "src": "/images/screenshots/web/tutorial-create-event-02-event-form-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-event-02-event-form-mobile-demo.png",
-    "alt": "Completed Create Event form in Marker showing a selected course, an event name, a date, and the Save button",
+    "src": "/images/screenshots/web/event-form-filled-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-form-filled-mobile-vue-demo.png",
+    "alt": "Create event form in Marker with Spyglass Hill GC selected, no series chosen, the event name Monterey Summer Shootout, the date 07/25/2026 and a Save button",
     "caption": "With course, name, and date filled in, tap Save to create the event.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Shows fully completed form: course No. 2, event name Pinehurst Pandemonium, date 07/06/2026, Save button. All fictional demo data. Series picker not shown — demo account is not a commissioner. Reviewed and approved."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Form filled locally; Save is not pressed."
   },
 
   "tutorialCreateEventStep3": {
-    "src": "/images/screenshots/web/tutorial-create-event-03-event-created-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-event-03-event-created-mobile-demo.png",
-    "alt": "Marker event dashboard for a newly created event showing empty Players, Scorecards, and Games sections each with an add button",
-    "caption": "Your event is ready — add players, create scorecards, and configure games in any order.",
+    "src": "/images/screenshots/web/event-empty-dashboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-empty-dashboard-mobile-vue-demo.png",
+    "alt": "Marker event dashboard for Poppy Hills Spring Classic with empty Players (0), Scorecards and Games sections, each with an add button, and the notice Must add scorecards in order to start an event",
+    "caption": "Your event is ready — add players, scorecards, and games in any order. Marker reminds you that the event needs scorecards before it can start.",
     "usage": ["tutorials/create-an-event"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Empty event dashboard immediately after creation: Players 0, Scorecards 0, Games 0, each with + button. Event name Pinehurst Pandemonium is fictional demo data. Reviewed and approved."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F5A: saved event with no players, groups or games."
   },
 
   "eventAddPlayersPicker": {
-    "src": "/images/screenshots/web/tutorial-event-add-players-01-player-picker-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-add-players-01-player-picker-mobile-demo.png",
-    "alt": "Event Add Players screen showing 5 players selected as chips above a Recent Partners list with 5 of 10 partners checked and a Continue (5) button",
-    "caption": "Tap past partners to check them off — select your whole group before tapping Continue.",
+    "src": "/images/screenshots/web/event-add-players-picker-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-add-players-picker-mobile-vue-demo.png",
+    "alt": "Event Add Players screen with three selected players shown as chips above the Recent Players list, where Debbie Dogleg, Larry Lateral and Mike Mulligan are checked, and a Continue button",
+    "caption": "Check players from Recent Players — your selections collect at the top until you tap Continue.",
     "usage": ["tutorials/add-players"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Event player picker in multi-select state. 5 of 10 recent partners selected: Bert Bailout, Ben Birdie, Debbie Dogleg, Paul Press, Bob Smith. Invite new player link visible in section header. All fictional golf-themed demo names. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F5B Spyglass Club Day. Selection is local; Continue is not pressed. Vue lists Recent Players alphabetically by last name."
   },
 
   "eventAddPlayersTees": {
-    "src": "/images/screenshots/web/tutorial-event-add-players-02-tee-assignment-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-add-players-02-tee-assignment-mobile-demo.png",
-    "alt": "Set Tees screen showing a Men's tee picker with White selected and a Women's tee section with Blue and White options visible",
-    "caption": "Set a default tee for each gender in the selected batch — individual players can be adjusted later from the event dashboard.",
+    "src": "/images/screenshots/web/event-add-players-tees-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-add-players-tees-mobile-vue-demo.png",
+    "alt": "Set Player Tees step for Spyglass Hill GC with the Male tee list showing yardage, rating and slope for each tee and White checked, above a Save button",
+    "caption": "After Continue, set the tee for the selected players — the tees you pick apply to all of them, and individuals can be adjusted later.",
     "usage": ["tutorials/add-players"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Event bulk tee assignment screen. Men's tee: Championship, Green, Blue, White (selected, green highlight), Brown, Gold, Fairway Tees — all with yardage, rating, and slope. Women's tee section visible with Blue and White; selection is below the visible fold. Back and Save buttons at bottom. No personal data; course is fictional demo data. Tees apply only to the current batch of newly added players."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Second step after Continue (Vue: Set Player Tees). The Female tee list for Debbie Dogleg is further down the screen. Save is not pressed."
   },
 
   "eventScorecardsTeeTimes": {
-    "src": "/images/screenshots/web/tutorial-event-scorecards-01-tee-times-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-scorecards-01-tee-times-mobile-demo.png",
+    "src": "/images/screenshots/web/event-groups-tee-times-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-groups-tee-times-mobile-vue-demo.png",
     "alt": "Add Event Scorecard screen with Tee Times selected, showing Start time 08:30 AM, Start hole 1, Number of groups 4, Spacing (minutes) 10, and a Save (4) button",
     "caption": "For tee-time starts, set the first group's start time, starting hole, number of groups, and spacing — Marker calculates each group's tee time automatically.",
     "usage": ["tutorials/create-scorecards"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Add Event Scorecard form in Tee Times mode. Section label reads TEE TIME (singular). Start time 08:30 AM, Start hole 1, Number of groups 4 (highlighted), Tee Times toggle selected (green), Spacing (minutes) 10, Save (4) button. Spacing field is visible in Tee Times mode and hidden in Shotgun mode. No preview text in Tee Times mode. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F5B. Save is not pressed."
   },
 
   "eventScorecardsShotgun": {
-    "src": "/images/screenshots/web/tutorial-event-scorecards-02-shotgun-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-scorecards-02-shotgun-mobile-demo.png",
-    "alt": "Add Event Scorecard screen with Shotgun Start selected, Start hole 17, and a preview reading 'This will add groups starting at 8:30 AM on holes: 17, 18, 1, 2'",
-    "caption": "For a shotgun start, Marker previews the exact hole assignments before you save — starting at hole 17 with 4 groups wraps around through holes 18, 1, and 2.",
+    "src": "/images/screenshots/web/event-groups-shotgun-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-groups-shotgun-mobile-vue-demo.png",
+    "alt": "Add Event Scorecard screen with Shotgun Start selected, Start time 08:00 AM, Start hole 1, Number of groups 6, and the preview This will add groups starting at 08:00 AM on holes: 1, 2, 3, 4, 5, 6",
+    "caption": "For a shotgun start, Marker previews the starting holes before you save — six groups starting on hole 1 go out on holes 1 through 6.",
     "usage": ["tutorials/create-scorecards"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Add Event Scorecard form in Shotgun Start mode. Start time 08:30 AM, Start hole 17 (highlighted), Number of groups 4, Shotgun Start toggle selected (green). Spacing (minutes) field is not shown in Shotgun mode. Preview text visible: 'This will add groups starting at 8:30 AM on holes: 17, 18, 1, 2' — demonstrates consecutive hole assignment with wraparound from hole 18 back to hole 1. Save (4) button. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F5B. Start hole 1 keeps the preview exact: Vue's preview text does not wrap past hole 18, although the groups it creates do. Save is not pressed."
   },
 
   "eventScorecardsPlayerAssignment": {
-    "src": "/images/screenshots/web/tutorial-event-scorecards-03-player-assignment-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-scorecards-03-player-assignment-mobile-demo.png",
-    "alt": "Edit Event Scorecard screen showing the Players section with four checked players assigned to this scorecard and five unchecked unassigned event players listed below",
+    "src": "/images/screenshots/web/event-group-assign-players-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-group-assign-players-mobile-vue-demo.png",
+    "alt": "Edit Event Scorecard screen showing the Players section with Allan Albatross, Bert Bailout, Ben Birdie and Dave Divot checked and other unassigned event players unchecked below, each with tee and course handicap",
     "caption": "Check players from the unassigned pool to add them to this scorecard — players already on other scorecards are not shown as candidates.",
     "usage": ["tutorials/create-scorecards"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Edit Event Scorecard screen. Scorecard tee time 08:50 AM, Start hole 1. PLAYERS section shows 4 checked (Mike Mulligan White Tees C.H. 13, Harry Hazard White Tees C.H. 2, Allan Albatross White Tees C.H. 15, Joe Jar White Tees C.H. 14) and 5 visible unchecked unassigned event players (Debbie Dogleg Red Tees C.H. 5, Dave Divot White Tees C.H. 27, George Green White Tees C.H. 41, Tom Triple White Tees C.H. 10, Kevin Kickin White Tees C.H. 18). List may continue below the fold. Save button visible; Remove Group action is not visible in this frame. All names are fictional golf-themed demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F5B: nine unassigned players, one empty group. Checks are local until Save, which is not pressed."
   },
 
   "eventGamesPicker": {
-    "src": "/images/screenshots/web/tutorial-event-games-01-game-picker-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-games-01-game-picker-mobile-demo.png",
-    "alt": "Add game screen showing all 11 game formats in the SELECT GAME list, with Premium badges on Scotch, Team Stableford, and Wolf",
+    "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
+    "alt": "Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
     "caption": "Tap any format to open its configuration — formats marked Premium require an active subscription.",
     "usage": ["tutorials/add-and-configure-games"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Event game picker. All 11 formats visible: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Stableford, Team Stroke Play, Wolf. Premium badges on Scotch, Team Stableford, and Wolf. Captured from the Event game-management workflow using fictional demo Event data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker: Vue's event route shows the same picker (titled Add Game there)."
   },
 
   "eventGamesConfiguration": {
-    "src": "/images/screenshots/web/tutorial-event-games-02-game-configuration-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-games-02-game-configuration-mobile-demo.png",
-    "alt": "Skins game configuration screen showing Handicap set to Net and the Players section listing 15 Event players, with five of six visible players checked",
-    "caption": "Configure handicap, select participants from the Event roster, and save — the player list shows everyone in your event.",
+    "src": "/images/screenshots/web/event-games-skins-settings-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-games-skins-settings-mobile-vue-demo.png",
+    "alt": "Edit Game screen for an event Skins game, scrolled to Settings: Carry over skins on ties and Validate skins unchecked, Holes 1 to 18, Pool Buy-in selected at $20, and the note Winners split the pot by number of skins won",
+    "caption": "Skins settings: choose carryovers, validation, the holes in play, and a pool buy-in or per-skin amount. Checked players from the event roster appear above.",
     "usage": ["tutorials/add-and-configure-games"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Event Skins game configuration. 'Players (15)' heading confirms the full Event roster is available. Net selected; P.H. visible for checked players; Stroke off the low ball unchecked so S.O. not shown. 6 players visible: Mike Mulligan White Tees C.H. 13 P.H. 13 (checked), Harry Hazard White Tees C.H. 2 P.H. 2 (checked), Allan Albatross White Tees C.H. 15 (unchecked, no P.H.), Joe Jar White Tees C.H. 14 P.H. 14 (checked), Debbie Dogleg Red Tees C.H. 5 P.H. 5 (checked), Dave Divot (partially visible, checked). Skins-specific settings are below the visible frame. Save game button at bottom. All names are fictional golf-themed demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F4 PebblePayday Skins game (16 players); the last three checked players are visible above Settings. Save is not pressed."
   },
 
   "eventScoringLiveLeaderboard": {
-    "src": "/images/screenshots/web/tutorial-event-scoring-01-live-leaderboard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-scoring-01-live-leaderboard-mobile-demo.png",
-    "alt": "Event leaderboard for PebblePayday showing Team Stroke Play standings for four teams with an Event in progress badge",
+    "src": "/images/screenshots/web/event-live-leaderboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-live-leaderboard-mobile-vue-demo.png",
+    "alt": "Event leaderboard for PebblePayday with an Event in progress badge, Skins and Stroke Play collapsed, and Team Stroke Play standings for four teams with front, back, to-par and amount columns",
     "caption": "Follow Event standings while groups are still playing — the Event leaderboard shows results across all teams.",
     "usage": ["tutorials/event-scoring", "games/team-stroke-play"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Recaptured Jul 2026 to show the Event-level leaderboard (trophy icon from event dashboard). Title 'Leaderboard', event header PebblePayday Jul 10 2026 Pebble Beach GL, 'Event in progress' badge (yellow pill). Team Stroke Play card: Kevin Kickin/Bert Bailout/Ben Birdie/Debbie Dogleg (#1, ✓18, -5, -4, -9, $640); Harry Hazard/Joe Jar/George Green/Tom Triple (#2, ✓18, -4, -3, -7, $0); Mike Mulligan/Larry Lateral/Greg Gimme/Bob Smith (#3, 18, -2, +3, +1, $0); Paul Press/Dave Divot/Edward Eagle/Allan Albatross (#4, 18, -1, +4, +3, $0). All names fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F4: groups 1-3 finished, group 4 through 15. Team names within a group can appear in any order between builds."
   },
 
   "eventCompleteConfirm": {
-    "src": "/images/screenshots/web/tutorial-event-complete-01-confirm-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-complete-01-confirm-mobile-demo.png",
-    "alt": "Complete event confirmation sheet on the Marker event dashboard explaining that scorecards lock and per-game results freeze, with a Complete event button",
-    "caption": "Tap Complete event from the event dashboard — all scorecards lock and per-game results freeze.",
+    "src": "/images/screenshots/web/event-complete-confirm-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-complete-confirm-mobile-vue-demo.png",
+    "alt": "Complete this event confirmation over the Marker event dashboard, explaining that completing locks the scorecards, prevents further edits and finalizes the game results, with Yes and Cancel buttons",
+    "caption": "Tap Complete event on the event dashboard, then Yes — Marker locks the scorecards and finalizes the game results.",
     "usage": ["tutorials/complete-event-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Recaptured Jul 2026 to show the event-level Complete event confirmation modal. Background is event dashboard ('Event' title, gear icon) for PebblePayday Jul 10 2026 showing Players · 16 with player list. Modal: title 'Complete event' (green), body 'By completing this event, you attest that the scores are correct. Scorecards lock and per-game results freeze. You can unlock later if you need to make changes.', confirm button 'Complete event' (dark green). Visible player names: Allan Albatross, Bert Bailout, Ben Birdie, Dave Divot, Debbie Dogleg — all fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F4. Opens the confirmation only; Yes is never pressed."
   },
 
   "eventCompleteFinalSettlement": {
-    "src": "/images/screenshots/web/tutorial-event-complete-02-final-settlement-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-event-complete-02-final-settlement-mobile-demo.png",
-    "alt": "Event total section of the Event leaderboard showing the Settlement tab with Buy-ins collected checked and pot payouts to eight players",
-    "caption": "Event total combines all Event Game results — Settlement shows who receives what from the pot.",
+    "src": "/images/screenshots/web/event-final-settlement-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-final-settlement-mobile-vue-demo.png",
+    "alt": "Completed event leaderboard for Chambers Bay Cup with the Skins, Stroke Play and Team Stroke Play sections collapsed and Overall - event showing the Settlement view, Buy-ins collected checked, and the pot paying eight winners from $120 down to $20",
+    "caption": "Overall - event combines every Event Game. With Buy-ins collected checked, Settlement shows what each winner receives from the pot.",
     "usage": ["tutorials/complete-event-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Shows the Event total section of the leaderboard in Settlement view. Top of frame shows bottom rows of a game standings card: Team 3 (Bob Smith, Greg Gimme, Larry Lateral, Mike Mulligan, THRU 18, 91, $0) and Team 4 (Allan Albatross, Edward Eagle, Dave Divot, Paul Press, THRU 18, 91, $0). Event total section: Settlement tab active (dark green), Profit / loss tab inactive. Buy-ins collected checkbox (checked, green) with description 'Settle from the pot for buy-in games, then between players for the rest.' FROM / TO / AMOUNT table: Pot→Bert Bailout $320, Pot→George Green $240, Pot→Kevin Kickin $160, Pot→Ben Birdie $160, Pot→Debbie Dogleg $160, Pot→Harry Hazard $80, Pot→Joe Jar $80, Pot→Tom Triple $80. Share leaderboard button at bottom. All names fictional golf-themed demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F7 Chambers Bay Cup, completed through Vue's Complete event. Three $10 buy-in games for 12 players ($360 pot), reconciled to the cent. Shared with commissionersSettlement."
   },
 
   "gameNassauScorecard": {
-    "src": "/images/screenshots/web/game-nassau-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-nassau-scorecard-mobile-demo.png",
-    "alt": "Marker Nassau scorecard showing Front and Total match status with automatic presses tracked during play",
+    "src": "/images/screenshots/web/game-nassau-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-scorecard-mobile-vue-demo.png",
+    "alt": "Marker scorecard with the Nassau tab active, showing front and total match status on each hole, automatic presses and press buttons",
     "caption": "Front and Total run simultaneously, while presses create additional matches from the hole where they begin.",
     "usage": ["games/nassau"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Shinnecock Hills Golf scorecard with Nassau selected as the active game chip (dark green, BS vs AA vs BB/EE). Side A = BS (ch.4) and AA (ch.13); Side B = BB (ch.15) and EE. Holes 1–5 scored, holes 6–8 blank. Nassau column: hole 1 shows 'start' labels for Front and Total; hole 3 shows 'auto' label where 2-down auto press fired; hole 5 shows three standings (-3/-1/+1) as cascading presses accumulate. Press pills visible on unplayed holes. All player abbreviations represent fictional demo players (BS=Bob Smith, AA=Allan Albatross, BB=Bert Bailout, EE=Edward Eagle). No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 Shinnecock through hole 9. Shared with followGamesNassauScorecard and scoreRoundMainScorecard."
   },
 
   "gameNassauLeaderboard": {
-    "src": "/images/screenshots/web/game-nassau-leaderboard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-nassau-leaderboard-mobile-demo.png",
-    "alt": "Marker Nassau leaderboard showing separate Front 9, Back 9, and Total matches with automatic presses and accounting",
-    "caption": "Front 9, Back 9, and Total are tracked as separate matches. Each press creates another match with its own status and result.",
+    "src": "/images/screenshots/web/game-nassau-leaderboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-leaderboard-mobile-vue-demo.png",
+    "alt": "Marker Nassau leaderboard showing the Front match for holes 1 to 9 with automatic 2-down presses and their results, and the start of the Back match with 9 to play",
+    "caption": "Each Nassau match has its own section. The Front shows the original match and each press with its status and result.",
     "usage": ["games/nassau"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Leaderboard screen with Nassau card. Front 9 · Holes 1–9 · Auto 2-Down: original match (Side B 3-up, 4 to play), press from hole 3 auto (Side B 1-up), press from hole 5 auto (Side A 1-up); -$10/$10 dollar row. Back 9 · Holes 10–18 · Auto 2-Down: not started, $0/$0. Total · Holes 1–18: Side B 3-up, 13 to play; -$20/$20. Stroke Play card partially visible below. Round mid-progress (5 holes scored). All names fictional demo data: Bob Smith, Allan Albatross, Bert Bailout, Edward Eagle. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 through hole 9. Only Front (with presses) and the start of Back are visible; Total is below the fold. Shared with followGamesLiveLeaderboard."
   },
 
   "gameWolfPartnerModal": {
-    "src": "/images/screenshots/web/game-wolf-partner-modal-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-wolf-partner-modal-mobile-demo.png",
-    "alt": "Marker Wolf partner-selection modal on hole 6 showing three partner choices, Lone Wolf selected, and Blind Wolf with the triples-points hint",
+    "src": "/images/screenshots/web/game-wolf-partner-modal-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-wolf-partner-modal-mobile-vue-demo.png",
+    "alt": "Marker Wolf partner-selection modal on hole 6 with Allan Albatross as the Wolf, three partner choices, Lone Wolf selected, and Blind Wolf with the triples-points hint",
     "caption": "The Wolf can choose any of the other three players as a partner, play Lone Wolf, or declare Blind Wolf for triple points.",
     "usage": ["games/wolf"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows WolfActionModal bottom sheet on hole 6: header 'Wolf: Hole #6', Wolf player identified. Three non-Wolf players listed as partner options (checkboxes). 'Lone Wolf' row checked (selected). 'Blind Wolf' row unchecked with 'triples points' hint text visible. Mutual exclusion visible — Lone Wolf is selected, no partner checked. All player names are fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1. Partner button order can vary between builds."
   },
 
   "gameSkinsScorecardCarryover": {
-    "src": "/images/screenshots/web/game-skins-scorecard-carryover-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-skins-scorecard-carryover-mobile-demo.png",
-    "alt": "Marker Skins scorecard showing tied holes accumulating carryovers and a later player winning three skins",
-    "caption": "Tied holes build the carryover from +1 to +2. The next outright winner collects all three skins.",
+    "src": "/images/screenshots/web/game-skins-scorecard-carryover-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-skins-scorecard-carryover-mobile-vue-demo.png",
+    "alt": "Marker Skins scorecard for holes 3 to 9 with holes 5 and 6 labelled 2 TIES and 3 TIES, and Bob Smith winning hole 7 outright, labelled SMITH, B (3)",
+    "caption": "Tied holes show how many players tied instead of a winner. With carryovers on, the next outright winner collects the skins carried forward — SMITH, B (3) is a three-skin win.",
     "usage": ["games/skins"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows in-round Skins scorecard with carryover indicators visible in hole cells: hole 2 tied showing +1 carryover, hole 3 tied showing +2 carryover, hole 4 showing three-skin win. All player names fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 Net Skins with carryovers."
   },
 
   "gameSkinsLeaderboard": {
-    "src": "/images/screenshots/web/game-skins-leaderboard-hole-by-hole-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-skins-leaderboard-hole-by-hole-mobile-demo.png",
-    "alt": "Marker Skins leaderboard showing player standings, accounting, tied holes, and a three-skin carryover win",
-    "caption": "The leaderboard shows skins won and accounting, while the expanded hole-by-hole view shows how ties carried forward into a three-skin win.",
+    "src": "/images/screenshots/web/game-skins-leaderboard-hole-by-hole-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-skins-leaderboard-hole-by-hole-mobile-vue-demo.png",
+    "alt": "Marker Skins leaderboard with skins won and dollar results per player, and the hole-by-hole view listing each hole's low score and winner, tied holes, and Smith, B (3) on hole 7",
+    "caption": "The leaderboard shows skins won and accounting, while the hole-by-hole view shows how ties carried forward into a three-skin win.",
     "usage": ["games/skins"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Skins leaderboard with hole-by-hole section expanded. Main table: player rankings with skins won and dollar amounts. Hole-by-hole: tied holes showing '2 ties' result, hole 4 showing three-skin carryover win. All player names fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1. Rows tied on skins can appear in either order."
   },
 
   "commissionersHero": {
-    "src": "/images/screenshots/web/commissioners-event-overview-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/commissioners-event-overview-mobile-demo.png",
-    "alt": "Marker event overview showing four scorecard groups with tee times, multiple game formats including Skins and Team Stroke Play, and centralized commissioner controls for managing a tournament",
+    "src": "/images/screenshots/web/event-dashboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-dashboard-mobile-vue-demo.png",
+    "alt": "Marker event dashboard for PebblePayday with the 16-player list collapsed, four scorecards with tee times from 8:00 AM, a Republish scorecards button, and Complete event in the footer",
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Event dashboard for PebblePayday showing SCORECARDS · 4 with tee times and player first names (Mike/Greg/Bob/Larry at 8:00, Kevin/Debbie/Ben/Bert at 8:30, Harry/Joe/Tom/George at 8:20, Dave/Allan/Edward/Paul at 8:10) and GAMES · 4 (Skins, Stroke Play, Team Stroke Play, Team Stableford — all 16 players). Republish scorecards link and Complete event CTA visible. All names fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F4 PebblePayday. Names within a group can appear in any order between builds."
   },
 
   "commissionersLiveScoring": {
-    "src": "/images/screenshots/web/commissioners-live-leaderboard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/commissioners-live-leaderboard-mobile-demo.png",
-    "alt": "Live event leaderboard in Marker showing multiple teams in a Team Stroke Play event with front and back scoring, total standings, and accounting values during a round in progress",
+    "src": "/images/screenshots/web/event-live-leaderboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-live-leaderboard-mobile-vue-demo.png",
+    "alt": "Live event leaderboard in Marker for PebblePayday with an Event in progress badge and Team Stroke Play standings for four teams with front, back, to-par and amount columns",
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Scorecard-level leaderboard in PebblePayday event (breadcrumb PebblePayday > Leaderboard) with Round in progress badge and Event Games > Team Stroke Play standings. Teams: Debbie Dogleg/Ben Birdie/Bert Bailout/Kevin Kickin (#1, ✓18, -5/-4, -9, $640); Tom Triple/George Green/Joe Jar/Harry Hazard (#2, ✓18, -4/-3, -7, $0); Bob Smith/Greg Gimme/Larry Lateral/Mike Mulligan (#3, 18, -2/+3, +1, $0); Allan (partial, #4). All names fictional demo data. No personal data. Appropriate for commissioner page product illustration."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses event-live-leaderboard."
   },
 
   "commissionersSettlement": {
-    "src": "/images/screenshots/web/commissioners-settlement-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/commissioners-settlement-mobile-demo.png",
-    "alt": "Event settlement screen in Marker showing buy-ins collected, payouts distributed from the pot to winners, profit and loss per player, and calculated payment amounts",
+    "src": "/images/screenshots/web/event-final-settlement-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/event-final-settlement-mobile-vue-demo.png",
+    "alt": "Completed event settlement in Marker for Chambers Bay Cup: Overall - event with Buy-ins collected checked and the pot paying eight winners from $120 down to $20",
     "caption": null,
     "usage": ["commissioners"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Event leaderboard bottom section: Team 3 (Bob Smith/Greg Gimme/Larry Lateral/Mike Mulligan, 18, 91, $0) and Team 4 (Allan Albatross/Edward Eagle/Dave Divot/Paul Press, 17, 85, $0). Event total: Settlement tab active, Buy-ins collected checked. Pot payouts: Bert Bailout $480, George Green $240, Tom Triple $240, Kevin Kickin $160, Ben Birdie $160, Debbie Dogleg $160, Harry Hazard $80, Joe Jar $80. Share leaderboard button. All names fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses event-final-settlement (F7, completed)."
   },
 
   "followGamesNassauScorecard": {
-    "src": "/images/screenshots/web/tutorial-follow-games-01-nassau-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-follow-games-01-nassau-scorecard-mobile-demo.png",
-    "alt": "Nassau game selected on a Marker scorecard showing live match status and presses during the round",
+    "src": "/images/screenshots/web/game-nassau-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-scorecard-mobile-vue-demo.png",
+    "alt": "Nassau game selected on a Marker scorecard showing front and total match status, automatic presses and press buttons during the round",
     "caption": "Switch between game tabs to follow each game as scores are entered.",
     "usage": ["tutorials/follow-games-and-results"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Active-round standalone scorecard with Nassau selected. Demonstrates the game-specific scorecard column and live match status."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-nassau-scorecard."
   },
 
   "followGamesLiveLeaderboard": {
-    "src": "/images/screenshots/web/tutorial-follow-games-02-live-leaderboard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-follow-games-02-live-leaderboard-mobile-demo.png",
-    "alt": "Marker live leaderboard showing Net Skins standings and Nassau match results during an active round",
-    "caption": "The Leaderboard brings every game's standings together in one view.",
+    "src": "/images/screenshots/web/game-nassau-leaderboard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-leaderboard-mobile-vue-demo.png",
+    "alt": "Marker live leaderboard showing the Nassau Front match with its automatic presses and results, and the Back match with 9 to play",
+    "caption": "The Leaderboard shows each game's standings — here the Nassau Front match and its presses.",
     "usage": ["tutorials/follow-games-and-results"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Active-round standalone leaderboard showing multiple configured games and Round in progress state."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-nassau-leaderboard."
   },
 
   "followGamesDayTotal": {
-    "src": "/images/screenshots/web/tutorial-follow-games-03-day-total-settlement-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-follow-games-03-day-total-settlement-mobile-demo.png",
-    "alt": "Marker Day total showing current settlement transactions across games during an active round",
-    "caption": "Day total combines the current accounting impact of all games on the scorecard.",
+    "src": "/images/screenshots/web/overall-side-games-accounting-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/overall-side-games-accounting-mobile-vue-demo.png",
+    "alt": "Marker leaderboard during a round with a Round in progress badge, the Nassau, Skins and Wolf sections collapsed, and Overall - side games showing current who-pays-whom settlement rows",
+    "caption": "Overall - side games combines the current accounting of every game on the scorecard. Amounts are provisional until the round ends.",
     "usage": ["tutorials/follow-games-and-results"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Active-round Day total in Settlement view. Values remain provisional while the round is in progress."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 in progress. Side-game settlement reconciled to the cent against every game."
   },
 
   "reviewResultsEndRound": {
-    "src": "/images/screenshots/web/tutorial-settle-01-end-round-confirmation-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-settle-01-end-round-confirmation-mobile-demo.png",
-    "alt": "Marker End round confirmation explaining that ending the round locks the scorecard",
-    "caption": "Ending the round locks the scorecard and finalizes the game results. You can unlock it later from scorecard settings if a correction is needed.",
+    "src": "/images/screenshots/web/end-round-confirm-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/end-round-confirm-mobile-vue-demo.png",
+    "alt": "Marker End round sheet: By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.",
+    "caption": "Ending the round locks the scorecard and finalizes the game results. You can unlock it later in scorecard settings if a correction is needed.",
     "usage": ["tutorials/review-results-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Standalone scorecard End round confirmation state. Demonstrates the transition from provisional results to locked final results."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 Cypress Point through 18. Opens the sheet only."
   },
 
   "reviewResultsFinalSettlement": {
-    "src": "/images/screenshots/web/tutorial-settle-02-final-settlement-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-settle-02-final-settlement-mobile-demo.png",
-    "alt": "Marker final Day total showing settlement transactions after a completed round",
-    "caption": "The final Day total shows exactly who pays whom across all games on the scorecard.",
+    "src": "/images/screenshots/web/final-settlement-completed-round-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/final-settlement-completed-round-mobile-vue-demo.png",
+    "alt": "Marker leaderboard after a completed round at Cypress Point Club, with Overall - side games showing the final who-pays-whom settlement: three payments between players",
+    "caption": "After the round ends, Overall - side games shows exactly who pays whom across all games on the scorecard.",
     "usage": ["tutorials/review-results-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Final standalone scorecard Day total in Settlement view after the round is locked."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 after End round (locked). An Upgrade to Premium banner appears at the top for this free account."
   },
 
   "createScorecardNewGame": {
-    "src": "/images/screenshots/web/tutorial-create-scorecard-01-new-game-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-scorecard-01-new-game-mobile-demo.png",
-    "alt": "Marker home screen showing the New Game and Host Event options for starting a round",
+    "src": "/images/screenshots/web/home-recent-games-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/home-recent-games-mobile-vue-demo.png",
+    "alt": "Marker home screen for Bob Smith with Connect USGA ID, New Game and Host Event buttons, and recent scorecards and events below",
     "caption": "Tap New Game to start a standalone scorecard for your group.",
     "usage": ["tutorials/create-a-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Home screen with New Game (1-5 players) and Host Event (6+ players) buttons. Demo account Bob Smith. No personal data visible."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Shared with welcomeMarkerHome. Names within a scorecard row can appear in any order between builds."
   },
 
   "createScorecardSelectCourse": {
-    "src": "/images/screenshots/web/tutorial-create-scorecard-02-select-course-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-scorecard-02-select-course-mobile-demo.png",
-    "alt": "Create scorecard flow in Marker showing the course search screen with results for Shinnecock",
+    "src": "/images/screenshots/web/scorecard-course-search-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/scorecard-course-search-mobile-vue-demo.png",
+    "alt": "Create scorecard course search in Marker with the query shinn and one matching course: Shinnecock Hills Golf Club",
     "caption": "Choose the course for your round.",
     "usage": ["tutorials/create-a-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Course selection step of scorecard creation. Search query 'shinnecock' showing 2 matching courses. No tee selection visible on this screen."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. The isolated Hub's own course-search response is replayed."
   },
 
   "createScorecardSetup": {
-    "src": "/images/screenshots/web/tutorial-create-scorecard-03-setup-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-create-scorecard-03-setup-mobile-demo.png",
-    "alt": "Add Player screen in Marker showing name, handicap index, gender, and tee selection for a player",
-    "caption": "Marker takes you into player setup — confirm your handicap, gender, and tee before continuing.",
+    "src": "/images/screenshots/web/scorecard-add-self-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/scorecard-add-self-mobile-vue-demo.png",
+    "alt": "Add Player screen in Marker prefilled for Bob Smith with handicap index 4.2, Male selected, and the Pebble Beach GL tee list with no tee selected yet",
+    "caption": "Marker takes you into player setup — confirm your handicap and gender, and pick your tee.",
     "usage": ["tutorials/create-a-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Player settings panel showing demo player Bob Smith, handicap 4.7, Male selected, tee options with Blue/White selected. Fictional demo data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F6: where Vue lands after creating a scorecard. Vue does not preselect a tee for the first player. Save is not pressed."
   },
 
   "addPlayersPlayerPicker": {
-    "src": "/images/screenshots/web/tutorial-add-players-01-player-picker-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-add-players-01-player-picker-mobile-demo.png",
-    "alt": "Marker Add Player screen showing a list of ten recent playing partners and a search field for filtering by name",
+    "src": "/images/screenshots/web/scorecard-partner-picker-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/scorecard-partner-picker-mobile-vue-demo.png",
+    "alt": "Marker Add Player screen with a search field, an Invite player button and a list of ten recent partners",
     "caption": "Choose from people you've played with before, or use search to filter your playing-partner list.",
     "usage": ["tutorials/add-players-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Shows 'Select past partners' section with 'Search players' field and 'RECENT PARTNERS · 10' list. Invite player link visible top-right. All names are fictional demo data. Search filters the user's playing-partner history only — not a global Marker user search."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F6. Most recent partners first; partners whose latest rounds were saved in the same second can appear in either order."
   },
 
   "addPlayersInvitePlayer": {
-    "src": "/images/screenshots/web/tutorial-add-players-02-invite-player-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-add-players-02-invite-player-mobile-demo.png",
-    "alt": "Blank Add Player form in Marker showing fields for mobile number, name, handicap index, gender, and tee when adding a new playing partner",
+    "src": "/images/screenshots/web/scorecard-invite-player-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/scorecard-invite-player-mobile-vue-demo.png",
+    "alt": "Blank Add Player form in Marker with an optional mobile number field, name fields, handicap index, gender and the Pebble Beach GL tee list",
     "caption": "Enter a name, handicap, and tee for someone new — adding a phone number shares the scorecard with them by text.",
     "usage": ["tutorials/add-players-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Blank player settings form (Adjust player settings) reached via Invite player. Shows Add/find by mobile number field, Name (First/Last), Handicap index (0), Handicap Settings (Male/Female), and Tee list (Red/Green/Blue visible). Save button at bottom."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F6. Nothing entered or saved."
   },
 
   "addGamesGamePicker": {
-    "src": "/images/screenshots/web/tutorial-add-games-01-game-picker-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-add-games-01-game-picker-mobile-demo.png",
-    "alt": "Marker Add Game screen listing all eleven available game formats with one-line descriptions, and Premium badges on Scotch, Team Stableford, and Wolf",
+    "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
+    "alt": "Marker Add game screen with buttons for all twelve game formats and Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
     "caption": "Choose the game your group wants to play.",
     "usage": ["tutorials/add-games-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Standalone scorecard game picker. Shows SELECT GAME list with all 11 formats: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch (Premium), Skins, Stableford, Stroke Play, Team Stableford (Premium), Team Stroke Play, Wolf (Premium). No search or category filters visible."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker."
   },
 
   "scoreRoundMainScorecard": {
-    "src": "/images/screenshots/web/tutorial-score-round-01-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-score-round-01-scorecard-mobile-demo.png",
-    "alt": "Marker scorecard showing players, hole scores, handicap indicators, and game status during a round",
+    "src": "/images/screenshots/web/game-nassau-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-nassau-scorecard-mobile-vue-demo.png",
+    "alt": "Marker scorecard showing four players' hole scores with handicap stroke dots and the Nassau match status column during a round",
     "caption": "Enter scores in the grid and Marker updates the scorecard and game status as the round progresses.",
     "usage": ["tutorials/score-the-round"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Active Nassau scorecard on Shinnecock Hills. Shows four players (BS, AA, BB, EE) split into Side A/B teams, holes 1–5 scored with gross/net stacked display, handicap dot indicators, birdie circles, and the Nassau game-status column with front/press/total match rows and press pills."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-nassau-scorecard."
   },
 
   "addGamesGameConfiguration": {
-    "src": "/images/screenshots/web/tutorial-add-games-02-game-configuration-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-add-games-02-game-configuration-mobile-demo.png",
-    "alt": "Nassau configuration screen in Marker showing the Handicap section set to Net with Stroke off the low ball checked, all four players selected with tee and course handicap details, and the Teams section partially visible at the bottom",
-    "caption": "Each game's form shows handicap controls at the top, the full player list with tee and course handicap details, and game-specific settings below.",
+    "src": "/images/screenshots/web/nassau-configuration-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/nassau-configuration-mobile-vue-demo.png",
+    "alt": "Nassau configuration in Marker showing Match: 1 - 9 and Match: 10 - 18, each with Automatic Press set to 2 down and a $10 amount per match, with Match: 1 - 18 below",
+    "caption": "Match games like Nassau set presses and the amount per match — here each match auto-presses when a side is 2 down.",
     "usage": ["tutorials/add-games-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Nassau configuration. Shows Handicap (Net selected, Gross available, Stroke off the low ball checked, show advanced link), Players (4) with all checked (Bob Smith, Allan Albatross, Bert Bailout, Edward Eagle — Blue/White tee with C.H./P.H./S.O. values), Teams (Side A vs Side B partially visible). Save game button at bottom. Accounting fields not visible in this capture."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 Nassau edit form. Save is not pressed."
   },
 
   "welcomeMarkerHome": {
-    "src": "/images/screenshots/web/tutorial-welcome-01-home-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-welcome-01-home-mobile-demo.png",
+    "src": "/images/screenshots/web/home-recent-games-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/home-recent-games-mobile-vue-demo.png",
     "alt": "Marker Home screen showing player name, Connect USGA ID button, New Game and Host Event tiles, and recent scorecards and events",
     "caption": "The Home screen is your starting point for a New Game, a larger Event, or returning to recent play.",
     "usage": ["tutorials/welcome-to-marker"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Signed-in Home screen for demo account Bob Smith without a connected USGA ID. Hero shows player name and Connect USGA ID button (no handicap index or club visible). New Game (1-5 players) and Host Event (6+ players) tiles visible. Three recent scorecards and two recent events visible with fictional demo data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses home-recent-games."
   },
 
   "setupProfileEdit": {
-    "src": "/images/screenshots/web/tutorial-profile-01-edit-profile-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-profile-01-edit-profile-mobile-demo.png",
+    "src": "/images/screenshots/web/profile-edit-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/profile-edit-mobile-vue-demo.png",
     "alt": "Marker profile edit form showing Phone, Email, USGA Handicap ID, Name, and Handicap Settings fields with a Save button",
     "caption": "Complete your player information here and optionally connect your USGA Handicap ID.",
     "usage": ["tutorials/set-up-your-profile"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Profile Edit screen using fictitious demo data (Bob Smith, (000) 555-0001, bob@testgolfer.org). USGA Handicap ID field is empty — no validated USGA identity shown. Handicap Settings (Male/Female) is visible because no USGA ID is connected. Save button visible at bottom."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Fictional Bob Smith: 000-555 phone, example.com email, no USGA ID."
   },
 
   "handicapsGameSettings": {
-    "src": "/images/screenshots/web/tutorial-handicaps-01-game-settings-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-handicaps-01-game-settings-mobile-demo.png",
-    "alt": "Marker game handicap settings showing Net scoring, stroke off the low ball, handicap allowance, and advanced handicap options",
-    "caption": "Choose Net scoring, then adjust the handicap allowance and advanced stroke settings for the game.",
+    "src": "/images/screenshots/web/handicap-advanced-settings-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/handicap-advanced-settings-mobile-vue-demo.png",
+    "alt": "Marker Nassau handicap settings with net selected, Stroke off of low ball checked, Handicap Allowance 100%, and the advanced options Limit Playing Handicap, Use half strokes, Use handicap overrides and No strokes on par 3's",
+    "caption": "Choose net scoring, then adjust the handicap allowance and advanced stroke settings for the game.",
     "usage": ["tutorials/handicap-settings"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Game configuration handicap section with Net selected, Stroke off the low ball checkbox, and show advanced expanded to reveal Handicap Allowance, Limit Playing Handicap, Use half strokes, No strokes on par 3's, and Override player handicaps options."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 Nassau edit form with show advanced opened (display only). Save is not pressed."
   },
 
   "handicapsScorecardIndicators": {
-    "src": "/images/screenshots/web/tutorial-handicaps-02-scorecard-indicators-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/tutorial-handicaps-02-scorecard-indicators-mobile-demo.png",
-    "alt": "Marker scorecard showing handicap stroke indicators in player score cells",
-    "caption": "Dots show strokes received on a hole; a plus sign shows a stroke the player gives back.",
+    "src": "/images/screenshots/web/handicaps-scorecard-indicators-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/handicaps-scorecard-indicators-mobile-vue-demo.png",
+    "alt": "Marker scorecard for holes 11 to 18 with handicap stroke dots in player score cells and a plus sign on hole 17 for a player giving a stroke back",
+    "caption": "Dots show strokes received on a hole; a plus sign shows a stroke the player gives back. Indicators follow the active game's handicap settings.",
     "usage": ["tutorials/handicap-settings"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Scorecard mid-round showing dot (•) indicators for strokes received and plus (+) indicators for strokes given back in the top corner of score cells."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 with the Net Skins tab active (full handicaps), so Edward Eagle's plus handicap shows as + on hole 17."
   },
 
   "gameScotchActionModal": {
-    "src": "/images/screenshots/web/game-scotch-action-modal-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-scotch-action-modal-mobile-demo.png",
-    "alt": "Marker Scotch hole action modal showing Closest to Pin selection, Match Press, and Hole Press controls",
+    "src": "/images/screenshots/web/game-scotch-action-modal-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-scotch-action-modal-mobile-vue-demo.png",
+    "alt": "Marker Scotch hole 8 action sheet with Harry Hazard checked for Closest to Pin (KP), Match Press checked, and a Hole Press counter",
     "caption": "Use the Scotch hole menu to record the KP winner and add a match press or hole press during play.",
     "usage": ["games/scotch"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows ScotchActionModal bottom sheet: header 'Scotch: Hole #N' in green. KP section lists all 4 players with checkboxes; one player checked (green highlight). Press options section shows Match Press checkbox with multiplier hint and Hole Press stepper with +/- buttons. All player names are fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F2 Torrey Pines South (Vue shows the course title SOUTH). KP option order can vary between builds."
   },
 
   "gameScotchScorecard": {
-    "src": "/images/screenshots/web/game-scotch-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-scotch-scorecard-mobile-demo.png",
-    "alt": "Marker Scotch scorecard showing running point differential, KP results, presses, and increasing point multipliers during live play",
-    "caption": "The Scotch column tracks the running point differential, presses, multipliers, and KP results as the match unfolds.",
+    "src": "/images/screenshots/web/game-scotch-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-scotch-scorecard-mobile-vue-demo.png",
+    "alt": "Marker Scotch scorecard for holes 2 to 9 showing the running point differential, points per hole, KP badges, and the match press from hole 8 marked 2x",
+    "caption": "The Scotch column tracks the running point differential and each hole's points. KP badges mark the closest-to-pin winners, and the match press from hole 8 doubles points for the rest of the match (2x).",
     "usage": ["games/scotch"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Scotch scorecard mid-round: hole cells display running cumulative point differential in center, per-hole team points in top corners, 2x/4x multiplier labels for Blitz and pressed holes, 'kp' label when KP is designated. KP badge visible on winning player's row. All player names are fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F2. Running total climbs to +15 by hole 7; hole 8 shows 10 points with 2x (match)."
   },
 
   "gameMatchPlayScorecard": {
-    "src": "/images/screenshots/web/game-matchplay-scorecard-mobile-demo.webp",
-    "fallback": "/images/screenshots/source/game-matchplay-scorecard-mobile-demo.png",
-    "alt": "Marker Match Play scorecard showing an original team match and multiple concurrent press standings during live play",
+    "src": "/images/screenshots/web/game-match-play-scorecard-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/game-match-play-scorecard-mobile-vue-demo.png",
+    "alt": "Marker Match Play scorecard (tab labelled Matchplay: 1 - 18) showing the original match and concurrent presses, including an automatic press from hole 4",
     "caption": "The original match and each press run independently. Automatic presses begin new matches when a side falls two down, while manual presses remain available during play.",
     "usage": ["games/match-play"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Expo screenshot. Visual, accuracy, and privacy review completed Jul 2026. Shows Match Play scorecard mid-round with original match and at least one automatic press both active. Hole cells display concurrent standings separated by /. Auto press label visible. Manual press pill visible on future holes. All player names are fictional demo data. No personal data."
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F2. Vue labels the tab Matchplay and the column Match Play."
   }
 }

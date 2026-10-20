@@ -1,7 +1,7 @@
 ---
 layout: layouts/tutorial-guide.njk
 title: Review Results & Settle Up
-description: Learn how to end a standalone Marker round, lock the scorecard, review final game results, and settle up with Day total, Settlement, and Profit / loss.
+description: Learn how to end a standalone Marker round, lock the scorecard, review final game results, and settle up with Overall - side games, Settlement, and Profit / loss.
 subtitle: "End the round to lock in final results, then use Settlement or Profit / loss to pay out."
 category: Playing with Your Group
 order: 6
@@ -69,9 +69,9 @@ cta:
 <div class="tutorial-step">
 <div class="tutorial-step__marker" aria-hidden="true">5</div>
 <div class="tutorial-step__content">
-<h3>Read the Day total</h3>
-<p>Scroll past the individual game cards to reach the <strong>Day total</strong> panel. It combines the accounting results from all configured games into a single summary. The panel only appears when at least one game has an accounting amount set.</p>
-<p>The Day total shows two views: <strong>Settlement</strong> and <strong>Profit / loss</strong>. Switch between them using the pill tabs at the top of the panel.</p>
+<h3>Read Overall - side games</h3>
+<p>Scroll past the individual game cards to reach <strong>Overall - side games</strong>. It combines the accounting results from all configured games into a single summary, and opens expanded once the round has ended. It only appears when at least one game has an accounting amount set.</p>
+<p>It shows two views: <strong>Settlement</strong> and <strong>Profit/loss</strong>. Switch between them using the pill tabs at the top of the section.</p>
 </div>
 </div>
 
@@ -79,10 +79,11 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">6</div>
 <div class="tutorial-step__content">
 <h3>Settle up</h3>
-<p><strong>Settlement</strong> (the default view) shows the payment transactions needed to square up: who pays whom and how much. Each row lists a <strong>From</strong> player, a <strong>To</strong> player, and an <strong>Amount</strong>. Marker minimizes the number of transactions needed, so you may see fewer rows than you expect.</p>
-<p>If any game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears above the table. Check it if players already put money in the pot before the round — Marker settles from the pot first, then lists any remaining player-to-player payments. Uncheck it to show all settlements as direct payments.</p>
-<p><strong>Profit / loss</strong> shows each player's overall financial position: <strong>Gross</strong> winnings from all games combined. When buy-ins are involved, <strong>Buy-in</strong> and <strong>Net</strong> columns also appear — Net is the gross amount minus the player's total buy-in contribution. Green values are positive; red values are negative.</p>
-<p>Use Settlement to run the actual payout. Use Profit / loss to see the bigger picture of who came out ahead.</p>
+<p><strong>Settlement</strong> (the default view) shows the payment transactions needed to square up: who pays whom and how much. Each row lists a <strong>From</strong> player, a <strong>To</strong> player, and an <strong>Amount</strong>. Marker nets each player's results across all games, so you may see fewer rows than you expect.</p>
+<p>If any game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears above the table, checked by default. Checked, Marker settles from the pot for buy-in games, then between players for the rest; unchecked, it settles everything directly between players. The checkbox only changes how the settlement is displayed — it isn't saved and doesn't change anyone's results.</p>
+<p>Marker calculates and displays the amounts; it doesn't process payments. Settle up however your group usually does.</p>
+<p><strong>Profit/loss</strong> shows each player's overall financial position: <strong>Gross</strong> winnings from all games combined. When buy-ins are involved, <strong>Buy-in</strong> and <strong>Net</strong> columns also appear — Net is the gross amount minus the player's total buy-in contribution.</p>
+<p>Use Settlement to run the actual payout. Use Profit/loss to see the bigger picture of who came out ahead.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("reviewResultsFinalSettlement", screenshots, frame="phone", caption=true) }}
 </div>

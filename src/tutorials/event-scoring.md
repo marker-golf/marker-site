@@ -58,8 +58,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
 <h3>Check provisional Event totals</h3>
-<p>Scroll below the game standings cards to see the <strong>Event total</strong> section. This combines the accounting impact across all Event Games — who owes whom and how much — based on scores entered so far. Values here are provisional while the event is in progress and become final when the event is completed.</p>
-<p>The <strong>Settlement</strong> tab (the default) shows player-to-player payment amounts. The <strong>Profit / loss</strong> tab shows each player's gross winnings and net result. Both tabs are available during the round and update as scoring progresses.</p>
+<p>Below the game sections, <strong>Overall - event</strong> combines the accounting across all Event Games — who owes whom and how much — based on scores entered so far. While the event is in progress the section is collapsed and marked <em>Round in progress...</em>; tap it to expand. Values are provisional until the event is completed.</p>
+<p>The <strong>Settlement</strong> view (the default) shows who pays whom. If any Event Game has a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears, checked by default. Checked, Marker settles from the pot for buy-in games, then between players for the rest; unchecked, it settles everything directly between players, as if buy-ins were never collected. The checkbox only changes how the settlement is displayed — it isn't saved and doesn't change anyone's results. The <strong>Profit/loss</strong> view shows each player's gross winnings and, for buy-in games, their buy-in and net result. Both views update as scoring progresses. Marker calculates and displays the amounts; it doesn't process payments.</p>
 </div>
 </div>
 

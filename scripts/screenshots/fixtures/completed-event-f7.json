@@ -1,0 +1,22 @@
+{
+  "_comment": "F7: a finished event, completed by the last capture through Vue's Complete event confirmation. Twelve players in three groups, every scorecard scored through 18 from a fixed seed; published, unlocked until that capture. Every game is a buy-in (pool) game as Vue's event game forms create them, $10 a player each: net Skins (pot split by skins won), net Stroke Play paying $60/$40/$20, and Team Stroke Play (groups as teams, two net balls, one 1-18 pot, winner takes all). Only pool games, so every Pot row in Vue's buy-ins-collected settlement is a real pool payout. The seed is chosen so the Stroke Play top three and the winning team are untied and the skins divide the Skins pot evenly. Dated a week before the browser's fixed date and built before every other fixture, so it never shows in the recent scorecards, recent events or recent partners lists other captures show.",
+  "name": "Chambers Bay Cup",
+  "course": { "facility": "Chambers Bay Golf Club", "courseId": "41f41bd1-06f7-44f7-919e-257b939b3255" },
+  "date": "2026-07-03",
+  "utcOffset": "-07:00",
+  "tees": {
+    "male": { "name": "Sand", "gender": "Male" },
+    "female": { "name": "White", "gender": "Female" }
+  },
+  "groups": [
+    { "teeTime": "08:00", "startHole": 1, "players": ["bob", "harry", "kevin", "dave"],      "holesPlayed": 18 },
+    { "teeTime": "08:10", "startHole": 1, "players": ["greg", "larry", "edward", "allan"],   "holesPlayed": 18 },
+    { "teeTime": "08:20", "startHole": 1, "players": ["tom", "mike", "debbie", "george"],    "holesPlayed": 18 }
+  ],
+  "scoreSeed": 20260730,
+  "games": [
+    { "game": "Skins", "amount": 10, "isPool": true, "carryTies": false },
+    { "game": "Stroke Play", "amount": 10, "isPool": true, "payouts": [60, 40, 20] },
+    { "game": "Team Stroke Play", "netBalls": 2, "teamsFromGroups": true, "subTotals": [{ "start": 1, "end": 18, "amount": 10 }] }
+  ]
+}

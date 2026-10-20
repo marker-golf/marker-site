@@ -47,7 +47,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
 <h3>Review your player settings</h3>
-<p>Marker takes you into player setup, starting with yourself. Review your handicap, gender, and tee selection. Change your tee here if needed before continuing.</p>
+<p>Marker takes you into player setup, starting with yourself. Review your handicap and gender, then pick your tee — no tee is selected for you yet — and tap <strong>Save</strong>.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("createScorecardSetup", screenshots, frame="phone", caption=true) }}
 </div>

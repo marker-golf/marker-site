@@ -1,0 +1,21 @@
+{
+  "_comment": "Fictional demo golfers. Phones use the reserved 000-555 range; the only email uses the reserved example.com domain. No GHIN numbers.",
+  "users": [
+    { "key": "bob",    "id": "5c2ee000-0000-4000-8000-000000000001", "firstName": "Bob",    "lastName": "Smith",     "gender": "male",   "phone": "0005550001", "handicapIndex": 4.2,  "email": "bob.smith@example.com", "level": 2 },
+    { "key": "joe",    "id": "5c2ee000-0000-4000-8000-000000000002", "firstName": "Joe",    "lastName": "Jar",       "gender": "male",   "phone": "0005550002", "handicapIndex": 13.7, "level": 1 },
+    { "key": "greg",   "id": "5c2ee000-0000-4000-8000-000000000003", "firstName": "Greg",   "lastName": "Gimme",     "gender": "male",   "phone": "0005550003", "handicapIndex": 9.1,  "level": 1 },
+    { "key": "harry",  "id": "5c2ee000-0000-4000-8000-000000000004", "firstName": "Harry",  "lastName": "Hazard",    "gender": "male",   "phone": "0005550004", "handicapIndex": 2.1,  "level": 1 },
+    { "key": "larry",  "id": "5c2ee000-0000-4000-8000-000000000005", "firstName": "Larry",  "lastName": "Lateral",   "gender": "male",   "phone": "0005550005", "handicapIndex": 16.3, "level": 1 },
+    { "key": "bert",   "id": "5c2ee000-0000-4000-8000-000000000006", "firstName": "Bert",   "lastName": "Bailout",   "gender": "male",   "phone": "0005550006", "handicapIndex": 14.6, "level": 1 },
+    { "key": "kevin",  "id": "5c2ee000-0000-4000-8000-000000000007", "firstName": "Kevin",  "lastName": "Kickin",    "gender": "male",   "phone": "0005550007", "handicapIndex": 17.4, "level": 1 },
+    { "key": "tom",    "id": "5c2ee000-0000-4000-8000-000000000008", "firstName": "Tom",    "lastName": "Triple",    "gender": "male",   "phone": "0005550008", "handicapIndex": 9.8,  "level": 1 },
+    { "key": "dave",   "id": "5c2ee000-0000-4000-8000-000000000009", "firstName": "Dave",   "lastName": "Divot",     "gender": "male",   "phone": "0005550009", "handicapIndex": 24.9, "level": 1 },
+    { "key": "mike",   "id": "5c2ee000-0000-4000-8000-000000000010", "firstName": "Mike",   "lastName": "Mulligan",  "gender": "male",   "phone": "0005550010", "handicapIndex": 12.5, "level": 1 },
+    { "key": "paul",   "id": "5c2ee000-0000-4000-8000-000000000011", "firstName": "Paul",   "lastName": "Press",     "gender": "male",   "phone": "0005550011", "handicapIndex": 11.0, "level": 1 },
+    { "key": "edward", "id": "5c2ee000-0000-4000-8000-000000000012", "firstName": "Edward", "lastName": "Eagle",     "gender": "male",   "phone": "0005550012", "handicapIndex": -1.4, "level": 1 },
+    { "key": "allan",  "id": "5c2ee000-0000-4000-8000-000000000013", "firstName": "Allan",  "lastName": "Albatross", "gender": "male",   "phone": "0005550013", "handicapIndex": 12.8, "level": 1 },
+    { "key": "ben",    "id": "5c2ee000-0000-4000-8000-000000000014", "firstName": "Ben",    "lastName": "Birdie",    "gender": "male",   "phone": "0005550014", "handicapIndex": 6.3,  "level": 1 },
+    { "key": "george", "id": "5c2ee000-0000-4000-8000-000000000015", "firstName": "George", "lastName": "Green",     "gender": "male",   "phone": "0005550015", "handicapIndex": 22.0, "level": 1 },
+    { "key": "debbie", "id": "5c2ee000-0000-4000-8000-000000000016", "firstName": "Debbie", "lastName": "Dogleg",    "gender": "female", "phone": "0005550016", "handicapIndex": 5.2,  "level": 1 }
+  ]
+}

@@ -35,7 +35,10 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Method 1 — Add from recent playing partners</h3>
-<p>Your most recent playing partners appear at the top of the player list for quick one-tap selection. Tap a name to check them off. This is the fastest way to add your regular group — Marker remembers everyone you've played with.</p>
+<p>The <strong>Recent Players</strong> list shows people from your past events, alphabetically by last name, for quick one-tap selection. Tap a name to check them off — each selection also appears at the top of the screen with a running count. This is the fastest way to add your regular group.</p>
+<div class="tutorial-step__screenshot">
+{{ ProductScreenshot("eventAddPlayersPicker", screenshots, frame="phone", caption=true) }}
+</div>
 </div>
 </div>
 
@@ -44,9 +47,6 @@ cta:
 <div class="tutorial-step__content">
 <h3>Method 2 — Search for a previous playing partner</h3>
 <p>Type in the search field to filter by name. The search covers players you've previously played with in Marker — it doesn't search every Marker user, only your playing history. Tap a result to select them.</p>
-<div class="tutorial-step__screenshot">
-{{ ProductScreenshot("eventAddPlayersPicker", screenshots, frame="phone", caption=true) }}
-</div>
 </div>
 </div>
 
@@ -62,7 +62,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">5</div>
 <div class="tutorial-step__content">
 <h3>Set tees for the group</h3>
-<p>After selecting players via Methods 1 or 2 and tapping <strong>Continue</strong>, Marker shows a tee assignment screen. Choose the default tee for each gender present in your selection — the tee you pick applies to all newly added players of that gender at once.</p>
+<p>Choosing tees is a separate step. After selecting players via Methods 1 or 2, tap <strong>Continue</strong> and Marker opens <strong>Set Player Tees</strong>. Choose the tee for each gender present in your selection — the tee you pick applies to all newly added players of that gender at once — then tap <strong>Save</strong> to add them to the event.</p>
 <p>Individual tee adjustments can be made at any time by tapping a player's name on the event dashboard.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventAddPlayersTees", screenshots, frame="phone", caption=true) }}

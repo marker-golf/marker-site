@@ -28,11 +28,11 @@ cta:
 <div class="tutorial-step__content">
 <h3>Complete the event</h3>
 <p>Once scoring is done, players can end their individual scorecard from the scorecard view. Tapping <strong>End round</strong> locks just that scorecard and asks for confirmation. Individual scorecards do not need to be separately ended before the event organizer completes the event — but players may do so when their group finishes.</p>
+<p>When all groups are done and scores are correct, the event organizer taps <strong>Complete event</strong> in the event dashboard sticky footer. A confirmation appears: <em>"Complete this event. Once all the scores are in, you can complete the event. This will lock the scorecards, prevent further edits, and finalize the game results."</em> Tap <strong>Yes</strong> to confirm.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventCompleteConfirm", screenshots, frame="phone", caption=true) }}
 </div>
-<p>When all groups are done and scores are correct, the event organizer taps <strong>Complete event</strong> in the event dashboard sticky footer. A confirmation sheet appears: <em>"By completing this event, you attest that the scores are correct. Scorecards lock and per-game results freeze. You can unlock later if you need to make changes."</em> Tap <strong>Complete event</strong> to confirm.</p>
-<p>After completion, the event dashboard shows <strong>This event is complete.</strong> If you need to correct a score, tap <strong>Unlock</strong> from that banner — scorecards become editable again and game summaries recalculate live.</p>
+<p>After completion, the event dashboard shows <strong>This round is complete.</strong> If you need to correct a score, tap <strong>Unlock</strong> there and confirm — scorecards become editable again and game summaries recalculate.</p>
 </div>
 </div>
 
@@ -40,7 +40,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Review final results</h3>
-<p>Tap the <strong>trophy icon</strong> to open the Event leaderboard. The <strong>Event in progress</strong> badge is gone — standings are now final. Each Event Game card shows its frozen result, and the <strong>Event total</strong> section below reflects the final accounting across all Event Games.</p>
+<p>Tap the <strong>trophy icon</strong> to open the Event leaderboard. The <strong>Event in progress</strong> badge is gone — standings are now final. Each Event Game section shows its final result, and <strong>Overall - event</strong> below reflects the final accounting across all Event Games. It opens expanded once the event is complete.</p>
 </div>
 </div>
 
@@ -48,8 +48,10 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">3</div>
 <div class="tutorial-step__content">
 <h3>Settle up</h3>
-<p>The <strong>Settlement</strong> tab in the Event total section shows exactly who pays whom and how much — one row per payment needed. If any Event Game uses a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears: check it to settle from the collected pot first and show only residual payments between players; uncheck it to show all settlements as direct player-to-player amounts.</p>
-<p>Event total covers Event Games only. If any scorecard has Side Games, those settle separately on that scorecard's own leaderboard and are not rolled into the Event total.</p>
+<p>The <strong>Settlement</strong> view in <strong>Overall - event</strong> shows exactly who pays whom and how much — one row per payment needed. If any Event Game has a pool buy-in, a <strong>Buy-ins collected</strong> checkbox appears, checked by default. Checked, Marker settles from the pot for buy-in games, then between players for the rest; unchecked, it settles everything directly between players, as if buy-ins were never collected. The checkbox only changes how the settlement is displayed — it isn't saved and doesn't change anyone's results.</p>
+<p>In the example below, every game had a $10 buy-in, so with <strong>Buy-ins collected</strong> checked each row is a payment from the pot to a winner, and the payouts add up to exactly the buy-ins collected.</p>
+<p>Marker calculates and displays these amounts; it doesn't process payments. Settle up however your group usually does.</p>
+<p>Overall - event covers Event Games only. If any scorecard has Side Games, those settle separately on that scorecard's own leaderboard (under <strong>Overall - side games</strong>) and are not rolled into the event total.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventCompleteFinalSettlement", screenshots, frame="phone", caption=true) }}
 </div>
@@ -60,7 +62,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">4</div>
 <div class="tutorial-step__content">
 <h3>Check profit and loss</h3>
-<p>Tap the <strong>Profit / loss</strong> tab in the Event total section to see a per-player summary: gross winnings across all Event Games, buy-in cost (when applicable), and net result. Positive net values are shown in green; negative in red.</p>
+<p>Tap <strong>Profit/loss</strong> in Overall - event to see a per-player summary: gross winnings across all Event Games and, when games have buy-ins, each player's buy-in and net result (gross minus buy-in).</p>
 </div>
 </div>
 

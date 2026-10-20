@@ -48,7 +48,7 @@ cta:
 <p>When creating more than one scorecard, choose the start format:</p>
 <ul>
 <li><strong>Tee Times</strong> — all groups start from the same starting hole, departing at timed intervals. Set the interval in the <strong>Spacing (minutes)</strong> field — options run from 5 to 20 minutes; the default is 10. The first group tees off at your chosen start time; each subsequent group is delayed by that interval.</li>
-<li><strong>Shotgun Start</strong> — all groups start at the same time, each from a different hole. Marker assigns consecutive starting holes beginning at the Start hole you set, wrapping from 18 back to 1. A preview line shows the exact hole assignments before you save.</li>
+<li><strong>Shotgun Start</strong> — all groups start at the same time, each from a different hole. Marker assigns consecutive starting holes beginning at the Start hole you set, and groups that run past hole 18 continue from hole 1. A preview line lists the starting holes before you save — for example, six groups starting on hole 1 go out on holes 1 through 6. (The preview counts straight up from the Start hole, so it's exact whenever no group runs past 18.)</li>
 </ul>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventScorecardsTeeTimes", screenshots, frame="phone", caption=true) }}

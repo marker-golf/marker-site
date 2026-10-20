@@ -1,0 +1,23 @@
+{
+  "_comment": "F4: in-progress event. Scores are generated from a fixed seed; groups 1-3 finished, group 4 through 15 holes. The seed is chosen so no Stroke Play, Team Stroke Play or Team Stableford position is tied at the top.",
+  "name": "PebblePayday",
+  "course": { "facility": "Pebble Beach GL", "courseId": "de34ef06-9d12-4d40-958a-73f9069522f1" },
+  "date": "2026-07-10",
+  "tees": {
+    "male": { "name": "White", "gender": "Male" },
+    "female": { "name": "Red", "gender": "Female" }
+  },
+  "groups": [
+    { "teeTime": "08:00", "startHole": 1, "players": ["bob", "greg", "larry", "mike"],      "holesPlayed": 18 },
+    { "teeTime": "08:10", "startHole": 1, "players": ["allan", "dave", "edward", "paul"],   "holesPlayed": 18 },
+    { "teeTime": "08:20", "startHole": 1, "players": ["george", "harry", "joe", "tom"],     "holesPlayed": 18 },
+    { "teeTime": "08:30", "startHole": 1, "players": ["ben", "bert", "debbie", "kevin"],    "holesPlayed": 15 }
+  ],
+  "scoreSeed": 20260750,
+  "games": [
+    { "game": "Skins", "amount": 20, "isPool": true, "carryTies": false },
+    { "game": "Stroke Play", "amount": 10, "isPool": true },
+    { "game": "Team Stroke Play", "netBalls": 3, "amount": 20, "teamsFromGroups": true },
+    { "game": "Team Stableford", "netBalls": 3, "amount": 20, "teamsFromGroups": true }
+  ]
+}
