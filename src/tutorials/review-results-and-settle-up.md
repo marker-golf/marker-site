@@ -62,7 +62,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>Review final game results</h3>
 <p>Tap the <strong>trophy icon</strong> to open the Leaderboard. The Round in progress badge is no longer shown — the results you see are final.</p>
-<p>Each configured game has its own results card with final standings, hole-by-hole detail, and dollar results if you set accounting. The structure is the same as the in-progress view — the difference is that the numbers are now locked. For a full walkthrough of how to read individual game cards, see <a href="/tutorials/follow-games-and-results/">Follow Games &amp; Results</a>.</p>
+<p>Each configured game has its own results card with final standings, hole-by-hole detail, and dollar results if you set accounting. The structure is the same as the in-progress view — the difference is that the numbers are now locked. For a full walkthrough of how to read individual game cards, see <a href="{{ '/tutorials/follow-games-and-results/' | url }}">Follow Games &amp; Results</a>.</p>
 </div>
 </div>
 

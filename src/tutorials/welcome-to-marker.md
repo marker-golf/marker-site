@@ -54,12 +54,12 @@ cta:
 <p><strong>New Game · 1–5 players</strong><br>
 Creates a standalone scorecard for one group. Up to five players share a single scoring grid, and any player can enter or correct scores from their own phone. This is the right choice for a regular foursome, a casual round, or any time one group is playing together.</p>
 
-<p>The <a href="/tutorials/create-a-scorecard/">Playing with Your Group</a> tutorial path walks through every step — create a scorecard, add players, configure games, score the round, and settle up.</p>
+<p>The <a href="{{ '/tutorials/create-a-scorecard/' | url }}">Playing with Your Group</a> tutorial path walks through every step — create a scorecard, add players, configure games, score the round, and settle up.</p>
 
 <p><strong>Host Event · 6+ players</strong><br>
 Organizes a larger outing under a single event. An event supports multiple groups, each with its own scorecard, and brings results together in a shared leaderboard. This is the right choice when you have more players than fit on one scorecard, or when you're running a structured outing with tee times or multiple flights.</p>
 
-<p>The <a href="/tutorials/create-an-event/">Running an Event</a> tutorial path covers the full event workflow.</p>
+<p>The <a href="{{ '/tutorials/create-an-event/' | url }}">Running an Event</a> tutorial path covers the full event workflow.</p>
 
 <p>Not sure which to use: if everyone playing fits on one scorecard (up to five players), use <strong>New Game</strong>. If you have multiple groups or need a combined leaderboard, use <strong>Host Event</strong>.</p>
 
@@ -71,9 +71,9 @@ Organizes a larger outing under a single event. An event supports multiple group
 
 <ul>
 <li><strong>Set Up Your Profile</strong> — the next tutorial in this path covers adding your name, connecting your USGA Handicap ID, and understanding what each setting affects.</li>
-<li><a href="/tutorials/create-a-scorecard/"><strong>Playing with Your Group</strong></a> — start here to create your first standalone scorecard.</li>
-<li><a href="/tutorials/create-an-event/"><strong>Running an Event</strong></a> — start here to set up a multi-group outing.</li>
-<li><a href="/games/"><strong>Games guides</strong></a> — rules, scoring examples, and strategy for Skins, Nassau, Wolf, and every other format Marker supports.</li>
+<li><a href="{{ '/tutorials/create-a-scorecard/' | url }}"><strong>Playing with Your Group</strong></a> — start here to create your first standalone scorecard.</li>
+<li><a href="{{ '/tutorials/create-an-event/' | url }}"><strong>Running an Event</strong></a> — start here to set up a multi-group outing.</li>
+<li><a href="{{ '/games/' | url }}"><strong>Games guides</strong></a> — rules, scoring examples, and strategy for Skins, Nassau, Wolf, and every other format Marker supports.</li>
 </ul>
 
 </div>

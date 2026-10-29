@@ -534,7 +534,7 @@ Each hole, Marker selects the player with the lowest net score from each team. T
 
 **Handicap percentage.** The percentage setting (default 100%) scales handicaps before application. Setting it to 80% reduces each player's effective strokes by 20%, which is common in competitive formats to prevent heavy handicappers from dominating.
 
-For more on how Marker handles handicap allocation, see the [Handicap Settings guide](/tutorials/handicap-settings/).
+For more on how Marker handles handicap allocation, see the [Handicap Settings guide]({{ '/tutorials/handicap-settings/' | url }}).
 
 </div>
 
@@ -665,7 +665,7 @@ Both Team Stroke Play and Team Stableford collect individual scores, select a co
 
 <div class="gg-prose">
 
-Choose Team Stroke Play when your group prefers traditional stroke scoring and wants a direct total to compare against par. Choose [Team Stableford](/games/team-stableford/) when you want to limit the damage from blow-up holes and keep players engaged late in the round regardless of how their individual round is going.
+Choose Team Stroke Play when your group prefers traditional stroke scoring and wants a direct total to compare against par. Choose [Team Stableford]({{ '/games/team-stableford/' | url }}) when you want to limit the damage from blow-up holes and keep players engaged late in the round regardless of how their individual round is going.
 
 </div>
 
@@ -874,31 +874,31 @@ Choose Team Stroke Play when your group prefers traditional stroke scoring and w
 {{ RelatedCard(
   "TeamCountX",
   "Teams collect all scores and choose exactly X to count across the round. Active selection strategy, decisions locked as you play.",
-  "/games/team-count-x/"
+  '/games/team-count-x/' | url
 ) }}
 
 {{ RelatedCard(
   "Team Stableford",
   "Teams accumulate Stableford points from the best scoring player on each hole. More forgiving of bad holes.",
-  "/games/team-stableford/"
+  '/games/team-stableford/' | url
 ) }}
 
 {{ RelatedCard(
   "Stableford",
   "Individual points-based scoring where blow-up holes cost less. The foundation of Team Stableford.",
-  "/games/stableford/"
+  '/games/stableford/' | url
 ) }}
 
 {{ RelatedCard(
   "Match Play",
   "Hole-by-hole competition between two players or teams. Win, lose, or halve each hole — total strokes don't matter.",
-  "/games/match-play/"
+  '/games/match-play/' | url
 ) }}
 
 {{ RelatedCard(
   "Handicap Settings",
   "How Marker allocates handicap strokes across 18 holes, percentage settings, and override options.",
-  "/tutorials/handicap-settings/"
+  '/tutorials/handicap-settings/' | url
 ) }}
 
 </div>

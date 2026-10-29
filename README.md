@@ -469,6 +469,8 @@ PATHPREFIX=/marker-site/ npm run build
 
 Then serve `_site/` with any static file server and navigate to `/marker-site/`.
 
+`npm run check:links` checks both deployment paths automatically: it fails on any internal link in `src/` that skips the `url` filter, then builds with `PATHPREFIX=/` (a root domain such as marker.golf) and `PATHPREFIX=/marker-site/` (GitHub Pages) into temporary folders and verifies that every internal link, image, video, poster, stylesheet and script resolves under the prefix. External, `mailto:`, `tel:` and fragment links are not checked.
+
 ### Add a URL redirect
 
 Append a line to `src/_redirects` in the format `old-path  new-path  301`. The file is copied verbatim to `_site/_redirects` at build time.
@@ -483,7 +485,13 @@ After any structural change, verify the build is clean:
 npm run build
 ```
 
-Eleventy will exit non-zero and report the error if any template fails. Common issues:
+Eleventy will exit non-zero and report the error if any template fails. Then check internal links under both path prefixes:
+
+```bash
+npm run check:links
+```
+
+Common issues:
 
 - **Missing `| url` filter** on an internal link — the link will work locally but break on GitHub Pages.
 - **HTML blocks indented ≥ 4 spaces** in `.md` files — CommonMark treats them as code blocks; keep block-level HTML at column 0.

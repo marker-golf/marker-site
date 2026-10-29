@@ -474,7 +474,7 @@ Many club events run both competitions simultaneously. Players compete for the l
 
 **Stableford**
 
-Stableford is stroke play's close cousin — players still count strokes on every hole, but the scoring converts to points (birdie = 3, par = 2, bogey = 1, double bogey or worse = 0). One bad hole costs you less than in stroke play. Marker's [Stableford](/games/stableford/) game handles this natively.
+Stableford is stroke play's close cousin — players still count strokes on every hole, but the scoring converts to points (birdie = 3, par = 2, bogey = 1, double bogey or worse = 0). One bad hole costs you less than in stroke play. Marker's [Stableford]({{ '/games/stableford/' | url }}) game handles this natively.
 
 **Partial rounds (9-hole stroke play)**
 
@@ -482,7 +482,7 @@ Stroke Play in Marker is configured by the event's hole count. A 9-hole event sc
 
 **Playing to a quota**
 
-Some stroke play formats use a "quota" where each player sets a target based on their handicap (typically 36 minus their handicap index) and tries to beat it. This is handled by [Stableford](/games/stableford/) in Quota mode, not Stroke Play directly.
+Some stroke play formats use a "quota" where each player sets a target based on their handicap (typically 36 minus their handicap index) and tries to beat it. This is handled by [Stableford]({{ '/games/stableford/' | url }}) in Quota mode, not Stroke Play directly.
 
 **Scramble**
 
@@ -551,25 +551,25 @@ A scramble is not stroke play — the team selects the best shot after each swin
 {{ RelatedCard(
   "Stableford",
   "Points-based scoring where one bad hole doesn't torpedo your round. Birdie earns 3, par earns 2, bogey earns 1.",
-  "/games/stableford/"
+  '/games/stableford/' | url
 ) }}
 
 {{ RelatedCard(
   "Skins",
   "Win individual holes outright — ties carry the pot forward. Runs as a natural side game alongside stroke play.",
-  "/games/skins/"
+  '/games/skins/' | url
 ) }}
 
 {{ RelatedCard(
   "Nassau",
   "Three separate match play bets on the front, back, and overall 18. The classic money game alongside a stroke play event.",
-  "/games/nassau/"
+  '/games/nassau/' | url
 ) }}
 
 {{ RelatedCard(
   "Team Stroke Play",
   "Combine individual stroke scores into team totals. Best-ball or aggregate — perfect for team competitions.",
-  "/games/team-stroke-play/"
+  '/games/team-stroke-play/' | url
 ) }}
 
 </div>

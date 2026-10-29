@@ -43,7 +43,7 @@ cta:
 <li><strong>Score count</strong> — the bottom-right corner shows how many scores have been entered out of the total players (for example, "2/4").</li>
 <li><strong>Tied holes and carryovers</strong> — if multiple players tie the low score, the label shows how many players tied (for example, "2 TIES") instead of a winner name. When carryovers are on, the next outright winner's label shows how many skins they collect in brackets — for example, "SMITH, B (3)" for a three-skin win.</li>
 </ul>
-<p>For Skins rules, scoring examples, and strategy, see the <a href="/games/skins/">Skins game guide</a>.</p>
+<p>For Skins rules, scoring examples, and strategy, see the <a href="{{ '/games/skins/' | url }}">Skins game guide</a>.</p>
 </div>
 </div>
 
@@ -60,7 +60,7 @@ cta:
 <li><strong>auto</strong> — an automatic press triggered here based on your auto-press settings.</li>
 </ul>
 <p>Tapping a Nassau cell row opens a press action panel where you can add or remove a manual press on that hole.</p>
-<p>For Nassau rules and press strategy, see the <a href="/games/nassau/">Nassau game guide</a>.</p>
+<p>For Nassau rules and press strategy, see the <a href="{{ '/games/nassau/' | url }}">Nassau game guide</a>.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("followGamesNassauScorecard", screenshots, frame="phone", caption=true) }}
 </div>
@@ -128,7 +128,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>Keep playing</h3>
 <p>Return to the scorecard to continue entering scores. Switch between game tabs, open the Leaderboard to check standings, and share the link as often as you like — all while the round is in progress.</p>
-<p>When the last hole is scored and your group is ready to finalize results, the next step is ending the round. See <a href="/tutorials/review-results-and-settle-up/">Review Results &amp; Settle Up</a> to lock the scorecard and run final settlement.</p>
+<p>When the last hole is scored and your group is ready to finalize results, the next step is ending the round. See <a href="{{ '/tutorials/review-results-and-settle-up/' | url }}">Review Results &amp; Settle Up</a> to lock the scorecard and run final settlement.</p>
 </div>
 </div>
 

@@ -495,25 +495,25 @@ A popular recreational twist: replace the stroke-by-stroke match play comparison
 {{ RelatedCard(
   "Match Play",
   "The core format inside every Ryder Cup session. Hole-by-hole competition — win more holes than your opponent.",
-  "/games/match-play/"
+  '/games/match-play/' | url
 ) }}
 
 {{ RelatedCard(
   "Nassau",
   "Three-match structure (front 9, back 9, overall) that gives match play its stakes on every side of the course.",
-  "/games/nassau/"
+  '/games/nassau/' | url
 ) }}
 
 {{ RelatedCard(
   "High-Low",
   "Two-point-per-hole team format where both players on a team contribute every hole. A natural Four-Ball session game.",
-  "/games/high-low/"
+  '/games/high-low/' | url
 ) }}
 
 {{ RelatedCard(
   "Scotch",
   "The team alternate-shot format at the heart of the Foursomes session — two players, one ball, alternating shots.",
-  "/games/scotch/"
+  '/games/scotch/' | url
 ) }}
 
 </div>

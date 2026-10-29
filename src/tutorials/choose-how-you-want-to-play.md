@@ -23,7 +23,7 @@ cta:
 
 <p>If you're playing with a foursome or other small group — everyone on one scorecard — start with <strong>New Game</strong>. Marker labels this <em>1-5 players</em> on the Home screen.</p>
 
-<p>The <a href="/tutorials/create-a-scorecard/">Playing with Your Group</a> path walks through the full workflow:</p>
+<p>The <a href="{{ '/tutorials/create-a-scorecard/' | url }}">Playing with Your Group</a> path walks through the full workflow:</p>
 
 <ul>
 <li>create the scorecard and select a course</li>
@@ -34,13 +34,13 @@ cta:
 <li>review final results and settle up</li>
 </ul>
 
-<p><a href="/tutorials/create-a-scorecard/">Start with Create a Scorecard →</a></p>
+<p><a href="{{ '/tutorials/create-a-scorecard/' | url }}">Start with Create a Scorecard →</a></p>
 
 <h3>Hosting a larger outing</h3>
 
 <p>If your outing involves more players than fit on one scorecard, or you want a shared leaderboard across multiple groups, start with <strong>Host Event</strong>. Marker labels this <em>6+ players</em> on the Home screen.</p>
 
-<p>The <a href="/tutorials/create-an-event/">Running an Event</a> path covers the full workflow:</p>
+<p>The <a href="{{ '/tutorials/create-an-event/' | url }}">Running an Event</a> path covers the full workflow:</p>
 
 <ul>
 <li>create the Event and set a date</li>
@@ -52,13 +52,13 @@ cta:
 <li>review Event results and settle up</li>
 </ul>
 
-<p><a href="/tutorials/create-an-event/">Start with Create an Event →</a></p>
+<p><a href="{{ '/tutorials/create-an-event/' | url }}">Start with Create an Event →</a></p>
 
 <h3>Learning a game</h3>
 
-<p>If you want to understand a format before adding it to a round — how Skins pays out, how Nassau splits into three bets, how Wolf assigns teams hole by hole — the <a href="/games/">Games guides</a> cover rules, scoring, and examples for every format Marker supports. They're useful to read before a round or to reference mid-game.</p>
+<p>If you want to understand a format before adding it to a round — how Skins pays out, how Nassau splits into three bets, how Wolf assigns teams hole by hole — the <a href="{{ '/games/' | url }}">Games guides</a> cover rules, scoring, and examples for every format Marker supports. They're useful to read before a round or to reference mid-game.</p>
 
-<p><a href="/games/">Browse Games →</a></p>
+<p><a href="{{ '/games/' | url }}">Browse Games →</a></p>
 
 <h3>These choices aren't mutually exclusive</h3>
 
@@ -67,9 +67,9 @@ cta:
 <h3>Start where you are</h3>
 
 <ul>
-<li><strong>One group, one scorecard</strong> — <a href="/tutorials/create-a-scorecard/">Create a Scorecard</a></li>
-<li><strong>Multiple groups or a shared leaderboard</strong> — <a href="/tutorials/create-an-event/">Create an Event</a></li>
-<li><strong>Learning a format</strong> — <a href="/games/">Browse Games</a></li>
+<li><strong>One group, one scorecard</strong> — <a href="{{ '/tutorials/create-a-scorecard/' | url }}">Create a Scorecard</a></li>
+<li><strong>Multiple groups or a shared leaderboard</strong> — <a href="{{ '/tutorials/create-an-event/' | url }}">Create an Event</a></li>
+<li><strong>Learning a format</strong> — <a href="{{ '/games/' | url }}">Browse Games</a></li>
 </ul>
 
 </div>

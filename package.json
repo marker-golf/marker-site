@@ -6,6 +6,7 @@
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve --watch",
+    "check:links": "node scripts/check-links.mjs",
     "screens:prepare": "node scripts/screenshots/prepare.mjs",
     "screens:db": "node scripts/screenshots/db-reset.mjs",
     "screens:auth": "node scripts/screenshots/auth.mjs",

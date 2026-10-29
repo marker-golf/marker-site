@@ -78,7 +78,7 @@ cta:
 </ul>
 <p>Getting the tee right matters: Marker uses each player's tee, slope, and course rating to calculate their course handicap for net scoring. A player on the wrong tee will have incorrect stroke allocation.</p>
 <p>If your Marker account is connected to a USGA® Handicap ID, a <strong>USGA® Handicap Lookup</strong> link appears below the handicap field. This lets you look up and attach a partner's current GHIN-verified handicap directly. Once attached, the handicap field becomes read-only and shows the revision date.</p>
-<p>See <a href="/tutorials/handicap-settings/">Using Handicaps in Marker</a> for more on how course handicap is calculated.</p>
+<p>See <a href="{{ '/tutorials/handicap-settings/' | url }}">Using Handicaps in Marker</a> for more on how course handicap is calculated.</p>
 </div>
 </div>
 

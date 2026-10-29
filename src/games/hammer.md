@@ -484,25 +484,25 @@ Hammer can overlay Skins, where each hole has a pot value that carries over on t
 {{ RelatedCard(
   "Nassau",
   "Three simultaneous match play bets with automatic press tracking. The most popular companion game for Hammer.",
-  "/games/nassau/"
+  '/games/nassau/' | url
 ) }}
 
 {{ RelatedCard(
   "Match Play",
   "The foundation under Hammer — hole-by-hole competition with real-time standings. Hammer sits on top of it.",
-  "/games/match-play/"
+  '/games/match-play/' | url
 ) }}
 
 {{ RelatedCard(
   "Skins",
   "Hole-by-hole pot game where ties carry the skin forward. Hammer can overlay Skins to multiply individual skin values.",
-  "/games/skins/"
+  '/games/skins/' | url
 ) }}
 
 {{ RelatedCard(
   "Wolf",
   "Per-hole team selection where the Wolf faces the other three. High per-hole stakes that Hammer complements naturally.",
-  "/games/wolf/"
+  '/games/wolf/' | url
 ) }}
 
 </div>
