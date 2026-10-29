@@ -36,6 +36,7 @@ import { log, redact } from './lib/proc.mjs'
 import { sandboxArgs } from './lib/sandbox.mjs'
 import { claimForCapture, verifyFixturesAfterCapture, finalizedEventPositions } from './lib/state.mjs'
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
+import { fontFulfillers } from './lib/local-fonts.mjs'
 import {
   VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
   BROWSER_FIXED_TIME, BROWSER_ALLOWED_HOSTS, EXPECTED_BLOCKED_REQUESTS, ALLOWED_CONSOLE_ERRORS,
@@ -131,38 +132,6 @@ const require = createRequire(import.meta.url)
 const sharp = require('sharp')
 const { chromium } = require('playwright')
 
-// Google Fonts families requested by the Vue app, mapped to @fontsource files.
-const FONT_PACKAGES = {
-  'Source Sans Pro': { pkg: '@fontsource/source-sans-pro', slug: 'source-sans-pro', weights: [400, 600, 700] },
-  'Pragati Narrow': { pkg: '@fontsource/pragati-narrow', slug: 'pragati-narrow', weights: [400, 700] },
-  'Marck Script': { pkg: '@fontsource/marck-script', slug: 'marck-script', weights: [400] }
-}
-const LOCAL_FONT_PREFIX = 'https://fonts.gstatic.com/__local__/'
-
-function fontCss (url) {
-  const families = url.searchParams.getAll('family').flatMap(f => f.split('|'))
-  return families.map(spec => {
-    const name = spec.split(':')[0].replace(/\+/g, ' ')
-    const config = FONT_PACKAGES[name]
-    if (!config) throw new Error(`Unmapped font family requested: ${name}`)
-    return config.weights.map(weight => `@font-face { font-family: '${name}'; font-style: normal; font-weight: ${weight}; font-display: block; src: url(${LOCAL_FONT_PREFIX}${config.slug}/${weight}.woff2) format('woff2'); }`).join('\n')
-  }).join('\n')
-}
-
-function fontFile (url) {
-  const [slug, file] = url.pathname.replace('/__local__/', '').split('/')
-  const config = Object.values(FONT_PACKAGES).find(f => f.slug === slug)
-  const weight = parseInt(file, 10)
-  if (!config || !config.weights.includes(weight)) throw new Error(`Unknown local font ${url.pathname}`)
-  const dir = path.dirname(require.resolve(`${config.pkg}/package.json`))
-  return fs.readFileSync(path.join(dir, 'files', `${slug}-latin-${weight}-normal.woff2`))
-}
-
-const fulfillers = [
-  { match: url => url.protocol === 'https:' && url.host === 'fonts.googleapis.com', respond: url => ({ status: 200, contentType: 'text/css', body: fontCss(url) }) },
-  { match: url => url.href.startsWith(LOCAL_FONT_PREFIX), respond: url => ({ status: 200, contentType: 'font/woff2', body: fontFile(url) }) }
-]
-
 const STABILIZE_CSS = `
   *, *::before, *::after { transition: none !important; animation: none !important; caret-color: transparent !important; }
   #nprogress { display: none !important; }
@@ -195,7 +164,7 @@ const context = await browser.newContext({
   serviceWorkers: 'block',
   storageState: AUTH_STATE
 })
-await installNetworkPolicy(context, { allowedHosts: BROWSER_ALLOWED_HOSTS, expectedBlocked: EXPECTED_BLOCKED_REQUESTS, fulfillers, report })
+await installNetworkPolicy(context, { allowedHosts: BROWSER_ALLOWED_HOSTS, expectedBlocked: EXPECTED_BLOCKED_REQUESTS, fulfillers: fontFulfillers, report })
 await context.clock.setFixedTime(new Date(BROWSER_FIXED_TIME))
 await context.addInitScript(css => {
   document.addEventListener('DOMContentLoaded', () => {

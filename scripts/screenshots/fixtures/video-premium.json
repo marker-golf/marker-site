@@ -1,0 +1,12 @@
+{
+  "_comment": "Demo video only: a fictional active subscription that makes Bob premium, so the leaderboard shows no Upgrade to Premium banner (Vue shows it when the profile has no subscription; the Hub returns the user's active subscriptions row). Not part of the screenshot fixtures (db-reset asserts there are no subscriptions, and the approved leaderboard screenshots show the banner): video.mjs inserts this row after claiming the fixtures and its restore deletes it. The Stripe fields are required columns and are fictional placeholders; nothing contacts Stripe and the Hub does not return them to the app.",
+  "user": "bob",
+  "id": "5c2ee000-0000-4000-8000-0000000000a1",
+  "stripeSubscriptionId": "fictional-screens-video-subscription",
+  "stripeCustomerId": "fictional-screens-video-customer",
+  "stripeCheckoutSessionId": "fictional-screens-video-session",
+  "status": "active",
+  "periodStart": "2026-07-01T00:00:00Z",
+  "periodEnd": "2027-07-01T00:00:00Z",
+  "insertedAt": "2026-07-01 00:00:00"
+}

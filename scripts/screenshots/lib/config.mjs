@@ -71,8 +71,10 @@ export const COURSE_REFERENCE_TABLES = [
 // Toolchains used inside the sandbox (minimal PATHs, no inherited environment).
 const HOME = os.homedir()
 export const HUB_PATH = `${HOME}/.asdf/shims:/opt/homebrew/bin:/usr/bin:/bin`
-export const NODE16_BIN = `${HOME}/.nvm/versions/node/v16.20.2/bin`
-export const VUE_PATH = `${NODE16_BIN}:/usr/bin:/bin`
+// The Vue CLI server runs on the app's own pinned Node (.nvmrc at APP_SHA),
+// which the copied node_modules (node-sass binding) were built for.
+export const VUE_NODE_BIN = `${HOME}/.nvm/versions/node/v14.18.1/bin`
+export const VUE_PATH = `${VUE_NODE_BIN}:/usr/bin:/bin`
 
 // The complete environment of every Hub process (mix compile, migrations,
 // token minting, Repo checks and the server). Nothing is inherited.
@@ -107,6 +109,7 @@ export const STEP_TIMEOUTS = {
   'servers.mjs start': 10 * MINUTE,
   'fixtures.mjs': 10 * MINUTE,
   'capture.mjs': 15 * MINUTE,
+  'video.mjs': 15 * MINUTE,
   'scan.mjs': 3 * MINUTE
 }
 export const COMMAND_TIMEOUT = 15 * MINUTE
@@ -149,3 +152,12 @@ export const BOB_PHONE = '0005550001'
 export const SOURCE_DIR = path.join(SITE_ROOT, 'src/images/screenshots/source')
 export const WEB_DIR = path.join(SITE_ROOT, 'src/images/screenshots/web')
 export const DRAFT_PREFIX = 'vue-draft-'
+
+// Demo video (video.mjs). Review output only: nothing is written into the
+// site. ffmpeg/ffprobe are static builds installed into the work folder
+// (see README), never on the repository's dependency list.
+export const VIDEO_STAGING_DIR = path.join(WORK_DIR, 'video-staging')
+export const VIDEO_REVIEW_DIR = path.join(WORK_DIR, 'review', 'video-poc')
+export const FFMPEG = path.join(WORK_DIR, 'tools/node_modules/ffmpeg-static/ffmpeg')
+export const FFPROBE = path.join(WORK_DIR, 'tools/node_modules/ffprobe-static/bin/darwin/arm64/ffprobe')
+export const VIDEO_FPS = 30

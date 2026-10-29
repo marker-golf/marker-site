@@ -15,7 +15,7 @@ import { assertSafeDatabaseTarget, assertHubRepoTarget, portInUse, listenerPids 
 import { launchService, stopAll, recordPath } from './lib/processes.mjs'
 import {
   HUB_EXPORT, APP_EXPORT, VUE_PATH, LOG_DIR, RUN_DIR, HUB_PORT, VUE_PORT, HUB_URL, VUE_URL,
-  API_BASE, AUTH_STATE, NODE16_BIN, USGA_DEAD_PORT, hubEnv
+  API_BASE, AUTH_STATE, VUE_NODE_BIN, USGA_DEAD_PORT, hubEnv
 } from './lib/config.mjs'
 
 // The Hub's dev config hardcodes port 4000, so the endpoint is reconfigured at
@@ -58,8 +58,8 @@ const SERVICES = {
       'BROWSERSLIST_IGNORE_OLD_DATA=1'
     ],
     // --public keeps the dev-server client on 127.0.0.1 (it defaults to localhost).
-    cmd: [`${NODE16_BIN}/node`, 'node_modules/@vue/cli-service/bin/vue-cli-service.js', 'serve', '--host', '127.0.0.1', '--port', String(VUE_PORT), '--public', `127.0.0.1:${VUE_PORT}`],
-    identity: [new RegExp(`^${escape(NODE16_BIN)}/node node_modules/@vue/cli-service/bin/vue-cli-service\\.js serve --host 127\\.0\\.0\\.1 --port ${VUE_PORT}\\b`)],
+    cmd: [`${VUE_NODE_BIN}/node`, 'node_modules/@vue/cli-service/bin/vue-cli-service.js', 'serve', '--host', '127.0.0.1', '--port', String(VUE_PORT), '--public', `127.0.0.1:${VUE_PORT}`],
+    identity: [new RegExp(`^${escape(VUE_NODE_BIN)}/node node_modules/@vue/cli-service/bin/vue-cli-service\\.js serve --host 127\\.0\\.0\\.1 --port ${VUE_PORT}\\b`)],
     ready: vueReady,
     readyTimeout: 240000
   }
