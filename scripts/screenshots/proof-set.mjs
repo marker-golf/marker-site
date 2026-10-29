@@ -20,7 +20,7 @@ import path from 'node:path'
 import { SCRIPTS_DIR, VIEWPORT } from './lib/config.mjs'
 
 // Shows the scorecard column for one game (tabs toggle, so click only if needed).
-async function showGameColumn (page, tabTitle, columnTitle) {
+export async function showGameColumn (page, tabTitle, columnTitle) {
   const column = page.locator('th.game-summary').filter({ hasText: new RegExp(`^\\s*${columnTitle}\\s*$`) })
   const tab = page.locator('.GameButton').filter({ has: page.locator('.title', { hasText: new RegExp(`^\\s*${tabTitle}\\s*$`) }) })
   await tab.first().waitFor()
@@ -30,7 +30,7 @@ async function showGameColumn (page, tabTitle, columnTitle) {
 
 // Scrolls the window so `target` sits just below whatever fixed or sticky
 // header covers the top of the viewport (a normal user scroll).
-async function scrollBelowHeader (target, gap = 12) {
+export async function scrollBelowHeader (target, gap = 12) {
   await target.waitFor()
   await target.evaluate((el, gap) => {
     const covering = [...document.querySelectorAll('*')].filter(e => {
@@ -43,17 +43,17 @@ async function scrollBelowHeader (target, gap = 12) {
   await target.page().waitForFunction(el => el.getBoundingClientRect().top > 0, await target.elementHandle())
 }
 
-const sectionTitle = (page, name) => page.locator('.title').filter({ hasText: new RegExp(`^\\s*${name}\\s*$`) })
-const section = (page, name) => sectionTitle(page, name).locator('xpath=ancestor::section[1]')
+export const sectionTitle = (page, name) => page.locator('.title').filter({ hasText: new RegExp(`^\\s*${name}\\s*$`) })
+export const section = (page, name) => sectionTitle(page, name).locator('xpath=ancestor::section[1]')
 
 // Expands a collapsible section only if its content is not already shown.
-async function expandSection (page, name) {
+export async function expandSection (page, name) {
   if (!(await section(page, name).locator('.block').count())) await sectionTitle(page, name).click()
   await section(page, name).locator('.block').first().waitFor()
 }
 
 // Collapses a section only if its content is currently shown.
-async function collapseSection (page, name) {
+export async function collapseSection (page, name) {
   if (await section(page, name).locator('.block').count()) await sectionTitle(page, name).click()
   await section(page, name).locator('.block').first().waitFor({ state: 'detached' })
 }
@@ -66,7 +66,7 @@ async function collapseSection (page, name) {
 //  - the consolidated profit/loss equals those totals and sums to zero.
 // Only normal taps are used (Game accounting / Hide details, Settlement /
 // Profit/loss), and every view is restored before the capture.
-function money (text) {
+export function money (text) {
   const match = /^(-?)\$([\d,]+(?:\.\d{1,2})?)$/.exec(text.trim())
   if (!match) throw new Error(`Unexpected amount "${text}"`)
   return Math.round(Number(match[2].replace(/,/g, '')) * 100) * (match[1] ? -1 : 1)
@@ -87,7 +87,7 @@ async function settlementNets (scope) {
 
 const sumOf = nets => Object.values(nets).reduce((a, b) => a + b, 0)
 
-async function assertSideGamesReconcile (page) {
+export async function assertSideGamesReconcile (page) {
   const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
   const expected = {}
   for (const game of games) {
@@ -315,7 +315,7 @@ async function chooseButton (page, text) {
   await page.locator('.button-group > div.active').filter({ hasText: new RegExp(`^\\s*${text}\\s*$`) }).waitFor()
 }
 
-const holeRow = (page, hole) => page.locator('tbody tr').filter({ has: page.locator('td.scorecard-hole', { hasText: new RegExp(`^\\s*${hole}\\s*$`) }) })
+export const holeRow = (page, hole) => page.locator('tbody tr').filter({ has: page.locator('td.scorecard-hole', { hasText: new RegExp(`^\\s*${hole}\\s*$`) }) })
 
 export default [
   {

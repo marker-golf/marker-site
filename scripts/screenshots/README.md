@@ -7,7 +7,8 @@ repositories, `fourball_dev`, or any existing approved screenshot.
 ```bash
 npm run screens:proof                 # full run from a clean reset; always cleans up
 npm run screens:test                  # fast regression tests (no Hub, no database)
-npm run screens:test:capture-failure  # integration test: failed captures cannot change drafts
+npm run screens:test:capture-failure  # integration test: failed captures cannot change published screenshots or drafts
+npm run screens:video                 # demo video for review (see "Demo video")
 ```
 
 ## Requirements
@@ -20,7 +21,7 @@ with APFS copy-on-write (`cp -c`), and process checks use the BSD `ps` and
 | Tool | Version / location | Used for |
 |---|---|---|
 | Node 20 | `.nvmrc` (run every `npm run screens:*` with it) | pipeline scripts, Playwright |
-| Node 16.20.2 | `~/.nvm/versions/node/v16.20.2` | the Vue CLI dev server |
+| Node 14.18.1 | `~/.nvm/versions/node/v14.18.1` (the app's `.nvmrc`) | the Vue CLI dev server |
 | Elixir / Erlang | asdf shims in `~/.asdf/shims` (Elixir 1.19, OTP 27) | the Hub |
 | PostgreSQL | local server on `127.0.0.1:5432`, trust auth for your OS user | `fourball_screens`, read-only course dump |
 | Homebrew | `/opt/homebrew/bin` (Apple Silicon path) | `psql`, `pg_dump`, `createdb`, `dropdb` |
@@ -178,6 +179,55 @@ without `ORDER BY`, so these can change order between builds:
 
 Each variant is a genuine rendering of the production app. Review the
 specific files you intend to approve.
+
+## Demo video (`video.mjs`)
+
+`npm run screens:video` runs the same steps as `screens:proof` but ends with
+`video.mjs`, which records "Score a round with side games" on F1 and writes
+review files only (never into the site) to
+`../.marker-screens/review/video-poc/`, named for the recipe version
+(`score-round-side-games-<version>`; v1 files have no suffix and are never
+written again): an FFV1 intermediate (`.mkv`), an H.264 MP4, a VP9 WebM, a
+JPEG poster (final frame) and `-shots.json` (shot timings, the final callout
+position and the Skins results shown).
+
+- **Story**: hole 10 is scored (Allan 5, Bert 5, Edward 4, Bob 3). Hole 9 was
+  tied, so Bob's net 2 wins two Net Skins; the scorecard, the Skins
+  standings and the Skins settlement update. A touch indicator and three
+  callouts are drawn in an overlay outside the app's DOM tree under `<body>`.
+- **Premium user**: Vue shows an Upgrade to Premium banner on the leaderboard
+  when the profile has no active subscription. For the recording only,
+  `video.mjs` inserts one fictional active subscription for Bob
+  (`fixtures/video-premium.json`) after claiming the fixtures; the restore
+  removes it. The screenshot fixtures stay subscription-free (db-reset
+  asserts this), so the approved screenshots are unaffected. Bob's premium
+  state is part of the users digest and `subscriptions` is an audited table.
+- **Final frame**: after Game accounting opens, a short scroll places the
+  whole Skins section just above the sticky footer; the run fails unless the
+  Skins title stays below the header and the Wolf section is out of view.
+  The last callout sits beside the Skins heading, aligned with the card, and
+  the run fails if it would touch any text, control or the card.
+- **Same guards as captures**: fixture claim, browser sandbox and network
+  policy, page/console error checks. The only Hub writes allowed are the four
+  `POST /api/app/scores`; anything else fails the run.
+- **Checks**: the Skins change must follow exactly from the entered scores
+  (winner gains the carried skins, amounts are stake x (skins x players -
+  total), the settlement matches), and every game's accounting must
+  reconcile (`assertSideGamesReconcile`, after recording).
+- **Restore**: afterwards, even on failure, the only data changes allowed are
+  the video subscription and those score rows; they are deleted and every
+  fixture digest and audited row must match the fixtures-ready snapshot
+  again.
+- **Encoding** runs in a no-network sandbox. Outputs are checked for
+  780x1688, codec, no audio track, 20-30 s duration, a full decode, and no
+  metadata tags (MP4 brand fields and WebM's mandatory bare `Lavf` muxer name
+  excepted). `node video.mjs --encode-only` re-encodes the last verified
+  recording.
+- **Tools**: static ffmpeg/ffprobe builds in the work folder, not repository
+  dependencies:
+  `npm --prefix ../.marker-screens/tools install ffmpeg-static@5.2.0 ffprobe-static@3.1.0`
+  (downloads binaries once). The recording browser runs with
+  `--force-device-scale-factor=2` so screencast frames are device pixels.
 
 ## Network isolation and external integrations
 

@@ -2,13 +2,13 @@
 layout: layouts/tutorial-guide.njk
 title: Score the Round
 description: Learn how to enter scores in Marker — tap a cell to open the score picker, read stroke indicators, follow your games, and check standings mid-round.
-subtitle: "Tap any score cell to enter, Marker auto-advances to the next player, and everyone's phones update in real time."
+subtitle: "Tap any score cell to enter, Marker updates the scorecard and side games as each score is saved, and everyone's phones update in real time."
 category: Playing with Your Group
 order: 4
 tutorialPath: group
 tutorialOrder: 4
 estimatedTime: "4 min read"
-cardDescription: "Enter scores one tap at a time. Marker auto-advances to the next player, shows live game standings, and syncs to every phone in real time."
+cardDescription: "Enter scores one tap at a time. Marker updates the scorecard and side games as each score is saved, and syncs to every phone in real time."
 iconSvg: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>'
 cta:
   heading: "Ready to play?"
@@ -37,10 +37,10 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Enter a score</h3>
-<p>Tap any score cell to open the score picker. A panel floats below that hole's row, showing the player's name, tee, handicap, and yardage for context.</p>
-<p>Tap a number in the 3×3 grid to select it and submit. For scores of 10 or higher, tap <strong>10+</strong> to switch to a text input field, enter the score, and tap <strong>Set</strong>.</p>
-<p>After you submit, Marker waits briefly then automatically advances to the next player on the same hole who doesn't have a score yet. When the last player on a hole is scored, the picker stays open for the next hole.</p>
-<p>To clear a score you already entered, tap the same number again — it deselects and removes the score.</p>
+<p>Tap any score cell to open the score picker. An <strong>Enter score</strong> panel slides up from the bottom of the screen, showing the player's name and the hole's number, yardage, par, tee, and handicap for context.</p>
+<p>Tap the player's total strokes (1–11) to save the score and close the picker.</p>
+<p>Tap a player's score cell, enter the total strokes, then repeat for the other players. Marker updates the scorecard and side games as each score is saved.</p>
+<p>To clear a score you already entered, tap its cell and then tap <strong>CLEAR</strong>.</p>
 <p>Any player viewing the scorecard can enter or correct any score. The scorecard is not locked until the round is ended.</p>
 </div>
 </div>

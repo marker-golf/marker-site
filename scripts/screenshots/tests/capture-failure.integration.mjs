@@ -1,5 +1,7 @@
 // Integration test (M4): a capture with an unexpected request or a page error
-// cannot change the approved drafts. Uses the real isolated Hub, Vue and
+// cannot change the published screenshots (the manifest's approved PNG/WebP
+// pairs) or add, remove or modify any file in the screenshot folders,
+// including drafts. Both failure cases run. Uses the real isolated Hub, Vue and
 // fourball_screens (rebuilt for each case), with the same cleanup path as
 // the proof pipeline. Usage: npm run screens:test:capture-failure
 import path from 'node:path'

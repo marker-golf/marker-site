@@ -18,8 +18,8 @@ import path from 'node:path'
 import { run, log } from './lib/proc.mjs'
 import { SITE_ROOT, WORK_DIR, AUTH_STATE, HUB_EXPORT, HUB_REPO } from './lib/config.mjs'
 
-const BINARY = /\.(png|webp|jpe?g|gif|woff2?|ico|pdf)$/i
-const GENERATED_DIRS = ['logs', 'run', 'debug', 'capture-staging', 'review', 'baseline', 'auth']
+const BINARY = /\.(png|webp|jpe?g|gif|woff2?|ico|pdf|mp4|webm|mkv)$/i
+const GENERATED_DIRS = ['logs', 'run', 'debug', 'capture-staging', 'video-staging', 'review', 'baseline', 'auth']
 
 const patterns = [
   { label: 'JWT-shaped value', test: text => /eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/.test(text) },

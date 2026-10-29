@@ -88,11 +88,14 @@ function eventDigest (id) {
   }
 }
 
-// Fictional user records (profiles, handicap settings): the profile and
-// partner screens read them and must not change them.
+// Fictional user records (profiles, handicap settings) and their premium
+// state (subscriptions, which only the demo video adds and removes): the
+// profile and partner screens read them and must not change them.
 function usersDigest () {
   const rows = screensSql(`select coalesce(md5(string_agg(u.id || ':' || coalesce(u.phone, '-') || ':' || coalesce(u.email, '-') || ':' ||
-    u.first_name || ':' || u.last_name || ':' || coalesce(u.gender, '-') || ':' || coalesce(u.ghin_number::text, '-') || ':' || coalesce(u.level::text, '-'), ',' order by u.id)), '-') from users u`)
+    u.first_name || ':' || u.last_name || ':' || coalesce(u.gender, '-') || ':' || coalesce(u.ghin_number::text, '-') || ':' || coalesce(u.level::text, '-') || ':' ||
+    coalesce((select string_agg(s.id || '/' || coalesce(s.status, '-') || '/' || coalesce(s.period_end::text, '-'), ';' order by s.id) from subscriptions s where s.user_id = u.id), 'free'),
+    ',' order by u.id)), '-') from users u`)
   return { scores: rows, games: '-', locked: false }
 }
 
@@ -111,7 +114,7 @@ export function fixtureDigests (ids) {
 }
 
 // Row-level audit of every table fixtures live in: id -> md5 of the whole row.
-const AUDITED_TABLES = ['users', 'events', 'scorecards', 'players', 'game_players', 'games', 'scores']
+const AUDITED_TABLES = ['users', 'subscriptions', 'events', 'scorecards', 'players', 'game_players', 'games', 'scores']
 
 export function recordSnapshot () {
   return Object.fromEntries(AUDITED_TABLES.map(table => {
@@ -230,6 +233,88 @@ export function verifyFixturesAfterCapture (ids, { locked = [] } = {}) {
   else problems.push(...auditRows(state.rows, ids, locked))
   if (problems.length) throw new Error(`Refusing to publish: ${problems.join('; ')}`)
   return now
+}
+
+function requireClaimedBuild (action) {
+  const state = read()
+  if (state?.stage !== 'captured' || !state.rows || state.dbOid !== screensDbOid()) {
+    throw new Error(`Refusing to ${action}: fixture state is not a claimed build of this database`)
+  }
+  return state
+}
+
+const unixSeconds = iso => {
+  const ms = Date.parse(iso)
+  if (!Number.isFinite(ms)) throw new Error(`Invalid date ${iso}`)
+  return Math.floor(ms / 1000)
+}
+const literal = value => {
+  if (!/^[\w .:-]+$/.test(value)) throw new Error(`Unexpected characters in ${value}`)
+  return `'${value}'`
+}
+
+// Demo video only: makes the fictional user premium with one active
+// subscription row (fixtures/video-premium.json), after the fixtures were
+// claimed. restoreAfterVideo removes it again.
+export function addVideoPremium (premium, userId) {
+  requireClaimedBuild('add the video subscription')
+  if (screensSql('select count(*) from subscriptions') !== '0') throw new Error('Refusing: subscriptions already exist')
+  screensSql(`insert into subscriptions (id, user_id, stripe_subscription_id, stripe_customer_id, stripe_checkout_session_id, status,
+    period_start, period_end, plan_data, cancel_at_period_end, cancel_at, inserted_at, updated_at) values (${uuid(premium.id)}, ${uuid(userId)},
+    ${literal(premium.stripeSubscriptionId)}, ${literal(premium.stripeCustomerId)}, ${literal(premium.stripeCheckoutSessionId)}, ${literal(premium.status)},
+    ${unixSeconds(premium.periodStart)}, ${unixSeconds(premium.periodEnd)}, null, false, null, ${literal(premium.insertedAt)}, ${literal(premium.insertedAt)})`)
+  // The Hub's SubscriptionService.get: the user's row with status "active".
+  if (screensSql(`select count(*) from subscriptions where user_id = ${uuid(userId)} and status = 'active'`) !== '1') {
+    throw new Error('The video subscription is not the single active subscription')
+  }
+}
+
+// After the demo video, which enters one hole's scores on one standalone
+// scorecard: the only differences from the fixtures-ready snapshot must be
+// the video's subscription row (addVideoPremium) and those score rows (at
+// most one per expected player, on that hole, with the expected gross score;
+// a failed recording may have saved fewer). Both are deleted again, and then
+// every fixture digest (including the users' premium state) and every
+// audited row must equal the snapshot exactly.
+// `scores` maps player id -> gross score. Returns the number of score rows removed.
+export function restoreAfterVideo (ids, { hole, scores, premium }) {
+  const state = requireClaimedBuild('restore')
+  const now = recordSnapshot()
+  const problems = []
+  for (const table of AUDITED_TABLES) {
+    const was = state.rows[table] || {}
+    const is = now[table]
+    const added = Object.keys(is).filter(id => !(id in was))
+    const removed = Object.keys(was).filter(id => !(id in is))
+    const changed = Object.keys(is).filter(id => id in was && is[id] !== was[id])
+    if (table === 'subscriptions') {
+      if (added.join() !== premium.id) problems.push(`subscriptions added: ${added.length}, expected only the video subscription`)
+    } else if (table !== 'scores' && added.length) problems.push(`${added.length} row(s) added to ${table}`)
+    if (removed.length) problems.push(`${removed.length} row(s) removed from ${table}`)
+    if (changed.length) problems.push(`${changed.length} row(s) changed in ${table}`)
+  }
+  const added = Object.keys(now.scores).filter(id => !(id in state.rows.scores))
+  const rows = added.length
+    ? screensSql(`select id || '|' || player_id || '|' || hole_number || '|' || score from scores where id in (${added.map(uuid).join(', ')}) order by id`)
+      .split('\n').filter(Boolean).map(line => line.split('|'))
+    : []
+  const seen = new Set()
+  for (const [, playerId, holeNumber, score] of rows) {
+    if (!(playerId in scores) || seen.has(playerId)) problems.push(`unexpected score row for player ${playerId}`)
+    else if (Number(holeNumber) !== hole || Number(score) !== scores[playerId]) problems.push(`score row for ${playerId} is hole ${holeNumber}, ${score}`)
+    seen.add(playerId)
+  }
+  if (rows.length !== added.length) problems.push('added score rows could not be read back')
+  if (problems.length) throw new Error(`Refusing to restore: the recording changed more than the declared scores: ${problems.join('; ')}`)
+
+  // A failed recording may have saved only some of the scores (or none).
+  const deleted = !added.length ? '0' : screensSql(`with d as (delete from scores where id in (${added.map(uuid).join(', ')}) and hole_number = ${Number(hole)}
+    and player_id in (${Object.keys(scores).map(uuid).join(', ')}) returning 1) select count(*) from d`)
+  if (Number(deleted) !== rows.length) throw new Error(`Restore deleted ${deleted} score rows, expected ${rows.length}`)
+  const unsubscribed = screensSql(`with d as (delete from subscriptions where id = ${uuid(premium.id)} returning 1) select count(*) from d`)
+  if (unsubscribed !== '1' || screensSql('select count(*) from subscriptions') !== '0') throw new Error('Restore did not remove the video subscription')
+  verifyFixturesAfterCapture(ids, { locked: [] })
+  return rows.length
 }
 
 export function claimForCapture () {
