@@ -92,6 +92,6 @@ cta:
 
 <p>With your profile set up, you're ready to choose how you want to play. The next tutorial in this path — <strong>Choose How You Want to Play</strong> — helps you decide between a standalone New Game and a Marker Event, and routes you into the right learning path.</p>
 
-<p>If you're ready to jump in now, the <a href="/tutorials/create-a-scorecard/">Playing with Your Group</a> path starts with creating your first scorecard.</p>
+<p>If you're ready to jump in now, the <a href="{{ '/tutorials/create-a-scorecard/' | url }}">Playing with Your Group</a> path starts with creating your first scorecard.</p>
 
 </div>

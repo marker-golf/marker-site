@@ -597,7 +597,7 @@ This means a high-handicapper can win the low-score position on a hole where the
 
 **Handicap percentage** scales how many strokes are applied. At 100% (the default), a player's full course handicap is used. At 80%, the effective handicap is reduced by 20%. This is common in money games to partially offset the advantage of high handicappers.
 
-For full details on stroke allocation by stroke index, see the [Handicap Settings guide](/tutorials/handicap-settings/).
+For full details on stroke allocation by stroke index, see the [Handicap Settings guide]({{ '/tutorials/handicap-settings/' | url }}).
 
 </div>
 
@@ -832,31 +832,31 @@ For full details on stroke allocation by stroke index, see the [Handicap Setting
 {{ RelatedCard(
   "Wolf",
   "Another three- or four-player format with rotating partnerships and per-hole decisions. More complex, higher variance.",
-  "/games/wolf/"
+  '/games/wolf/' | url
 ) }}
 
 {{ RelatedCard(
   "Skins",
   "Hole-by-hole format where the outright winner claims the skin. Works for any number of players. Ties carry the pot forward.",
-  "/games/skins/"
+  '/games/skins/' | url
 ) }}
 
 {{ RelatedCard(
   "Match Play",
   "Head-to-head hole-by-hole competition. Win the hole, halve it, or lose it. Works for two players or two teams.",
-  "/games/match-play/"
+  '/games/match-play/' | url
 ) }}
 
 {{ RelatedCard(
   "Nassau",
   "Three bets in one — front 9, back 9, and overall 18. The classic format for side-game wagering.",
-  "/games/nassau/"
+  '/games/nassau/' | url
 ) }}
 
 {{ RelatedCard(
   "Handicap Settings",
   "How Marker allocates handicap strokes across holes by stroke index, with percentage and override options.",
-  "/tutorials/handicap-settings/"
+  '/tutorials/handicap-settings/' | url
 ) }}
 
 </div>
