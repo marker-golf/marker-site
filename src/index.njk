@@ -1,10 +1,9 @@
 ---
 layout: layouts/base.njk
 title: All Golf. No Math.
-description: Marker tracks scores live, manages your side games, and settles the tab instantly. Available on iPhone, iPad, Android, and Web.
+description: Marker tracks scores live, manages your side games, and settles the tab instantly — right in your phone's browser, with no app store required.
 ---
 
-{% from "components/badges.njk" import AppStoreBadge, PlayStoreBadge %}
 {% from "components/platform-bar.njk" import PlatformSupportBar %}
 {% from "components/trust-stats.njk" import TrustStats %}
 {% from "components/product-screenshot.njk" import ProductScreenshot %}
@@ -253,14 +252,10 @@ description: Marker tracks scores live, manages your side games, and settles the
 <!-- CTA band -->
 <section class="cta-band">
   <div class="container">
-    <h2>Available anywhere you play.</h2>
-    <p>iPhone, iPad, Android, Web — Marker is on every device in your group.</p>
+    <h2>No app store required.</h2>
+    <p>Open Marker in your phone's browser and add it to your home screen for an app-like experience. There's nothing to download, and everyone can use the same current version.</p>
     <div class="cta-band__actions">
       <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
-      <div class="cta-band__badges">
-        {{ AppStoreBadge() }}
-        {{ PlayStoreBadge() }}
-      </div>
     </div>
   </div>
 </section>

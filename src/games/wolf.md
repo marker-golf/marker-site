@@ -968,7 +968,7 @@ Marker offers advanced options including stroke off low ball (differential-based
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
 </div>
 <h4>Works on Any Device</h4>
-        <p>iPhone, Android, iPad, or web browser — the Wolf uses their phone to declare their choice, scores sync to every other player instantly. No shared paper scorecard, no disputes about what was recorded when.</p>
+        <p>Any phone, tablet or computer browser — the Wolf uses their phone to declare their choice, scores sync to every other player instantly. No shared paper scorecard, no disputes about what was recorded when.</p>
 </div>
 
 </div>

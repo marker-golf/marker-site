@@ -707,7 +707,7 @@ In gross High-Low, the team with the two best players will almost always win. Ne
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
 </div>
 <h4>Works on Any Device</h4>
-        <p>iPhone, Android, iPad, or web browser — every player uses the device they prefer. Scores sync in real time across the entire group. No one needs to be on the same platform.</p>
+        <p>Any phone, tablet or computer browser — every player uses the device they prefer. Scores sync in real time across the entire group. No one needs to be on the same platform.</p>
 </div>
 
 <div class="gg-benefit">
@@ -722,7 +722,7 @@ In gross High-Low, the team with the two best players will almost always win. Ne
 
 <div style="margin-top:40px; text-align:center;">
       <a href="https://app.marker.golf" class="btn btn-primary">Try Marker Free</a>
-      <p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Available on iOS, Android, and Web · No credit card required</p>
+      <p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Works in your phone's browser · No credit card required</p>
 </div>
 
 </div>

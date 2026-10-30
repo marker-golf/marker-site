@@ -37,7 +37,7 @@ import { spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { log, redact } from './lib/proc.mjs'
 import { sandboxArgs } from './lib/sandbox.mjs'
-import { claimForCapture, addVideoPremium, restoreAfterVideo } from './lib/state.mjs'
+import { claimForCapture, addVideoPremium, captureRows, restoreAfterVideo } from './lib/state.mjs'
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import { fontFulfillers } from './lib/local-fonts.mjs'
 import { reviewOutputDir } from './lib/video-output.mjs'
@@ -48,7 +48,7 @@ import {
   VIDEO_STAGING_DIR, VIDEO_REVIEW_ROOT, FFMPEG, FFPROBE, VIDEO_FPS
 } from './lib/config.mjs'
 
-const RECIPES = ['score-round-side-games', 'run-multi-group-event']
+const RECIPES = ['score-round-side-games', 'run-multi-group-event', 'complete-event-settle-up']
 const option = name => process.argv.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3)
 const recipeName = option('recipe') ?? RECIPES[0]
 if (!RECIPES.includes(recipeName)) throw new Error(`Unknown recipe ${recipeName} (known: ${RECIPES.join(', ')})`)
@@ -56,7 +56,9 @@ const recipe = (await import(`./video-recipes/${recipeName}.mjs`)).default
 
 const PREMIUM = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'video-premium.json'), 'utf8'))
 const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
-const declaredWrites = [['POST', '/api/app/scores']]
+// The Hub writes a recipe may send (each counted against recipe.entries);
+// by default, score entries.
+const declaredWrites = recipe.writes ? recipe.writes(ids) : [['POST', '/api/app/scores']]
 const resultsFile = path.join(VIDEO_STAGING_DIR, 'results.json')
 const framesDir = path.join(VIDEO_STAGING_DIR, 'frames')
 
@@ -71,7 +73,10 @@ if (process.argv.includes('--encode-only')) {
 if (process.env.SCREENS_SANDBOX !== 'browser') {
   claimForCapture()
   fs.rmSync(VIDEO_STAGING_DIR, { recursive: true, force: true })
+  // The recipe's declared score rows and the rows it may change in place;
+  // the latter are captured in full now so the restore can put them back.
   const restore = recipe.restore(ids)
+  const captured = captureRows(restore.rows)
   let result = { status: 1 }
   try {
     addVideoPremium(PREMIUM, ids.bobUserId)
@@ -81,11 +86,16 @@ if (process.env.SCREENS_SANDBOX !== 'browser') {
       stdio: 'inherit',
       env: { HOME: process.env.HOME, PATH: '/usr/bin:/bin', LANG: 'en_US.UTF-8', SCREENS_SANDBOX: 'browser' }
     })
+    // Checks that need the database as the recording left it (for example a
+    // completed event's stored results), before the restore undoes it.
+    if (result.status === 0 && recipe.verifyStored) {
+      for (const line of recipe.verifyStored(ids, JSON.parse(fs.readFileSync(resultsFile, 'utf8')))) log(line)
+    }
   } finally {
     // Restore the fixture data whether or not the recording succeeded; a
     // recording that changed anything else is refused here.
-    const removed = restoreAfterVideo(ids, { ...restore, premium: PREMIUM })
-    log(`fixture data restored: video subscription and ${removed} hole-${restore.hole} score row(s) removed; every fixture digest (including premium state) and audited row matches the fixtures-ready snapshot`)
+    const restored = restoreAfterVideo(ids, { ...restore, rows: captured, premium: PREMIUM })
+    log(`fixture data restored: video subscription removed, ${restored.scores} score row(s) removed, ${restored.rows} changed row(s) written back; every fixture digest (including premium state) and audited row matches the fixtures-ready snapshot`)
   }
   if (result.status !== 0) process.exit(result.status ?? 1)
   await encode(JSON.parse(fs.readFileSync(resultsFile, 'utf8')))
@@ -316,9 +326,23 @@ function stageFor (page, results, frameClock) {
     }
     throw new Error(`no free place for the "${text}" callout (${size.width.toFixed(0)}x${size.height.toFixed(0)}) in ${JSON.stringify(regions)}`)
   }
+  // The named boxes (viewport rectangles), the fixed header and footer and
+  // the viewport edges a callout at `rect` would come within `margin` px of,
+  // plus any text or control it would cover (table cells too when `cells`).
+  const calloutClear = async (rect, avoid = [], { margin = 8, cells = false } = {}) => {
+    const { headerBottom, footerTop } = await fixedBounds()
+    const touches = box => box.width > 0 && box.height > 0 && rect.left - margin < box.x + box.width && rect.left + rect.width + margin > box.x &&
+      rect.top - margin < box.y + box.height && rect.top + rect.height + margin > box.y
+    const hits = avoid.filter(([, box]) => box && touches(box)).map(([name]) => name)
+    if (rect.top < headerBottom + margin) hits.push('the fixed header')
+    if (rect.top + rect.height > footerTop - margin) hits.push('the footer')
+    if (rect.left < margin || rect.left + rect.width > VIEWPORT.width - margin || rect.top + rect.height > VIEWPORT.height - margin) hits.push('the viewport edges')
+    hits.push(...await calloutHits(rect, { cells }))
+    return [...new Set(hits)]
+  }
   const callout = (text, place) => page.evaluate(([text, place]) => window.__demo.callout(text, place), [text, place])
   const hideCallout = () => page.evaluate(() => window.__demo.hideCallout())
-  return { page, ids, results, mark, hold, tap, glideTo, scrollTargetBelowHeader, revealHorizontally, fixedBounds, calloutHits, findCalloutSpot, callout, hideCallout }
+  return { page, ids, results, mark, hold, tap, glideTo, scrollTargetBelowHeader, revealHorizontally, fixedBounds, calloutHits, calloutClear, findCalloutSpot, callout, hideCallout }
 }
 
 const results = { recipe: recipe.name, frames: [], marks: [] }
@@ -367,6 +391,7 @@ try {
     fs.mkdirSync(DEBUG_DIR, { recursive: true })
     await pages[0].screenshot({ path: path.join(DEBUG_DIR, `${recipe.name}.png`) }).catch(() => {})
     fs.writeFileSync(path.join(DEBUG_DIR, `${recipe.name}.txt`), await pages[0].locator('body').innerText().catch(() => ''))
+    fs.writeFileSync(path.join(DEBUG_DIR, `${recipe.name}.error.txt`), redact(String(error.stack || error.message)))
   }
 } finally {
   await context.close()
@@ -379,9 +404,9 @@ const problems = []
 if (failure) problems.push(`recording failed: ${redact(failure.message.split('\n')[0])} (debug output in ${DEBUG_DIR})`)
 if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[...new Set(report.unexpected)].join('\n  ')}`)
 if (pageErrors.length) problems.push(`page errors:\n  ${pageErrors.join('\n  ')}`)
-if (hubWrites.length) problems.push(`Hub writes outside the declared score entries:\n  ${hubWrites.join('\n  ')}`)
+if (hubWrites.length) problems.push(`Hub writes outside the declared writes:\n  ${hubWrites.join('\n  ')}`)
 if (consoleErrors.length) problems.push(`console errors outside the allowlist:\n  ${consoleErrors.join('\n  ')}`)
-if (!failure && scorePosts.length !== recipe.entries) problems.push(`${scorePosts.length} score writes, expected ${recipe.entries}`)
+if (!failure && scorePosts.length !== recipe.entries) problems.push(`${scorePosts.length} declared writes, expected ${recipe.entries}`)
 
 if (!problems.length) {
   problems.push(...recipe.verify(results))
@@ -396,7 +421,7 @@ if (problems.length) {
 }
 fs.writeFileSync(resultsFile, JSON.stringify(results, null, 2))
 const [summary, ...details] = recipe.report(results)
-log(`network policy held; ${recipe.entries} declared score writes only; ${summary}`)
+log(`network policy held; ${recipe.entries} declared write(s) only (${declaredWrites.map(([m, p]) => `${m} ${p}`).join(', ')}); ${summary}`)
 for (const line of details) log(line)
 log(`recorded ${results.frames.length} frames over ${(results.end / 1000).toFixed(2)}s`)
 process.exit(0)

@@ -35,7 +35,7 @@ cta:
 
 <p>Your phone number is how other players find and add you in Marker. If someone else is setting up your round, they may text you a link to the shared scorecard — open the link and sign in the same way.</p>
 
-<p>Marker is available as a native app for iPhone and Android, and as a web app at <strong>app.marker.golf</strong> — no download required.</p>
+<p>Marker is a progressive web app at <strong>app.marker.golf</strong>. Open it in your phone's browser and add it to your home screen for an app-like experience — there's nothing to download from an app store.</p>
 
 <h3>The Home screen</h3>
 

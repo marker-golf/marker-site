@@ -719,7 +719,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 
 <div style="margin-top:40px; text-align:center;">
 <a href="https://app.marker.golf" class="btn btn-primary">Play Match Play in Marker</a>
-<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Available on iOS, Android, and Web · No credit card required</p>
+<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Works in your phone's browser · No credit card required</p>
 </div>
 
 </div>

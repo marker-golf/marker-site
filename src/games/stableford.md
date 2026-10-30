@@ -827,7 +827,7 @@ Same gross score, 1-point difference, because one hole allocates a stroke and th
 
 <div style="margin-top:40px; text-align:center;">
 <a href="https://app.marker.golf" class="btn btn-primary">Play Stableford in Marker</a>
-<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Available on iOS, Android, and Web · Solo or Group</p>
+<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Works in your phone's browser · Solo or Group</p>
 </div>
 
 </div>

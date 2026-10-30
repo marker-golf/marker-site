@@ -25,7 +25,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Open Marker in your browser</h3>
-<p>Go to <strong>app.marker.golf</strong> in Safari (iPhone) or Chrome (Android). Marker is a progressive web app — no App Store download required, though it is also available in the App Store and Google Play.</p>
+<p>Go to <strong>app.marker.golf</strong> in Safari (iPhone) or Chrome (Android). Marker is a progressive web app — there's nothing to download from an app store.</p>
 <p>For the best experience on iPhone, use Safari. On Android, use Chrome. Other browsers work but may not support home screen installation.</p>
 </div>
 </div>
