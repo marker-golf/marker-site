@@ -8,6 +8,7 @@ description: Marker tracks scores live, manages your side games, and settles the
 {% from "components/platform-bar.njk" import PlatformSupportBar %}
 {% from "components/trust-stats.njk" import TrustStats %}
 {% from "components/product-screenshot.njk" import ProductScreenshot %}
+{% from "components/demo-video.njk" import DemoVideo %}
 
 <!-- Hero -->
 <section class="hero">
@@ -135,9 +136,8 @@ description: Marker tracks scores live, manages your side games, and settles the
 <!-- Feature: Live leaderboard -->
 <section class="section feature-showcase">
   <div class="container">
-    <!-- Demo video: silent screen recording of the Vue app (fictional data).
-         Native controls are the no-JavaScript fallback; main.js replaces them
-         with the play/pause button and handles autoplay and reduced motion. -->
+    <!-- Demo video: silent screen recording of the Vue app (fictional data);
+         see components/demo-video.njk. -->
     <div class="feature-row feature-row--flip">
       <div class="feature-row__text">
         <h2>Score once. Marker handles the games.</h2>
@@ -145,34 +145,13 @@ description: Marker tracks scores live, manages your side games, and settles the
         <a href="{{ '/tutorials/score-the-round/' | url }}" class="feature-row__link">See how scoring works →</a>
       </div>
       <div class="feature-row__media feature-row__media--video">
-        <figure class="product-screenshot product-screenshot--phone demo-video" data-demo-video>
-          <div class="product-screenshot__phone-frame">
-            <div class="product-screenshot__phone-screen">
-              <video id="demo-video" class="demo-video__media" width="780" height="1688"
-                poster="{{ '/images/video/score-round-side-games-poster.jpg' | url }}"
-                muted playsinline loop controls preload="none"
-                disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate noremoteplayback"
-                aria-label="Demo: scoring a hole in Marker and seeing the Skins game update"
-                aria-describedby="demo-video-description">
-                <source src="{{ '/images/video/score-round-side-games.webm' | url }}" type='video/webm; codecs="vp9"'>
-                <source src="{{ '/images/video/score-round-side-games.mp4' | url }}" type='video/mp4; codecs="avc1.640028"'>
-                <img src="{{ '/images/video/score-round-side-games-poster.jpg' | url }}" width="780" height="1688" alt="Marker leaderboard showing the Skins settlement: Allan Albatross pays Bob Smith $50 and Edward Eagle pays Bert Bailout $10">
-              </video>
-            </div>
-          </div>
-          <figcaption id="demo-video-description" class="visually-hidden">
-            Silent 23-second screen recording of the Marker app with fictional players at Shinnecock Hills.
+        {{ DemoVideo("demo-video", "score-round-side-games",
+          "Demo: scoring a hole in Marker and seeing the Skins game update",
+          "Marker leaderboard showing the Skins settlement: Allan Albatross pays Bob Smith $50 and Edward Eagle pays Bert Bailout $10",
+          "Silent 23-second screen recording of the Marker app with fictional players at Shinnecock Hills.
             Scores for hole 10 are entered for four players. Bob Smith's birdie wins two skins carried over from a tied hole,
             and the scorecard updates his total from 3 to 5 skins. The leaderboard's Skins settlement then shows who owes whom:
-            Allan Albatross pays Bob Smith $50 and Edward Eagle pays Bert Bailout $10.
-          </figcaption>
-          <button type="button" class="demo-video__toggle" aria-controls="demo-video" hidden>
-            <svg class="demo-video__icon demo-video__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
-            <svg class="demo-video__icon demo-video__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>
-            <svg class="demo-video__icon demo-video__icon--replay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
-            <span class="demo-video__label">Play demo</span>
-          </button>
-        </figure>
+            Allan Albatross pays Bob Smith $50 and Edward Eagle pays Bert Bailout $10.") }}
       </div>
     </div>
 
