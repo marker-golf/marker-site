@@ -10,6 +10,7 @@ npm run screens:test                  # fast regression tests (no Hub, no databa
 npm run screens:test:capture-failure  # integration test: failed captures cannot change published screenshots or drafts
 npm run screens:video                 # homepage scoring demo video for review (see "Demo videos")
 npm run screens:video:event           # multi-group event demo video for review
+npm run screens:video:settlement      # complete-the-event settlement demo video for review
 ```
 
 ## Requirements
@@ -195,13 +196,19 @@ the shot timings, callout positions and the results shown.
 |---|---|---|
 | `npm run screens:video` | `score-round-side-games`: "Score a round with side games" (F1) | `video-poc/score-round-side-games-v2.*`, `-shots.json` |
 | `npm run screens:video:event` | `run-multi-group-event`: "Run a multi-group event" (F4) | `video-event/run-multi-group-event-v2.*`, `-v2-timing.json` (v1 files have no suffix) |
+| `npm run screens:video:settlement` | `complete-event-settle-up`: "Complete the event and settle up" (F7) | `video-settlement/complete-event-settle-up-v2.*`, `-v2-timing.json` |
 
 Review files are never overwritten: if any output name already exists, the
 run writes into a `rerun-<timestamp>/` subfolder instead
 (`lib/video-output.mjs`), unless `--replace` is passed
 (`npm run screens:video:event -- --replace`). A recipe provides its baseline
 (not filmed), setup, the filmed timeline, the checks after recording and
-its declared score rows; the runner owns everything else below.
+its declared writes and the rows it changes; the runner owns everything
+else below. Rows a recipe changes in place (completing an event locks the
+event and its group scorecards and stores each game's summary) are captured
+in full before the recording and written back afterwards (`captureRows`,
+`restoreAfterVideo`); a recipe may also check the database as the recording
+left it before the restore (`verifyStored`).
 
 ### Score a round with side games (`score-round-side-games`)
 
@@ -273,6 +280,31 @@ recipe.
   badge, the fixed event header, the Event Games heading, every game heading
   and chevron, the footer and the viewport edges, or the run fails; the
   timing file records its gaps. The final frame must have no callout.
+
+### Complete the event and settle up (`complete-event-settle-up`)
+
+- **Story**: F7 (Chambers Bay Cup, 12 players in three groups, scored through
+  18, three $10 buy-in games). The event dashboard with Players and Games
+  collapsed ("Complete the event"); Complete event and Vue's confirmation;
+  Yes; the lock notice "This round is complete." ("Final results,
+  automatically"); the leaderboard with the games collapsed and Overall -
+  event's settlement paid from the pot; "Buy-ins collected" unticked, so the
+  table becomes the player-to-player settlement ("Who owes whom" beside its
+  heading), then at least 4.5 s of that clean table with no callout (the
+  poster). v1 ended on the pot settlement.
+- **Write and restore**: the single declared write is the PUT that completes
+  the event. Before the restore, F7 must be locked and finalized and its
+  stored results must reconcile and equal the displayed settlement; then the
+  event, scorecard and game rows are written back exactly.
+- **Checks**: the settlement equals the one the open event showed, is paid
+  entirely from the $360 pot (12 players x $30) and matches the reconciled
+  accounting (`assertEventAccountingReconciles`). Unticking "Buy-ins
+  collected" must send no request at all; the player-to-player table must
+  equal the reconciled one, involve no pot and leave every player at their
+  Net. Every callout keeps 8 px
+  from the header, the footer, the viewport edges and the named Vue elements
+  (headings, chevrons, tabs, Buy-ins collected, settlement rows, the lock
+  notice) and covers no text, control or table cell.
 
 ## Network isolation and external integrations
 

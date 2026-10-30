@@ -269,15 +269,47 @@ export function addVideoPremium (premium, userId) {
   }
 }
 
-// After the demo video, which enters one hole's scores on one standalone
-// scorecard: the only differences from the fixtures-ready snapshot must be
-// the video's subscription row (addVideoPremium) and those score rows (at
-// most one per expected player, on that hole, with the expected gross score;
-// a failed recording may have saved fewer). Both are deleted again, and then
-// every fixture digest (including the users' premium state) and every
-// audited row must equal the snapshot exactly.
-// `scores` maps player id -> gross score. Returns the number of score rows removed.
-export function restoreAfterVideo (ids, { hole, scores, premium }) {
+// Rows a demo video may change in place (completing an event locks it and
+// its group scorecards and stores each game's final summary), captured in
+// full before the recording so they can be put back exactly.
+const RESTORABLE_TABLES = ['events', 'scorecards', 'games']
+
+// `spec` maps a table to row ids; returns { table: { id: row JSON } }.
+export function captureRows (spec = {}) {
+  requireClaimedBuild('capture rows')
+  const rows = {}
+  for (const [table, list] of Object.entries(spec)) {
+    if (!RESTORABLE_TABLES.includes(table)) throw new Error(`Refusing: ${table} rows cannot be restored`)
+    rows[table] = {}
+    for (const id of list) {
+      const json = screensSql(`select row_to_json(t)::text from ${table} t where t.id = ${uuid(id)}`)
+      if (!json) throw new Error(`No ${table} row ${id}`)
+      rows[table][id] = json
+    }
+  }
+  return rows
+}
+
+function restoreRow (table, id, json) {
+  const columns = screensSql(`select string_agg(quote_ident(column_name), ', ' order by ordinal_position) from information_schema.columns
+    where table_schema = 'public' and table_name = '${table}' and column_name <> 'id'`)
+  if (json.includes('$restore$')) throw new Error(`Cannot quote the ${table} row ${id}`)
+  const updated = screensSql(`with u as (update ${table} t set (${columns}) = (select ${columns} from json_populate_record(null::${table}, $restore$${json}$restore$::json))
+    where t.id = ${uuid(id)} returning 1) select count(*) from u`)
+  if (updated !== '1') throw new Error(`Restore did not update the ${table} row ${id}`)
+}
+
+// After a demo video: the only differences from the fixtures-ready snapshot
+// may be the video's subscription row (addVideoPremium), score rows the
+// recording entered (at most one per expected player, on that hole, with
+// the expected gross score; a failed recording may have saved fewer) and
+// changes to the rows captured with captureRows. The subscription and score
+// rows are deleted, the captured rows are written back, and then every
+// fixture digest (including the users' premium state) and every audited row
+// must equal the snapshot exactly.
+// `scores` maps player id -> gross score; `rows` is captureRows' result.
+// Returns { scores, rows }: the score rows removed and the rows restored.
+export function restoreAfterVideo (ids, { hole = null, scores = {}, premium, rows: captured = {} }) {
   const state = requireClaimedBuild('restore')
   const now = recordSnapshot()
   const problems = []
@@ -291,7 +323,9 @@ export function restoreAfterVideo (ids, { hole, scores, premium }) {
       if (added.join() !== premium.id) problems.push(`subscriptions added: ${added.length}, expected only the video subscription`)
     } else if (table !== 'scores' && added.length) problems.push(`${added.length} row(s) added to ${table}`)
     if (removed.length) problems.push(`${removed.length} row(s) removed from ${table}`)
-    if (changed.length) problems.push(`${changed.length} row(s) changed in ${table}`)
+    const restorable = new Set(Object.keys(captured[table] || {}))
+    const unexpected = changed.filter(id => !restorable.has(id))
+    if (unexpected.length) problems.push(`${unexpected.length} row(s) changed in ${table}`)
   }
   const added = Object.keys(now.scores).filter(id => !(id in state.rows.scores))
   const rows = added.length
@@ -305,7 +339,7 @@ export function restoreAfterVideo (ids, { hole, scores, premium }) {
     seen.add(playerId)
   }
   if (rows.length !== added.length) problems.push('added score rows could not be read back')
-  if (problems.length) throw new Error(`Refusing to restore: the recording changed more than the declared scores: ${problems.join('; ')}`)
+  if (problems.length) throw new Error(`Refusing to restore: the recording changed more than its declared scores and rows: ${problems.join('; ')}`)
 
   // A failed recording may have saved only some of the scores (or none).
   const deleted = !added.length ? '0' : screensSql(`with d as (delete from scores where id in (${added.map(uuid).join(', ')}) and hole_number = ${Number(hole)}
@@ -313,8 +347,15 @@ export function restoreAfterVideo (ids, { hole, scores, premium }) {
   if (Number(deleted) !== rows.length) throw new Error(`Restore deleted ${deleted} score rows, expected ${rows.length}`)
   const unsubscribed = screensSql(`with d as (delete from subscriptions where id = ${uuid(premium.id)} returning 1) select count(*) from d`)
   if (unsubscribed !== '1' || screensSql('select count(*) from subscriptions') !== '0') throw new Error('Restore did not remove the video subscription')
+  let restored = 0
+  for (const [table, list] of Object.entries(captured)) {
+    for (const [id, json] of Object.entries(list)) {
+      restoreRow(table, id, json)
+      restored++
+    }
+  }
   verifyFixturesAfterCapture(ids, { locked: [] })
-  return rows.length
+  return { scores: rows.length, rows: restored }
 }
 
 export function claimForCapture () {

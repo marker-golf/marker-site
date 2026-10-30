@@ -19,6 +19,7 @@
     "screens:proof": "node scripts/screenshots/proof.mjs",
     "screens:video": "node scripts/screenshots/video-proof.mjs",
     "screens:video:event": "node scripts/screenshots/video-proof.mjs --recipe=run-multi-group-event",
+    "screens:video:settlement": "node scripts/screenshots/video-proof.mjs --recipe=complete-event-settle-up",
     "screens:test": "node --test scripts/screenshots/tests/",
     "screens:test:capture-failure": "node scripts/screenshots/tests/capture-failure.integration.mjs"
   },
