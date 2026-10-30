@@ -153,11 +153,12 @@ export const SOURCE_DIR = path.join(SITE_ROOT, 'src/images/screenshots/source')
 export const WEB_DIR = path.join(SITE_ROOT, 'src/images/screenshots/web')
 export const DRAFT_PREFIX = 'vue-draft-'
 
-// Demo video (video.mjs). Review output only: nothing is written into the
-// site. ffmpeg/ffprobe are static builds installed into the work folder
-// (see README), never on the repository's dependency list.
+// Demo videos (video.mjs and video-recipes/). Review output only: nothing is
+// written into the site. ffmpeg/ffprobe are static builds installed into the
+// work folder (see README), never on the repository's dependency list.
 export const VIDEO_STAGING_DIR = path.join(WORK_DIR, 'video-staging')
-export const VIDEO_REVIEW_DIR = path.join(WORK_DIR, 'review', 'video-poc')
+// Each recipe writes into its own subfolder (video-poc, video-event, ...).
+export const VIDEO_REVIEW_ROOT = path.join(WORK_DIR, 'review')
 export const FFMPEG = path.join(WORK_DIR, 'tools/node_modules/ffmpeg-static/ffmpeg')
 export const FFPROBE = path.join(WORK_DIR, 'tools/node_modules/ffprobe-static/bin/darwin/arm64/ffprobe')
 export const VIDEO_FPS = 30

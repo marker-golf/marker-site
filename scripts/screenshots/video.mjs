@@ -1,31 +1,32 @@
-// Records the demo video "Score a round with side games" from the isolated
-// Vue app, then restores the fixture data it changed:
+// Records a demo video from the isolated Vue app with a named recipe
+// (video-recipes/<name>.mjs), then restores the fixture data it changed:
 //
 //   1. claim the fixture state (refuses stale or already-captured data) and
-//      make the fictional user premium (fixtures/video-premium.json), so the
-//      leaderboard shows no upgrade banner;
+//      make the fictional user premium (fixtures/video-premium.json), so no
+//      screen shows the upgrade banner;
 //   2. re-run itself inside the "browser" network sandbox (Hub and Vue
 //      loopback ports only) with the same network policy, local fonts, fixed
 //      browser clock and console/page-error checks as capture.mjs;
-//   3. record the story below as lossless PNG frames (Chrome DevTools
+//   3. record the recipe's story as lossless PNG frames (Chrome DevTools
 //      screencast at 780x1688), with a touch indicator and short callouts
 //      drawn in an overlay outside the app's own DOM;
-//   4. after recording (not filmed) require that side-game accounting still
-//      reconciles and that the Skins result changed exactly as the entered
-//      scores imply;
+//   4. after recording (not filmed) run the recipe's checks: accounting
+//      reconciles and the result changed exactly as the entered scores imply;
 //   5. back outside the sandbox: require that the only data changed is the
-//      video subscription and the declared hole-10 score rows on F1, delete
-//      them, and require every fixture digest (including premium state) and
+//      video subscription and the recipe's declared score rows, delete them,
+//      and require every fixture digest (including premium state) and
 //      audited row to match the fixtures-ready snapshot again (lib/state.mjs);
 //   6. encode, with ffmpeg in a no-network sandbox: an FFV1 intermediate, an
 //      H.264 MP4, a VP9 WebM (no audio, no metadata) and a JPEG poster, into
-//      the review folder outside the site, named for VERSION so earlier
-//      versions are never overwritten. Nothing is written into the site.
+//      the recipe's review folder outside the site. Existing review files are
+//      never overwritten (a rerun-<id> subfolder is used instead) unless
+//      --replace is given. Nothing is written into the site.
 //
-// The only Hub writes allowed are the four POST /api/app/scores the story
-// makes; any other write fails the run.
+// The only Hub writes allowed are the recipe's POST /api/app/scores; any
+// other write fails the run.
 //
-// Usage: node video.mjs [--encode-only]
+// Usage: node video.mjs [--recipe=<name>] [--replace] [--encode-only]
+// The default recipe is the homepage scoring demo (score-round-side-games).
 // (--encode-only re-encodes the last recording that passed every check,
 // without opening the browser or touching data.)
 
@@ -39,35 +40,22 @@ import { sandboxArgs } from './lib/sandbox.mjs'
 import { claimForCapture, addVideoPremium, restoreAfterVideo } from './lib/state.mjs'
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import { fontFulfillers } from './lib/local-fonts.mjs'
+import { reviewOutputDir } from './lib/video-output.mjs'
 import {
   VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
   BROWSER_FIXED_TIME, BROWSER_ALLOWED_HOSTS, EXPECTED_BLOCKED_REQUESTS, ALLOWED_CONSOLE_ERRORS,
   DEBUG_DIR, USGA_DEAD_PORT, LOOPBACK, HUB_PORT, SCRIPTS_DIR,
-  VIDEO_STAGING_DIR, VIDEO_REVIEW_DIR, FFMPEG, FFPROBE, VIDEO_FPS
+  VIDEO_STAGING_DIR, VIDEO_REVIEW_ROOT, FFMPEG, FFPROBE, VIDEO_FPS
 } from './lib/config.mjs'
-import {
-  showGameColumn, scrollBelowHeader, section, sectionTitle, holeRow, money, assertSideGamesReconcile
-} from './proof-set.mjs'
 
-const NAME = 'score-round-side-games'
-// Review output version (v1: first proof of concept; v2: premium user, so no
-// upgrade banner, and the final frame framed on the Skins settlement).
-const VERSION = 'v2'
-const OUTPUT = `${NAME}-${VERSION}`
+const RECIPES = ['score-round-side-games', 'run-multi-group-event']
+const option = name => process.argv.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3)
+const recipeName = option('recipe') ?? RECIPES[0]
+if (!RECIPES.includes(recipeName)) throw new Error(`Unknown recipe ${recipeName} (known: ${RECIPES.join(', ')})`)
+const recipe = (await import(`./video-recipes/${recipeName}.mjs`)).default
+
 const PREMIUM = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'video-premium.json'), 'utf8'))
-const F1 = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'shinnecock-f1.json'), 'utf8'))
-// Hole 10 (par 4, stroke index 2; every player but Edward gets a stroke).
-// Hole 9 was tied, so its skin carries: Bob's birdie (net 2) beats three
-// net 4s and wins two skins. Order is the scorecard's column order.
-const HOLE = 10
-const ENTRIES = [['allan', 5], ['bert', 5], ['edward', 4], ['bob', 3]]
-const SKINS_WINNER = 'Bob Smith'
-const SKINS_WON = 2
-const SKIN_AMOUNT = F1.games.find(g => g.game === 'Skins').amount
-const DURATION_LIMITS = [20, 30] // seconds
-
 const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
-const expectedScores = Object.fromEntries(ENTRIES.map(([key, score]) => [ids.f1Players[key], score]))
 const declaredWrites = [['POST', '/api/app/scores']]
 const resultsFile = path.join(VIDEO_STAGING_DIR, 'results.json')
 const framesDir = path.join(VIDEO_STAGING_DIR, 'frames')
@@ -75,12 +63,15 @@ const framesDir = path.join(VIDEO_STAGING_DIR, 'frames')
 // Outer process --------------------------------------------------------------
 if (process.argv.includes('--encode-only')) {
   if (!fs.existsSync(resultsFile)) throw new Error('No verified recording to encode; run node video.mjs first')
-  await encode(JSON.parse(fs.readFileSync(resultsFile, 'utf8')))
+  const results = JSON.parse(fs.readFileSync(resultsFile, 'utf8'))
+  if (results.recipe !== recipe.name) throw new Error(`The last recording is ${results.recipe}; pass --recipe=${results.recipe}`)
+  await encode(results)
   process.exit(0)
 }
 if (process.env.SCREENS_SANDBOX !== 'browser') {
   claimForCapture()
   fs.rmSync(VIDEO_STAGING_DIR, { recursive: true, force: true })
+  const restore = recipe.restore(ids)
   let result = { status: 1 }
   try {
     addVideoPremium(PREMIUM, ids.bobUserId)
@@ -93,8 +84,8 @@ if (process.env.SCREENS_SANDBOX !== 'browser') {
   } finally {
     // Restore the fixture data whether or not the recording succeeded; a
     // recording that changed anything else is refused here.
-    const removed = restoreAfterVideo(ids, { hole: HOLE, scores: expectedScores, premium: PREMIUM })
-    log(`fixture data restored: video subscription and ${removed} hole-${HOLE} score row(s) removed; every fixture digest (including premium state) and audited row matches the fixtures-ready snapshot`)
+    const removed = restoreAfterVideo(ids, { ...restore, premium: PREMIUM })
+    log(`fixture data restored: video subscription and ${removed} hole-${restore.hole} score row(s) removed; every fixture digest (including premium state) and audited row matches the fixtures-ready snapshot`)
   }
   if (result.status !== 0) process.exit(result.status ?? 1)
   await encode(JSON.parse(fs.readFileSync(resultsFile, 'utf8')))
@@ -226,53 +217,10 @@ function watch (page, label) {
   })
 }
 
-// The Skins standings table: { player: { skins, amount (cents) } }.
-async function skinsStandings (page) {
-  const rows = await section(page, 'Skins').locator('table').first().locator('tr')
-    .evaluateAll(trs => trs.map(tr => [...tr.cells].map(c => c.innerText.trim())))
-  const standings = {}
-  for (const [player, skins, amount] of rows) {
-    if (!/^\d+$/.test(skins || '') || player === 'Total') continue
-    standings[player] = { skins: Number(skins), amount: money(amount) }
-  }
-  if (Object.keys(standings).length !== F1.players.length) throw new Error(`Skins table lists ${Object.keys(standings).length} players`)
-  return standings
-}
-
-const results = { frames: [], marks: [] }
-let failure = null
-try {
-  // Before (not filmed): the Skins standings as the round stands.
-  const before = await context.newPage()
-  watch(before, 'baseline')
-  await before.goto(`${VUE_URL}/scorecards/${ids.f1Scorecard}/leaderboard`, { waitUntil: 'networkidle' })
-  results.before = await skinsStandings(before)
-  await before.close()
-
-  const page = await context.newPage()
-  watch(page, 'recording')
-  await page.goto(`${VUE_URL}/scorecards/${ids.f1Scorecard}`, { waitUntil: 'networkidle' })
-  if (new URL(page.url()).pathname.startsWith('/login')) throw new Error('redirected to login')
-  // Opening frame: the Skins column, hole 9's tie (carryover) at the top and
-  // the empty hole 10 below it.
-  await showGameColumn(page, 'Net Skins', 'Skins')
-  await scrollBelowHeader(holeRow(page, 9), 0)
-  await holeRow(page, 9).getByText('2 Ties').waitFor()
-  await page.evaluate(() => document.fonts.ready)
-
-  // Lossless frames from the compositor at the device pixel size.
-  const cdp = await context.newCDPSession(page)
-  let started = null
-  const writes = []
-  cdp.on('Page.screencastFrame', frame => {
-    const t = Date.now()
-    started ??= t
-    const file = `frame-${String(results.frames.length).padStart(5, '0')}.png`
-    results.frames.push({ file, t: t - started })
-    writes.push(fs.promises.writeFile(path.join(framesDir, file), Buffer.from(frame.data, 'base64')))
-    cdp.send('Page.screencastFrameAck', { sessionId: frame.sessionId }).catch(() => {})
-  })
-  const mark = label => results.marks.push({ label, t: Date.now() - (started ?? Date.now()) })
+// Helpers recipes use while recording. All movement is driven from here,
+// because the page clock is fixed.
+function stageFor (page, results, frameClock) {
+  const mark = label => results.marks.push({ label, t: Date.now() - (frameClock.started ?? Date.now()) })
   const hold = ms => page.waitForTimeout(ms)
   const tap = async (target, pause = 160) => {
     const box = await target.boundingBox()
@@ -281,147 +229,144 @@ try {
     await hold(pause) // the indicator shows before the app reacts
     await target.click()
   }
-  // A short, eased scroll (never a jump), driven from here because the page
-  // clock is fixed.
-  // A short, eased scroll to window.scrollY `to` (never a jump), driven from
-  // here because the page clock is fixed.
+  const ease = p => p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2
+  // A short, eased scroll to window.scrollY `to` (never a jump).
   const glideTo = async (to, ms = 600) => {
     const from = await page.evaluate(() => window.scrollY)
     const steps = Math.round(ms / 33)
     for (let i = 1; i <= steps; i++) {
-      const p = i / steps
-      const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2
-      await page.evaluate(y => window.scrollTo(0, y), Math.round(from + (to - from) * eased))
+      await page.evaluate(y => window.scrollTo(0, y), Math.round(from + (to - from) * ease(i / steps)))
       await hold(33)
     }
     if (Math.abs(await page.evaluate(() => window.scrollY) - to) > 1) throw new Error(`could not scroll to ${to}`)
   }
-
-  await cdp.send('Page.startScreencast', { format: 'png', maxWidth: VIEWPORT.width * DEVICE_SCALE_FACTOR, maxHeight: VIEWPORT.height * DEVICE_SCALE_FACTOR, everyNthFrame: 1 })
-  await page.evaluate(() => window.scrollBy(0, 0)) // first frame
-  mark('Scorecard in progress (Net Skins, hole 9 tied)')
-  await hold(900)
-  await page.evaluate(() => window.__demo.callout('Enter scores', { bottom: 36 }))
-  await hold(1900)
-  await page.evaluate(() => window.__demo.hideCallout())
-  await hold(300)
-
-  mark(`Enter hole ${HOLE} scores`)
-  const row = holeRow(page, HOLE)
-  for (const [i, [key, score]] of ENTRIES.entries()) {
-    await tap(row.locator('td.scorecard-score').nth(i))
-    await page.getByText('Enter score', { exact: true }).waitFor()
-    await page.locator('.picker-player', { hasText: new RegExp(`^${key}\\b`, 'i') }).waitFor()
-    await hold(650)
-    const saved = page.waitForResponse(r => new URL(r.url()).pathname === '/api/app/scores' && r.request().method() === 'POST')
-    await tap(page.locator('.btn_numberpad', { hasText: new RegExp(`^\\s*${score}\\s*$`) }))
-    if ((await saved).status() >= 300) throw new Error(`saving ${key}'s score failed`)
-    await page.getByText('Enter score', { exact: true }).waitFor({ state: 'detached' })
-    await hold(i === ENTRIES.length - 1 ? 250 : 550)
+  // The window.scrollY that puts `target` just below the fixed or sticky
+  // header (the same rule as scrollBelowHeader, without jumping there).
+  const scrollTargetBelowHeader = (target, gap = 12) => target.evaluate((el, gap) => {
+    const covering = [...document.querySelectorAll('*')].filter(e => {
+      const style = getComputedStyle(e)
+      return ['fixed', 'sticky'].includes(style.position) && parseFloat(style.top) < 300 && e.getBoundingClientRect().height > 0
+    }).map(e => parseFloat(getComputedStyle(e).top) + e.getBoundingClientRect().height)
+    return Math.round(el.getBoundingClientRect().top + window.scrollY - Math.max(0, ...covering) - gap)
+  }, gap)
+  // An eased horizontal scroll of the nearest scrollable ancestor (a tab bar)
+  // until `target` is fully in view.
+  const revealHorizontally = async (target, ms = 500) => {
+    const shift = await target.evaluate(el => {
+      let box = el.parentElement
+      while (box && !(box.scrollWidth > box.clientWidth + 1 && ['auto', 'scroll'].includes(getComputedStyle(box).overflowX))) box = box.parentElement
+      if (!box) return null
+      const r = el.getBoundingClientRect()
+      const b = box.getBoundingClientRect()
+      const by = r.right > b.right - 8 ? r.right - (b.right - 8) : r.left < b.left + 8 ? r.left - (b.left + 8) : 0
+      return { from: box.scrollLeft, to: Math.round(box.scrollLeft + by) }
+    })
+    if (!shift || shift.from === shift.to) return
+    const steps = Math.round(ms / 33)
+    for (let i = 1; i <= steps; i++) {
+      await target.evaluate((el, x) => {
+        let box = el.parentElement
+        while (box && !(box.scrollWidth > box.clientWidth + 1 && ['auto', 'scroll'].includes(getComputedStyle(box).overflowX))) box = box.parentElement
+        box.scrollLeft = x
+      }, Math.round(shift.from + (shift.to - shift.from) * ease(i / steps)))
+      await hold(33)
+    }
   }
-
-  // Marker recalculates immediately: the hole 10 Skins cell and the totals.
-  const skinsCell = row.locator('td').last()
-  await skinsCell.getByText(/Smith/i).waitFor()
-  const winnerText = (await skinsCell.innerText()).replace(/\s+/g, ' ').trim()
-  if (!new RegExp(`Smith, B \\(${SKINS_WON}\\)`, 'i').test(winnerText)) throw new Error(`hole ${HOLE} Skins cell shows "${winnerText}"`)
-  results.skinsCell = winnerText
-  mark('Skins recalculated on the scorecard')
-  await hold(500)
-  await page.evaluate(() => window.__demo.callout('Side games update automatically', { bottom: 36 }))
-  await hold(2600)
-  await page.evaluate(() => window.__demo.hideCallout())
-  await hold(300)
-
-  mark('Open the leaderboard')
-  await tap(page.locator('.right > .leaderboard'))
-  await page.waitForURL(/\/leaderboard$/)
-  await sectionTitle(page, 'Skins').waitFor()
-  await page.evaluate(() => document.fonts.ready)
-  // The fictional user is premium for the video, so Vue shows no banner.
-  if (await page.getByText('Upgrade to Premium!').count()) throw new Error('the leaderboard shows the upgrade banner')
-  await hold(1300)
-  mark('Collapse Nassau to bring Skins up')
-  await tap(sectionTitle(page, 'Nassau'))
-  await section(page, 'Nassau').locator('.block').first().waitFor({ state: 'detached' })
-  results.after = await skinsStandings(page)
-  await hold(2700)
-  mark('Skins game accounting: who pays whom')
-  const skins = section(page, 'Skins')
-  await tap(skins.getByText('Game accounting', { exact: true }))
-  const whoPays = skins.getByText('Who pays whom.')
-  await whoPays.waitFor()
-  const settlement = await skins.locator('table.leaderboard-table')
-    .filter({ has: page.locator('th', { hasText: /^\s*From\s*$/ }) }).first().locator('tr')
-    .evaluateAll(trs => trs.slice(1).map(tr => [...tr.cells].map(c => c.innerText.trim())))
-  results.settlement = settlement.map(([from, to, amount]) => ({ from, to, amount: money(amount) }))
-  await hold(400)
-  // Final framing: the whole Skins section (title, standings, settlement) sits
-  // just above the sticky footer, which leaves the Wolf section below the
-  // fold; the Skins title must stay below the header.
-  const frame = await skins.evaluate((el, gap) => {
+  // Top of the sticky footer and bottom of the fixed header, in the viewport.
+  const fixedBounds = () => page.evaluate(() => {
     const fixed = [...document.body.querySelectorAll('*')].filter(e => ['fixed', 'sticky'].includes(getComputedStyle(e).position))
       .map(e => e.getBoundingClientRect()).filter(r => r.height > 0)
-    const footerTop = Math.min(innerHeight, ...fixed.filter(r => r.top > innerHeight / 2).map(r => r.top))
-    const headerBottom = Math.max(0, ...fixed.filter(r => r.bottom < innerHeight / 2).map(r => r.bottom))
-    const box = el.getBoundingClientRect()
-    return { to: Math.round(scrollY + box.bottom - (footerTop - gap)), titleTop: box.top, shift: box.bottom - (footerTop - gap), headerBottom }
-  }, 16)
-  if (frame.titleTop - frame.shift < frame.headerBottom + 4) throw new Error('the Skins section does not fit between the header and the footer')
-  await glideTo(frame.to)
-  const hidden = await section(page, 'Wolf').evaluate(el => {
-    const footer = [...document.body.querySelectorAll('*')].filter(e => ['fixed', 'sticky'].includes(getComputedStyle(e).position))
-      .map(e => e.getBoundingClientRect()).filter(r => r.height > 0 && r.top > innerHeight / 2)
-    return el.getBoundingClientRect().top >= Math.min(innerHeight, ...footer.map(r => r.top))
+    return {
+      footerTop: Math.min(innerHeight, ...fixed.filter(r => r.top > innerHeight / 2).map(r => r.top)),
+      headerBottom: Math.max(0, ...fixed.filter(r => r.bottom < innerHeight / 2).map(r => r.bottom))
+    }
   })
-  if (!hidden) throw new Error('the Wolf section is visible in the final frame')
-  await hold(400)
-  // The callout sits on the empty right of the Skins heading, directly above
-  // the card it refers to and aligned with its right edge (the gap beside
-  // "Who pays whom." is too low for it). It may not touch any text, control
-  // or the card.
-  const card = await whoPays.locator('xpath=ancestor::*[contains(concat(" ", normalize-space(@class), " "), " block ")][1]').boundingBox()
-  const heading = await sectionTitle(page, 'Skins').boundingBox()
-  const size = await page.evaluate(text => window.__demo.measureCallout(text), 'See who owes whom')
-  const place = { left: Math.round(card.x + card.width - size.width), top: Math.round(heading.y + heading.height / 2 - size.height / 2) }
-  const covered = await page.evaluate(({ rect, card }) => {
+  // Everything a callout at `rect` would cover: text and controls (and table
+  // cells when `cells`), with a 4 px margin. `ignore` lists exact texts a
+  // recipe may cover (an empty-hole placeholder, never a value).
+  const calloutHits = (rect, { cells = false, ignore = [] } = {}) => page.evaluate(({ rect, cells, ignore }) => {
     const pad = 4
     const r = { left: rect.left - pad, top: rect.top - pad, right: rect.left + rect.width + pad, bottom: rect.top + rect.height + pad }
     const meets = b => b.width > 0 && b.height > 0 && b.left < r.right && b.right > r.left && b.top < r.bottom && b.bottom > r.top
     const hits = []
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
-      if (!node.textContent.trim()) continue
+      if (!node.textContent.trim() || ignore.includes(node.textContent.trim())) continue
       const range = document.createRange()
       range.selectNodeContents(node)
       if ([...range.getClientRects()].some(meets)) hits.push(`"${node.textContent.trim().slice(0, 30)}"`)
     }
-    for (const el of document.body.querySelectorAll('button, a, input, select, label, [role="button"], .clickable, th, td')) {
+    for (const el of document.body.querySelectorAll(`button, a, input, select, label, [role="button"], .clickable${cells ? ', th, td' : ''}`)) {
       if (meets(el.getBoundingClientRect())) hits.push(`<${el.tagName.toLowerCase()}>`)
     }
-    if (r.bottom > card.y || rect.left + rect.width > card.x + card.width + 1) hits.push('the Skins card')
     return hits
-  }, { rect: { ...place, ...size }, card })
-  if (covered.length) throw new Error(`the final callout ${JSON.stringify({ ...place, ...size })} would cover ${[...new Set(covered)].join(', ')} (card ${JSON.stringify(card)})`)
-  results.finalCallout = { ...place, ...size }
-  await page.evaluate(place => window.__demo.callout('See who owes whom', place), place)
-  await hold(3600)
-  mark('End')
+  }, { rect, cells, ignore })
+  // The first place inside the regions (viewport rectangles, in order of
+  // preference) where the callout touches no text or control, scanning down
+  // in 2 px steps with the given horizontal alignment.
+  const findCalloutSpot = async (text, regions, { align = 'center', cells = false, ignore = [] } = {}) => {
+    const size = await page.evaluate(text => window.__demo.measureCallout(text), text)
+    for (const region of regions) {
+      if (region.right - region.left < size.width) continue
+      const left = Math.round(align === 'right' ? region.right - size.width : align === 'left' ? region.left : (region.left + region.right - size.width) / 2)
+      for (let top = Math.round(region.top); top + size.height <= region.bottom; top += 2) {
+        const rect = { left, top, ...size }
+        if (!(await calloutHits(rect, { cells, ignore })).length) return rect
+      }
+    }
+    throw new Error(`no free place for the "${text}" callout (${size.width.toFixed(0)}x${size.height.toFixed(0)}) in ${JSON.stringify(regions)}`)
+  }
+  const callout = (text, place) => page.evaluate(([text, place]) => window.__demo.callout(text, place), [text, place])
+  const hideCallout = () => page.evaluate(() => window.__demo.hideCallout())
+  return { page, ids, results, mark, hold, tap, glideTo, scrollTargetBelowHeader, revealHorizontally, fixedBounds, calloutHits, findCalloutSpot, callout, hideCallout }
+}
+
+const results = { recipe: recipe.name, frames: [], marks: [] }
+const ctx = { ids, results }
+let failure = null
+try {
+  // Before (not filmed).
+  const before = await context.newPage()
+  watch(before, 'baseline')
+  await recipe.baseline(before, ctx)
+  await before.close()
+
+  const page = await context.newPage()
+  watch(page, 'recording')
+  await recipe.setup(page, ctx)
+  if (new URL(page.url()).pathname.startsWith('/login')) throw new Error('redirected to login')
+  await page.evaluate(() => document.fonts.ready)
+
+  // Lossless frames from the compositor at the device pixel size.
+  const cdp = await context.newCDPSession(page)
+  const frameClock = { started: null }
+  const writes = []
+  cdp.on('Page.screencastFrame', frame => {
+    const t = Date.now()
+    frameClock.started ??= t
+    const file = `frame-${String(results.frames.length).padStart(5, '0')}.png`
+    results.frames.push({ file, t: t - frameClock.started })
+    writes.push(fs.promises.writeFile(path.join(framesDir, file), Buffer.from(frame.data, 'base64')))
+    cdp.send('Page.screencastFrameAck', { sessionId: frame.sessionId }).catch(() => {})
+  })
+  const stage = stageFor(page, results, frameClock)
+  await cdp.send('Page.startScreencast', { format: 'png', maxWidth: VIEWPORT.width * DEVICE_SCALE_FACTOR, maxHeight: VIEWPORT.height * DEVICE_SCALE_FACTOR, everyNthFrame: 1 })
+  await recipe.record(stage)
+  stage.mark('End')
   await cdp.send('Page.stopScreencast')
-  results.end = Date.now() - started
+  results.end = Date.now() - frameClock.started
   await Promise.all(writes)
 
-  // After (not filmed): every game's accounting still reconciles.
-  await page.reload({ waitUntil: 'networkidle' })
-  await assertSideGamesReconcile(page)
+  // After (not filmed).
+  await recipe.afterwards(page, ctx)
   await page.close()
 } catch (error) {
   failure = error
   const pages = context.pages()
   if (pages.length) {
     fs.mkdirSync(DEBUG_DIR, { recursive: true })
-    await pages[0].screenshot({ path: path.join(DEBUG_DIR, `${NAME}.png`) }).catch(() => {})
-    fs.writeFileSync(path.join(DEBUG_DIR, `${NAME}.txt`), await pages[0].locator('body').innerText().catch(() => ''))
+    await pages[0].screenshot({ path: path.join(DEBUG_DIR, `${recipe.name}.png`) }).catch(() => {})
+    fs.writeFileSync(path.join(DEBUG_DIR, `${recipe.name}.txt`), await pages[0].locator('body').innerText().catch(() => ''))
   }
 } finally {
   await context.close()
@@ -436,53 +381,35 @@ if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[
 if (pageErrors.length) problems.push(`page errors:\n  ${pageErrors.join('\n  ')}`)
 if (hubWrites.length) problems.push(`Hub writes outside the declared score entries:\n  ${hubWrites.join('\n  ')}`)
 if (consoleErrors.length) problems.push(`console errors outside the allowlist:\n  ${consoleErrors.join('\n  ')}`)
-if (!failure && scorePosts.length !== ENTRIES.length) problems.push(`${scorePosts.length} score writes, expected ${ENTRIES.length}`)
+if (!failure && scorePosts.length !== recipe.entries) problems.push(`${scorePosts.length} score writes, expected ${recipe.entries}`)
 
 if (!problems.length) {
-  // The Skins change must be exactly what the entered scores imply: the
-  // winner gains the carried skins, nobody else changes, and every amount is
-  // the per-skin stake times (skins x players - total skins).
-  const players = Object.keys(results.before)
-  const total = standings => Object.values(standings).reduce((sum, s) => sum + s.skins, 0)
-  for (const player of players) {
-    const gained = results.after[player].skins - results.before[player].skins
-    if (gained !== (player === SKINS_WINNER ? SKINS_WON : 0)) problems.push(`${player} gained ${gained} skins`)
-  }
-  for (const standings of [results.before, results.after]) {
-    const sum = Object.values(standings).reduce((s, v) => s + v.amount, 0)
-    if (sum !== 0) problems.push(`Skins amounts sum to ${sum}c`)
-    for (const [player, s] of Object.entries(standings)) {
-      if (s.amount !== SKIN_AMOUNT * 100 * (s.skins * players.length - total(standings))) problems.push(`${player}'s Skins amount ${s.amount}c does not follow from the skins`)
-    }
-  }
-  const nets = {}
-  for (const { from, to, amount } of results.settlement) {
-    nets[from] = (nets[from] || 0) - amount
-    nets[to] = (nets[to] || 0) + amount
-  }
-  for (const player of players) if ((nets[player] || 0) !== results.after[player].amount) problems.push(`Skins settlement for ${player} does not match the standings`)
-
+  problems.push(...recipe.verify(results))
   const dims = await sharp(path.join(framesDir, results.frames[0].file)).metadata()
   if (dims.width !== VIEWPORT.width * DEVICE_SCALE_FACTOR || dims.height !== VIEWPORT.height * DEVICE_SCALE_FACTOR) problems.push(`frames are ${dims.width}x${dims.height}`)
-  if (results.end / 1000 < DURATION_LIMITS[0] || results.end / 1000 > DURATION_LIMITS[1]) problems.push(`recording is ${results.end / 1000}s`)
+  const [min, max] = recipe.durationLimits
+  if (results.end / 1000 < min || results.end / 1000 > max) problems.push(`recording is ${results.end / 1000}s`)
 }
 if (problems.length) {
   process.stderr.write(`[screens] video rejected:\n${problems.map(p => `  - ${p}`).join('\n')}\n`)
   process.exit(1)
 }
 fs.writeFileSync(resultsFile, JSON.stringify(results, null, 2))
-const fmt = standings => Object.entries(standings).map(([p, s]) => `${p} ${s.skins} (${s.amount < 0 ? '-' : ''}$${Math.abs(s.amount / 100)})`).join(', ')
-log(`network policy held; ${ENTRIES.length} declared score writes only; side-game accounting reconciles`)
-log(`Skins before: ${fmt(results.before)}`)
-log(`Skins after:  ${fmt(results.after)}`)
+const [summary, ...details] = recipe.report(results)
+log(`network policy held; ${recipe.entries} declared score writes only; ${summary}`)
+for (const line of details) log(line)
 log(`recorded ${results.frames.length} frames over ${(results.end / 1000).toFixed(2)}s`)
 process.exit(0)
 
 // Encoding (outer process, after the restore) --------------------------------
 async function encode (results) {
   const sharp = createRequire(import.meta.url)('sharp')
-  fs.mkdirSync(VIDEO_REVIEW_DIR, { recursive: true })
-  const out = name => path.join(VIDEO_REVIEW_DIR, name)
+  const OUTPUT = recipe.output
+  const outputs = [`${OUTPUT}.mp4`, `${OUTPUT}.webm`, `${OUTPUT}-poster.jpg`, `${OUTPUT}-intermediate.mkv`, recipe.shotsFile]
+  const runId = new Date().toISOString().replace(/[:.]/g, '-')
+  const reviewDir = reviewOutputDir(path.join(VIDEO_REVIEW_ROOT, recipe.reviewDir), outputs, { replace: process.argv.includes('--replace'), runId })
+  fs.mkdirSync(reviewDir, { recursive: true })
+  const out = name => path.join(reviewDir, name)
   // ffmpeg and ffprobe run in a sandbox that permits no network at all
   // (the only allowed port is the dead USGA port).
   const tool = (bin, args) => {
@@ -518,7 +445,7 @@ async function encode (results) {
     ...gop, ...clean, encoded(`${OUTPUT}.webm`)])
   tool(FFMPEG, ['-y', '-v', 'error', '-i', encoded(`${OUTPUT}.mp4`), '-c', 'copy', '-movflags', '+faststart', ...clean, out(`${OUTPUT}.mp4`)])
   tool(FFMPEG, ['-y', '-v', 'error', '-i', encoded(`${OUTPUT}.webm`), '-c', 'copy', ...clean, out(`${OUTPUT}.webm`)])
-  // Poster: the final frame (updated Skins settlement), metadata-free JPEG.
+  // Poster: the final frame, metadata-free JPEG.
   await sharp(path.join(framesDir, results.frames.at(-1).file)).jpeg({ quality: 84, mozjpeg: true }).toFile(out(`${OUTPUT}-poster.jpg`))
 
   // Verify every output: dimensions, codec, no audio, duration, decodes to
@@ -535,7 +462,8 @@ async function encode (results) {
     if (v.width !== expected[0] || v.height !== expected[1]) problems.push(`${v.width}x${v.height}`)
     if (v.pix_fmt !== 'yuv420p') problems.push(`pixel format ${v.pix_fmt}`)
     const duration = Number(probe.format.duration)
-    if (!(duration >= DURATION_LIMITS[0] && duration <= DURATION_LIMITS[1])) problems.push(`duration ${duration}s`)
+    const [min, max] = recipe.durationLimits
+    if (!(duration >= min && duration <= max)) problems.push(`duration ${duration}s`)
     // Allowed: MP4 brand fields, and WebM's mandatory muxing/writing app,
     // which bitexact reduces to the bare "Lavf" (no version).
     const tags = Object.entries(probe.format.tags || {})
@@ -552,7 +480,7 @@ async function encode (results) {
   const poster = await sharp(out(`${OUTPUT}-poster.jpg`)).metadata()
   if (poster.width !== expected[0] || poster.height !== expected[1] || poster.exif || poster.icc || poster.xmp || poster.iptc) throw new Error('poster has unexpected dimensions or metadata')
   summary.push(`${OUTPUT}-poster.jpg: JPEG ${poster.width}x${poster.height}, no EXIF/ICC/XMP, ${(fs.statSync(out(`${OUTPUT}-poster.jpg`)).size / 1024).toFixed(0)} KB`)
-  fs.writeFileSync(out(`${OUTPUT}-shots.json`), JSON.stringify({ version: VERSION, marks: results.marks, end: results.end, finalCallout: results.finalCallout, skins: { before: results.before, after: results.after, settlement: results.settlement, cell: results.skinsCell } }, null, 2))
+  fs.writeFileSync(out(recipe.shotsFile), JSON.stringify(recipe.shots(results), null, 2))
   for (const line of summary) log(line)
-  log(`review files written to ${VIDEO_REVIEW_DIR}`)
+  log(`review files written to ${reviewDir}`)
 }

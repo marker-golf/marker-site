@@ -199,17 +199,25 @@ function assertResolves (label, players, transfers, buyInsCollected) {
 
 const sumBy = (values, key) => Object.values(values).reduce((sum, v) => sum + v[key], 0)
 
-async function assertEventAccountingReconciles (page) {
-  const playerCount = F7.groups.reduce((n, g) => n + g.players.length, 0)
+// `event` is the fixture definition (F7 by default; the event demo video
+// checks F4 while it is still in progress).
+export async function assertEventAccountingReconciles (page, event = F7) {
+  await expandSection(page, 'Overall - event')
+  const playerCount = event.groups.reduce((n, g) => n + g.players.length, 0)
   const games = (await page.locator('.games-group .title').allInnerTexts()).map(t => t.trim())
-  if (games.join('|') !== F7.games.map(g => g.game).join('|')) throw new Error(`Event games are ${games.join(', ')}`)
+  // The Hub lists event games without ORDER BY, so compare the set; each
+  // game's section is then found by name.
+  if ([...games].sort().join('|') !== event.games.map(g => g.game).sort().join('|')) throw new Error(`Event games are ${games.join(', ')}`)
   const expected = {}
   const report = { games: {} }
-  for (const definition of F7.games) {
+  for (const definition of event.games) {
     const block = section(page, definition.game)
     await block.getByText('Game accounting', { exact: true }).click()
     const { players, transfers } = await readDaySummary(block)
-    const buyIn = 100 * (definition.subTotals ? definition.subTotals.reduce((sum, s) => sum + s.amount, 0) : definition.amount)
+    // Without subTotals, fixtures.mjs gives Team Stroke Play three pots:
+    // 1-18 at the amount and 1-9 and 10-18 at half of it each.
+    const pots = definition.subTotals || (definition.game === 'Team Stroke Play' ? [{ amount: definition.amount }, { amount: definition.amount / 2 }, { amount: definition.amount / 2 }] : [{ amount: definition.amount }])
+    const buyIn = 100 * pots.reduce((sum, s) => sum + s.amount, 0)
     const pool = buyIn * playerCount
     const label = definition.game
     if (Object.keys(players).length !== playerCount) throw new Error(`${label}: ${Object.keys(players).length} players, expected ${playerCount}`)
@@ -221,7 +229,7 @@ async function assertEventAccountingReconciles (page) {
     if (definition.payouts && paid.join() !== definition.payouts.map(d => d * 100).join()) throw new Error(`${label}: payouts ${paid} are not the defined ${definition.payouts}`)
     if (definition.teamsFromGroups) {
       const size = pool / paid.length
-      if (paid.length !== F7.groups[0].players.length || paid.some(p => p !== size)) throw new Error(`${label}: the pot is not split evenly within one team`)
+      if (paid.length !== event.groups[0].players.length || paid.some(p => p !== size)) throw new Error(`${label}: the pot is not split evenly within one team`)
     }
     if (transfers.some(t => t.from !== 'Pot')) throw new Error(`${label}: a buy-in game settles player to player`)
     for (const t of transfers) if (players[t.to]?.gross !== t.amount) throw new Error(`${label}: pays ${t.to} ${t.amount}c, payout is ${players[t.to]?.gross}c`)

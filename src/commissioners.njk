@@ -6,6 +6,7 @@ description: Marker gives golf commissioners everything to run the game — crea
 
 {% from "components/trust-stats.njk" import TrustStats %}
 {% from "components/product-screenshot.njk" import ProductScreenshot %}
+{% from "components/demo-video.njk" import DemoVideo %}
 
 <!-- Hero -->
 <section class="page-hero">
@@ -209,6 +210,26 @@ description: Marker gives golf commissioners everything to run the game — crea
 <!-- Product showcase: live scoring + settlement -->
 <section class="section feature-showcase">
   <div class="container">
+
+    <!-- Demo video: silent screen recording of the Vue app (fictional data);
+         see components/demo-video.njk. -->
+    <div class="feature-row feature-row--flip">
+      <div class="feature-row__text">
+        <h2>Run every group from one place.</h2>
+        <p>Organize scorecards, follow live scoring, and see the whole event leaderboard update as groups play.</p>
+        <a href="{{ '/tutorials/event-scoring/' | url }}" class="feature-row__link">See how event scoring works →</a>
+      </div>
+      <div class="feature-row__media feature-row__media--video">
+        {{ DemoVideo("event-demo-video", "run-multi-group-event",
+          "Demo: running a multi-group event in Marker and following the live event leaderboard",
+          "Marker event leaderboard for PebblePayday: Team Stroke Play standings with the 8:30 group in third place at 6 over par through 16 holes",
+          "Silent 32-second screen recording of the Marker app with a fictional event, PebblePayday: sixteen players in four groups at Pebble Beach.
+            The commissioner opens the 8:30 group, which is through 15 holes, and views its scorecard with the Team Stroke Play column.
+            Hole 16 scores are entered for its four players: Bert Bailout 5, Ben Birdie 3, Debbie Dogleg 4 and Kevin Kickin 4.
+            The best three net scores count, so the team moves from 9 over par to 6 over par. The event leaderboard then shows
+            the group moving from fourth to third in Team Stroke Play.") }}
+      </div>
+    </div>
 
     <div class="feature-row">
       <div class="feature-row__text">

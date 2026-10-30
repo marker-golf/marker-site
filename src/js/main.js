@@ -10,14 +10,12 @@ if (toggle && panel) {
   });
 }
 
-// Homepage demo video. Silent and muted; plays automatically only while at
-// least 40% of it is on screen, and never for visitors who prefer reduced
-// motion or have Save-Data on (they get the poster and a Play button; with
-// reduced motion a started demo plays once instead of looping). Without this
-// script the native controls remain.
-const demo = document.querySelector('[data-demo-video]');
-
-if (demo) {
+// Demo videos (components/demo-video.njk), each handled on its own. Silent
+// and muted; plays automatically only while at least 40% of it is on screen,
+// and never for visitors who prefer reduced motion or have Save-Data on (they
+// get the poster and a Play button; with reduced motion a started demo plays
+// once instead of looping). Without this script the native controls remain.
+document.querySelectorAll('[data-demo-video]').forEach(demo => {
   const video  = demo.querySelector('video');
   const button = demo.querySelector('.demo-video__toggle');
   const label  = button.querySelector('.demo-video__label');
@@ -94,4 +92,4 @@ if (demo) {
       play();
     }
   }
-}
+});
