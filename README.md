@@ -78,7 +78,6 @@ marker-site/
 │   │   │   ├── prose-page.njk    # Hero + content body (about)
 │   │   │   └── tutorial-guide.njk# Tutorial page with breadcrumb, subnav, steps
 │   │   ├── components/
-│   │   │   ├── badges.njk        # AppStoreBadge, PlayStoreBadge macros
 │   │   │   ├── game-guide.njk    # Game guide section/step macros
 │   │   │   ├── platform-bar.njk  # PlatformSupportBar macro
 │   │   │   ├── product-screenshot.njk # ProductScreenshot, TutorialStepScreenshot, GameGuideScreenshot

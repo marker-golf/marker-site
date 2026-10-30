@@ -716,7 +716,7 @@ Net Scotch is the standard form: each player's Course Handicap is applied by Str
 
 <div style="margin-top:40px; text-align:center;">
 <a href="https://app.marker.golf" class="btn btn-primary">Play Scotch in Marker</a>
-<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Premium feature · Available on iOS, Android, and Web</p>
+<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Premium feature · Works in your phone's browser</p>
 </div>
 
 </div>

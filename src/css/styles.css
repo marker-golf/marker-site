@@ -130,32 +130,6 @@ p { color: var(--ink-muted); line-height: 1.75; }
 }
 .btn-sm { padding: 10px 20px; font-size: 0.875rem; border-radius: 32px; }
 
-/* ---- 6. Store badge placeholders ---- */
-.store-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1.5px dashed rgba(255, 255, 255, 0.28);
-  border-radius: var(--radius);
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.82rem;
-  font-weight: 500;
-  min-width: 148px;
-  transition: background 0.18s, border-color 0.18s, color 0.18s;
-  text-decoration: none;
-  cursor: default;
-}
-.store-badge:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.45);
-  color: rgba(255, 255, 255, 0.85);
-}
-.store-badge__icon { flex-shrink: 0; opacity: 0.75; }
-.store-badge__text { line-height: 1.35; }
-.store-badge__text small { font-size: 0.72rem; opacity: 0.65; display: block; }
-
 /* ---- 7. Platform support bar ---- */
 .platform-bar {
   display: flex;
@@ -628,12 +602,6 @@ p { color: var(--ink-muted); line-height: 1.75; }
   align-items: center;
   gap: 16px;
 }
-.cta-band__badges {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 
 /* ---- 16. Page hero (interior pages) ---- */
 .page-hero {
@@ -1076,7 +1044,6 @@ p { color: var(--ink-muted); line-height: 1.75; }
 @media (max-width: 540px) {
   .footer__grid { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; gap: 12px; text-align: center; }
-  .cta-band__badges { flex-direction: column; align-items: center; }
   .game-grid { grid-template-columns: 1fr; }
   .platform-bar { gap: 20px; }
   .platform-bar__divider { display: none; }
