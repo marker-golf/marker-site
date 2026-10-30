@@ -8,7 +8,8 @@ repositories, `fourball_dev`, or any existing approved screenshot.
 npm run screens:proof                 # full run from a clean reset; always cleans up
 npm run screens:test                  # fast regression tests (no Hub, no database)
 npm run screens:test:capture-failure  # integration test: failed captures cannot change published screenshots or drafts
-npm run screens:video                 # demo video for review (see "Demo video")
+npm run screens:video                 # homepage scoring demo video for review (see "Demo videos")
+npm run screens:video:event           # multi-group event demo video for review
 ```
 
 ## Requirements
@@ -180,16 +181,29 @@ without `ORDER BY`, so these can change order between builds:
 Each variant is a genuine rendering of the production app. Review the
 specific files you intend to approve.
 
-## Demo video (`video.mjs`)
+## Demo videos (`video.mjs`, `video-recipes/`)
 
-`npm run screens:video` runs the same steps as `screens:proof` but ends with
-`video.mjs`, which records "Score a round with side games" on F1 and writes
-review files only (never into the site) to
-`../.marker-screens/review/video-poc/`, named for the recipe version
-(`score-round-side-games-<version>`; v1 files have no suffix and are never
-written again): an FFV1 intermediate (`.mkv`), an H.264 MP4, a VP9 WebM, a
-JPEG poster (final frame) and `-shots.json` (shot timings, the final callout
-position and the Skins results shown).
+The video commands run the same steps as `screens:proof` but end with
+`video.mjs`, a runner that records one named recipe from
+`video-recipes/<name>.mjs` (`--recipe=<name>`; the default is the scoring
+demo) and writes review files only (never into the site) to
+`../.marker-screens/review/<recipe folder>/`: an FFV1 intermediate (`.mkv`),
+an H.264 MP4, a VP9 WebM, a JPEG poster (final frame) and a JSON file with
+the shot timings, callout positions and the results shown.
+
+| Command | Recipe | Review folder and files |
+|---|---|---|
+| `npm run screens:video` | `score-round-side-games`: "Score a round with side games" (F1) | `video-poc/score-round-side-games-v2.*`, `-shots.json` |
+| `npm run screens:video:event` | `run-multi-group-event`: "Run a multi-group event" (F4) | `video-event/run-multi-group-event-v2.*`, `-v2-timing.json` (v1 files have no suffix) |
+
+Review files are never overwritten: if any output name already exists, the
+run writes into a `rerun-<timestamp>/` subfolder instead
+(`lib/video-output.mjs`), unless `--replace` is passed
+(`npm run screens:video:event -- --replace`). A recipe provides its baseline
+(not filmed), setup, the filmed timeline, the checks after recording and
+its declared score rows; the runner owns everything else below.
+
+### Score a round with side games (`score-round-side-games`)
 
 - **Story**: hole 10 is scored (Allan 5, Bert 5, Edward 4, Bob 3). Hole 9 was
   tied, so Bob's net 2 wins two Net Skins; the scorecard, the Skins
@@ -228,6 +242,37 @@ position and the Skins results shown).
   `npm --prefix ../.marker-screens/tools install ffmpeg-static@5.2.0 ffprobe-static@3.1.0`
   (downloads binaries once). The recording browser runs with
   `--force-device-scale-factor=2` so screencast frames are device pixels.
+
+The premium user, guards, restore, encoding and tools above apply to every
+recipe.
+
+### Run a multi-group event (`run-multi-group-event`)
+
+- **Story**: F4 (PebblePayday, 16 players in four groups; group 4 is through
+  15). The event dashboard (players collapsed) shows the four groups; group
+  4's settings ("Manage every group"); its scorecard with the Team Stroke
+  Play column (groups are teams, best three net balls); hole 16 is scored
+  (Bert 5, Ben 3, Debbie 4, Kevin 4, so three net birdies count, -3); the
+  team column goes from +9 to +6 ("Scores update across the event"); the
+  event leaderboard from that scorecard opens ("Live standings" beside the
+  Round in progress badge for about 2.3 s), then Skins, Stroke Play and Team
+  Stableford collapse and the complete Team Stroke Play table, with group 4
+  moved from 4th to 3rd, holds for over 4 s with no callout. The F4 fixture
+  definition is unchanged: the four scores exist only during the
+  recording.
+- **Checks**: the scorecard columns are matched by label (two players are
+  "BB") and their stroke dots must match the arithmetic; group 4's to-par
+  must change by exactly the best three net balls, no other team may
+  change, places must follow the totals with no tie, the event's own
+  leaderboard must show the same standings, no skin may change hands, and
+  every game's and the event's accounting must reconcile
+  (`assertEventAccountingReconciles` with F4).
+- **Callouts**: placed in the first spot that touches no text or control;
+  the scorecard callout may cover only the team column's "-" for holes not
+  yet played. "Live standings" must also keep an 8 px margin from the
+  badge, the fixed event header, the Event Games heading, every game heading
+  and chevron, the footer and the viewport edges, or the run fails; the
+  timing file records its gaps. The final frame must have no callout.
 
 ## Network isolation and external integrations
 
