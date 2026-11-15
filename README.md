@@ -69,7 +69,9 @@ marker-site/
 ├── src/
 │   ├── _data/
 │   │   ├── pricing.json          # Pricing plans rendered in index.njk
-│   │   └── screenshots.json      # Screenshot manifest (see Images and Screenshots)
+│   │   ├── screenshots.json      # Screenshot manifest (see Images and Screenshots)
+│   │   ├── stats.js              # Usage counts fetched from the hub at build time
+│   │   └── statsFallback.json    # Counts used when the hub and the saved copy are unavailable
 │   ├── _includes/
 │   │   ├── layouts/
 │   │   │   ├── base.njk          # HTML shell: meta, fonts, header, footer
@@ -205,6 +207,14 @@ Use `layouts/legal-page.njk`. Front matter includes a `toc` array of `{label, an
 ### Pricing data (`src/_data/pricing.json`)
 
 Pricing values are stored in `src/_data/pricing.json` and automatically available in templates as `pricing`. The homepage renders both the hero note and the pricing cards from this file. Edit the JSON to change prices, plan features, or copy without touching `index.njk`.
+
+### Usage stats (`src/_data/stats.js`)
+
+The usage row on the home and commissioners pages (`components/trust-stats.njk`) shows four counts: scorecards, scores, golfers and events. `src/_data/stats.js` fetches them from the hub's public stats endpoint (`STATS_URL` in that file) on every build, rounds each one down (11,914 becomes `11,000+`) and exposes them as `stats`.
+
+If the fetch fails or times out, the build uses the last good response saved in `.cache/public-stats.json` (git-ignored; kept between CI runs by `actions/cache`), then the committed `src/_data/statsFallback.json`. A failed fetch never fails the build. The build log has a `[stats] using live|cache|fallback counts` line saying which one was used.
+
+To try another endpoint locally, set `MARKER_STATS_URL`.
 
 ---
 
@@ -414,7 +424,7 @@ Playwright-based automated capture is designed but not yet implemented. Sharp is
 
 ## Deployment
 
-Pushes to `main` trigger `.github/workflows/pages.yml`, which:
+Pushes to `main`, a daily schedule (so the usage stats stay current) and manual runs trigger `.github/workflows/pages.yml`, which:
 
 1. Checks out the repo with `node-version: 20`
 2. Runs `npm ci` and `npm run build` with `PATHPREFIX=/marker-site/`

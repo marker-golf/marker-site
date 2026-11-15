@@ -1,25 +1,26 @@
-{% macro TrustStats() %}
+{% macro TrustStats(stats) %}
 {#
-  Trust stats — static placeholders.
-  Values will eventually be sourced from admin.marker.golf.
-  Update all four entries here when refreshing metrics.
+  Trust stats — counts come from src/_data/stats.js, which fetches them from
+  the hub at build time and falls back to the last good response, then to
+  src/_data/statsFallback.json. Pass the global `stats` in: imported macros
+  cannot see global data.
 #}
 <div class="trust-stats" aria-label="Marker usage statistics">
   <div class="trust-stats__item">
-    <span class="trust-stats__number">11,000+</span>
+    <span class="trust-stats__number">{{ stats.scorecards }}</span>
     <span class="trust-stats__label">Scorecards Created</span>
   </div>
   <div class="trust-stats__item">
-    <span class="trust-stats__number">642,000+</span>
+    <span class="trust-stats__number">{{ stats.scores }}</span>
     <span class="trust-stats__label">Scores Recorded</span>
   </div>
   <div class="trust-stats__item">
-    <span class="trust-stats__number">2,600+</span>
-    <span class="trust-stats__label">Registered Golfers</span>
+    <span class="trust-stats__number">{{ stats.golfers }}</span>
+    <span class="trust-stats__label">Golfers</span>
   </div>
   <div class="trust-stats__item">
-    <span class="trust-stats__number">Hundreds</span>
-    <span class="trust-stats__label">of Events Managed</span>
+    <span class="trust-stats__number">{{ stats.events }}</span>
+    <span class="trust-stats__label">Events Managed</span>
   </div>
 </div>
 {% endmacro %}
