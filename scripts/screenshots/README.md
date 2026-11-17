@@ -77,9 +77,10 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
    `fourball_screens` on `127.0.0.1:5432` as your user, run the migrations,
    load the validated course cache, insert the fictional users, run the
    sanitization assertions and write the `reset` fixture-state marker.
-4. `auth.mjs`: mint a JWT for Bob Smith with the Hub's Guardian module (no
-   HTTP login, so no Mailchimp, SMS or Slack side effects). The token is valid
-   against the real clock and is written only to the 0600 auth-state file.
+4. `auth.mjs`: mint JWTs for Bob Smith and Polly Putter (the GHIN posting
+   captures) with the Hub's Guardian module (no HTTP login, so no Mailchimp,
+   SMS or Slack side effects). The tokens are valid against the real clock and
+   are written only to the two 0600 auth-state files.
 5. `servers.mjs start`: re-check the Hub Repo target, then start the Hub and
    Vue, each in its own process group and sandbox, with `env -i`.
 6. `fixtures.mjs`: build the fixtures through the Hub REST API and record a
@@ -102,6 +103,17 @@ Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
      with nine unassigned players and one empty group (event-setup screens).
    - F6: a new Pebble Beach scorecard with only Bob on it, as Vue leaves it
      after create + add-self (add-self, partner picker, invite form).
+   - F8 (built first, as Polly Putter): her own Spyglass Hill scorecard
+     through 18, locked when built (Vue's End round request), so the GHIN
+     posting captures (`post-score-ready`, `post-score-sheet`) sign in as
+     Polly and stay read-only. Bob is not on it, so none of his lists change.
+     After every fixture exists, Polly alone gets a fictional, negative
+     USGA Handicap ID (`fixtureUsgaHandicapId` in `fixtures/users.json`):
+     Vue opens the Post Score sheet only with a connected ID. A negative ID
+     cannot be a real one, and the isolated Hub cannot reach any USGA service.
+     Fixture readiness and every capture check that it is the only ID in the
+     database and that no player has posting data; F8 must stay locked and
+     unchanged.
    - The isolated Hub's own responses to the new-event ("sp") and
      new-scorecard ("shinn") course searches are recorded to `run/mocks/`
      (local course data; its USGA lookup fails on the dead loopback port).
@@ -127,6 +139,14 @@ and the fixture definitions are unchanged since they were built. To re-run
 by hand: `screens:stop`, `screens:db`, `screens:auth`, `screens:start`,
 `screens:fixtures`, `screens:capture`, `screens:stop`. Or just run
 `screens:proof`.
+
+### Sign-in and USGA requests
+
+A recipe signs in as Bob unless it sets `signIn` (only `polly`); each user
+gets its own browser context with the same network policy. Any request whose
+path mentions USGA or GHIN, even to the isolated Hub, rejects the run. The
+posting captures log every request they make. `--only` takes a
+comma-separated list of recipes.
 
 ### Recorded responses and the fixed clock
 

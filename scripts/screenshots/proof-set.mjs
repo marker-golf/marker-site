@@ -1,4 +1,5 @@
-// Proof set for the Vue screenshot pipeline (35 images). The event game
+// Proof set for the Vue screenshot pipeline (35 published images, plus the
+// two GHIN posting drafts, post-score-ready and post-score-sheet). The event game
 // picker reuses game-picker: Vue's event route shows the same picker. Each shot names the
 // draft output file, the route to open and the steps that produce the state.
 // Draft names never collide with existing Expo assets.
@@ -17,7 +18,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
-import { SCRIPTS_DIR, VIEWPORT } from './lib/config.mjs'
+import { SCRIPTS_DIR, VIEWPORT, POLLY_USER_ID } from './lib/config.mjs'
 
 // Shows the scorecard column for one game (tabs toggle, so click only if needed).
 export async function showGameColumn (page, tabTitle, columnTitle) {
@@ -145,6 +146,24 @@ export async function assertSideGamesReconcile (page) {
 // is restored before the capture. Only normal taps are used (Game accounting
 // / Hide details, Settlement / Profit/loss, the checkbox).
 const F7 = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'completed-event-f7.json'), 'utf8'))
+const F8 = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'post-score-f8.json'), 'utf8'))
+const FIXTURE_USGA_ID = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', 'users.json'), 'utf8'))
+  .users.find(u => u.key === 'polly').fixtureUsgaHandicapId
+
+// The posting captures: signed in as Polly (Vue's own profile state), and the
+// scorecard's player columns are F8's four distinct initials.
+async function assertPostingCard (page) {
+  const profileId = await page.evaluate(() => document.querySelector('#app').__vue__.$store.state.profile.id)
+  if (profileId !== POLLY_USER_ID) throw new Error('The posting captures are not signed in as Polly Putter')
+  const headers = (await page.locator('thead th').allInnerTexts()).map(t => t.trim()).filter(t => !['Hole', 'Par'].includes(t))
+  if (headers.join(',') !== 'DD,KK,MM,PP') throw new Error(`Unexpected player columns: ${headers.join(',')}`)
+}
+
+// The posting captures must not show any USGA Handicap ID, not even the
+// fictional fixture one.
+async function assertNoUsgaId (page) {
+  if ((await page.locator('body').innerText()).includes(String(FIXTURE_USGA_ID))) throw new Error('A USGA Handicap ID is visible')
+}
 
 // The first table in scope with a column headed `header` (game leaderboards
 // above it have their own Player columns).
@@ -728,6 +747,43 @@ export default [
       if (!values.some(v => /\(000\) 555-0001/.test(v))) throw new Error('Profile phone is not the fictional 000-555 number')
       if (values.some(v => /@/.test(v) && !/@example\.com$/.test(v))) throw new Error('Profile shows a non-example.com email')
       if (await page.getByPlaceholder('e.g. GHIN #').inputValue() !== '') throw new Error('Profile shows a USGA Handicap ID')
+    }
+  },
+  {
+    // Signed in as Polly Putter: her F8 scorecard, locked when built, shows
+    // Vue's posting button. Nothing is tapped.
+    name: 'post-score-ready',
+    signIn: 'polly',
+    path: ids => `/scorecards/${ids.f8Scorecard}`,
+    async prepare (page) {
+      const button = page.getByRole('button', { name: /Post my score to USGA/ })
+      await button.waitFor()
+      if (!/Only you, not the group/.test(await button.innerText())) throw new Error('Posting button lacks "Only you, not the group"')
+      if (await page.getByRole('button', { name: 'End round', exact: true }).count()) throw new Error('F8 is not locked')
+      await assertPostingCard(page)
+      await assertNoUsgaId(page)
+    }
+  },
+  {
+    // Opens Vue's Post Score sheet from the same button. The sheet is only
+    // read; Post Score is never tapped, so nothing is sent to the Hub or USGA.
+    name: 'post-score-sheet',
+    signIn: 'polly',
+    path: ids => `/scorecards/${ids.f8Scorecard}`,
+    async prepare (page) {
+      await page.getByRole('button', { name: /Post my score to USGA/ }).click()
+      const sheet = page.locator('.modal-window').filter({ hasText: 'Holes played' })
+      await sheet.getByText('Date played', { exact: true }).waitFor()
+      await assertPostingCard(page)
+      if (await sheet.locator('input[type="date"]').inputValue() !== F8.date) throw new Error('Date played is not the scorecard date')
+      // The two button groups: Score Type, then Holes played (Vue preselects
+      // Home and the longest side).
+      const groups = await sheet.locator('.button-group').evaluateAll(els => els.map(el =>
+        [...el.children].map(b => (b.classList.contains('active') ? '*' : '') + b.textContent.trim().replace(/\s+/g, ' '))))
+      if (groups.length !== 2 || groups[0].join('|') !== '*Home|Away|Competition') throw new Error(`Unexpected Score Type options: ${JSON.stringify(groups)}`)
+      if (groups[1].join('|') !== 'Front 9 (46)|Back 9 (48)|*All 18 (94)') throw new Error(`Unexpected Holes played options: ${JSON.stringify(groups[1])}`)
+      if (!(await sheet.locator('button', { hasText: /^\s*Post Score\s*$/ }).count())) throw new Error('No Post Score button in the sheet')
+      await assertNoUsgaId(page)
     }
   },
   {

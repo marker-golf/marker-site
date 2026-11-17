@@ -9,14 +9,14 @@
 //   - the active demo token itself;
 //   - the Hub's committed config secrets (from the pinned export);
 //   - values from the Hub working tree's .env, if one exists.
-// The auth-state file is the one place the active token may live; it must be
-// mode 0600 inside a 0700 folder. Only file names and pattern labels are
+// The auth-state files (one per fictional user) are the only places the
+// active tokens may live; each must be mode 0600 inside a 0700 folder. Only file names and pattern labels are
 // printed, never values.
 
 import fs from 'node:fs'
 import path from 'node:path'
 import { run, log } from './lib/proc.mjs'
-import { SITE_ROOT, WORK_DIR, AUTH_STATE, HUB_EXPORT, HUB_REPO } from './lib/config.mjs'
+import { SITE_ROOT, WORK_DIR, AUTH_STATES, HUB_EXPORT, HUB_REPO } from './lib/config.mjs'
 
 const BINARY = /\.(png|webp|jpe?g|gif|woff2?|ico|pdf|mp4|webm|mkv)$/i
 const GENERATED_DIRS = ['logs', 'run', 'debug', 'capture-staging', 'video-staging', 'review', 'baseline', 'auth']
@@ -27,8 +27,8 @@ const patterns = [
 ]
 const literal = (label, value) => value && value.length >= 12 && patterns.push({ label, test: text => text.includes(value) })
 
-if (fs.existsSync(AUTH_STATE)) {
-  const token = JSON.parse(fs.readFileSync(AUTH_STATE, 'utf8')).origins?.[0]?.localStorage?.find(i => i.name === 'auth.jwt')?.value
+for (const file of AUTH_STATES.filter(f => fs.existsSync(f))) {
+  const token = JSON.parse(fs.readFileSync(file, 'utf8')).origins?.[0]?.localStorage?.find(i => i.name === 'auth.jwt')?.value
   literal('active demo token', token)
 }
 for (const file of ['config.exs', 'dev.exs']) {
@@ -61,16 +61,16 @@ for (const file of files) {
   const text = fs.readFileSync(file, 'utf8')
   for (const pattern of patterns) {
     if (!pattern.test(text)) continue
-    if (file === AUTH_STATE && ['JWT-shaped value', 'active demo token'].includes(pattern.label)) continue
+    if (AUTH_STATES.includes(file) && ['JWT-shaped value', 'active demo token'].includes(pattern.label)) continue
     hits.push(`${path.relative(path.dirname(SITE_ROOT), file)}: ${pattern.label}`)
   }
 }
 
 const problems = [...hits]
-if (fs.existsSync(AUTH_STATE)) {
-  const fileMode = fs.statSync(AUTH_STATE).mode & 0o777
-  const dirMode = fs.statSync(path.dirname(AUTH_STATE)).mode & 0o777
-  if (fileMode !== 0o600) problems.push(`auth state mode is ${fileMode.toString(8)}, expected 600`)
+for (const file of AUTH_STATES.filter(f => fs.existsSync(f))) {
+  const fileMode = fs.statSync(file).mode & 0o777
+  const dirMode = fs.statSync(path.dirname(file)).mode & 0o777
+  if (fileMode !== 0o600) problems.push(`${path.basename(file)} mode is ${fileMode.toString(8)}, expected 600`)
   if (dirMode !== 0o700) problems.push(`auth folder mode is ${dirMode.toString(8)}, expected 700`)
 }
 
@@ -79,4 +79,4 @@ if (problems.length) {
   process.stderr.write(`[screens] secret scan FAILED:\n${problems.map(p => `  - ${p}`).join('\n')}\n`)
   process.exit(1)
 }
-log('secret scan passed: no tokens or secrets outside the 0600 auth state')
+log('secret scan passed: no tokens or secrets outside the 0600 auth states')

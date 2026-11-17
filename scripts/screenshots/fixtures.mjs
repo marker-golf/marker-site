@@ -1,7 +1,7 @@
 // Builds the proof-set fixtures (F1, F2, F3 scorecards, the F4 event and the
-// F5 event-setup states, the F6 new scorecard, the F7 event to be completed)
-// through the isolated Hub's REST API, signed in
-// as the fictional demo user. Requires a freshly reset fourball_screens (the
+// F5 event-setup states, the F6 new scorecard, the F7 event to be completed,
+// the F8 locked scorecard for the GHIN posting captures) through the isolated
+// Hub's REST API, signed in as the fictional demo user (F8: as Polly Putter). Requires a freshly reset fourball_screens (the
 // "reset" fixture-state marker for this exact database build, and no events or
 // scorecards), which makes every run produce identical data.
 
@@ -10,7 +10,7 @@ import path from 'node:path'
 import { log, httpErrorSummary } from './lib/proc.mjs'
 import { assertSafeDatabaseTarget, screensSql } from './lib/guards.mjs'
 import { requireFreshReset, markFixturesReady } from './lib/state.mjs'
-import { API_BASE, API_TIMEOUT, AUTH_STATE, FIXTURE_IDS, SCRIPTS_DIR } from './lib/config.mjs'
+import { API_BASE, API_TIMEOUT, AUTH_STATE, POLLY_AUTH_STATE, FIXTURE_IDS, SCRIPTS_DIR } from './lib/config.mjs'
 
 const readFixture = name => JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures', name), 'utf8'))
 const { users } = readFixture('users.json')
@@ -21,10 +21,18 @@ const f4 = readFixture('pebblepayday-f4.json')
 const f5 = readFixture('event-setup-f5.json')
 const f6 = readFixture('new-scorecard-f6.json')
 const f7 = readFixture('completed-event-f7.json')
+const f8 = readFixture('post-score-f8.json')
 const userByKey = Object.fromEntries(users.map(u => [u.key, u]))
 
-const token = JSON.parse(fs.readFileSync(AUTH_STATE, 'utf8')).origins[0].localStorage
+const tokenIn = file => JSON.parse(fs.readFileSync(file, 'utf8')).origins[0].localStorage
   .find(i => i.name === 'auth.jwt').value
+const token = tokenIn(AUTH_STATE)
+// Requests go out as Bob unless asUser switches the signed-in user (F8).
+let acting = token
+async function asUser (userToken, build) {
+  acting = userToken
+  try { return await build() } finally { acting = token }
+}
 
 // Errors carry only the method, path, status and a redacted first line of
 // the response (see httpErrorSummary); request bodies are never included.
@@ -36,7 +44,7 @@ async function api (method, url, body) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/vnd.fourball.v2+json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${acting}`
       },
       body: body ? JSON.stringify(body) : undefined,
       signal: AbortSignal.timeout(API_TIMEOUT)
@@ -305,8 +313,19 @@ async function buildEvent (fx, label) {
   return { eventId, groupCards, games }
 }
 
-// F7 first: its players are then the oldest player rows of every user, so the
-// recent-partner order (latest player row first) is exactly as without it.
+// F8 and F7 first: their players are then the oldest player rows of every
+// user, so the recent-partner order (latest player row first) is exactly as
+// without them. F8 is Polly's own scorecard (Bob is not on it), locked the
+// way Vue's End round locks it (no games, so nothing to finalize).
+const pollyToken = tokenIn(POLLY_AUTH_STATE)
+const { card: f8Card } = await asUser(pollyToken, async () => {
+  const built = await buildScorecard(f8, 'F8')
+  await api('PUT', `scorecards/${built.card}`, { scorecard: { locked: true }, finalized_games: [] })
+  return built
+})
+if (screensSql(`select locked from scorecards where id = '${f8Card}'`) !== 't') throw new Error('F8 is not locked')
+log('F8 locked (End round, as Polly Putter)')
+
 const { eventId: f7Event, groupCards: f7Scorecards, games: f7Games } = await buildEvent(f7, 'F7')
 
 const { card: f1Card, players: f1Players, games: f1Games } = await buildScorecard(f1, 'F1')
@@ -369,6 +388,17 @@ await recordCourseSearch('scorecard-course-search', f6.courseSearch)
 // them so the isolated database holds no usable login codes.
 screensSql('update users set code = null where code is not null')
 
+// The posting captures need a connected USGA Handicap ID (Vue opens the Post
+// Score sheet only then). Polly gets the fictional, negative fixture ID only
+// now, after every player row exists, so the Hub never attempted a handicap
+// lookup for it; the isolated Hub cannot reach any USGA service anyway.
+const polly = userByKey.polly
+if (!Number.isInteger(polly.fixtureUsgaHandicapId) || polly.fixtureUsgaHandicapId >= 0) throw new Error('Polly needs a negative fixtureUsgaHandicapId')
+if (screensSql(`with u as (update users set ghin_number = ${polly.fixtureUsgaHandicapId} where id = '${polly.id}' and ghin_number is null returning 1) select count(*) from u`) !== '1') {
+  throw new Error('Could not set the fixture USGA Handicap ID')
+}
+log('fixture-only USGA Handicap ID set for Polly Putter (fictional; never sent anywhere)')
+
 // Known limitation: some Hub queries return players without ORDER BY (for
 // example the array_agg behind group player names, and game player lists), so
 // the order of names, Wolf partner buttons, tied leaderboard rows and the
@@ -376,7 +406,7 @@ screensSql('update users set code = null where code is not null')
 // a genuine rendering of the production app.
 
 fs.mkdirSync(path.dirname(FIXTURE_IDS), { recursive: true })
-const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups, f1Games, f6Scorecard: f6Card, f7Event, f7Scorecards, f7Games, bobUserId: userByKey.bob.id }
+const fixtureIds = { f1Scorecard: f1Card, f1Players, f2Scorecard: f2Card, f2Players, f3Scorecard: f3Card, f3Players, f4Event: eventId, f4Scorecards: groupCards, f5aEvent, f5bEvent, f5bPlayers, f5bGroups, f1Games, f6Scorecard: f6Card, f7Event, f7Scorecards, f7Games, f8Scorecard: f8Card, bobUserId: userByKey.bob.id }
 fs.writeFileSync(FIXTURE_IDS, JSON.stringify(fixtureIds, null, 2))
 log(`fixture ids written to ${FIXTURE_IDS}`)
 markFixturesReady(fixtureIds)

@@ -37,6 +37,10 @@ export const RUN_DIR = path.join(WORK_DIR, 'run')
 export const DEBUG_DIR = path.join(WORK_DIR, 'debug')
 export const CAPTURE_STAGING_DIR = path.join(WORK_DIR, 'capture-staging')
 export const AUTH_STATE = path.join(WORK_DIR, 'auth', 'bob.storage-state.json')
+// Polly Putter, the fictional user of the GHIN posting captures (her own locked
+// F8 scorecard and a fixture-only USGA Handicap ID), signs in separately.
+export const POLLY_AUTH_STATE = path.join(WORK_DIR, 'auth', 'polly.storage-state.json')
+export const AUTH_STATES = [AUTH_STATE, POLLY_AUTH_STATE]
 export const FIXTURE_IDS = path.join(RUN_DIR, 'fixture-ids.json')
 export const FIXTURE_STATE = path.join(RUN_DIR, 'fixture-state.json')
 export const COURSE_CACHE_DIR = path.join(WORK_DIR, 'cache')
@@ -147,6 +151,8 @@ export const ALLOWED_CONSOLE_ERRORS = [
 // Fictional demo user the captures sign in as.
 export const BOB_USER_ID = '5c2ee000-0000-4000-8000-000000000001'
 export const BOB_PHONE = '0005550001'
+export const POLLY_USER_ID = '5c2ee000-0000-4000-8000-000000000017'
+export const POLLY_PHONE = '0005550017'
 
 // Proof-set output (distinct draft filenames; never overwrites existing assets).
 export const SOURCE_DIR = path.join(SITE_ROOT, 'src/images/screenshots/source')

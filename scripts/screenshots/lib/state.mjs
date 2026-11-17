@@ -12,15 +12,21 @@
 // per-row snapshot of the tables fixtures live in. Before any draft is
 // published, capture compares both again: every fixture must be unchanged and
 // unlocked, except fixtures a recipe declares it locks (F3, End round; F7,
-// Complete event), which must be fully locked and finalized; and the only rows
-// that may differ at all are those fixtures' own scorecard, event and game
-// rows.
+// Complete event), which must be fully locked and finalized, and F8, which is
+// built locked and must stay exactly as built; and the only rows that may
+// differ at all are those fixtures' own scorecard, event and game rows. The
+// one fictional USGA Handicap ID (Polly's, for the posting captures) and the
+// absence of any posting data are checked at the same points.
 
 import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
 import { screensSql } from './guards.mjs'
 import { FIXTURE_STATE, SCRIPTS_DIR, SCREENS_DB } from './config.mjs'
+
+// Fixtures that are locked when built (F8: the posting captures need a locked
+// scorecard but must not write) rather than by a recipe.
+export const BUILT_LOCKED = ['f8']
 
 export const screensDbOid = () => screensSql(`select oid from pg_database where datname = '${SCREENS_DB}'`)
 
@@ -109,8 +115,30 @@ export function fixtureDigests (ids) {
     f4: eventDigest(ids.f4Event),
     f5a: eventDigest(ids.f5aEvent),
     f5b: eventDigest(ids.f5bEvent),
-    f7: eventDigest(ids.f7Event)
+    f7: eventDigest(ids.f7Event),
+    f8: scorecardDigest(ids.f8Scorecard)
   }
+}
+
+// The only USGA Handicap ID in the database is the fictional one fixtures.mjs
+// gives the posting-capture user (users.json fixtureUsgaHandicapId, a negative
+// number that cannot be a real ID), and no player carries any GHIN or posting
+// data: nothing was posted, confirmed or cancelled.
+export function usgaFixtureProblems () {
+  const { users } = JSON.parse(fs.readFileSync(path.join(SCRIPTS_DIR, 'fixtures/users.json'), 'utf8'))
+  const holders = users.filter(u => u.fixtureUsgaHandicapId !== undefined)
+  const problems = []
+  if (holders.length !== 1 || !Number.isInteger(holders[0].fixtureUsgaHandicapId) || holders[0].fixtureUsgaHandicapId >= 0) {
+    problems.push('users.json must give exactly one user a negative fixtureUsgaHandicapId')
+    return problems
+  }
+  const [holder] = holders
+  const rows = screensSql('select id || \'|\' || ghin_number from users where ghin_number is not null order by id')
+  if (rows !== `${holder.id}|${holder.fixtureUsgaHandicapId}`) problems.push(`USGA Handicap IDs in the database are not exactly the fixture ID for ${holder.firstName} ${holder.lastName}`)
+  if (screensSql('select count(*) from players where handicap_id is not null or posting_id is not null or posting_details is not null or posted_by_user_id is not null or posted_by_handicap_id is not null') !== '0') {
+    problems.push('a player has GHIN or posting data')
+  }
+  return problems
 }
 
 // Row-level audit of every table fixtures live in: id -> md5 of the whole row.
@@ -208,7 +236,10 @@ export function finalizedEventPositions (eventId) {
 export function markFixturesReady (ids) {
   const { oid } = requireStage('reset')
   const digests = fixtureDigests(ids)
-  if (Object.values(digests).some(d => d.locked)) throw new Error('Refusing: a fixture is locked straight after building')
+  const wrongLock = Object.entries(digests).filter(([key, d]) => d.locked !== BUILT_LOCKED.includes(key)).map(([key]) => key)
+  if (wrongLock.length) throw new Error(`Refusing: lock state straight after building is wrong for ${wrongLock.join(', ')}`)
+  const usga = usgaFixtureProblems()
+  if (usga.length) throw new Error(`Refusing: ${usga.join('; ')}`)
   write({ stage: 'fixtures-ready', dbOid: oid, fixtureHash: fixtureDefinitionHash(), digests, rows: recordSnapshot() })
 }
 
@@ -226,11 +257,12 @@ export function verifyFixturesAfterCapture (ids, { locked = [] } = {}) {
     if (now[key].games !== state.digests[key].games) problems.push(`${key} game settings changed`)
   }
   for (const key of Object.keys(state.digests)) {
-    if (now[key].locked !== locked.includes(key)) problems.push(`${key} is ${now[key].locked ? '' : 'not '}locked`)
+    if (now[key].locked !== (locked.includes(key) || BUILT_LOCKED.includes(key))) problems.push(`${key} is ${now[key].locked ? '' : 'not '}locked`)
     if ('finalized' in now[key] && locked.includes(key) && !now[key].finalized) problems.push(`${key} is not fully finalized (event, every group scorecard and every game summary)`)
   }
   if (!state.rows) problems.push('row snapshot is missing')
   else problems.push(...auditRows(state.rows, ids, locked))
+  problems.push(...usgaFixtureProblems())
   if (problems.length) throw new Error(`Refusing to publish: ${problems.join('; ')}`)
   return now
 }
