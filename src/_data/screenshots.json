@@ -26,12 +26,12 @@
   "homepageGames": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Marker Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker (shared with eventGamesPicker and addGamesGamePicker). Twelve formats: High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, Wolf. No per-format descriptions are shown."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker (shared with eventGamesPicker and addGamesGamePicker). Twelve formats: High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, Wolf. No per-format descriptions are shown."
   },
 
   "tutorialCreateEventStep1": {
@@ -125,12 +125,12 @@
   "eventGamesPicker": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
-    "caption": "Tap any format to open its configuration — formats marked Premium require an active subscription.",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
+    "caption": "Tap any format to open its configuration.",
     "usage": ["tutorials/add-and-configure-games"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker: Vue's event route shows the same picker (titled Add Game there)."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker: Vue's event route shows the same picker (titled Add Game there)."
   },
 
   "eventGamesConfiguration": {
@@ -295,7 +295,7 @@
     "usage": ["tutorials/follow-games-and-results"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 in progress. Side-game settlement reconciled to the cent against every game."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. F1 in progress: three provisional payments, $70, $20 and $30. Side-game settlement reconciled to the cent against every game."
   },
 
   "reviewResultsEndRound": {
@@ -309,6 +309,39 @@
     "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 Cypress Point through 18. Opens the sheet only."
   },
 
+  "postScoreEndRound": {
+    "src": "/images/screenshots/web/end-round-confirm-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/end-round-confirm-mobile-vue-demo.png",
+    "alt": "Marker End round sheet: By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.",
+    "caption": "Ending the round is your attestation and locks the scorecard so you can post. Spot a mistake? Unlock it in scorecard settings before posting.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Same approved capture as reviewResultsEndRound (end-round-confirm), with a posting-specific caption."
+  },
+
+  "postScoreReady": {
+    "src": "/images/screenshots/web/post-score-ready-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/post-score-ready-mobile-vue-demo.png",
+    "alt": "Locked Marker scorecard at Spyglass Hill GC for holes 1 to 9 with four players, and a red POST MY SCORE TO USGA button reading Only you, not the group at the bottom",
+    "caption": "Once the scorecard is locked, the red POST MY SCORE TO USGA button appears at the bottom — for your own score only.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Nov 2026. Fixture F8, fictional Polly Putter's locked card; read-only, no USGA/GHIN request. No USGA Handicap ID visible."
+  },
+
+  "postScoreSheet": {
+    "src": "/images/screenshots/web/post-score-sheet-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/post-score-sheet-mobile-vue-demo.png",
+    "alt": "Marker Post Score sheet with the USGA Handicap Data Affiliate logo, Course Spyglass Hill GC, Tees White, Date played 07/08/2026, Score Type Home selected, Holes played options Front 9 (46), Back 9 (48) and All 18 (94) with All 18 selected, and a Post Score button",
+    "caption": "Check the course and tees, confirm the date, score type and holes played, then tap Post Score.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Nov 2026. Post Score sheet on fixture F8; opened only, never submitted; no USGA/GHIN request. Polly's fixture-only USGA Handicap ID is not shown."
+  },
+
   "reviewResultsFinalSettlement": {
     "src": "/images/screenshots/web/final-settlement-completed-round-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/final-settlement-completed-round-mobile-vue-demo.png",
@@ -317,7 +350,7 @@
     "usage": ["tutorials/review-results-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 after End round (locked). An Upgrade to Premium banner appears at the top for this free account."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. F3 after End round (locked): three player-to-player payments, $15, $10 and $5."
   },
 
   "createScorecardNewGame": {
@@ -378,12 +411,12 @@
   "addGamesGamePicker": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Marker Add game screen with buttons for all twelve game formats and Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
     "caption": "Choose the game your group wants to play.",
     "usage": ["tutorials/add-games-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker."
   },
 
   "scoreRoundMainScorecard": {

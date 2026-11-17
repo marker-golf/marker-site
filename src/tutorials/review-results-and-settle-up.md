@@ -7,6 +7,8 @@ category: Playing with Your Group
 order: 6
 tutorialPath: group
 tutorialOrder: 6
+indexGroup: finish-settle-and-post
+indexOrder: 1
 estimatedTime: "4 min read"
 cardDescription: "Tap End round to lock the scorecard, review final game results on the Leaderboard, and use Settlement to pay out."
 iconSvg: '<path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'
@@ -102,7 +104,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">8</div>
 <div class="tutorial-step__content">
 <h3>Post your score to USGA</h3>
-<p>After the scorecard locks, a <strong>Post my score to USGA</strong> button may appear in the footer on the scorecard screen. This is a personal posting action — only your own score is posted, not the group's.</p>
+<p>After the scorecard locks, a <strong>POST MY SCORE TO USGA</strong> button may appear in the footer on the scorecard screen. This is a personal posting action — only your own score is posted, not the group's.</p>
 <p>The button appears when all of the following are true:</p>
 <ul>
 <li>The scorecard is locked.</li>
@@ -110,11 +112,10 @@ cta:
 <li>You have at least 9 holes scored.</li>
 <li>You haven't already posted this round.</li>
 <li>Your tee is a standard rated tee, not a manually-entered one.</li>
-<li>Your Marker profile has a USGA ID connected.</li>
 </ul>
 <p>If the button appears but you haven't connected a USGA ID to your Marker account, tapping it opens a <strong>Connect USGA ID</strong> prompt that takes you to your profile settings.</p>
 <p>In the Post Score panel you'll confirm the <strong>date played</strong>, the <strong>score type</strong> (Home, Away, or Competition), and which <strong>holes played</strong> (Front 9, Back 9, All 18, or a partial 10–17 hole round). USGA may flag your submission for review — if that happens, follow the on-screen prompt to accept or cancel the flagged score.</p>
-<p>Each player on the scorecard posts their own score independently. Marker does not post on behalf of anyone else.</p>
+<p>Each player on the scorecard posts their own score independently. Marker does not post on behalf of anyone else. See <a href="{{ '/tutorials/post-your-score-to-ghin/' | url }}">Post Your Score to GHIN</a> for the full posting workflow.</p>
 </div>
 </div>
 
@@ -123,7 +124,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>Round complete</h3>
 <p>The round is done. The locked scorecard remains accessible from your Marker home screen for reference. Use the Settlement view to run the final payout, and share the leaderboard link with anyone who wants to see the results.</p>
-<p>If you discover a scoring error after the fact, return to the scorecard, unlock it from the info screen, correct the score, and end the round again.</p>
+<p>If you discover a scoring error after the fact, return to the scorecard, unlock it from the info screen, correct the score, and end the round again. If you've already posted to USGA, the correction stays in Marker — it doesn't change the posted score.</p>
 </div>
 </div>
 

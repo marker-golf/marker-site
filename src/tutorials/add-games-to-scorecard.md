@@ -7,6 +7,8 @@ category: Playing with Your Group
 order: 3
 tutorialPath: group
 tutorialOrder: 3
+indexGroup: score-a-round
+indexOrder: 3
 estimatedTime: "5 min read"
 cardDescription: "Choose a game format, configure handicaps and accounting, and save. Add as many games as your group wants to play from one set of scores."
 iconSvg: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/>'
@@ -33,8 +35,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Choose a game</h3>
-<p>The <strong>Select game</strong> screen shows one button per format. Games labeled <strong>Premium</strong> require a Marker premium subscription.</p>
-<p>Marker supports twelve formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf. Scotch, Team Count X, Team Stableford, and Wolf are Premium.</p>
+<p>The <strong>Select game</strong> screen shows one button per format.</p>
+<p>Marker supports twelve formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Games guide library</a>. This tutorial explains how to configure them in Marker — not how to play them.</p>
 <p>Tap a game to open its configuration form.</p>
 <div class="tutorial-step__screenshot">

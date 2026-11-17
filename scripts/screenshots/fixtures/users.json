@@ -1,5 +1,5 @@
 {
-  "_comment": "Fictional demo golfers. Phones use the reserved 000-555 range; the only email uses the reserved example.com domain. No GHIN numbers.",
+  "_comment": "Fictional demo golfers. Phones use the reserved 000-555 range; the only email uses the reserved example.com domain. No real GHIN numbers: db-reset inserts nobody with one, and only Polly (the posting-screen user) is given fixtureUsgaHandicapId by fixtures.mjs, a negative number that cannot be a real USGA Handicap ID. The isolated Hub can reach no USGA service.",
   "users": [
     { "key": "bob",    "id": "5c2ee000-0000-4000-8000-000000000001", "firstName": "Bob",    "lastName": "Smith",     "gender": "male",   "phone": "0005550001", "handicapIndex": 4.2,  "email": "bob.smith@example.com", "level": 2 },
     { "key": "joe",    "id": "5c2ee000-0000-4000-8000-000000000002", "firstName": "Joe",    "lastName": "Jar",       "gender": "male",   "phone": "0005550002", "handicapIndex": 13.7, "level": 1 },
@@ -16,6 +16,7 @@
     { "key": "allan",  "id": "5c2ee000-0000-4000-8000-000000000013", "firstName": "Allan",  "lastName": "Albatross", "gender": "male",   "phone": "0005550013", "handicapIndex": 12.8, "level": 1 },
     { "key": "ben",    "id": "5c2ee000-0000-4000-8000-000000000014", "firstName": "Ben",    "lastName": "Birdie",    "gender": "male",   "phone": "0005550014", "handicapIndex": 6.3,  "level": 1 },
     { "key": "george", "id": "5c2ee000-0000-4000-8000-000000000015", "firstName": "George", "lastName": "Green",     "gender": "male",   "phone": "0005550015", "handicapIndex": 22.0, "level": 1 },
-    { "key": "debbie", "id": "5c2ee000-0000-4000-8000-000000000016", "firstName": "Debbie", "lastName": "Dogleg",    "gender": "female", "phone": "0005550016", "handicapIndex": 5.2,  "level": 1 }
+    { "key": "debbie", "id": "5c2ee000-0000-4000-8000-000000000016", "firstName": "Debbie", "lastName": "Dogleg",    "gender": "female", "phone": "0005550016", "handicapIndex": 5.2,  "level": 1 },
+    { "key": "polly",  "id": "5c2ee000-0000-4000-8000-000000000017", "firstName": "Polly",  "lastName": "Putter",    "gender": "female", "phone": "0005550017", "handicapIndex": 8.6,  "level": 1, "fixtureUsgaHandicapId": -17 }
   ]
 }

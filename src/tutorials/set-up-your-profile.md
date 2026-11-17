@@ -7,6 +7,8 @@ category: Getting Started
 order: 2
 tutorialPath: getting-started
 tutorialOrder: 2
+indexGroup: get-started
+indexOrder: 2
 estimatedTime: "4 min read"
 cardDescription: "Add your name, connect your USGA Handicap ID, and understand what each profile field does."
 iconSvg: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'
@@ -61,7 +63,7 @@ cta:
 <ul>
 <li><strong>Handicap Index on the Home screen</strong> — your current H.I., Low H.I., club name, and GHIN number appear in the green hero area every time you open Marker.</li>
 <li><strong>Automatic handicap information</strong> — Marker fetches your current Handicap Index from the USGA so it's up to date each session.</li>
-<li><strong>USGA score posting</strong> — after locking a qualifying scorecard, a <strong>Post my score to USGA</strong> button becomes available. This lets you post your score directly through Marker. The button only appears for players with a connected USGA ID.</li>
+<li><strong>USGA score posting</strong> — after locking a qualifying scorecard, a <strong>POST MY SCORE TO USGA</strong> button becomes available. This lets you post your score directly through Marker; without a connected USGA ID, the button asks you to connect one first. See <a href="{{ '/tutorials/post-your-score-to-ghin/' | url }}">Post Your Score to GHIN</a>.</li>
 </ul>
 
 <p>These features require a validated USGA Handicap ID. Manual handicap entry is still available — it just doesn't enable USGA posting.</p>

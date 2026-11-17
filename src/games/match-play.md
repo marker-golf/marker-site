@@ -597,7 +597,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 </div>
 <div class="gg-variation__body">
 <h4>Singles Match Play</h4>
-<p>One player against another, 1v1. The standard form of match play. Each player's own score determines every hole result. This is the default in Marker and the format used in the Ryder Cup singles, Walker Cup, and most club championships.</p>
+<p>One player against another, 1v1. The standard form of match play. Each player's own score determines every hole result. This is the default in Marker and the format used in team-cup singles matches and most club championships.</p>
 </div>
 </div>
 
@@ -607,7 +607,7 @@ This differs from the traditional "difference method" (where the lower handicapp
 </div>
 <div class="gg-variation__body">
 <h4>Four-Ball Match Play (2v2)</h4>
-<p>Two players on each side, both playing their own ball. The best score from each side wins the hole. This is what Marker calls "team match play" — configure 2v2 with 1 net ball per side. The Ryder Cup and Presidents Cup feature this format prominently.</p>
+<p>Two players on each side, both playing their own ball. The best score from each side wins the hole. This is what Marker calls "team match play" — configure 2v2 with 1 net ball per side. Professional team cups feature this format prominently.</p>
 </div>
 </div>
 

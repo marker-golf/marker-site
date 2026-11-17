@@ -1,0 +1,11 @@
+[
+  { "from": "/tutorials/gettingstarted/", "to": "/tutorials/welcome-to-marker/", "title": "Welcome to Marker" },
+  { "from": "/tutorials/firstscorecard/", "to": "/tutorials/create-a-scorecard/", "title": "Create a Scorecard" },
+  { "from": "/tutorials/posting/", "to": "/tutorials/post-your-score-to-ghin/", "title": "Post Your Score to GHIN" },
+  { "from": "/tutorials/createevent/", "to": "/tutorials/create-an-event/", "title": "Create an Event" },
+  { "from": "/tutorials/eventaddplayers/", "to": "/tutorials/add-players/", "title": "Add Players" },
+  { "from": "/tutorials/eventcreatescorecards/", "to": "/tutorials/create-scorecards/", "title": "Create & Organize Scorecards" },
+  { "from": "/tutorials/eventaddgames/", "to": "/tutorials/add-and-configure-games/", "title": "Add Event Games" },
+  { "from": "/tutorials/eventscoring/", "to": "/tutorials/event-scoring/", "title": "Publish & Follow Event Scoring" },
+  { "from": "/tutorials/sidegames/", "to": "/tutorials/side-games/", "title": "Side Games" }
+]

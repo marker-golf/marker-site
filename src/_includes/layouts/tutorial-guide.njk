@@ -14,12 +14,18 @@ layout: layouts/base.njk
 
 {% set pathNav = collections.tutorials | prevNextInPath(page.url, tutorialPath) %}
 
+{% set indexGroupData = tutorialGroups | tutorialGroup(indexGroup) %}
+
 <section class="tutorial-hero">
   <div class="container">
     <nav class="tutorial-breadcrumb" aria-label="Breadcrumb">
       <a href="{{ '/tutorials/' | url }}">Tutorials</a>
       <span aria-hidden="true">›</span>
+      {% if indexGroupData %}
+      <a href="{{ '/tutorials/' | url }}#{{ indexGroupData.id }}">{{ indexGroupData.label }}</a>
+      {% else %}
       <span>{{ pathLabel }}</span>
+      {% endif %}
       <span aria-hidden="true">›</span>
       <span aria-current="page">{{ title }}</span>
     </nav>

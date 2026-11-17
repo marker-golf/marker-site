@@ -73,6 +73,7 @@ description: Marker tracks scores live, manages your side games, and settles the
           {% if plan.period %}<span class="pricing-card__period">{{ plan.period }}</span>{% endif %}
         </div>
         <p class="pricing-card__alt">{{ plan.altText }}</p>
+        {% if plan.renewalNote %}<p class="pricing-card__renewal">{{ plan.renewalNote }}</p>{% endif %}
         <div class="pricing-card__divider" aria-hidden="true"></div>
         <ul class="pricing-card__features">
           {% for feature in plan.features %}
@@ -106,7 +107,7 @@ description: Marker tracks scores live, manages your side games, and settles the
           </svg>
         </div>
         <h3>Invite your group</h3>
-        <p>Share a link and your playing partners join instantly — no accounts required.</p>
+        <p>Add players to the scorecard or share a link so they can join. Players who score from their own phones sign in to Marker.</p>
       </div>
       <div class="how-card">
         <div class="how-card__icon">
@@ -116,7 +117,7 @@ description: Marker tracks scores live, manages your side games, and settles the
           </svg>
         </div>
         <h3>Enter scores live</h3>
-        <p>Everyone scores on their own device. The leaderboard updates in real time, hole by hole.</p>
+        <p>Players can score on their own phones, or one player can keep score for the group. The leaderboard updates in real time, hole by hole.</p>
       </div>
       <div class="how-card">
         <div class="how-card__icon">
@@ -220,7 +221,7 @@ description: Marker tracks scores live, manages your side games, and settles the
           </svg>
         </div>
         <h4>Team Competitions</h4>
-        <p>Ryder Cup, Scotch, Team Stroke Play — full team format support for any size event.</p>
+        <p>Scotch, Team Stroke Play, TeamCountX — full team format support for any size event.</p>
       </div>
       <div class="commissioner-feature">
         <div class="commissioner-feature__icon">

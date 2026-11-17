@@ -19,8 +19,13 @@ export const MARKER_ROOT = path.resolve(SITE_ROOT, '..')
 export const APP_REPO = path.join(MARKER_ROOT, 'app')
 export const HUB_REPO = path.join(MARKER_ROOT, 'hub')
 
-// Pinned production commits (origin/master of each repo, fetched 2026-10-19).
-export const APP_SHA = 'd6225d56e9e86d621cb3b4cc3934d8862e15e7bc'
+// Pinned commits. HUB_SHA: origin/master, fetched 2026-10-19.
+// APP_SHA: TEMPORARY pre-release source pin. Local commit fea08fd on
+// feature/remove-premium-game-gating (d6225d5 plus "fix: remove per-game
+// premium gating"), not yet pushed or merged, so not the released production
+// app revision. Revisit after the app PR merges: see "Pinned commits and
+// capture provenance" in scripts/screenshots/README.md.
+export const APP_SHA = 'fea08fd28284e82ec44b749e6449ecb2efa0a9ef'
 export const HUB_SHA = 'dd30f45eea267a9827690d4b6f1329a1bcb110cd'
 
 // Lockfiles that must be identical at the pinned SHA and in the working tree
@@ -37,6 +42,10 @@ export const RUN_DIR = path.join(WORK_DIR, 'run')
 export const DEBUG_DIR = path.join(WORK_DIR, 'debug')
 export const CAPTURE_STAGING_DIR = path.join(WORK_DIR, 'capture-staging')
 export const AUTH_STATE = path.join(WORK_DIR, 'auth', 'bob.storage-state.json')
+// Polly Putter, the fictional user of the GHIN posting captures (her own locked
+// F8 scorecard and a fixture-only USGA Handicap ID), signs in separately.
+export const POLLY_AUTH_STATE = path.join(WORK_DIR, 'auth', 'polly.storage-state.json')
+export const AUTH_STATES = [AUTH_STATE, POLLY_AUTH_STATE]
 export const FIXTURE_IDS = path.join(RUN_DIR, 'fixture-ids.json')
 export const FIXTURE_STATE = path.join(RUN_DIR, 'fixture-state.json')
 export const COURSE_CACHE_DIR = path.join(WORK_DIR, 'cache')
@@ -147,6 +156,8 @@ export const ALLOWED_CONSOLE_ERRORS = [
 // Fictional demo user the captures sign in as.
 export const BOB_USER_ID = '5c2ee000-0000-4000-8000-000000000001'
 export const BOB_PHONE = '0005550001'
+export const POLLY_USER_ID = '5c2ee000-0000-4000-8000-000000000017'
+export const POLLY_PHONE = '0005550017'
 
 // Proof-set output (distinct draft filenames; never overwrites existing assets).
 export const SOURCE_DIR = path.join(SITE_ROOT, 'src/images/screenshots/source')

@@ -35,6 +35,18 @@ export default function (eleventyConfig) {
       .sort((a, b) => (a.data.tutorialOrder ?? 99) - (b.data.tutorialOrder ?? 99));
   });
 
+  // Returns tutorials in a tutorials-index group (src/_data/tutorialGroups.json), sorted by indexOrder
+  eleventyConfig.addFilter("tutorialsByGroup", function (collection, group) {
+    return (collection || [])
+      .filter((t) => t.data && t.data.indexGroup === group)
+      .sort((a, b) => (a.data.indexOrder ?? 99) - (b.data.indexOrder ?? 99));
+  });
+
+  // Returns the tutorials-index group with this id, or null
+  eleventyConfig.addFilter("tutorialGroup", function (groups, id) {
+    return (groups || []).find((g) => g.id === id) || null;
+  });
+
   // Returns { prev, next, currentStep, totalSteps } for a tutorial within its path
   eleventyConfig.addFilter("prevNextInPath", function (collection, currentUrl, path) {
     const sorted = (collection || [])

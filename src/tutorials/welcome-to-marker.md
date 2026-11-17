@@ -7,6 +7,8 @@ category: Getting Started
 order: 1
 tutorialPath: getting-started
 tutorialOrder: 1
+indexGroup: get-started
+indexOrder: 1
 estimatedTime: "3 min read"
 cardDescription: "Learn what Marker does, how to sign in, and what the Home screen has to offer before you start your first round."
 iconSvg: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>'
@@ -19,7 +21,7 @@ cta:
 
 <div class="tutorial-prose">
 
-<p>Marker gives a group one shared scorecard. Each player enters scores on their own phone and everyone sees the same grid in real time. Add side games — Skins, Nassau, Stroke Play, and more — and Marker calculates standings and accounting from the same entered scores, updating as the round progresses.</p>
+<p>Marker gives a group one shared scorecard. Players can enter scores on their own phones, or one player can keep score for the group, and everyone sees the same grid in real time. Add side games — Skins, Nassau, Stroke Play, and more — and Marker calculates standings and accounting from the same entered scores, updating as the round progresses.</p>
 
 <p>For larger outings with multiple groups, a Marker Event organizes everything under a shared leaderboard.</p>
 
@@ -36,6 +38,15 @@ cta:
 <p>Your phone number is how other players find and add you in Marker. If someone else is setting up your round, they may text you a link to the shared scorecard — open the link and sign in the same way.</p>
 
 <p>Marker is a progressive web app at <strong>app.marker.golf</strong>. Open it in your phone's browser and add it to your home screen for an app-like experience — there's nothing to download from an app store.</p>
+
+<h3>Add Marker to your home screen</h3>
+
+<ul>
+<li><strong>iPhone (Safari):</strong> tap the Share icon, then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>
+<li><strong>Android (Chrome):</strong> tap the three-dot menu, then <strong>Add to Home screen</strong> or <strong>Install app</strong>, and confirm.</li>
+</ul>
+
+<p>Marker then opens from its own icon, full screen, like any other app on your phone.</p>
 
 <h3>The Home screen</h3>
 

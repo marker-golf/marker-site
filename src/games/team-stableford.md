@@ -84,7 +84,7 @@ Team Stableford combines the Stableford points system with team competition. Eac
 
 This creates a format that is at once familiar and strategic: individual players still feel the pressure of their personal score, but the team has a built-in safety net. A team member who makes a triple bogey doesn't hurt the team if anyone else on the team scored par or better.
 
-Team Stableford is a separate, distinct game in Marker from individual Stableford. It requires teams, minimum four players, and is a premium feature. It supports all the same configuration options as individual Stableford — customizable point values, Quota mode, net or gross scoring — applied at the team level.
+Team Stableford is a separate, distinct game in Marker from individual Stableford. It requires teams and a minimum of four players. It supports all the same configuration options as individual Stableford — customizable point values, Quota mode, net or gross scoring — applied at the team level.
 
 </div>
 
@@ -628,7 +628,7 @@ Each player receives one handicap stroke on holes where their course handicap is
 
 <div style="margin-top:40px; text-align:center;">
 <a href="https://app.marker.golf" class="btn btn-primary">Play Team Stableford in Marker</a>
-<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Premium feature · Works in your phone's browser</p>
+<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Works in your phone's browser</p>
 </div>
 
 </div>
@@ -647,7 +647,7 @@ Each player receives one handicap stroke on holes where their course handicap is
 <details class="gg-faq-item">
 <summary>What is Team Stableford?</summary>
 <div class="gg-faq-body">
-<p>Team Stableford is a team format where groups of players earn Stableford points individually on each hole and those points are combined into a team total. By default, only the best-performing team member's net Stableford points count per hole. The team with the most points after 18 holes wins. It is a separate, premium game in Marker distinct from individual Stableford.</p>
+<p>Team Stableford is a team format where groups of players earn Stableford points individually on each hole and those points are combined into a team total. By default, only the best-performing team member's net Stableford points count per hole. The team with the most points after 18 holes wins. It is a separate game in Marker, distinct from individual Stableford.</p>
 </div>
 </details>
 
@@ -689,7 +689,7 @@ Each player receives one handicap stroke on holes where their course handicap is
 <details class="gg-faq-item">
 <summary>What is the difference between Team Stableford and individual Stableford?</summary>
 <div class="gg-faq-body">
-<p>Individual Stableford: every player's points count on every hole, all players compete in one ranking. Team Stableford: players form teams, only the best team member's points count per hole (by default), and team totals determine the winner. Team Stableford requires a minimum of 4 players and is a premium Marker feature. Individual Stableford requires only 1 player and is available to all.</p>
+<p>Individual Stableford: every player's points count on every hole, all players compete in one ranking. Team Stableford: players form teams, only the best team member's points count per hole (by default), and team totals determine the winner. Team Stableford requires a minimum of 4 players. Individual Stableford requires only 1 player.</p>
 </div>
 </details>
 
@@ -704,13 +704,6 @@ Each player receives one handicap stroke on holes where their course handicap is
 <summary>Does Team Stableford support Quota mode?</summary>
 <div class="gg-faq-body">
 <p>Yes. In Team Quota mode, each team receives a combined quota equal to the sum of all team members' individual quotas (36 − each player's course handicap). The team that accumulates the most gross Stableford points relative to their combined quota wins. Marker calculates the combined quota automatically from each player's handicap. Quota mode in Team Stableford uses gross scoring — handicap is incorporated in the quota target rather than applied hole-by-hole.</p>
-</div>
-</details>
-
-<details class="gg-faq-item">
-<summary>Is Team Stableford a premium feature?</summary>
-<div class="gg-faq-body">
-<p>Yes. Team Stableford is a premium game in Marker, requiring a premium event configuration. Individual Stableford is available on all plans. See <a href="https://app.marker.golf">Marker's pricing page</a> for details on premium game access.</p>
 </div>
 </details>
 

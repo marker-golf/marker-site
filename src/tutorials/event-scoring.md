@@ -7,6 +7,8 @@ category: Running Events
 order: 3
 tutorialPath: event
 tutorialOrder: 5
+indexGroup: run-an-event
+indexOrder: 5
 estimatedTime: "3 min read"
 cardDescription: "Publish scorecards to players, follow live Event standings, and share the leaderboard as the round progresses."
 iconSvg: '<polyline points="18 20 18 10"/><polyline points="12 20 12 4"/><polyline points="6 20 6 14"/>'
@@ -27,7 +29,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">1</div>
 <div class="tutorial-step__content">
 <h3>Publish scorecards</h3>
-<p>From the event dashboard, tap <strong>Publish scorecards</strong> in the sticky footer. Marker sends each player a text message with a link to their individual scorecard. Players can open the link on any phone — no Marker account required to enter scores or view the leaderboard.</p>
+<p>From the event dashboard, tap <strong>Publish scorecards</strong> in the sticky footer. Marker sends each player a text message with a link to their individual scorecard. Players open the link on any phone; it signs them in to Marker and opens their scorecard, where they can enter scores and view the leaderboard.</p>
 <p>There is no separate "Start Event" action. Publishing is the step that distributes scorecards and opens the event for scoring. After publishing, the footer button changes to <strong>Complete event</strong>, and a <strong>Republish scorecards</strong> option appears inside the Scorecards section for resending links if needed.</p>
 <p>Event Games remain editable and scorecard assignments can still be adjusted while the event is unlocked. Publishing does not lock the event.</p>
 </div>

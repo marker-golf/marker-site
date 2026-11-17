@@ -3,7 +3,7 @@
     "heading": "Simple Pricing",
     "subheading": "Start free. Upgrade when you're ready for more."
   },
-  "heroNote": "Unlimited New Games with standard formats. Create up to 3 Events free. No credit card required.",
+  "heroNote": "Unlimited New Games. Create up to 3 Events free. No credit card required.",
   "plans": [
     {
       "id": "free",
@@ -13,7 +13,6 @@
       "altText": "Always free. No credit card required.",
       "features": [
         "Unlimited New Games (1–5 players)",
-        "10 standard game formats",
         "Up to 3 Events",
         "Live scoring",
         "Leaderboards",
@@ -30,13 +29,11 @@
       "amount": "$67",
       "period": "/year",
       "altText": "or $6.99 / month",
+      "renewalNote": "Subscriptions renew automatically at the selected monthly or annual interval until canceled.",
       "features": [
+        "Everything in Free",
         "Unlimited Events",
-        "Wolf",
-        "Hammer",
-        "Ryder Cup",
-        "TeamCountX",
-        "Future premium features"
+        "Future Premium features"
       ],
       "cta": {
         "text": "Start Free",

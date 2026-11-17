@@ -12,7 +12,6 @@ game:
   name: TeamCountX
   difficulty: intermediate
   difficultyLabel: Intermediate
-  premium: true
   subtitle: "Each team collects all of its players' scores on every hole — then selects which scores will count toward the team total. Choose wisely. Discard the rest. Lowest net total wins."
   heroSubtitleWidth: "560px"
   heroStats:
@@ -102,7 +101,6 @@ sections:
     - Accounting: pool model — buy-in per player, winner-take-all by default, configurable payouts
     - Blind draws: fill uneven team slots; excluded from scoring and payout
     - Multi-card: teams can span multiple scoring groups/scorecards
-    - premium: true
 #}
 
 {% from "components/game-guide.njk" import SectionHeader, ConfigCard, TipCard, RelatedCard, MarkerImplNote %}

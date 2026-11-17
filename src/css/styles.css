@@ -264,6 +264,16 @@ p { color: var(--ink-muted); line-height: 1.75; }
   line-height: 1.5;
 }
 .pricing-card--premium .pricing-card__alt { color: rgba(255, 255, 255, 0.45); }
+/* Auto-renewal disclosure: sits under the price, before the features and the button */
+.pricing-card__renewal {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+.pricing-card--premium .pricing-card__renewal { color: rgba(255, 255, 255, 0.85); }
 .pricing-card__divider {
   height: 1px;
   background: var(--border);
@@ -1004,7 +1014,6 @@ p { color: var(--ink-muted); line-height: 1.75; }
   .comm-features-grid { grid-template-columns: repeat(2, 1fr); }
   .comm-why__grid { grid-template-columns: repeat(2, 1fr); }
   .comm-games__grid { grid-template-columns: repeat(2, 1fr); }
-  .tutorial-grid { grid-template-columns: repeat(2, 1fr); }
 
   /* Trust stats: 2×2 */
   .trust-stats { grid-template-columns: repeat(2, 1fr); }
@@ -1053,7 +1062,6 @@ p { color: var(--ink-muted); line-height: 1.75; }
   .trust-stats__item { border-right: none; border-bottom: 1px solid var(--border); }
   .trust-stats__item:last-child { border-bottom: none; }
 
-  .tutorial-grid { grid-template-columns: 1fr; }
 }
 
 /* ---- 19. Tutorials ---- */
@@ -1089,6 +1097,9 @@ p { color: var(--ink-muted); line-height: 1.75; }
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+/* After the base rule so the narrower layouts win. */
+@media (max-width: 960px) { .tutorial-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .tutorial-grid { grid-template-columns: 1fr; } }
 
 .tutorial-card {
   background: var(--gray-50);
@@ -1143,6 +1154,36 @@ p { color: var(--ink-muted); line-height: 1.75; }
   text-transform: uppercase;
   color: var(--ink-light);
 }
+
+/* Links to the index groups; each group clears the sticky header when jumped to. */
+.tutorial-jump ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 clamp(48px, 7vw, 72px);
+  padding: 0;
+}
+.tutorial-jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  background: var(--gray-50);
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.18s, color 0.18s;
+}
+.tutorial-jump a:hover { border-color: var(--green-600); color: var(--green-700); }
+.tutorial-jump a:focus-visible {
+  outline: 3px solid var(--green-600);
+  outline-offset: 3px;
+}
+.tutorial-category { scroll-margin-top: calc(var(--nav-h) + 24px); }
 
 /* ---- 20. Legal pages ---- */
 .legal {

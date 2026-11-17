@@ -24,7 +24,7 @@
 // The browser clock is fixed for deterministic rendering only. Server-side
 // token validation uses the Hub's real clock and is unaffected.
 //
-// Usage: node capture.mjs [--only=<recipe>] [--inject-failure=page-error|external-request]
+// Usage: node capture.mjs [--only=<recipe>[,<recipe>...]] [--inject-failure=page-error|external-request]
 // (--inject-failure exists only for the transactional regression test.)
 
 import fs from 'node:fs'
@@ -38,17 +38,21 @@ import { claimForCapture, verifyFixturesAfterCapture, finalizedEventPositions } 
 import { createReport, installNetworkPolicy } from './lib/browser-policy.mjs'
 import { fontFulfillers } from './lib/local-fonts.mjs'
 import {
-  VUE_URL, AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
+  VUE_URL, AUTH_STATE, POLLY_AUTH_STATE, FIXTURE_IDS, VIEWPORT, DEVICE_SCALE_FACTOR, BROWSER_LOCALE, BROWSER_TIMEZONE,
   BROWSER_FIXED_TIME, BROWSER_ALLOWED_HOSTS, EXPECTED_BLOCKED_REQUESTS, ALLOWED_CONSOLE_ERRORS,
   SOURCE_DIR, WEB_DIR, DRAFT_PREFIX, DEBUG_DIR, CAPTURE_STAGING_DIR, USGA_DEAD_PORT, LOOPBACK, HUB_PORT
 } from './lib/config.mjs'
 import shots from './proof-set.mjs'
 
-const only = process.argv.find(arg => arg.startsWith('--only='))?.slice('--only='.length)
+const only = process.argv.find(arg => arg.startsWith('--only='))?.slice('--only='.length).split(',')
 const inject = process.argv.find(arg => arg.startsWith('--inject-failure='))?.slice('--inject-failure='.length)
 if (inject && !['page-error', 'external-request'].includes(inject)) throw new Error(`Unknown --inject-failure=${inject}`)
-const selected = only ? shots.filter(s => s.name === only) : shots
-if (!selected.length) throw new Error(`No proof shot named ${only}`)
+const selected = only ? shots.filter(s => only.includes(s.name)) : shots
+const unknown = (only || []).filter(name => !shots.some(s => s.name === name))
+if (!selected.length || unknown.length) throw new Error(`No proof shot named ${unknown.join(', ') || only}`)
+// Who a recipe signs in as (default Bob); each user gets its own context.
+const SIGN_IN = { bob: AUTH_STATE, polly: POLLY_AUTH_STATE }
+for (const shot of shots) if (!SIGN_IN[shot.signIn || 'bob']) throw new Error(`Refusing: ${shot.name} signs in as unknown user ${shot.signIn}`)
 const firstWriter = shots.findIndex(shot => shot.mayWrite)
 if (firstWriter !== -1 && shots.slice(firstWriter).some(shot => !shot.mayWrite)) {
   throw new Error('Refusing: every state-changing recipe (mayWrite) must run after all read-only recipes')
@@ -141,6 +145,8 @@ const report = createReport()
 const consoleErrors = []
 const pageErrors = []
 const hubWrites = []
+const usgaRequests = []
+const requestLog = {}
 const results = {}
 const ids = JSON.parse(fs.readFileSync(FIXTURE_IDS, 'utf8'))
 const runId = new Date().toISOString().replace(/[:.]/g, '-')
@@ -153,28 +159,36 @@ const browser = await chromium.launch({
   chromiumSandbox: false,
   args: ['--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1']
 })
-const context = await browser.newContext({
-  viewport: VIEWPORT,
-  deviceScaleFactor: DEVICE_SCALE_FACTOR,
-  isMobile: true,
-  hasTouch: true,
-  locale: BROWSER_LOCALE,
-  timezoneId: BROWSER_TIMEZONE,
-  reducedMotion: 'reduce',
-  serviceWorkers: 'block',
-  storageState: AUTH_STATE
-})
-await installNetworkPolicy(context, { allowedHosts: BROWSER_ALLOWED_HOSTS, expectedBlocked: EXPECTED_BLOCKED_REQUESTS, fulfillers: fontFulfillers, report })
-await context.clock.setFixedTime(new Date(BROWSER_FIXED_TIME))
-await context.addInitScript(css => {
-  document.addEventListener('DOMContentLoaded', () => {
-    const style = document.createElement('style')
-    style.textContent = css
-    document.head.appendChild(style)
+// One browser context per signed-in user, each with the same network policy,
+// clock and stabilizing CSS.
+const contexts = {}
+async function contextFor (user) {
+  if (contexts[user]) return contexts[user]
+  const context = await browser.newContext({
+    viewport: VIEWPORT,
+    deviceScaleFactor: DEVICE_SCALE_FACTOR,
+    isMobile: true,
+    hasTouch: true,
+    locale: BROWSER_LOCALE,
+    timezoneId: BROWSER_TIMEZONE,
+    reducedMotion: 'reduce',
+    serviceWorkers: 'block',
+    storageState: SIGN_IN[user]
   })
-}, STABILIZE_CSS)
-if (inject === 'page-error') {
-  await context.addInitScript(() => setTimeout(() => { throw new Error('injected page error (regression test)') }, 0))
+  await installNetworkPolicy(context, { allowedHosts: BROWSER_ALLOWED_HOSTS, expectedBlocked: EXPECTED_BLOCKED_REQUESTS, fulfillers: fontFulfillers, report })
+  await context.clock.setFixedTime(new Date(BROWSER_FIXED_TIME))
+  await context.addInitScript(css => {
+    document.addEventListener('DOMContentLoaded', () => {
+      const style = document.createElement('style')
+      style.textContent = css
+      document.head.appendChild(style)
+    })
+  }, STABILIZE_CSS)
+  if (inject === 'page-error') {
+    await context.addInitScript(() => setTimeout(() => { throw new Error('injected page error (regression test)') }, 0))
+  }
+  contexts[user] = context
+  return context
 }
 
 let failure = null
@@ -182,6 +196,7 @@ try {
   for (const shot of selected) {
     // Every recipe starts at the same fixed browser time (a recipe may move
     // it forward, see letDebounceRun in proof-set.mjs).
+    const context = await contextFor(shot.signIn || 'bob')
     await context.clock.setFixedTime(new Date(BROWSER_FIXED_TIME))
     const page = await context.newPage()
     page.on('console', msg => {
@@ -195,6 +210,10 @@ try {
     const declared = shot.mayWrite ? shot.writes(ids) : []
     page.on('request', request => {
       const url = new URL(request.url())
+      // No capture may ask for anything USGA/GHIN, not even from the isolated
+      // Hub (which could only fail against its dead USGA port).
+      if (/usga|ghin/i.test(url.pathname)) usgaRequests.push(`${shot.name}: ${request.method()} ${url.host}${url.pathname}`)
+      if (shot.signIn) (requestLog[shot.name] ||= []).push(`${request.method()} ${url.host}${url.pathname}`)
       if (url.host !== `${LOOPBACK}:${HUB_PORT}` || ['GET', 'HEAD', 'OPTIONS'].includes(request.method())) return
       if (!declared.some(([method, pathname]) => method === request.method() && pathname === url.pathname)) {
         hubWrites.push(`${shot.name}: ${shot.mayWrite ? 'undeclared ' : ''}${request.method()} ${url.pathname}`)
@@ -243,18 +262,23 @@ try {
 } catch (error) {
   failure = error
 } finally {
-  await context.close()
+  for (const context of Object.values(contexts)) await context.close()
   await browser.close()
 }
 
 // Verdict ------------------------------------------------------------------
 log(`fonts served locally: ${report.fulfilled}; expected blocked: ${[...new Set(report.expectedBlocked)].join(', ') || 'none'}`)
 if (report.mocked.length) log(`replayed recorded Hub responses: ${[...new Set(report.mocked)].join('; ')}`)
+for (const [name, requests] of Object.entries(requestLog)) {
+  const hub = requests.filter(r => r.includes(`${LOOPBACK}:${HUB_PORT}`))
+  log(`${name} (signed in as ${selected.find(s => s.name === name).signIn}): ${requests.length} requests, ${hub.length} to the Hub: ${[...new Set(hub.map(r => r.replace(/[0-9a-f-]{36}/g, ':id')))].join(', ')}`)
+}
 const problems = []
 if (failure) problems.push(`recipe failed: ${redact(failure.message)}`)
 if (report.unexpected.length) problems.push(`unexpected network activity:\n  ${[...new Set(report.unexpected)].join('\n  ')}`)
 if (pageErrors.length) problems.push(`page errors:\n  ${pageErrors.join('\n  ')}`)
 if (hubWrites.length) problems.push(`Hub writes outside the declared ones:\n  ${hubWrites.join('\n  ')}`)
+if (usgaRequests.length) problems.push(`USGA/GHIN requests:\n  ${usgaRequests.join('\n  ')}`)
 if (consoleErrors.length) problems.push(`console errors outside the allowlist:\n  ${consoleErrors.join('\n  ')}`)
 
 const expected = [VIEWPORT.width * DEVICE_SCALE_FACTOR, VIEWPORT.height * DEVICE_SCALE_FACTOR]

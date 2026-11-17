@@ -68,8 +68,10 @@ No frameworks, no bundlers, no build-time dependencies beyond Eleventy.
 marker-site/
 ├── src/
 │   ├── _data/
+│   │   ├── legacyRedirects.json  # Old marker.golf tutorial URLs → new tutorials
 │   │   ├── pricing.json          # Pricing plans rendered in index.njk
-│   │   └── screenshots.json      # Screenshot manifest (see Images and Screenshots)
+│   │   ├── screenshots.json      # Screenshot manifest (see Images and Screenshots)
+│   │   └── tutorialGroups.json   # Tutorials landing page groups
 │   ├── _includes/
 │   │   ├── layouts/
 │   │   │   ├── base.njk          # HTML shell: meta, fonts, header, footer
@@ -107,6 +109,7 @@ marker-site/
 │   │   ├── stroke-play.md
 │   │   └── team-stroke-play.md
 │   ├── tutorials/
+│   │   ├── post-your-score-to-ghin.md
 │   │   ├── getting-started.md
 │   │   ├── create-an-event.md
 │   │   ├── add-players.md
@@ -119,6 +122,7 @@ marker-site/
 │   ├── index.njk                 # Homepage
 │   ├── games.njk                 # Games landing page
 │   ├── tutorials.njk             # Tutorials landing page
+│   ├── legacy-redirects.njk      # Redirect pages for old tutorial URLs
 │   ├── commissioners.njk         # Commissioner features page
 │   ├── about.md                  # About page
 │   ├── privacy.md                # Privacy policy
@@ -189,6 +193,12 @@ Each tutorial is a Markdown file with a `tutorial-guide.njk` layout. Required fr
 | `estimatedTime` | e.g. `"3 min read"` |
 | `cardDescription` | Short text shown on the tutorials landing page card |
 | `iconSvg` | SVG `<path>` elements (single-quoted YAML) for the card icon |
+| `tutorialPath` / `tutorialOrder` | Step-by-step path (`getting-started`, `group`, `event`, `reference`) and position, used for the previous/next links |
+| `indexGroup` / `indexOrder` | Group and position on the tutorials landing page; groups are defined in `src/_data/tutorialGroups.json`. A tutorial without `indexGroup` is not listed there. |
+
+### Legacy tutorial redirects
+
+The old marker.golf tutorial URLs (`/tutorials/gettingstarted`, `/tutorials/posting`, …) are mapped in `src/_data/legacyRedirects.json`. GitHub Pages ignores `_redirects`, so `src/legacy-redirects.njk` generates a real page at each old path with a canonical link, an immediate meta refresh, `location.replace()` and a visible link to the new tutorial, all through the `url` filter. Each page is a folder index, so the old URL works with or without a trailing slash. `npm run check:redirects` builds the site under `/` and `/marker-site/` and checks every mapping.
 
 ### Prose pages (`src/about.md`)
 

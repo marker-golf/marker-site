@@ -1,0 +1,20 @@
+{
+  "_comment": "F8: Polly Putter's own standalone scorecard for the GHIN posting screens, scored through 18 with no games and locked when built (Vue's End round, sent by fixtures.mjs as Polly), so the posting captures make no writes. Built first and owned by Polly, with partners who never play with Bob, so no recent scorecard, course, event or partner list Bob sees changes. Every player's initials are distinct (Vue shows initials as column headers, sorted by last name: DD, KK, MM, PP). Gross scores are explicit; Polly's total is 94 (46 out, 48 in).",
+  "course": { "facility": "Spyglass Hill GC", "courseId": "634ac465-f55f-464d-957f-5fc958409ccb" },
+  "date": "2026-07-08",
+  "teeTime": "08:10",
+  "utcOffset": "-07:00",
+  "startHole": 1,
+  "players": [
+    { "user": "polly",  "tee": { "name": "White", "gender": "Female" } },
+    { "user": "debbie", "tee": { "name": "White", "gender": "Female" } },
+    { "user": "kevin",  "tee": { "name": "White", "gender": "Male" } },
+    { "user": "mike",   "tee": { "name": "White", "gender": "Male" } }
+  ],
+  "scores": {
+    "polly":  [6, 3, 4, 5, 5, 7, 5, 6, 5, 4, 5, 5, 6, 7, 4, 7, 4, 6],
+    "debbie": [6, 5, 3, 3, 3, 7, 5, 6, 6, 5, 4, 3, 4, 6, 4, 6, 4, 5],
+    "kevin":  [6, 4, 4, 6, 4, 4, 8, 6, 5, 5, 7, 5, 5, 6, 4, 6, 5, 6],
+    "mike":   [5, 6, 3, 5, 4, 5, 5, 6, 6, 5, 6, 3, 6, 5, 3, 5, 5, 5]
+  }
+}
