@@ -7,6 +7,8 @@ category: Getting Started
 order: 3
 tutorialPath: getting-started
 tutorialOrder: 3
+indexGroup: get-started
+indexOrder: 3
 estimatedTime: "3 min read"
 cardDescription: "Decide between New Game and Host Event, then start the right tutorial path for your outing."
 iconSvg: '<polygon points="3 11 22 2 13 21 11 13 3 11"/>'

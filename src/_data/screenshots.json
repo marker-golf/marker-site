@@ -309,6 +309,39 @@
     "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 Cypress Point through 18. Opens the sheet only."
   },
 
+  "postScoreEndRound": {
+    "src": "/images/screenshots/web/end-round-confirm-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/end-round-confirm-mobile-vue-demo.png",
+    "alt": "Marker End round sheet: By ending this round, you attest that the scores are correct. This will lock the scorecard, but you can unlock it in scorecard settings.",
+    "caption": "Ending the round is your attestation and locks the scorecard so you can post. Spot a mistake? Unlock it in scorecard settings before posting.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Same approved capture as reviewResultsEndRound (end-round-confirm), with a posting-specific caption."
+  },
+
+  "postScoreReady": {
+    "src": "/images/screenshots/web/post-score-ready-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/post-score-ready-mobile-vue-demo.png",
+    "alt": "Locked Marker scorecard at Spyglass Hill GC for holes 1 to 9 with four players, and a red POST MY SCORE TO USGA button reading Only you, not the group at the bottom",
+    "caption": "Once the scorecard is locked, the red POST MY SCORE TO USGA button appears at the bottom — for your own score only.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Nov 2026. Fixture F8, fictional Polly Putter's locked card; read-only, no USGA/GHIN request. No USGA Handicap ID visible."
+  },
+
+  "postScoreSheet": {
+    "src": "/images/screenshots/web/post-score-sheet-mobile-vue-demo.webp",
+    "fallback": "/images/screenshots/source/post-score-sheet-mobile-vue-demo.png",
+    "alt": "Marker Post Score sheet with the USGA Handicap Data Affiliate logo, Course Spyglass Hill GC, Tees White, Date played 07/08/2026, Score Type Home selected, Holes played options Front 9 (46), Back 9 (48) and All 18 (94) with All 18 selected, and a Post Score button",
+    "caption": "Check the course and tees, confirm the date, score type and holes played, then tap Post Score.",
+    "usage": ["tutorials/post-your-score-to-ghin"],
+    "viewport": "mobile",
+    "status": "approved",
+    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Nov 2026. Post Score sheet on fixture F8; opened only, never submitted; no USGA/GHIN request. Polly's fixture-only USGA Handicap ID is not shown."
+  },
+
   "reviewResultsFinalSettlement": {
     "src": "/images/screenshots/web/final-settlement-completed-round-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/final-settlement-completed-round-mobile-vue-demo.png",

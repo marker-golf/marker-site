@@ -7,6 +7,8 @@ category: Running Events
 order: 3
 tutorialPath: event
 tutorialOrder: 5
+indexGroup: run-an-event
+indexOrder: 5
 estimatedTime: "3 min read"
 cardDescription: "Publish scorecards to players, follow live Event standings, and share the leaderboard as the round progresses."
 iconSvg: '<polyline points="18 20 18 10"/><polyline points="12 20 12 4"/><polyline points="6 20 6 14"/>'

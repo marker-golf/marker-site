@@ -7,6 +7,8 @@ category: Playing with Your Group
 order: 1
 tutorialPath: group
 tutorialOrder: 1
+indexGroup: score-a-round
+indexOrder: 1
 estimatedTime: "2 min read"
 cardDescription: "Tap New Game, pick your course, and Marker creates the scorecard. You're set up in seconds."
 iconSvg: '<path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>'
@@ -36,7 +38,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Select a course</h3>
-<p>Search for your course by name or browse nearby. Tap the correct course from the results. Marker creates the scorecard immediately — today's date and hole 1 are set automatically.</p>
+<p>Pick it from <strong>Recent Courses</strong> or search by name — each result shows the course with its facility and state. Tap the correct course from the results. Marker creates the scorecard immediately — today's date and hole 1 are set automatically.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("createScorecardSelectCourse", screenshots, frame="phone", caption=true) }}
 </div>

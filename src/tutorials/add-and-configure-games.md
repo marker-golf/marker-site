@@ -7,6 +7,8 @@ category: Running Events
 order: 1
 tutorialPath: event
 tutorialOrder: 4
+indexGroup: run-an-event
+indexOrder: 4
 estimatedTime: "4 min read"
 cardDescription: "Choose a game format, configure handicap settings and players, and add it to your event before the round starts."
 iconSvg: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>'

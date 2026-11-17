@@ -7,6 +7,8 @@ category: Running Events
 order: 2
 tutorialPath: reference
 tutorialOrder: 2
+indexGroup: games-and-handicaps
+indexOrder: 1
 estimatedTime: "5 min read"
 cardDescription: "Configure course handicap calculation, stroke allocation, percentage modes, and USGA score posting."
 iconSvg: '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>'
@@ -105,15 +107,15 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">6</div>
 <div class="tutorial-step__content">
 <h3>USGA Score Posting</h3>
-<p>Marker is a USGA Handicap Data Affiliate. If you have a GHIN number on your Marker profile, a <strong>Post Score</strong> button appears at the bottom of your scorecard once the scorecard is locked.</p>
-<p>Tap Post Score and select:</p>
+<p>Marker is a USGA Handicap Data Affiliate. Once a scorecard is locked, a red <strong>POST MY SCORE TO USGA</strong> button appears at the bottom of it for each player, and posting requires a USGA Handicap ID (GHIN number) on your Marker profile.</p>
+<p>Tap the button, then confirm:</p>
 <ul>
-<li><strong>Score type</strong> — Home, Away, or Competition</li>
-<li><strong>Side</strong> — Front 9, Back 9, or All 18. Only sides where you have a complete set of entered scores are available for selection.</li>
-<li><strong>Date</strong> — pre-filled from the scorecard; adjust if needed.</li>
+<li><strong>Date played</strong> — pre-filled from the scorecard; adjust if needed.</li>
+<li><strong>Score Type</strong> — Home, Away, or Competition</li>
+<li><strong>Holes played</strong> — Front 9, Back 9, All 18, or 10-17 for a partial round. Only options covered by your entered scores are offered.</li>
 </ul>
-<p>Tap <strong>Post Score</strong> to submit. Equitable Stroke Control (the net double bogey maximum per hole) is applied automatically before the score is sent to GHIN. Marker shows your estimated pending handicap index immediately after a successful post. Your official handicap index updates on the normal GHIN revision schedule.</p>
-<p>USGA posting requires a USGA-approved tee set. If a tee rating was entered manually rather than pulled from the USGA course database, the Post Score button will not appear for that player.</p>
+<p>Tap <strong>Post Score</strong> to submit. Marker sends your hole-by-hole gross scores; the USGA applies its own adjustments, such as net double bogey, when it calculates your score differential. Marker shows your pending handicap index immediately after a successful post.</p>
+<p>USGA posting requires a USGA-approved tee set. If a tee rating was entered manually rather than pulled from the USGA course database, the button will not appear for that player. <a href="{{ '/tutorials/post-your-score-to-ghin/' | url }}">Post Your Score to GHIN</a> covers the full posting workflow.</p>
 <p>To look up a partner's GHIN-linked handicap index when adding players, tap <strong>USGA® Handicap Lookup</strong> below the handicap index field in the player form. This option is available when your own GHIN number is connected to your Marker profile.</p>
 </div>
 </div>

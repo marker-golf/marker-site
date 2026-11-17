@@ -7,6 +7,8 @@ category: Playing with Your Group
 order: 5
 tutorialPath: group
 tutorialOrder: 5
+indexGroup: score-a-round
+indexOrder: 5
 estimatedTime: "5 min read"
 cardDescription: "Switch between game views on the scorecard, check live standings on the Leaderboard, and read Overall - side games — all from the same entered scores."
 iconSvg: '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>'

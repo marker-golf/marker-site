@@ -7,6 +7,8 @@ category: Running Events
 order: 4
 tutorialPath: event
 tutorialOrder: 6
+indexGroup: finish-settle-and-post
+indexOrder: 2
 estimatedTime: "3 min read"
 cardDescription: "Complete the Event, review final standings, and settle every Event Game — all from the Event leaderboard."
 iconSvg: '<polyline points="20 6 9 17 4 12"/>'
@@ -33,6 +35,7 @@ cta:
 {{ ProductScreenshot("eventCompleteConfirm", screenshots, frame="phone", caption=true) }}
 </div>
 <p>After completion, the event dashboard shows <strong>This round is complete.</strong> If you need to correct a score, tap <strong>Unlock</strong> there and confirm — scorecards become editable again and game summaries recalculate.</p>
+<p>Once the event is complete, players can post their own scores from their locked scorecards — see <a href="{{ '/tutorials/post-your-score-to-ghin/' | url }}">Post Your Score to GHIN</a>.</p>
 </div>
 </div>
 
