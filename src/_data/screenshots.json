@@ -26,12 +26,12 @@
   "homepageGames": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Marker Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
     "caption": null,
     "usage": ["index"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker (shared with eventGamesPicker and addGamesGamePicker). Twelve formats: High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, Wolf. No per-format descriptions are shown."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker (shared with eventGamesPicker and addGamesGamePicker). Twelve formats: High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, Wolf. No per-format descriptions are shown."
   },
 
   "tutorialCreateEventStep1": {
@@ -125,12 +125,12 @@
   "eventGamesPicker": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
     "caption": "Tap any format to open its configuration.",
     "usage": ["tutorials/add-and-configure-games"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker: Vue's event route shows the same picker (titled Add Game there)."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker: Vue's event route shows the same picker (titled Add Game there)."
   },
 
   "eventGamesConfiguration": {
@@ -295,7 +295,7 @@
     "usage": ["tutorials/follow-games-and-results"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F1 in progress. Side-game settlement reconciled to the cent against every game."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. F1 in progress: three provisional payments, $70, $20 and $30. Side-game settlement reconciled to the cent against every game."
   },
 
   "reviewResultsEndRound": {
@@ -350,7 +350,7 @@
     "usage": ["tutorials/review-results-and-settle-up"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. F3 after End round (locked). An Upgrade to Premium banner appears at the top for this free account."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. F3 after End round (locked): three player-to-player payments, $15, $10 and $5."
   },
 
   "createScorecardNewGame": {
@@ -411,12 +411,12 @@
   "addGamesGamePicker": {
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
-    "alt": "Marker Add game screen with buttons for all twelve game formats and Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
+    "alt": "Marker Add game screen: under Select game, twelve plain buttons, one per game format (High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play and Wolf), none with a badge, a close button at the top right and a Tap to request your favorite game! prompt below",
     "caption": "Choose the game your group wants to play.",
     "usage": ["tutorials/add-games-to-scorecard"],
     "viewport": "mobile",
     "status": "approved",
-    "notes": "Vue capture from the production Vue app (pinned commit d6225d5) against isolated fictional fixture data; approved Oct 2026. No personal data. Reuses game-picker."
+    "notes": "Vue capture from Vue commit fea08fd28284e82ec44b749e6449ecb2efa0a9ef (feature/remove-premium-game-gating: d6225d5 plus 'fix: remove per-game premium gating'; a pre-release commit, not yet merged) against isolated fictional fixture data; approved Nov 2026. No personal data. Reuses game-picker."
   },
 
   "scoreRoundMainScorecard": {

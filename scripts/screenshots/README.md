@@ -67,6 +67,43 @@ nothing is ever written to it.
 
 Pinned commits, ports, sandbox ports and time limits live in `lib/config.mjs`.
 
+## Pinned commits and capture provenance
+
+`APP_SHA` is a **temporary pre-release source pin**:
+`fea08fd28284e82ec44b749e6449ecb2efa0a9ef`, the local Vue commit "fix: remove
+per-game premium gating" on `feature/remove-premium-game-gating` (`d6225d5`
+plus that one change). It has not been pushed or merged and is not the
+released production app revision.
+
+| Approved captures | Vue commit |
+|---|---|
+| `game-picker`, `final-settlement-completed-round`, `overall-side-games-accounting` | `fea08fd28284e82ec44b749e6449ecb2efa0a9ef` |
+| every other approved screenshot, and the three demo videos | `d6225d56e9e86d621cb3b4cc3934d8862e15e7bc` |
+
+Each manifest entry's `notes` in `src/_data/screenshots.json` names its commit.
+`fea08fd` changes only the game-picker badges, the scorecard leaderboard's
+upgrade banner and upgrade copy, so the other captures are unaffected by it.
+
+### Release checklist: revisit the pin after the app PR merges
+
+Do this before deploying the website.
+
+1. **The commit lands unchanged** (fast-forward or merge commit): confirm it is
+   reachable from the released branch, e.g.
+   `git -C ../app fetch origin && git -C ../app merge-base --is-ancestor fea08fd28284e82ec44b749e6449ecb2efa0a9ef origin/master`.
+   Keep the pin, and replace "temporary pre-release" in the comment above
+   `APP_SHA` and in this section with the release it shipped in.
+2. **The PR is squash-merged or rebased** (new final SHA): compare trees,
+   `git -C ../app rev-parse fea08fd28284e82ec44b749e6449ecb2efa0a9ef^{tree} <released-sha>^{tree}`.
+   - Identical trees: update `APP_SHA` and the five `fea08fd` manifest notes
+     to the released SHA, record the tree-equivalence check, and run
+     `npm run screens:test` and `npm run screens:test:capture-failure`. No
+     recapture is needed.
+   - Different trees: update the pin, recapture the three screenshots above
+     (`node scripts/screenshots/capture.mjs --only=game-picker,overall-side-games-accounting,final-settlement-completed-round`
+     after a fresh `screens:db`/`screens:auth`/`screens:start`/`screens:fixtures`),
+     review them, and rerun the screenshot validation.
+
 ## Steps (`proof.mjs`)
 
 1. `prepare.mjs`: export the pinned commits (lockfile parity check), compile

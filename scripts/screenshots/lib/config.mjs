@@ -19,8 +19,13 @@ export const MARKER_ROOT = path.resolve(SITE_ROOT, '..')
 export const APP_REPO = path.join(MARKER_ROOT, 'app')
 export const HUB_REPO = path.join(MARKER_ROOT, 'hub')
 
-// Pinned production commits (origin/master of each repo, fetched 2026-10-19).
-export const APP_SHA = 'd6225d56e9e86d621cb3b4cc3934d8862e15e7bc'
+// Pinned commits. HUB_SHA: origin/master, fetched 2026-10-19.
+// APP_SHA: TEMPORARY pre-release source pin. Local commit fea08fd on
+// feature/remove-premium-game-gating (d6225d5 plus "fix: remove per-game
+// premium gating"), not yet pushed or merged, so not the released production
+// app revision. Revisit after the app PR merges: see "Pinned commits and
+// capture provenance" in scripts/screenshots/README.md.
+export const APP_SHA = 'fea08fd28284e82ec44b749e6449ecb2efa0a9ef'
 export const HUB_SHA = 'dd30f45eea267a9827690d4b6f1329a1bcb110cd'
 
 // Lockfiles that must be identical at the pinned SHA and in the working tree
