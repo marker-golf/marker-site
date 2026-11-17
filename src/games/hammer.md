@@ -12,7 +12,6 @@ game:
   name: Hammer
   difficulty: intermediate
   difficultyLabel: Intermediate
-  premium: true
   subtitle: "Drop a Hammer to double the hole. The other side accepts and plays on — or concedes and walks away. Simple premise. Maximum pressure."
   heroSubtitleWidth: "540px"
   heroStats:

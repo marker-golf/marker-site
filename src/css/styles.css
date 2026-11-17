@@ -264,6 +264,16 @@ p { color: var(--ink-muted); line-height: 1.75; }
   line-height: 1.5;
 }
 .pricing-card--premium .pricing-card__alt { color: rgba(255, 255, 255, 0.45); }
+/* Auto-renewal disclosure: sits under the price, before the features and the button */
+.pricing-card__renewal {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-top: 10px;
+  margin-bottom: 0;
+  line-height: 1.45;
+}
+.pricing-card--premium .pricing-card__renewal { color: rgba(255, 255, 255, 0.85); }
 .pricing-card__divider {
   height: 1px;
   background: var(--border);

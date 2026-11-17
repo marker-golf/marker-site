@@ -67,7 +67,7 @@ description: Marker gives golf commissioners everything to run the game — crea
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
-        Ryder Cup Weekends
+        Team Competitions
       </div>
 
       <div class="comm-use-case">
@@ -102,7 +102,7 @@ description: Marker gives golf commissioners everything to run the game — crea
         <div class="comm-step__num" aria-hidden="true">2</div>
         <div class="comm-step__content">
           <h3>Add players</h3>
-          <p>Share a link and your group joins from any phone or computer browser. No app download or account required for players to participate.</p>
+          <p>Add your players, then share their scorecard links. Players open them in any phone or computer browser with no app download, and players who score from their own phones sign in to Marker.</p>
         </div>
       </div>
 
@@ -126,7 +126,7 @@ description: Marker gives golf commissioners everything to run the game — crea
         <div class="comm-step__num" aria-hidden="true">5</div>
         <div class="comm-step__content">
           <h3>Score live and settle</h3>
-          <p>Every player enters scores on their own device. The leaderboard updates hole by hole. Lock the event when the round ends and Marker shows exactly who owes who — across every game, in one screen.</p>
+          <p>Players enter scores on their own phones, or one player keeps score for the group. The leaderboard updates hole by hole. Lock the event when the round ends and Marker shows exactly who owes who — across every game, in one screen.</p>
         </div>
       </div>
 
@@ -287,7 +287,7 @@ description: Marker gives golf commissioners everything to run the game — crea
 
       <a href="{{ '/games/wolf/' | url }}" class="comm-game-card">
         <h3>Wolf</h3>
-        <p>Rotating lone wolf. Every hole, the wolf picks their team — or goes it alone for double stakes. Premium.</p>
+        <p>Rotating lone wolf. Every hole, the wolf picks their team — or goes it alone for double stakes.</p>
       </a>
 
       <a href="{{ '/games/nassau/' | url }}" class="comm-game-card">
@@ -312,7 +312,7 @@ description: Marker gives golf commissioners everything to run the game — crea
 
       <a href="{{ '/games/team-count-x/' | url }}" class="comm-game-card">
         <h3>TeamCountX</h3>
-        <p>Team stroke play where each team selects X scores per hole. Scales to any team size. Premium.</p>
+        <p>Team stroke play where each team selects X scores per hole. Scales to any team size.</p>
       </a>
 
     </div>
@@ -332,7 +332,7 @@ description: Marker gives golf commissioners everything to run the game — crea
   <div class="container">
     <div class="pricing__header">
       <h2>Start free. Upgrade when you need more.</h2>
-      <p>Create up to 3 Events free. Upgrade to Premium for unlimited Events, Wolf, Hammer, Ryder Cup, and TeamCountX.</p>
+      <p>Create up to 3 Events free. Upgrade to Premium for unlimited Events.</p>
     </div>
     <div class="pricing__grid">
       {% for plan in pricing.plans %}
@@ -343,6 +343,7 @@ description: Marker gives golf commissioners everything to run the game — crea
           {% if plan.period %}<span class="pricing-card__period">{{ plan.period }}</span>{% endif %}
         </div>
         <p class="pricing-card__alt">{{ plan.altText }}</p>
+        {% if plan.renewalNote %}<p class="pricing-card__renewal">{{ plan.renewalNote }}</p>{% endif %}
         <div class="pricing-card__divider" aria-hidden="true"></div>
         <ul class="pricing-card__features">
           {% for feature in plan.features %}

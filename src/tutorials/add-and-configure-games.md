@@ -38,7 +38,7 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Select a game format</h3>
-<p>The game picker shows a button for each of Marker's 12 built-in formats — High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf. Formats marked <strong>Premium</strong> (Scotch, Team Count X, Team Stableford, and Wolf) require an active subscription.</p>
+<p>The game picker shows a button for each of Marker's 12 built-in formats — High-Low, Match Play, Nassau, Nines (5-3-1), Skins, Scotch, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Game Guides</a>. Tap a format in the app to open its configuration form.</p>
 <div class="tutorial-step__screenshot">
 {{ ProductScreenshot("eventGamesPicker", screenshots, frame="phone", caption=true) }}

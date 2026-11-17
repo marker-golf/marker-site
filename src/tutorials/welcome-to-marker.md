@@ -21,7 +21,7 @@ cta:
 
 <div class="tutorial-prose">
 
-<p>Marker gives a group one shared scorecard. Each player enters scores on their own phone and everyone sees the same grid in real time. Add side games — Skins, Nassau, Stroke Play, and more — and Marker calculates standings and accounting from the same entered scores, updating as the round progresses.</p>
+<p>Marker gives a group one shared scorecard. Players can enter scores on their own phones, or one player can keep score for the group, and everyone sees the same grid in real time. Add side games — Skins, Nassau, Stroke Play, and more — and Marker calculates standings and accounting from the same entered scores, updating as the round progresses.</p>
 
 <p>For larger outings with multiple groups, a Marker Event organizes everything under a shared leaderboard.</p>
 

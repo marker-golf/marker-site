@@ -35,8 +35,8 @@ cta:
 <div class="tutorial-step__marker" aria-hidden="true">2</div>
 <div class="tutorial-step__content">
 <h3>Choose a game</h3>
-<p>The <strong>Select game</strong> screen shows one button per format. Games labeled <strong>Premium</strong> require a Marker premium subscription.</p>
-<p>Marker supports twelve formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf. Scotch, Team Count X, Team Stableford, and Wolf are Premium.</p>
+<p>The <strong>Select game</strong> screen shows one button per format.</p>
+<p>Marker supports twelve formats in the current release: High-Low, Match Play, Nassau, Nines (5-3-1), Scotch, Skins, Stableford, Stroke Play, Team Count X, Team Stableford, Team Stroke Play, and Wolf.</p>
 <p>For rules, scoring examples, and strategy for each format, see the <a href="{{ '/games/' | url }}">Games guide library</a>. This tutorial explains how to configure them in Marker — not how to play them.</p>
 <p>Tap a game to open its configuration form.</p>
 <div class="tutorial-step__screenshot">

@@ -126,7 +126,7 @@
     "src": "/images/screenshots/web/game-picker-mobile-vue-demo.webp",
     "fallback": "/images/screenshots/source/game-picker-mobile-vue-demo.png",
     "alt": "Add game screen with buttons for all twelve game formats, Premium badges on Scotch, Team Count X, Team Stableford and Wolf",
-    "caption": "Tap any format to open its configuration — formats marked Premium require an active subscription.",
+    "caption": "Tap any format to open its configuration.",
     "usage": ["tutorials/add-and-configure-games"],
     "viewport": "mobile",
     "status": "approved",

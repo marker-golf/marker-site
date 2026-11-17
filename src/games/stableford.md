@@ -745,7 +745,7 @@ Same gross score, 1-point difference, because one hole allocates a stroke and th
 </div>
 <div class="gg-variation__body">
 <h4>Team Stableford</h4>
-<p>A separate, premium game in Marker. Four or more players split into teams; each hole, the team member with the best net score contributes their Stableford points to the team total. Supports the same Quota system, ball allocation, and accounting options as individual Stableford. See the <a href="{{ '/games/team-stableford/' | url }}">Team Stableford guide</a> for the full format, worked example, and configuration options.</p>
+<p>A separate game in Marker. Four or more players split into teams; each hole, the team member with the best net score contributes their Stableford points to the team total. Supports the same Quota system, ball allocation, and accounting options as individual Stableford. See the <a href="{{ '/games/team-stableford/' | url }}">Team Stableford guide</a> for the full format, worked example, and configuration options.</p>
 </div>
 </div>
 
@@ -909,7 +909,7 @@ Same gross score, 1-point difference, because one hole allocates a stroke and th
 <details class="gg-faq-item">
 <summary>Can Stableford be played as a team game?</summary>
 <div class="gg-faq-body">
-<p>Yes — <a href="{{ '/games/team-stableford/' | url }}">Team Stableford</a> is available in Marker as a separate premium game. It requires 4 or more players split into teams. Each hole, the team member with the best net score contributes their Stableford points to the team total. Team Quota is also supported. Individual Stableford has no team format — all players compete independently.</p>
+<p>Yes — <a href="{{ '/games/team-stableford/' | url }}">Team Stableford</a> is available in Marker as a separate game. It requires 4 or more players split into teams. Each hole, the team member with the best net score contributes their Stableford points to the team total. Team Quota is also supported. Individual Stableford has no team format — all players compete independently.</p>
 </div>
 </details>
 

@@ -783,7 +783,7 @@ In gross High-Low, the team with the two best players will almost always win. Ne
 <details class="gg-faq-item">
         <summary>Do I need exactly 4 players?</summary>
 <div class="gg-faq-body">
-          <p>Yes — standard High-Low requires exactly 4 players in a 2v2 format. For 3 players, consider <a href="{{ '/games/nines/' | url }}">Nines</a>. For larger groups or rotating partners, consider <a href="{{ '/games/skins/' | url }}">Skins</a> or a Ryder Cup format.</p>
+          <p>Yes — standard High-Low requires exactly 4 players in a 2v2 format. For 3 players, consider <a href="{{ '/games/nines/' | url }}">Nines</a>. For larger groups or rotating partners, consider <a href="{{ '/games/skins/' | url }}">Skins</a> or <a href="{{ '/games/wolf/' | url }}">Wolf</a>.</p>
 </div>
 </details>
 

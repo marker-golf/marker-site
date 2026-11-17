@@ -28,7 +28,7 @@ cta:
 <div class="tutorial-step__content">
 <h3>What is a side game?</h3>
 <p>A side game is a smaller game created from an individual event scorecard. It is separate from the event-wide games that the organizer configures — players can add their own side bets independently, without involving the whole field.</p>
-<p>A side game can include up to five players, and those players can be on different scorecards. For example: two players in one group might run a Nassau against two players in a different group. Each player enters scores on their own event scorecard, and Marker uses those entered scores to track the side game result.</p>
+<p>A side game can include up to five players, and those players can be on different scorecards. For example: two players in one group might run a Nassau against two players in a different group. Each player's scores are entered on their group's event scorecard, and Marker uses those entered scores to track the side game result.</p>
 <p>Multiple side games can run simultaneously on the same scorecard. Each tracks and settles independently.</p>
 </div>
 </div>

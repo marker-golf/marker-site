@@ -716,7 +716,7 @@ Net Scotch is the standard form: each player's Course Handicap is applied by Str
 
 <div style="margin-top:40px; text-align:center;">
 <a href="https://app.marker.golf" class="btn btn-primary">Play Scotch in Marker</a>
-<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Premium feature · Works in your phone's browser</p>
+<p style="margin-top:14px; font-size:0.8rem; color:rgba(255,255,255,0.38);">Works in your phone's browser</p>
 </div>
 
 </div>
@@ -802,12 +802,6 @@ Net Scotch is the standard form: each player's Course Handicap is applied by Str
 </div>
 </details>
 
-<details class="gg-faq-item">
-<summary>Is Scotch a premium feature?</summary>
-<div class="gg-faq-body">
-<p>Yes. Scotch is a premium game in Marker. See <a href="https://app.marker.golf">Marker's pricing page</a> for details on premium game access.</p>
-</div>
-</details>
 
 </div>
 
